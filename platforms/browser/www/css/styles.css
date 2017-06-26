@@ -42,3 +42,12 @@
     background-size: cover;
     background-position: center;
 }
+
+.txt-cart-order-amount{
+	width:1em!important;
+	border:1px solid black;
+}
+
+.list-item-shopping-cart{
+	padding:1em;
+}
