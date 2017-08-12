@@ -1,10 +1,6 @@
 <?php
 
-include_once './TranslationResult.php';
-include_once './Translation.php';
-include_once './TranslationGroupGrammar.php';
-include_once './TranslationList.php';
-include_once './Einstellungen.php';
+include_once '../config/settings.inc.php';
 
 
 class DbHelper {
@@ -12,7 +8,7 @@ class DbHelper {
     
     public static function getInstance() {
         global $config;
-        return new DbHelper($config['_DB_SERVER_'], $config['_DB_USER_'], $config['_DB_PASSWD_'], $config['_DB_NAME_']);
+        return new DbHelper(_DB_SERVER_, _DB_USER_, _DB_PASSWD_, _DB_NAME_);
     }
 
     private $servername;
@@ -33,10 +29,67 @@ class DbHelper {
   
 
         if ($this->conn->connect_error) {
-            die("Datenbank Verbindung Fehlt! : " . $this->conn->connect_error);
+            die("Datenbank Verbindung Fehlt! : ".$this->dbname."-" . $this->conn->connect_error);
         }
     }
 	
+	
+	function encrypt($passwd)
+	{
+		return md5(_COOKIE_KEY_.$passwd);
+	}
+	
+	function checkLogin($_email,$_passwd){
+		
+		$pwd=$this->encrypt($_passwd);
+		
+		$sql = "select firstname ,lastname from ps_customer where email='$_email' and passwd='$pwd'";
+        $result = $this->conn->query($sql);
+		
+        $items = array();
+		
+        if ($result->num_rows > 0) {
+			
+            while ($row = $result->fetch_assoc()) {
+				$rwitem=array();
+				array_push($rwitem,"OK");
+				array_push($rwitem,$row["firstname"]);
+				array_push($rwitem,$row["lastname"]);
+                array_push($items, $rwitem);
+            }
+        } else {
+            //no results
+        }
+        $this->conn->close();
+
+        return $items;
+	}
+	
+	function get_test_items($testinput) {
+
+        $sql = "select firstname ,lastname,passwd from ps_customer";
+        $result = $this->conn->query($sql);
+
+        $items = array();
+		
+		array_push($items, $testinput);
+
+        if ($result->num_rows > 0) {
+			
+            while ($row = $result->fetch_assoc()) {
+				$rwitem=array();
+				array_push($rwitem,$row["firstname"]);
+				array_push($rwitem,$row["lastname"]);
+				array_push($rwitem,$row["passwd"]);
+                array_push($items, $rwitem);
+            }
+        } else {
+            //no results
+        }
+        $this->conn->close();
+
+        return $items;
+    }
 	
 	
 	function saveEslerZitlar($_esler , $_deyimler , $_zitlar) {
