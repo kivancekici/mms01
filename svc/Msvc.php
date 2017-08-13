@@ -38,6 +38,9 @@ switch ($opr) {
     case "saveaddress":
         fSaveAddress($decoded);
         break;
+	case "getmyaddresses":
+        fGetMyAddress($decoded);
+        break;
 	case "deleteaddress":
 		fDeleteAddress($decoded);
 		break;		
@@ -62,17 +65,11 @@ switch ($opr) {
 	case "manufacturersmenu":
 		fGetManufacturersMenu($decoded);
 		break;
-	case "":
-		f($decoded);
+	case "productslist":
+		fGetProductsList($decoded);
 		break;
-	case "":
-		f($decoded);
-		break;
-	case "":
-		f($decoded);
-		break;
-	case "":
-		f($decoded);
+	case "placeorder":
+		fPlaceOrder($decoded);
 		break;
     default:
 		send_response(Null);
@@ -118,6 +115,19 @@ function fSaveAddress($_jsondata) {
 		send_response(Null);
 	}
 }
+
+
+function fGetMyAddress($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	$email=$_jsondata["email"];
+	$_items = DbHelper::getInstance()->getMyAddress($email);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
 
 function fDeleteAddress($_jsondata) {
 	//alanları ekle ve dbhelper methodunu yaz
@@ -204,6 +214,30 @@ function fGetManufacturersMenu($_jsondata) {
 	//alanları ekle ve dbhelper methodunu yaz
 	$email=$_jsondata["email"];
 	$_items = DbHelper::getInstance()->getManufacturersMenu($email);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+
+function fGetProductsList($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	$email=$_jsondata["email"];
+	$_items = DbHelper::getInstance()->getProductsList($email);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+
+function fPlaceOrder($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	$email=$_jsondata["email"];
+	$_items = DbHelper::getInstance()->placeOrder($email);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
