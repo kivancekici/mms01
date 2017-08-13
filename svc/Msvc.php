@@ -32,15 +32,50 @@ switch ($opr) {
     case "login":
         fLogin($decoded);
         break;
-    case "blue":
-        echo "Your favorite color is blue!";
+    case "register":
+        fRegisterUser($decoded);
         break;
-    case "green":
-        echo "Your favorite color is green!";
+    case "saveaddress":
+        fSaveAddress($decoded);
         break;
+	case "deleteaddress":
+		fDeleteAddress($decoded);
+		break;		
+	case "updateaddress":
+		fUpdateAddress($decoded);
+		break;
+	case "openorders":
+		fOpenOrders($decoded);
+		break;
+	case "openorderdetails":
+		fOpenOrderDetails($decoded);
+		break;
+	case "orldorders":
+		fOldOrders($decoded);
+		break;
+	case "messages":
+		fGetMessages($decoded);
+		break;
+	case "manufacturers":
+		fGetManufacturers($decoded);
+		break;
+	case "manufacturersmenu":
+		fGetManufacturersMenu($decoded);
+		break;
+	case "":
+		f($decoded);
+		break;
+	case "":
+		f($decoded);
+		break;
+	case "":
+		f($decoded);
+		break;
+	case "":
+		f($decoded);
+		break;
     default:
 		send_response(Null);
-        echo "Your favorite color is neither red, blue, nor green!";
 		break;
 }
 
@@ -73,5 +108,107 @@ function fRegisterUser($_jsondata) {
 	}
 }
 
+function fSaveAddress($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	$email=$_jsondata["email"];
+	$_items = DbHelper::getInstance()->saveAddress($email);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+function fDeleteAddress($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	$email=$_jsondata["email"];
+	$_items = DbHelper::getInstance()->deleteAddress($email);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+function fUpdateAddress($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	$email=$_jsondata["email"];
+	$_items = DbHelper::getInstance()->updateAddress($email);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+function fOpenOrders($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	$email=$_jsondata["email"];
+	$_items = DbHelper::getInstance()->openOrders($email);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+
+
+function fOpenOrderDetails($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	$email=$_jsondata["email"];
+	$_items = DbHelper::getInstance()->openOrderDetails($email);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+function fOldOrders($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	$email=$_jsondata["email"];
+	$_items = DbHelper::getInstance()->oldOrders($email);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+function fGetMessages($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	$email=$_jsondata["email"];
+	$_items = DbHelper::getInstance()->getMessages($email);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+
+
+function fGetManufacturers($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	$email=$_jsondata["email"];
+	$_items = DbHelper::getInstance()->getManufacturers($email);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+function fGetManufacturersMenu($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	$email=$_jsondata["email"];
+	$_items = DbHelper::getInstance()->getManufacturersMenu($email);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
 
 ?>

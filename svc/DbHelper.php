@@ -67,17 +67,23 @@ class DbHelper {
 	}
 	
 	function registerUser($_email) {
-        $sql = "INSERT INTO tblallesuchen (benutzerip, suchewort, datum)VALUES('$_SearchWord','$_UserIp',now())";
-        $result = $this->conn->query($sql);
+		$customer = new Customer();
+		$customer->firstname = 'name';
+		$customer->lastname = 'lastname';
+		$customer->email = 'mail@mail.com';
+		$customer->passwd = md5(time());
+		$customer->is_guest = 1;
 
-        $item = FALSE;
-
-        if ($result === TRUE) {
-            $item = TRUE;
-        }
+		$_res=$customer->add();
 
         $this->conn->close();
 
+		if($_res){
+		$item="OK";
+		}else{
+			$item="NOK";
+		}
+		
         return $item;
     }
 	
