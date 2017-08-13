@@ -1,6 +1,7 @@
 <?php
 
 include_once '../config/settings.inc.php';
+include_once '../classes/Customer.php';
 
 
 class DbHelper {
@@ -65,30 +66,19 @@ class DbHelper {
         return $items;
 	}
 	
-	function get_test_items($testinput) {
-
-        $sql = "select firstname ,lastname,passwd from ps_customer";
+	function registerUser($_email) {
+        $sql = "INSERT INTO tblallesuchen (benutzerip, suchewort, datum)VALUES('$_SearchWord','$_UserIp',now())";
         $result = $this->conn->query($sql);
 
-        $items = array();
-		
-		array_push($items, $testinput);
+        $item = FALSE;
 
-        if ($result->num_rows > 0) {
-			
-            while ($row = $result->fetch_assoc()) {
-				$rwitem=array();
-				array_push($rwitem,$row["firstname"]);
-				array_push($rwitem,$row["lastname"]);
-				array_push($rwitem,$row["passwd"]);
-                array_push($items, $rwitem);
-            }
-        } else {
-            //no results
+        if ($result === TRUE) {
+            $item = TRUE;
         }
+
         $this->conn->close();
 
-        return $items;
+        return $item;
     }
 	
 	

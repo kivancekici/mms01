@@ -62,4 +62,16 @@ function fLogin($_jsondata) {
 		send_response(Null);
 	}
 }
+
+function fRegisterUser($_jsondata) {
+	$email=$_jsondata["email"];
+	$_items = DbHelper::getInstance()->registerUser($email);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+
 ?>
