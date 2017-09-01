@@ -1,7 +1,6 @@
 <?php
 
 include_once '../config/settings.inc.php';
-include_once '../classes/Customer.php';
 
 
 class DbHelper {
@@ -66,20 +65,36 @@ class DbHelper {
         return $items;
 	}
 	
-	function registerUser($_email) {
-		$customer = new Customer();
-		$customer->firstname = 'name';
-		$customer->lastname = 'lastname';
-		$customer->email = 'mail@mail.com';
-		$customer->passwd = md5(time());
-		$customer->is_guest = 1;
+	function registerUser($_infos) {
+		$_res=false;
 
-		$_res=$customer->add();
+		$email=$_infos["email"];	
+		
+		$id_shop_group=1;
+		$id_shop=1;
+		$id_gender=1;
+		$id_default_group=1;
+		$id_lang=1;
+		$firstname=" ";
+		$lastname=" ";
+		$passwd= md5(time());
+		$newsletter=0;
+		$active=1;
+		$is_guest=0;
+		$deleted=0;
+		
+		$sql = "INSERT INTO ps_customer (id_shop_group,id_shop,id_gender,id_default_group,id_lang,firstname,lastname,email,passwd,last_passwd_gen,newsletter,active,is_guest,deleted,date_add,date_upd) "+
+				+"VALUES($id_shop_group,$id_shop,$id_gender,$id_default_group,$id_lang,$firstname,$lastname,$email,$passwd,now(),$newsletter,$active,$is_guest,$deleted,now(),now());";
+        $result = $this->conn->query($sql);
 
+        if ($result === TRUE) {
+            $_res = TRUE;
+        }
+		
         $this->conn->close();
 
 		if($_res){
-		$item="OK";
+			$item="OK;".$passwd;
 		}else{
 			$item="NOK";
 		}
@@ -87,10 +102,37 @@ class DbHelper {
         return $item;
     }
 	
-	function saveAddress($_email) {
+	function saveAddress($_infos) {
 		
 		$_res=false;
 
+		$id_country=$_infos["id_country"];
+		$id_state=$_infos["id_state"];
+		$id_customer=$_infos["id_customer"];
+		$id_manufacturer=$_infos["id_manufacturer"];
+		$id_warehouse=$_infos["id_warehouse"];
+		$alias=$_infos["alias"];
+		$company=$_infos["company"];
+		$lastname=$_infos["lastname"];
+		$firstname=$_infos["firstname"];
+		$address1=$_infos["address1"];
+		$address2=$_infos["address2"];
+		$postcode=$_infos["postcode"];
+		$city=$_infos["city"];
+		$other=$_infos["other"];
+		$phone=$_infos["phone"];
+		$phone_mobile=$_infos["phone_mobile"];
+		$vat_number=$_infos["vat_number"];
+		$dni=$_infos["dni"];		
+		
+		$sql = "INSERT INTO ps_address (id_country, id_state, id_customer, id_manufacturer, id_supplier, id_warehouse, alias, company, lastname, firstname,address1,address2,postcode,city,other,phone,phone_mobile,vat_number,dni,date_add,date_upd,active,deleted) "+
+				+"VALUES($id_country, $id_state, $id_customer, $id_manufacturer, $id_supplier, $id_warehouse, '$alias', '$company', '$lastname', '$firstname', '$address1', '$address2','$postcode','$city','$other','$phone','$phone_mobile','$vat_number','$dni',now(),now(),1,0);";
+        $result = $this->conn->query($sql);
+
+        if ($result === TRUE) {
+            $_res = TRUE;
+        }
+		
         $this->conn->close();
 
 		if($_res){
@@ -102,25 +144,71 @@ class DbHelper {
         return $item;
     }
 	
-	function getMyAddress($_email) {
+	function getMyAddress($_infos) {
 		
 		$_res=false;
 
+		$id_customer=$_infos["id_customer"];
+		$sql = "SELECT * FROM ps_address where deleted=0 and id_customer=$id_customer";
+        $result = $this->conn->query($sql);
+
+        $items = array();
+
+        if ($result->num_rows > 0) {
+            while ($_infos = $result->fetch_assoc()) {
+				
+				$addr=array();
+				array_push($addr,$_infos["id_address"]);
+						array_push($addr,$_infos["id_country"]);
+						array_push($addr,$_infos["id_state"]);
+						array_push($addr,$_infos["id_customer"]);
+						array_push($addr,$_infos["id_manufacturer"]);
+						array_push($addr,$_infos["id_warehouse"]);
+						array_push($addr,$_infos["alias"]);
+						array_push($addr,$_infos["company"]);
+						array_push($addr,$_infos["lastname"]);
+						array_push($addr,$_infos["firstname"]);
+						array_push($addr,$_infos["address1"]);
+						array_push($addr,$_infos["address2"]);
+						array_push($addr,$_infos["postcode"]);
+						array_push($addr,$_infos["city"]);
+						array_push($addr,$_infos["other"]);
+						array_push($addr,$_infos["phone"]);
+						array_push($addr,$_infos["phone_mobile"]);
+						array_push($addr,$_infos["vat_number"]);
+						array_push($addr,$_infos["dni"]);	
+				
+                array_push($items,$addr);
+				
+				$_res=true;
+            }
+			
+			
+        } else {
+            //no results
+        }
+		
         $this->conn->close();
 
 		if($_res){
 			$item="OK";
 		}else{
 			$item="NOK";
+			return $item;
 		}
 		
-        return $item;
+        return $items;
     }
 	
 	function deleteAddress($_email) {
 		
 		$_res=false;
 
+		$sql = "update ps_address set deleted=1 where id_address=$id_address and id_customer=$id_customer";
+        $result = $this->conn->query($sql);
+		if ($result === TRUE) {
+            $_res = TRUE;
+        }
         $this->conn->close();
 
 		if($_res){
@@ -136,6 +224,31 @@ class DbHelper {
 		
 		$_res=false;
 
+		$id_address=$_infos["id_address"];
+		$id_state=$_infos["id_state"];
+		$id_customer=$_infos["id_customer"];
+		$alias=$_infos["alias"];
+		$company=$_infos["company"];
+		$lastname=$_infos["lastname"];
+		$firstname=$_infos["firstname"];
+		$address1=$_infos["address1"];
+		$address2=$_infos["address2"];
+		$postcode=$_infos["postcode"];
+		$city=$_infos["city"];
+		$other=$_infos["other"];
+		$phone=$_infos["phone"];
+		$phone_mobile=$_infos["phone_mobile"];
+		$vat_number=$_infos["vat_number"];
+		$dni=$_infos["dni"];
+		$active=$_infos["active"];		
+		
+		$sql = "update ps_address set id_country=$id_country, id_state=$id_state, alias='$alias', lastname='$lastname', firstname='$firstname',address1='$address1',address2='$address2',postcode='$postcode',city='$city',other='$other',phone='$phone',phone_mobile='$phone_mobile',vat_number='$vat_number',dni='$dni',date_upd=now(),active=$active where id_address=$id_address and id_customer=$id_customer ";
+        $result = $this->conn->query($sql);
+
+        if ($result === TRUE) {
+            $_res = TRUE;
+        }
+		
         $this->conn->close();
 
 		if($_res){
@@ -192,49 +305,179 @@ class DbHelper {
         return $item;
     }
 	
-	function getMessages($_email) {
+	function getMessages($_infos2) {
 		
 		$_res=false;
 
+		$id_customer=$_infos2["id_customer"];
+		$sql = "SELECT * FROM ps_message where id_customer=$id_customer";
+        $result = $this->conn->query($sql);
+
+        $items = array();
+
+        if ($result->num_rows > 0) {
+            while ($_infos = $result->fetch_assoc()) {
+				
+				$msg=array();
+				array_push($msg,$_infos["id_message"]);
+				array_push($msg,$_infos["id_cart"]);
+				array_push($msg,$_infos["id_customer"]);
+				array_push($msg,$_infos["id_employee"]);
+				array_push($msg,$_infos["id_order"]);
+				array_push($msg,$_infos["message"]);
+				array_push($msg,$_infos["date_add"]);						
+				
+                array_push($items,$msg);
+				
+				$_res=true;
+            }
+			
+			
+        } else {
+            //no results
+        }
+		
         $this->conn->close();
 
 		if($_res){
 			$item="OK";
 		}else{
 			$item="NOK";
+			return $item;
 		}
 		
-        return $item;
+        return $items;
     }
 	
-	function getManufacturers($_email) {
+	function getManufacturers($_infos2) {
 		
 		$_res=false;
 
+		$manufacturer=$_infos2["manufacturer"];
+		$sql = "select * from ps_manufacturer where name like '%$manufacturer%' and active=1";
+        $result = $this->conn->query($sql);
+
+        $items = array();
+
+        if ($result->num_rows > 0) {
+            while ($_infos = $result->fetch_assoc()) {
+				
+				$msg=array();
+				array_push($msg,$_infos["id_manufacturer"]);
+				array_push($msg,$_infos["name"]);					
+				
+                array_push($items,$msg);
+				
+				$_res=true;
+            }
+			
+			
+        } else {
+            //no results
+        }
+		
         $this->conn->close();
 
 		if($_res){
 			$item="OK";
 		}else{
 			$item="NOK";
+			return $item;
 		}
 		
-        return $item;
+        return $items;
     }
 	
-	function getManufacturersMenu($_email) {
-		
+	function getManufacturersCategoryProducts($id_manufacturer,$id_category){
 		$_res=false;
 
+		$id_manufacturer=$_infos2["id_manufacturer"];
+		$sql = "select * from ps_product prd left join  ps_category_lang ctg on prd.id_category_default=ctg.id_category and ctg.id_lang=1 where id_manufacturer=$id_manufacturer and ctg.id_category=$id_category";
+        $result = $this->conn->query($sql);
+
+        $items = array();
+
+        if ($result->num_rows > 0) {
+            while ($_infos = $result->fetch_assoc()) {
+				
+				$prd=array();
+				array_push($prd,$_infos["id_category"]);
+				array_push($prd,$_infos["id_category"]);
+				array_push($prd,$_infos["id_category"]);
+				array_push($prd,$_infos["id_category"]);
+				array_push($prd,$_infos["id_category"]);
+				array_push($prd,$_infos["id_category"]);
+				array_push($prd,$_infos["id_category"]);
+				array_push($prd,$_infos["id_category"]);
+				array_push($prd,$_infos["id_category"]);
+				array_push($prd,$_infos["id_category"]);
+				array_push($prd,$_infos["id_category"]);
+				array_push($prd,$_infos["id_category"]);
+				array_push($prd,$_infos["id_category"]);
+				array_push($prd,$_infos["id_category"]);
+				array_push($prd,$_infos["id_category"]);
+				array_push($prd,$_infos["id_category"]);
+				array_push($prd,$_infos["id_category"]);
+				
+				
+                array_push($items,$prd);
+				
+				$_res=true;
+            }
+			
+			
+        } else {
+            //no results
+        }
+		
         $this->conn->close();
 
 		if($_res){
 			$item="OK";
 		}else{
 			$item="NOK";
+			return $item;
 		}
 		
-        return $item;
+        return $items;
+	}
+	
+	function getManufacturersMenu($_infos2) {
+		
+		$_res=false;
+
+		$id_manufacturer=$_infos2["id_manufacturer"];
+		$sql = "select distinct prd.id_category_default as id_category from ps_product prd left join  ps_category_lang ctg on prd.id_category_default=ctg.id_category and ctg.id_lang=1 where id_manufacturer=$id_manufacturer";
+        $result = $this->conn->query($sql);
+
+        $items = array();
+
+        if ($result->num_rows > 0) {
+            while ($_infos = $result->fetch_assoc()) {
+				
+				$msg=array();
+				$id_category=$_infos["id_category"];					
+				
+                array_push($items,$msg);
+				
+				$_res=true;
+            }
+			
+			
+        } else {
+            //no results
+        }
+		
+        $this->conn->close();
+
+		if($_res){
+			$item="OK";
+		}else{
+			$item="NOK";
+			return $item;
+		}
+		
+        return $items;
     }
 	
 	function getProductsList($_email) {

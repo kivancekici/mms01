@@ -106,9 +106,8 @@ function fRegisterUser($_jsondata) {
 }
 
 function fSaveAddress($_jsondata) {
-	//alanları ekle ve dbhelper methodunu yaz
-	$email=$_jsondata["email"];
-	$_items = DbHelper::getInstance()->saveAddress($email);
+	$infos=$_jsondata["email"];
+	$_items = DbHelper::getInstance()->saveAddress($infos);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
