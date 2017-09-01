@@ -43,7 +43,7 @@ class DbHelper {
 		
 		$pwd=$this->encrypt($_passwd);
 		
-		$sql = "select firstname ,lastname from ps_customer where email='$_email' and passwd='$pwd'";
+		$sql = "select id_customer,firstname ,lastname from ps_customer where email='$_email' and passwd='$pwd'";
         $result = $this->conn->query($sql);
 		
         $items = array();
@@ -52,13 +52,14 @@ class DbHelper {
 			
             while ($row = $result->fetch_assoc()) {
 				$rwitem=array();
-				array_push($rwitem,"OK");
-				array_push($rwitem,$row["firstname"]);
-				array_push($rwitem,$row["lastname"]);
+				$rwitem["status"]="OK";
+				$rwitem=array_merge($rwitem,$row);
                 array_push($items, $rwitem);
             }
         } else {
-            //no results
+            $rwitem=array();
+				$rwitem["status"]="NOK";
+                array_push($items, $rwitem);
         }
         $this->conn->close();
 
@@ -158,25 +159,9 @@ class DbHelper {
             while ($_infos = $result->fetch_assoc()) {
 				
 				$addr=array();
-				array_push($addr,$_infos["id_address"]);
-						array_push($addr,$_infos["id_country"]);
-						array_push($addr,$_infos["id_state"]);
-						array_push($addr,$_infos["id_customer"]);
-						array_push($addr,$_infos["id_manufacturer"]);
-						array_push($addr,$_infos["id_warehouse"]);
-						array_push($addr,$_infos["alias"]);
-						array_push($addr,$_infos["company"]);
-						array_push($addr,$_infos["lastname"]);
-						array_push($addr,$_infos["firstname"]);
-						array_push($addr,$_infos["address1"]);
-						array_push($addr,$_infos["address2"]);
-						array_push($addr,$_infos["postcode"]);
-						array_push($addr,$_infos["city"]);
-						array_push($addr,$_infos["other"]);
-						array_push($addr,$_infos["phone"]);
-						array_push($addr,$_infos["phone_mobile"]);
-						array_push($addr,$_infos["vat_number"]);
-						array_push($addr,$_infos["dni"]);	
+
+				$addr["status"]="OK";
+				$addr=array_merge($addr,$_infos);           
 				
                 array_push($items,$addr);
 				
@@ -278,7 +263,29 @@ class DbHelper {
 	function openOrderDetails($_email) {
 		
 		$_res=false;
+		
+		$id_order=$_infos2["id_order"];
+		$sql = "select * from ps_order_detail where id_order=$id_order";
+        $result = $this->conn->query($sql);
 
+        $items = array();
+
+        if ($result->num_rows > 0) {
+            while ($_infos = $result->fetch_assoc()) {
+				
+				$dets=array();
+				$dets["status"]="OK";
+				$dets=array_merge($dets,$_infos);
+                array_push($items,$dets);
+				
+				$_res=true;
+            }
+			
+			
+        } else {
+            //no results
+        }
+		
         $this->conn->close();
 
 		if($_res){
@@ -319,20 +326,12 @@ class DbHelper {
             while ($_infos = $result->fetch_assoc()) {
 				
 				$msg=array();
-				array_push($msg,$_infos["id_message"]);
-				array_push($msg,$_infos["id_cart"]);
-				array_push($msg,$_infos["id_customer"]);
-				array_push($msg,$_infos["id_employee"]);
-				array_push($msg,$_infos["id_order"]);
-				array_push($msg,$_infos["message"]);
-				array_push($msg,$_infos["date_add"]);						
-				
+				$msg["status"]="OK";
+				$msg=array_merge($msg,$_infos);
                 array_push($items,$msg);
 				
 				$_res=true;
             }
-			
-			
         } else {
             //no results
         }
@@ -363,8 +362,8 @@ class DbHelper {
             while ($_infos = $result->fetch_assoc()) {
 				
 				$msg=array();
-				array_push($msg,$_infos["id_manufacturer"]);
-				array_push($msg,$_infos["name"]);					
+				$msg["status"]="OK";
+				$msg=array_merge($msg,$_infos);				
 				
                 array_push($items,$msg);
 				
@@ -401,25 +400,9 @@ class DbHelper {
             while ($_infos = $result->fetch_assoc()) {
 				
 				$prd=array();
-				array_push($prd,$_infos["id_category"]);
-				array_push($prd,$_infos["id_category"]);
-				array_push($prd,$_infos["id_category"]);
-				array_push($prd,$_infos["id_category"]);
-				array_push($prd,$_infos["id_category"]);
-				array_push($prd,$_infos["id_category"]);
-				array_push($prd,$_infos["id_category"]);
-				array_push($prd,$_infos["id_category"]);
-				array_push($prd,$_infos["id_category"]);
-				array_push($prd,$_infos["id_category"]);
-				array_push($prd,$_infos["id_category"]);
-				array_push($prd,$_infos["id_category"]);
-				array_push($prd,$_infos["id_category"]);
-				array_push($prd,$_infos["id_category"]);
-				array_push($prd,$_infos["id_category"]);
-				array_push($prd,$_infos["id_category"]);
-				array_push($prd,$_infos["id_category"]);
-				
-				
+				$prd["status"]="OK";
+				$prd=array_merge($prd,$_infos);
+			
                 array_push($items,$prd);
 				
 				$_res=true;
@@ -447,7 +430,7 @@ class DbHelper {
 		$_res=false;
 
 		$id_manufacturer=$_infos2["id_manufacturer"];
-		$sql = "select distinct prd.id_category_default as id_category from ps_product prd left join  ps_category_lang ctg on prd.id_category_default=ctg.id_category and ctg.id_lang=1 where id_manufacturer=$id_manufacturer";
+		$sql = "select * from ps_product prd left join  ps_category_lang ctg on prd.id_category_default=ctg.id_category and ctg.id_lang=1 where id_manufacturer=$id_manufacturer order by prd.id_category_default";
         $result = $this->conn->query($sql);
 
         $items = array();
@@ -455,10 +438,10 @@ class DbHelper {
         if ($result->num_rows > 0) {
             while ($_infos = $result->fetch_assoc()) {
 				
-				$msg=array();
-				$id_category=$_infos["id_category"];					
+				$menu=array();
+				$menu=array_merge($menu,$_infos);					
 				
-                array_push($items,$msg);
+                array_push($items,$menu);
 				
 				$_res=true;
             }
@@ -480,19 +463,42 @@ class DbHelper {
         return $items;
     }
 	
-	function getProductsList($_email) {
+	function getProductsList($_infos2) {
 		
 		$_res=false;
 
+		$product_name=$_infos2["product_name"];
+		$sql = "select * from ps_product prd left join ps_product_lang prdlang on prd.id_product=prdlang.id_product and prdlang.id_lang=1 left join  ps_category_lang ctg on prd.id_category_default=ctg.id_category and ctg.id_lang=1 where id_manufacturer=$id_manufacturer order by prd.id_category_default";
+        $result = $this->conn->query($sql);
+
+        $items = array();
+
+        if ($result->num_rows > 0) {
+            while ($_infos = $result->fetch_assoc()) {
+				
+				$menu=array();
+				$menu=array_merge($menu,$_infos);					
+				
+                array_push($items,$menu);
+				
+				$_res=true;
+            }
+			
+			
+        } else {
+            //no results
+        }
+		
         $this->conn->close();
 
 		if($_res){
 			$item="OK";
 		}else{
 			$item="NOK";
+			return $item;
 		}
 		
-        return $item;
+        return $items;
     }
 	
 	function placeOrder($_email) {
