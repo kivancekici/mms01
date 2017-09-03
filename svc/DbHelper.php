@@ -245,22 +245,43 @@ class DbHelper {
         return $item;
     }
 	
-	function openOrders($_email) {
+	function openOrders($_infos2) {
 		
 		$_res=false;
 
+		$id_customer=$_infos2["id_customer"];
+		$sql = "select * from ps_orders where id_customer=$id_customer and current_state<=45";
+        $result = $this->conn->query($sql);
+
+        $items = array();
+
+        if ($result->num_rows > 0) {
+            while ($_infos = $result->fetch_assoc()) {
+				
+				$oldorders=array();
+				$oldorders["status"]="OK";
+				$oldorders=array_merge($oldorders,$_infos);
+                array_push($items,$oldorders);
+				
+				$_res=true;
+            }
+        } else {
+            //no results
+        }
+		
         $this->conn->close();
 
 		if($_res){
 			$item="OK";
 		}else{
 			$item="NOK";
+			return $item;
 		}
 		
-        return $item;
+        return $items;
     }
 	
-	function openOrderDetails($_email) {
+	function openOrderDetails($_infos2) {
 		
 		$_res=false;
 		
@@ -301,15 +322,36 @@ class DbHelper {
 		
 		$_res=false;
 
+		$id_customer=$_infos2["id_customer"];
+		$sql = "select * from ps_orders where id_customer=$id_customer and current_state>=5";
+        $result = $this->conn->query($sql);
+
+        $items = array();
+
+        if ($result->num_rows > 0) {
+            while ($_infos = $result->fetch_assoc()) {
+				
+				$oldorders=array();
+				$oldorders["status"]="OK";
+				$oldorders=array_merge($oldorders,$_infos);
+                array_push($items,$oldorders);
+				
+				$_res=true;
+            }
+        } else {
+            //no results
+        }
+		
         $this->conn->close();
 
 		if($_res){
 			$item="OK";
 		}else{
 			$item="NOK";
+			return $item;
 		}
 		
-        return $item;
+        return $items;
     }
 	
 	function getMessages($_infos2) {
