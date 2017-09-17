@@ -1,6 +1,6 @@
 // Initialize app
 var myApp = new Framework7({
-        swipePanel: 'left'
+        //swipePanel: 'left'
         // ... other parameters
 }
 );
