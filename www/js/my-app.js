@@ -3,8 +3,8 @@ var myApp = new Framework7({
     swipePanel: 'left',
     preroute: function (view, options) {
         if (!userLoggedIn) {
-            view.router.loadPage('login.html'); //load another page with auth form
-            return false; //required to prevent default router action
+            //view.router.loadPage('login.html'); //load another page with auth form
+            //return false; //required to prevent default router action
         }
     }
         
