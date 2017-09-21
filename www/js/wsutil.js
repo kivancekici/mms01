@@ -13,7 +13,7 @@ function restfulGetCall(restSuccess) {
 
 
 function restfulPostCall(sendData, restSuccess) {
-    $.ajax({
+    $$.ajax({
         url: servicePath ,
         method: 'POST',
         dataType: 'json',
