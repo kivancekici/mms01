@@ -5,7 +5,7 @@ function restfulGetCall(restSuccess) {
     $.get(servicePath, function (data) {
         restSuccess(data);
     }).fail(function () {
-        msgWarning("Uyarı!", "Bilgiler Alınamıyor...");
+        //msgWarning("Uyarı!", "Bilgiler Alınamıyor...");
     });
 
 
@@ -30,7 +30,7 @@ function mobileLogin(email,passwd) {
     var ansdata = {
             'opr': 'login',
             'email': email,
-            'passwd': passwd
+            'pswd': passwd
     }
 
     restfulCall(ansdata, function (data) {
