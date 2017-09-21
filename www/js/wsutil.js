@@ -15,6 +15,7 @@ function restfulGetCall(restSuccess) {
 function restfulPostCall(sendData, restSuccess) {
     $$.ajax({
         url: servicePath ,
+        async:false,
         method: 'POST',
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
