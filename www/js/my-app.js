@@ -67,8 +67,14 @@ $$(document).on('pageInit', function(e) {
     }
 });
 
+$$('#register').on('click', function() {
 
-$$('.btnLoginAction').on('click', function() {
+
+    myApp.alert('Register');
+
+});
+
+$$('#btnact').on('click', function() {
 
     myApp.alert('hello');
     userLoggedIn = true;
