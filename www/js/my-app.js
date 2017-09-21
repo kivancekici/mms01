@@ -1,9 +1,14 @@
 // Initialize app
 var myApp = new Framework7({
-    swipePanel: 'left'
-        // ... other parameters
+    swipePanel: 'left',
+    preroute: function (view, options) {
+        if (!userLoggedIn) {
+            view.router.loadPage('login.html'); //load another page with auth form
+            return false; //required to prevent default router action
+        }
+    }
+        
 });
-
 
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
@@ -13,23 +18,28 @@ var mainView = myApp.addView('.view-main', {
 
 });
 
+
+
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     console.log("Device is ready!");
-
 });
+
+$$('.btnlogin').on('click', function(){
+  alert('tıkıla');
+}); 
 
 var userLoggedIn = false;
 
 
-checkLogin();
+
 
 
 
 // Option 1. Using page callback for page (for "about" page in this case) (recommended way):
 myApp.onPageBeforeInit('index', function(page) {
 
-
+//checkLogin();
 
 });
 
