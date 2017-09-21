@@ -73,6 +73,10 @@ $$(document).on('pageInit', function(e) {
             myApp.alert('tıkıla');
         }); 
         
+        $$('.btnForgetPassword').on('click', function(){
+            myApp.alert('Unuttum bişeyleri');
+        }); 
+        
     }
 });
 
