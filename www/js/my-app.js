@@ -77,7 +77,9 @@ $$(document).on('pageInit', function(e) {
             if(customer==null){
                 myApp.alert('Başarısız : '+email+' ' + pass);
             }else{
-                myApp.alert('Wuuhuuu Başarılı');
+                userLoggedIn=true;
+                myApp.alert('Wuuhuuu Başarılı :'+ customer['id_customer'] + " "+customer.firstname+" "+customer.lastname);
+                
                 mainView.router.loadPage({ url: 'index.html', ignoreCache: true });
                 
             }
