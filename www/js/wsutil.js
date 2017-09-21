@@ -1,14 +1,24 @@
 
-function checkLogin(){
-	 try{
-           //var storedData = window.localStorage['baklava7-'+ '001'];
-          if(!userLoggedIn) {
-              //do your ajax login request here
-              // if successful do your login redirect  
-                 mainView.router.loadPage({url:'login.html', ignoreCache:true, reload:true });
-				 
-           }
-       }catch(e){
-	   }
+function restfulGetCall(met, restSuccess) {
+    $.get(servicePath + met, function (data) {
+        restSuccess(data);
+    }).fail(function () {
+        msgWarning("Uyarı!", "Bilgiler Alınamıyor...");
+    });
+
+
 }
 
+
+function restfulPostCall(met, ansdata, restSuccess) {
+    $.ajax({
+        url: servicePath + met,
+        method: 'POST',
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(ansdata),
+        success: function (data) {
+            restSuccess(data);
+        }
+    });
+}
