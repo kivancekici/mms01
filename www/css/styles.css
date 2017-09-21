@@ -14,62 +14,62 @@
     background: #000000;
 }
 
-.page-bg-main{
-	background-image: url("../images/baklava7bg.jpg");
-	background-size: cover;
-    background-position: center;
-}
-
-.cntbottom{
-	position:absolute;
-	width:100%;
-	bottom:0;
-}
-
-.cntmiddle{
-	position:absolute;
-	width:100%;
-	top:30%;
-}
-
-.panelmenulist.li{
-	width:100%;
-}
-
-.account-card-header{
-	background-image: url("../images/myaccount.png");
-	height: 30vw;
+.page-bg-main {
+    background-image: url("../images/baklava7bgx.jpg");
     background-size: cover;
     background-position: center;
 }
 
-.txt-cart-order-amount{
-	width:39px!important;
-	border:1px solid rgb(255, 149, 0)!important;
-	height:36px!important;
-	text-align: center; 
+.cntbottom {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
 }
 
-.list-item-shopping-cart{
-	padding:1em;
+.cntmiddle {
+    position: absolute;
+    width: 100%;
+    top: 30%;
 }
 
-.list-item-order-btnlist{
-	margin:0px!important;
+.panelmenulist.li {
+    width: 100%;
+}
+
+.account-card-header {
+    background-image: url("../images/myaccount.png");
+    height: 30vw;
+    background-size: cover;
+    background-position: center;
+}
+
+.txt-cart-order-amount {
+    width: 39px!important;
+    border: 1px solid rgb(255, 149, 0)!important;
+    height: 36px!important;
+    text-align: center;
+}
+
+.list-item-shopping-cart {
+    padding: 1em;
+}
+
+.list-item-order-btnlist {
+    margin: 0px!important;
 }
 
 .list-item-order-btnlist ul {
-	padding-left:0px!important;
+    padding-left: 0px!important;
 }
 
-.list-item-order-btnlist li{
-	padding:3px!important;
+.list-item-order-btnlist li {
+    padding: 3px!important;
 }
 
-.list-item-order-btnlist i{
-	padding:1px!important;
+.list-item-order-btnlist i {
+    padding: 1px!important;
 }
 
-.item-text-shopping-cart{
-	height:80px!important;
+.item-text-shopping-cart {
+    height: 80px!important;
 }
