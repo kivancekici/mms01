@@ -68,7 +68,7 @@ $$(document).on('pageInit', function(e) {
 });
 
 
-$$('#btnLoginAction').on('click', function() {
+$$('.btnLoginAction').on('click', function() {
 
     myApp.alert('hello');
     userLoggedIn = true;
