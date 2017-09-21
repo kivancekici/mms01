@@ -29,7 +29,7 @@ $$(document).on('deviceready', function() {
 var userLoggedIn = false;
 
 
-//checkLogin();
+checkLogin();
 
 
 
