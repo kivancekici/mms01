@@ -69,7 +69,7 @@ $$(document).on('pageInit', function(e) {
     if (page.name === 'login') {
         // Following code will be executed for page with data-page attribute equal to "about"
         //myApp.alert('Here comes login page');
-        $$('.btnlogin').on('click', function(){
+        $$('.btnLogin').on('click', function(){
             myApp.alert('tıkıla');
         }); 
         
