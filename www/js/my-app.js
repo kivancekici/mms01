@@ -62,7 +62,7 @@ $$(document).on('pageInit', function(e) {
 
         $$('#btnact').on('click', function() {
 
-            myApp.alert('hello');
+
             // userLoggedIn = true;
 
             myApp.showPreloader('Yükleniyor..');
@@ -84,7 +84,6 @@ $$(document).on('pageInit', function(e) {
                 data: JSON.stringify(loginData),
                 contentType: 'application/json',
                 dataType: 'json',
-                timeout: 2000,
                 success: function(data, status, xmlRequest) {
 
                     myApp.hidePreloader();
