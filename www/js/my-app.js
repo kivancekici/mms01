@@ -65,7 +65,7 @@ $$(document).on('pageInit', function(e) {
 
             // userLoggedIn = true;
 
-            myApp.showPreloader('Yükleniyor..');
+            //    myApp.showPreloader('Yükleniyor..');
 
             var userEmail = document.getElementById("lgnusername").value;
             var userPassword = document.getElementById("lgnpassword").value;
@@ -86,7 +86,7 @@ $$(document).on('pageInit', function(e) {
                 dataType: 'json',
                 success: function(data, status, xmlRequest) {
 
-                    myApp.hidePreloader();
+                    //    myApp.hidePreloader();
 
                     if (data.status != "NOK") {
                         mainView.router.loadPage({ url: 'create_order.html', ignoreCache: true });
@@ -99,7 +99,7 @@ $$(document).on('pageInit', function(e) {
 
                 },
                 error: function(request, status, error) {
-                    myApp.hidePreloader();
+                    //    myApp.hidePreloader();
                     myApp.alert("Request error");
 
                 }
