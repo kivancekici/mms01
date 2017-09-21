@@ -2,10 +2,8 @@
 var myApp = new Framework7({
     swipePanel: 'left',
     preroute: function (view, options) {
-        if (!userLoggedIn) {
-            //view.router.loadPage('login.html'); //load another page with auth form
-            //return false; //required to prevent default router action
-        }
+        checkLogin();
+        return false;
     }
         
 });
@@ -39,7 +37,7 @@ var userLoggedIn = false;
 // Option 1. Using page callback for page (for "about" page in this case) (recommended way):
 myApp.onPageBeforeInit('index', function(page) {
 
-//checkLogin();
+
 
 });
 
