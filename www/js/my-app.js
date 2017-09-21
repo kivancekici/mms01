@@ -2,8 +2,7 @@
 var myApp = new Framework7({
     swipePanel: 'left',
     preroute: function (view, options) {
-        checkLogin();
-        return false;
+        //login control yap
     }
         
 });
@@ -41,6 +40,8 @@ myApp.onPageBeforeInit('index', function(page) {
 
 });
 
+
+checkLogin();
 
 function checkLogin() {
     try {
