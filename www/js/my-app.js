@@ -11,6 +11,13 @@ var $$ = Dom7;
 // Add view
 var mainView = myApp.addView('.view-main', {
 
+    preroute: function(view, options) {
+        if (true) {
+            view.router.loadPage('login.html'); //load another page with auth form
+            return false; //required to prevent default router action
+        }
+    }
+
 });
 
 // Handle Cordova Device Ready Event
@@ -22,7 +29,7 @@ $$(document).on('deviceready', function() {
 var userLoggedIn = false;
 
 
-checkLogin();
+//checkLogin();
 
 
 
