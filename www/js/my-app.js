@@ -61,16 +61,14 @@ function checkLogin() {
 $$(document).on('pageInit', function(e) {
     // Get page data from event data
     var page = e.detail.page;
-
-
-    if (!userLoggedIn) {
+    
         $$('.btnlogin').on('click', function(){
             alert('tıkıla');
         }); 
-        return;
-    }
 
-    if (page.name === 'login.html') {
+
+
+    if (page.name === 'login') {
         // Following code will be executed for page with data-page attribute equal to "about"
         myApp.alert('Here comes login page');
         
