@@ -1,7 +1,6 @@
-// Initialize app
 var myApp = new Framework7({
-    swipePanel: 'left'
-        // ... other parameters
+    //swipePanel: 'left'
+    // ... other parameters
 });
 
 
@@ -10,24 +9,18 @@ var $$ = Dom7;
 
 // Add view
 var mainView = myApp.addView('.view-main', {
-
+    // Because we want to use dynamic navbar, we need to enable it for this view:
     dynamicNavbar: true
 });
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     console.log("Device is ready!");
-
 });
 
 var userLoggedIn = false;
 
-
 checkLogin();
-
-
-
-
 
 function checkLogin() {
     try {
@@ -35,71 +28,92 @@ function checkLogin() {
         if (!userLoggedIn) {
             //do your ajax login request here
             // if successful do your login redirect  
-            mainView.router.loadPage({ url: 'login.html', ignoreCache: true });
+            mainView.router.loadPage({ url: 'login.html', ignoreCache: true, reload: true });
 
-        } else {
-
-            mainView.router.loadPage({ url: 'create_order.html', ignoreCache: true });
         }
     } catch (e) {}
 }
 
 
-$$('#register').on('click', function() {
+
+// Now we need to run the code that will be executed only for About page.
+
+// Option 1. Using page callback for page (for "about" page in this case) (recommended way):
+myApp.onPageInit('about', function(page) {
 
 
-    myApp.alert('Register');
 
 });
 
-$$('#btnact').on('click', function() {
-
-    myApp.alert('hello');
-    // userLoggedIn = true;
-
-    myApp.showPreloader('Yükleniyor..');
-
-    var userEmail = document.getElementById("lgnusername").value;
-    var userPassword = document.getElementById("lgnpassword").value;
-
-    var loginData = {
-        opr: "login",
-        email: userEmail,
-        pswd: userPassword
-    };
+// Option 2. Using one 'pageInit' event handler for all pages:
+$$(document).on('pageInit', function(e) {
+    // Get page data from event data
+    var page = e.detail.page;
 
 
+    if (page.name === 'login') {
 
-    $$.ajax({
-        method: 'POST',
-        url: 'http://baklava7.de/mapi/Msvc.php',
-        data: JSON.stringify(loginData),
-        contentType: 'application/json',
-        dataType: 'json',
-        timeout: 2000,
-        success: function(data, status, xmlRequest) {
+        $$('#register').on('click', function() {
 
-            myApp.hidePreloader();
 
-            if (data.status != "NOK") {
-                mainView.router.loadPage({ url: 'create_order.html', ignoreCache: true });
-            } else {
-                myApp.alert("Kullanıcı adınızı veya şifrenizi kontrol ediniz.");
-            }
+            myApp.alert('Register');
+
+        });
+
+        $$('#btnact').on('click', function() {
+
+            myApp.alert('hello');
+            // userLoggedIn = true;
+
+            myApp.showPreloader('Yükleniyor..');
+
+            var userEmail = document.getElementById("lgnusername").value;
+            var userPassword = document.getElementById("lgnpassword").value;
+
+            var loginData = {
+                opr: "login",
+                email: userEmail,
+                pswd: userPassword
+            };
 
 
 
+            $$.ajax({
+                method: 'POST',
+                url: 'http://baklava7.de/mapi/Msvc.php',
+                data: JSON.stringify(loginData),
+                contentType: 'application/json',
+                dataType: 'json',
+                timeout: 2000,
+                success: function(data, status, xmlRequest) {
 
-        },
-        error: function(request, status, error) {
-            myApp.hidePreloader();
-            myApp.alert("Request error");
+                    myApp.hidePreloader();
 
-        }
+                    if (data.status != "NOK") {
+                        mainView.router.loadPage({ url: 'create_order.html', ignoreCache: true });
+                    } else {
+                        myApp.alert("Kullanıcı adınızı veya şifrenizi kontrol ediniz.");
+                    }
 
-    });
 
+
+
+                },
+                error: function(request, status, error) {
+                    myApp.hidePreloader();
+                    myApp.alert("Request error");
+
+                }
+
+            });
+
+        });
+
+
+    }
 });
+
+
 
 
 var calendarBirthday = myApp.calendar({
