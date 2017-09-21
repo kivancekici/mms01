@@ -21,6 +21,9 @@ function restfulPostCall(sendData, restSuccess) {
         data: JSON.stringify(sendData),
         success: function (data) {
             restSuccess(data);
+        },
+        error: function () {
+            restSuccess('NOK');
         }
     });
 }
