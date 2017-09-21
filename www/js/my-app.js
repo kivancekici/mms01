@@ -27,12 +27,6 @@ checkLogin();
 
 
 
-// Option 1. Using page callback for page (for "about" page in this case) (recommended way):
-myApp.onPageBeforeInit('index', function(page) {
-
-
-
-});
 
 
 function checkLogin() {
@@ -51,22 +45,6 @@ function checkLogin() {
 }
 
 
-// Option 2. Using one 'pageInit' event handler for all pages:
-$$(document).on('pageInit', function(e) {
-    // Get page data from event data
-    var page = e.detail.page;
-
-
-    if (!userLoggedIn) {
-        return;
-    }
-
-    if (page.name === 'about') {
-        // Following code will be executed for page with data-page attribute equal to "about"
-        myApp.alert('Here comes about page');
-    }
-});
-
 $$('#register').on('click', function() {
 
 
@@ -77,7 +55,7 @@ $$('#register').on('click', function() {
 $$('#btnact').on('click', function() {
 
     myApp.alert('hello');
-    userLoggedIn = true;
+    // userLoggedIn = true;
 
     myApp.showPreloader('Yükleniyor..');
 
