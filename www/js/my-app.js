@@ -67,7 +67,9 @@ $$(document).on('pageInit', function(e) {
     }
 });
 
-function loginClick() {
+
+$$('#btnLoginAction').on('click', function() {
+
     userLoggedIn = true;
 
     myApp.showPreloader('Yükleniyor..');
@@ -112,10 +114,8 @@ function loginClick() {
 
     });
 
+});
 
-
-
-}
 
 var calendarBirthday = myApp.calendar({
     input: '#calendarBirthday',
