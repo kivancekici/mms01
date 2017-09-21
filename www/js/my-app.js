@@ -22,9 +22,7 @@ $$(document).on('deviceready', function() {
     console.log("Device is ready!");
 });
 
-$$('.btnlogin').on('click', function(){
-  alert('tıkıla');
-}); 
+
 
 var userLoggedIn = false;
 
@@ -74,6 +72,10 @@ $$(document).on('pageInit', function(e) {
         myApp.alert('Here comes about page');
     }
 });
+
+$$('.btnlogin').on('click', function(){
+  alert('tıkıla');
+}); 
 
 function loginClick() {
     userLoggedIn = true;
