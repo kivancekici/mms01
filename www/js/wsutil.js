@@ -1,6 +1,8 @@
 
-function restfulGetCall(met, restSuccess) {
-    $.get(servicePath + met, function (data) {
+var servicePath="http://baklava7.de/mapi/Msvc.php";
+
+function restfulGetCall(restSuccess) {
+    $.get(servicePath, function (data) {
         restSuccess(data);
     }).fail(function () {
         msgWarning("Uyarı!", "Bilgiler Alınamıyor...");
@@ -10,15 +12,35 @@ function restfulGetCall(met, restSuccess) {
 }
 
 
-function restfulPostCall(met, ansdata, restSuccess) {
+function restfulPostCall(sendData, restSuccess) {
     $.ajax({
-        url: servicePath + met,
+        url: servicePath ,
         method: 'POST',
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(ansdata),
+        data: JSON.stringify(sendData),
         success: function (data) {
             restSuccess(data);
         }
     });
 }
+
+function mobileLogin(email,passwd) {
+
+    var ansdata = {
+            'opr': 'login',
+            'email': email,
+            'passwd': passwd
+    }
+
+    restfulCall(ansdata, function (data) {
+
+        if (data!='NOK') {
+            return data;
+
+        } else {
+            return false;
+        }
+    });
+}
+
