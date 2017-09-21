@@ -39,7 +39,7 @@ function mobileLogin(email,passwd) {
             return data;
 
         } else {
-            return false;
+            return null;
         }
     });
 }
