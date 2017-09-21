@@ -70,7 +70,17 @@ $$(document).on('pageInit', function(e) {
         // Following code will be executed for page with data-page attribute equal to "about"
         //myApp.alert('Here comes login page');
         $$('.btnLogin').on('click', function(){
-            myApp.alert('tıkıla');
+            var email=$$('#txtEmail').value;
+            var pass=$$('txtPassword').value;
+            var customer=mobileLogin(email , pass);
+            
+            if(customer==null){
+                myApp.alert('Başarısız : '+email+' ' + pass);
+            }else{
+                myApp.alert('Wuuhuuu Başarılı');
+                mainView.router.loadPage({ url: 'index.html', ignoreCache: true });
+                
+            }
         }); 
         
         $$('.btnForgetPassword').on('click', function(){
