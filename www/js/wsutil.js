@@ -1,14 +1,67 @@
+var servicePath = "http://baklava7.de/mapi/Msvc.php";
 
-function checkLogin(){
-	 try{
-           //var storedData = window.localStorage['baklava7-'+ '001'];
-          if(!userLoggedIn) {
-              //do your ajax login request here
-              // if successful do your login redirect  
-                 mainView.router.loadPage({url:'login.html', ignoreCache:true, reload:true });
-				 
-           }
-       }catch(e){
-	   }
+function restfulGetCall(restSuccess) {
+    $.get(servicePath, function(data) {
+        restSuccess(data);
+    }).fail(function() {
+        //msgWarning("Uyarı!", "Bilgiler Alınamıyor...");
+    });
+
+
 }
 
+
+function restfulPostCall(sendData) {
+
+    var response;
+
+    $$.ajax({
+        method: 'POST',
+        async: false,
+        url: servicePath,
+        data: JSON.stringify(sendData),
+        contentType: 'application/json',
+        dataType: 'json',
+        success: function(data, status, xmlRequest) {
+
+            console.log(data[0].status);
+            response = data;
+
+            /*
+            myApp.alert(JSON.stringify(data));
+
+            if (data[0].status != "NOK") {
+                mainView.router.loadPage({ url: 'create_order.html', ignoreCache: true });
+            }
+            */
+
+        },
+        error: function(request, status, error) {
+            response = "Error";
+
+            /*
+            myApp.hidePreloader();
+            //myApp.alert(JSON.stringify(data));
+            myApp.alert("Request error");
+            */
+        }
+
+    });
+
+    return response;
+
+
+}
+
+function mobileLogin(email, passwd) {
+
+    var lgndata = {
+        'opr': 'login',
+        'email': email,
+        'pswd': passwd
+    }
+
+    var result = restfulPostCall(lgndata);
+
+    myApp.alert(JSON.stringify(result));
+}
