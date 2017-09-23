@@ -70,8 +70,8 @@ $$(document).on('pageInit', function(e) {
             var email = $$('#txtEmail').val();
             var pass = $$('#txtPassword').val();
 
-            myApp.alert(email + ' ' + pass);
-            mobileLogin(email, pass);
+            var response = mobileLogin(email, pass);
+            myApp.alert(response);
         });
 
         $$('.btnForgetPassword').on('click', function() {
@@ -83,55 +83,6 @@ $$(document).on('pageInit', function(e) {
 
 
 
-function loginClick() {
-    userLoggedIn = true;
-
-    myApp.showPreloader('Yükleniyor..');
-
-    var userEmail = document.getElementById("lgnusername").value;
-    var userPassword = document.getElementById("lgnpassword").value;
-
-    var loginData = {
-        opr: "login",
-        email: userEmail,
-        pswd: userPassword
-    };
-
-
-
-    $$.ajax({
-        method: 'POST',
-        url: 'http://baklava7.de/mapi/Msvc.php',
-        data: JSON.stringify(loginData),
-        contentType: 'application/json',
-        dataType: 'json',
-        timeout: 2000,
-        success: function(data, status, xmlRequest) {
-
-            myApp.hidePreloader();
-
-            if (data.status != "NOK") {
-                mainView.router.loadPage({ url: 'create_order.html', ignoreCache: true });
-            } else {
-                myApp.alert("Kullanıcı adınızı veya şifrenizi kontrol ediniz.");
-            }
-
-
-
-
-        },
-        error: function(request, status, error) {
-            myApp.hidePreloader();
-            myApp.alert("Request error");
-
-        }
-
-    });
-
-
-
-
-}
 
 var calendarBirthday = myApp.calendar({
     input: '#calendarBirthday',

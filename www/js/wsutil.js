@@ -4,7 +4,7 @@ function restfulGetCall(restSuccess) {
     $.get(servicePath, function(data) {
         restSuccess(data);
     }).fail(function() {
-        //msgWarning("Uyarı!", "Bilgiler Alınamıyor...");
+
     });
 
 
@@ -12,6 +12,8 @@ function restfulGetCall(restSuccess) {
 
 
 function restfulPostCall(sendData) {
+
+    myApp.showPreloader();
 
     var response;
 
@@ -23,29 +25,12 @@ function restfulPostCall(sendData) {
         contentType: 'application/json',
         dataType: 'json',
         success: function(data, status, xmlRequest) {
-
-
-
-            console.log("success" + data[0].status);
+            myApp.hidePreloader();
             response = data;
-
-            /*
-            myApp.alert(JSON.stringify(data));
-
-            if (data[0].status != "NOK") {
-                mainView.router.loadPage({ url: 'create_order.html', ignoreCache: true });
-            }
-            */
-
         },
         error: function(request, status, error) {
-            response = "Error";
-            console.log("Error");
-            /*
             myApp.hidePreloader();
-            //myApp.alert(JSON.stringify(data));
-            myApp.alert("Request error");
-            */
+            response = "Error";
         }
 
     });
@@ -63,9 +48,18 @@ function mobileLogin(email, passwd) {
         'pswd': passwd
     }
 
-
-
     var result = restfulPostCall(lgndata);
 
-    myApp.alert(JSON.stringify(result));
+    if (result != "Error") {
+
+        if (result[0].status != "NOK") {
+            return result[0].id_customer;
+        } else {
+            return "NOK";
+        }
+
+    } else {
+        return "NOK"
+    }
+
 }
