@@ -72,6 +72,7 @@ $$(document).on('pageInit', function(e) {
 
             var response = mobileLogin(email, pass);
             myApp.alert(response);
+
         });
 
         $$('.btnForgetPassword').on('click', function() {
@@ -79,6 +80,12 @@ $$(document).on('pageInit', function(e) {
         });
 
     }
+
+    if (page.name === 'create_order') {
+        myApp.alert('Sipariş yaratma sayfasına geldiniz.');
+    }
+
+
 });
 
 
