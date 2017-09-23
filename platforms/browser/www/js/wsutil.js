@@ -12,22 +12,43 @@ function restfulGetCall(restSuccess) {
 
 
 function restfulPostCall(sendData) {
-    myApp.alert("hi rest");
+
     var response;
 
+    $$.ajax({
+        method: 'POST',
+        async: false,
+        url: servicePath,
+        data: JSON.stringify(sendData),
+        contentType: 'application/json',
+        dataType: 'json',
+        success: function(data, status, xmlRequest) {
 
 
-    $$.post(servicePath, JSON.stringify(sendData),
-        function(data) {
-            myApp.alert("success");
-            console.log(data[0].status);
+
+            console.log("success" + data[0].status);
             response = data;
-        },
-        function(xhr, status) {
-            response = "Error";
-            myApp.alert("error");
-        });
 
+            /*
+            myApp.alert(JSON.stringify(data));
+
+            if (data[0].status != "NOK") {
+                mainView.router.loadPage({ url: 'create_order.html', ignoreCache: true });
+            }
+            */
+
+        },
+        error: function(request, status, error) {
+            response = "Error";
+            console.log("Error");
+            /*
+            myApp.hidePreloader();
+            //myApp.alert(JSON.stringify(data));
+            myApp.alert("Request error");
+            */
+        }
+
+    });
 
     return response;
 
@@ -42,7 +63,7 @@ function mobileLogin(email, passwd) {
         'pswd': passwd
     }
 
-    myApp.alert(JSON.stringify(lgndata));
+
 
     var result = restfulPostCall(lgndata);
 
