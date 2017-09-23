@@ -71,7 +71,7 @@ $$(document).on('pageInit', function(e) {
             var pass = $$('#txtPassword').val();
 
             myApp.alert(email + ' ' + pass);
-            // mobileLogin(email, pass);
+            mobileLogin(email, pass);
         });
 
         $$('.btnForgetPassword').on('click', function() {

@@ -12,7 +12,7 @@ function restfulGetCall(restSuccess) {
 
 
 function restfulPostCall(sendData) {
-
+    myApp.alert("hi rest");
     var response;
 
     $$.ajax({
@@ -24,6 +24,7 @@ function restfulPostCall(sendData) {
         dataType: 'json',
         success: function(data, status, xmlRequest) {
 
+            myApp.alert("success");
             console.log(data[0].status);
             response = data;
 
@@ -38,7 +39,7 @@ function restfulPostCall(sendData) {
         },
         error: function(request, status, error) {
             response = "Error";
-
+            myApp.alert("error");
             /*
             myApp.hidePreloader();
             //myApp.alert(JSON.stringify(data));
@@ -60,6 +61,8 @@ function mobileLogin(email, passwd) {
         'email': email,
         'pswd': passwd
     }
+
+    myApp.alert(JSON.stringify(lgndata));
 
     var result = restfulPostCall(lgndata);
 
