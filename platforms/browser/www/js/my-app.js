@@ -72,6 +72,7 @@ $$(document).on('pageInit', function(e) {
 
             var response = mobileLogin(email, pass);
             myApp.alert(response);
+            mainView.router.loadPage({ url: 'create_order.html', ignoreCache: true });
 
         });
 
