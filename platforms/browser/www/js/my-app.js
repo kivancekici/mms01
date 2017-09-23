@@ -70,7 +70,8 @@ $$(document).on('pageInit', function(e) {
             var email = $$('#txtEmail').val();
             var pass = $$('#txtPassword').val();
 
-            mobileLogin(email, pass);
+            myApp.alert(email + ' ' + pass);
+            // mobileLogin(email, pass);
         });
 
         $$('.btnForgetPassword').on('click', function() {
