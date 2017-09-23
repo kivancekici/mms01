@@ -1,9 +1,7 @@
-// Initialize app
 var myApp = new Framework7({
-        swipePanel: 'left'
-        // ... other parameters
-}
-);
+    //swipePanel: 'left'
+    // ... other parameters
+});
 
 
 // If we need to use custom DOM library, let's save it to $$ variable:
@@ -20,21 +18,20 @@ $$(document).on('deviceready', function() {
     console.log("Device is ready!");
 });
 
-var userLoggedIn=false;
+var userLoggedIn = false;
 
 checkLogin();
 
-function checkLogin(){
-	 try{
-           //var storedData = window.localStorage['baklava7-'+ '001'];
-          if(!userLoggedIn) {
-              //do your ajax login request here
-              // if successful do your login redirect  
-                 mainView.router.loadPage({url:'login.html', ignoreCache:true, reload:true });
-				 
-           }
-       }catch(e){
-	   }
+function checkLogin() {
+    try {
+        //var storedData = window.localStorage['baklava7-'+ '001'];
+        if (!userLoggedIn) {
+            //do your ajax login request here
+            // if successful do your login redirect  
+            mainView.router.loadPage({ url: 'login.html', ignoreCache: true, reload: true });
+
+        }
+    } catch (e) {}
 }
 
 
@@ -42,35 +39,85 @@ function checkLogin(){
 // Now we need to run the code that will be executed only for About page.
 
 // Option 1. Using page callback for page (for "about" page in this case) (recommended way):
-myApp.onPageInit('about', function (page) {
-      
-	
+myApp.onPageInit('about', function(page) {
+
+
 
 });
 
 // Option 2. Using one 'pageInit' event handler for all pages:
-$$(document).on('pageInit', function (e) {
+$$(document).on('pageInit', function(e) {
     // Get page data from event data
     var page = e.detail.page;
-	
-	if(!userLoggedIn) {
-		return;
-	}
-	
-    if (page.name === 'about') {
-        // Following code will be executed for page with data-page attribute equal to "about"
-        myApp.alert('Here comes about page');
+
+
+    if (page.name === 'login') {
+
+        $$('#register').on('click', function() {
+
+
+            myApp.alert('Register');
+
+        });
+
+        $$('#btnact').on('click', function() {
+
+
+            // userLoggedIn = true;
+
+            //    myApp.showPreloader('Yükleniyor..');
+
+            var userEmail = document.getElementById("lgnusername").value;
+            var userPassword = document.getElementById("lgnpassword").value;
+
+            var loginData = {
+                opr: "login",
+                email: userEmail,
+                pswd: userPassword
+            };
+
+
+
+            $$.ajax({
+                method: 'POST',
+                url: 'http://baklava7.de/mapi/Msvc.php',
+                data: JSON.stringify(loginData),
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function(data, status, xmlRequest) {
+
+                    //    myApp.hidePreloader();
+
+                    if (data.status != "NOK") {
+                        mainView.router.loadPage({ url: 'create_order.html', ignoreCache: true });
+                    } else {
+                        myApp.alert("Kullanıcı adınızı veya şifrenizi kontrol ediniz.");
+                    }
+
+
+
+
+                },
+                error: function(request, status, error) {
+                    //    myApp.hidePreloader();
+                    myApp.alert("Request error");
+
+                }
+
+            });
+
+        });
+
+
     }
 });
 
-function loginClick(){
-	userLoggedIn=true;
-	mainView.router.loadPage({url:'index.html', ignoreCache:true, reload:true });
-}
+
+
 
 var calendarBirthday = myApp.calendar({
     input: '#calendarBirthday',
-});  
+});
 
 var postCodeSearch = myApp.autocomplete({
     input: '#autocomplete-dropdown-ajax',
@@ -81,7 +128,7 @@ var postCodeSearch = myApp.autocomplete({
     limit: 8, //limit to 8 results
     dropdownPlaceholderText: '35394 Giessen"',
     expandInput: true, // expand input
-    source: function (autocomplete, query, render) {
+    source: function(autocomplete, query, render) {
         var results = [];
         if (query.length === 0) {
             render(results);
@@ -98,7 +145,7 @@ var postCodeSearch = myApp.autocomplete({
             data: {
                 query: query
             },
-            success: function (data) {
+            success: function(data) {
                 // Find matched items
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].name.toLowerCase().indexOf(query.toLowerCase()) >= 0) results.push(data[i]);
