@@ -71,7 +71,10 @@ $$(document).on('pageInit', function(e) {
             var pass = $$('#txtPassword').val();
 
             var response = mobileLogin(email, pass);
-            myApp.alert(response);
+            if (response != "NOK") {
+                mainView.router.loadPage({ url: 'create_order.html', ignoreCache: true });
+            }
+
         });
 
         $$('.btnForgetPassword').on('click', function() {
@@ -79,6 +82,12 @@ $$(document).on('pageInit', function(e) {
         });
 
     }
+
+    if (page.name === 'create_order') {
+        myApp.alert('Sipariş yaratma sayfasına geldiniz.');
+    }
+
+
 });
 
 
