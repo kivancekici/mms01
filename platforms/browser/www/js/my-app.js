@@ -73,7 +73,7 @@ $$(document).on('pageInit', function(e) {
             var response = mobileLogin(email, pass);
             myApp.alert(response);
             if (response != 'NOK') {
-                mainView.router.loadPage({ url: 'create_order.html', ignoreCache: true });
+                mainView.router.loadPage({ url: 'index.html', ignoreCache: true });
             } else {
                 //mainView.router.loadPage({ url: 'index.html', ignoreCache: true });
             }
