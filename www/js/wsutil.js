@@ -1,50 +1,65 @@
-
-var servicePath="http://baklava7.de/mapi/Msvc.php";
+var servicePath = "http://baklava7.de/mapi/Msvc.php";
 
 function restfulGetCall(restSuccess) {
-    $.get(servicePath, function (data) {
+    $.get(servicePath, function(data) {
         restSuccess(data);
-    }).fail(function () {
-        //msgWarning("Uyarı!", "Bilgiler Alınamıyor...");
+    }).fail(function() {
+
     });
 
 
 }
 
 
-function restfulPostCall(sendData, restSuccess) {
+function restfulPostCall(sendData) {
+
+    myApp.showPreloader();
+
+    var response;
+
     $$.ajax({
-        url: servicePath ,
-        async:false,
         method: 'POST',
-        dataType: 'json',
-        contentType: "application/json; charset=utf-8",
+        async: false,
+        url: servicePath,
         data: JSON.stringify(sendData),
-        success: function (data) {
-            restSuccess(data);
+        contentType: 'application/json',
+        dataType: 'json',
+        success: function(data, status, xmlRequest) {
+            myApp.hidePreloader();
+            response = data;
         },
-        error: function () {
-            restSuccess('NOK');
+        error: function(request, status, error) {
+            myApp.hidePreloader();
+            response = "Error";
         }
+
     });
+
+    return response;
+
+
 }
 
-function mobileLogin(email,passwd) {
+function mobileLogin(email, passwd) {
 
-    var ansdata = {
-            'opr': 'login',
-            'email': email,
-            'pswd': passwd
+    var lgndata = {
+        'opr': 'login',
+        'email': email,
+        'pswd': passwd
     }
 
-    restfulCall(ansdata, function (data) {
+    var result = restfulPostCall(lgndata);
 
-        if (data!='NOK') {
-            return data;
+    if (result != "Error") {
 
+        if (result[0].status != "NOK") {
+            return result[0].id_customer;
         } else {
-            return null;
+            return "NOK";
         }
-    });
-}
 
+    } else {
+        return "NOK"
+    }
+
+}
