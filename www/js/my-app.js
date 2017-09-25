@@ -1,8 +1,11 @@
 // Initialize app
 var myApp = new Framework7({
     swipePanel: 'left',
-    swipeBackPage: false
+    swipeBackPage: false,
+    preroute: function(view, options) {
+        view.router.loadPage('login.html');
 
+    }
 
 });
 
@@ -13,18 +16,7 @@ var $$ = Dom7;
 // Add view
 var mainView = myApp.addView('.view-main', {
 
-    preroute: function(view, options) {
-        var lgnValue = window.localStorage.getItem("isLogin");
 
-        myApp.alert(lgnValue);
-
-        if (lgnValue != "1") {
-            view.router.loadPage('login.html');
-            return false;
-        }
-
-
-    }
 
 });
 
