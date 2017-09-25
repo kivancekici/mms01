@@ -3,7 +3,11 @@ var myApp = new Framework7({
     swipePanel: 'left',
     swipeBackPage: false,
     preroute: function(view, options) {
-        //login control yap
+        var lgnValue = window.localStorage.getItem("isLogin");
+
+        if (lgnValue == "1") {
+            mainView.router.loadPage({ url: 'create_order.html', ignoreCache: true });
+        }
     }
 
 });
@@ -29,9 +33,8 @@ $$(document).on('deviceready', function() {
 var userLoggedIn = false;
 
 
-var lgnValue = window.localStorage.getItem("isLogin");
 
-myApp.alert(lgnValue);
+
 
 
 // Option 1. Using page callback for page (for "about" page in this case) (recommended way):
@@ -79,6 +82,8 @@ $$(document).on('pageInit', function(e) {
             if (response != 'NOK') {
                 mainView.router.loadPage({ url: 'create_order.html', ignoreCache: true });
                 window.localStorage.setItem("isLogin", "1");
+                window.localStorage.setItem("userEmail", email);
+                window.localStorage.setItem("userPass", pass);
             } else {
                 //mainView.router.loadPage({ url: 'index.html', ignoreCache: true });
             }
