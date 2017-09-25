@@ -68,18 +68,15 @@ class DbHelper {
 	
 	function registerUser($_infos) {
 		$_res=false;
-
-
-		$id_customer="";
 		$id_shop_group=1;
 		$id_shop=1;
 		$id_gender=1;
 		$id_default_group=3;
 		$id_lang=1;
 		$id_risk=0; 
-		$company="";
-		$siret="";
-		$ape="";
+		$company=" ";
+		$siret=" ";
+		$ape=" ";
 		$firstname=" ";
 		$lastname=" ";
 		$email=$_infos["email"];	
@@ -91,16 +88,14 @@ class DbHelper {
 		$ip_registration_newsletter="";
 		$newsletter_date_add="";		
 		$optin=0;
-		$website="";		
+		$website=" ";		
 		$active=1;
 		$is_guest=0;
 		$deleted=0;
 		
 		
-		$sql = "INSERT INTO ps_customer (id_customer,id_shop_group,id_shop,id_gender,id_default_group,id_lang,id_risk,company,siret,ape,firstname,lastname,email,passwd,last_passwd_gen,birthday,newsletter,
-		ip_registration_newsletter,newsletter_date_add,optin,website,active,is_guest,deleted,date_add,date_upd) "
-				."VALUES($id_customer,$id_shop_group,$id_shop,$id_gender,$id_default_group,$id_lang,$id_risk,$company,$siret,$ape,'$firstname','$lastname','$email','$passwd',now(),now(),$newsletter,$ip_registration_newsletter,now(),$optin,
-				$website,$active,$is_guest,$deleted,now(),now());";
+		$sql = "INSERT INTO ps_customer (id_shop_group,id_shop,id_gender,id_default_group,id_lang,id_risk,company,siret,ape,firstname,lastname,email,passwd,last_passwd_gen,birthday,newsletter,ip_registration_newsletter,newsletter_date_add,optin,website,active,is_guest,deleted,date_add,date_upd) "
+				."VALUES($id_shop_group,$id_shop,$id_gender,$id_default_group,$id_lang,$id_risk,'$company','$siret','$ape','$firstname','$lastname','$email','$passwd',now(),now(),$newsletter,'$ip_registration_newsletter',now(),$optin,'$website',$active,$is_guest,$deleted,now(),now());";
         $result = $this->conn->query($sql);
 
         if ($result === TRUE) {
@@ -115,12 +110,113 @@ class DbHelper {
 			$rwitem["pswd"]="$passwdOpen";
 			return $rwitem;
 		}else{
-			$item="NOK";
+			$rwitem=array();
+			$rwitem["status"]="NOK";
+			$rwitem["SQL"]="$sql";
+			return $rwitem;
 		}
 		
         return $item;
     }
 	
+
+
+
+	function updateuserdata($_infos) {
+		$_res=false;
+		
+		$id_gender=$_infos["id_gender"];
+		$company=$_infos["company"];
+		$firstname=$_infos["firstname"];
+		$lastname=$_infos["lastname"];
+		$email=$_infos["email"];	
+		$passwd= md5($_infos["passwd"]);
+		$birthday=$_infos["birthday"];
+		$newsletter=$_infos["newsletter"];		
+		$optin=$_infos["optin"];
+		$website=$_infos["website"];
+		$date_upd=$_infos["date_upd"];
+		$id_customer=$_infos["id_customer"];
+		
+		
+		$sql = "UPDATE ps_customer SET id_gender=$id_gender,company='$company',firstname='$firstname',lastname='$lastname',email='$email',passwd='$passwd',birthday=$birthday,newsletter=$newsletter,optin=$optin,website='$website',date_upd=$date_upd WHERE id_customer=$id_customer";
+        $result = $this->conn->query($sql);
+
+        if ($result === TRUE) {
+            $_res = TRUE;
+        }
+		
+        $this->conn->close();
+
+		if($_res){
+			$rwitem=array();
+			$rwitem["status"]="OK";
+			$rwitem["pswd"]="$passwdOpen";
+			return $rwitem;
+		}else{
+			$rwitem=array();
+			$rwitem["status"]="NOK";
+			$rwitem["SQL"]="$sql";
+			return $rwitem;
+		}
+		
+        return $item;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	function saveAddress($_infos) {
 		
 		$_res=false;

@@ -107,6 +107,20 @@ function fRegisterUser($_jsondata) {
 	}
 }
 
+
+
+function fUpdateUserData($_jsondata) {
+	$_items = DbHelper::getInstance()->updateuserdata($_jsondata);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+
+
+
 function fSaveAddress($_jsondata) {
 	$_items = DbHelper::getInstance()->saveAddress($_jsondata);
 	if (!empty($_items)) {
