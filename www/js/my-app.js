@@ -1,7 +1,18 @@
 // Initialize app
 var myApp = new Framework7({
     swipePanel: 'left',
-    swipeBackPage: false,
+    swipeBackPage: false
+
+
+});
+
+
+// If we need to use custom DOM library, let's save it to $$ variable:
+var $$ = Dom7;
+
+// Add view
+var mainView = myApp.addView('.view-main', {
+
     preroute: function(view, options) {
         var lgnValue = window.localStorage.getItem("isLogin");
 
@@ -12,15 +23,6 @@ var myApp = new Framework7({
 
 
     }
-
-});
-
-
-// If we need to use custom DOM library, let's save it to $$ variable:
-var $$ = Dom7;
-
-// Add view
-var mainView = myApp.addView('.view-main', {
 
 });
 
