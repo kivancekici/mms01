@@ -5,9 +5,12 @@ var myApp = new Framework7({
     preroute: function(view, options) {
         var lgnValue = window.localStorage.getItem("isLogin");
 
-        if (lgnValue == "1") {
-            mainView.router.loadPage({ url: 'create_order.html', ignoreCache: true });
+        if (lgnValue != "1") {
+            view.router.loadPage('login.html');
+            return false;
         }
+
+
     }
 
 });
@@ -30,7 +33,7 @@ $$(document).on('deviceready', function() {
 
 
 
-var userLoggedIn = false;
+
 
 
 
@@ -44,6 +47,9 @@ myApp.onPageBeforeInit('index', function(page) {
 
 });
 
+/*
+
+var userLoggedIn = false;
 
 checkLogin();
 
@@ -62,6 +68,8 @@ function checkLogin() {
         }
     } catch (e) {}
 }
+
+*/
 
 
 // Option 2. Using one 'pageInit' event handler for all pages:
