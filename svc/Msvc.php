@@ -34,6 +34,9 @@ switch ($opr) {
         break;
     case "register":
         fRegisterUser($decoded);
+		break;
+	case "updateuserdata":
+        fUpdateUserData($decoded);
         break;
     case "saveaddress":
         fSaveAddress($decoded);
