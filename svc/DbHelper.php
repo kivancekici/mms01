@@ -78,14 +78,15 @@ class DbHelper {
 		$id_lang=1;
 		$firstname=" ";
 		$lastname=" ";
-		$passwd= md5(time());
+		$passwdOpen=time();
+		$passwd= md5($passwdOpen);
 		$newsletter=0;
 		$active=1;
 		$is_guest=0;
 		$deleted=0;
 		
-		$sql = "INSERT INTO ps_customer (id_shop_group,id_shop,id_gender,id_default_group,id_lang,firstname,lastname,email,passwd,last_passwd_gen,newsletter,active,is_guest,deleted,date_add,date_upd) "+
-				+"VALUES($id_shop_group,$id_shop,$id_gender,$id_default_group,$id_lang,$firstname,$lastname,$email,$passwd,now(),$newsletter,$active,$is_guest,$deleted,now(),now());";
+		$sql = "INSERT INTO ps_customer (id_shop_group,id_shop,id_gender,id_default_group,id_lang,firstname,lastname,email,passwd,last_passwd_gen,newsletter,active,is_guest,deleted,date_add,date_upd) "
+				."VALUES($id_shop_group,$id_shop,$id_gender,$id_default_group,$id_lang,'$firstname','$lastname','$email','$passwd',now(),$newsletter,$active,$is_guest,$deleted,now(),now());";
         $result = $this->conn->query($sql);
 
         if ($result === TRUE) {
@@ -95,7 +96,10 @@ class DbHelper {
         $this->conn->close();
 
 		if($_res){
-			$item="OK;".$passwd;
+			$rwitem=array();
+			$rwitem["status"]="OK";
+			$rwitem["pswd"]="$passwdOpen";
+			return $rwitem;
 		}else{
 			$item="NOK";
 		}

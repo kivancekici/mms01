@@ -53,7 +53,7 @@ switch ($opr) {
 	case "openorderdetails":
 		fOpenOrderDetails($decoded);
 		break;
-	case "orldorders":
+	case "oldorders":
 		fOldOrders($decoded);
 		break;
 	case "messages":
@@ -96,8 +96,7 @@ function fLogin($_jsondata) {
 }
 
 function fRegisterUser($_jsondata) {
-	$email=$_jsondata["email"];
-	$_items = DbHelper::getInstance()->registerUser($email);
+	$_items = DbHelper::getInstance()->registerUser($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
@@ -106,8 +105,7 @@ function fRegisterUser($_jsondata) {
 }
 
 function fSaveAddress($_jsondata) {
-	$infos=$_jsondata["email"];
-	$_items = DbHelper::getInstance()->saveAddress($infos);
+	$_items = DbHelper::getInstance()->saveAddress($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
@@ -118,8 +116,7 @@ function fSaveAddress($_jsondata) {
 
 function fGetMyAddress($_jsondata) {
 	//alanları ekle ve dbhelper methodunu yaz
-	$email=$_jsondata["email"];
-	$_items = DbHelper::getInstance()->getMyAddress($email);
+	$_items = DbHelper::getInstance()->getMyAddress($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
