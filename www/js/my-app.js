@@ -16,6 +16,8 @@ var mainView = myApp.addView('.view-main', {
     preroute: function(view, options) {
         var lgnValue = window.localStorage.getItem("isLogin");
 
+        myApp.alert(lgnValue);
+
         if (lgnValue != "1") {
             view.router.loadPage('login.html');
             return false;
