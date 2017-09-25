@@ -1,11 +1,8 @@
 // Initialize app
 var myApp = new Framework7({
     swipePanel: 'left',
-    swipeBackPage: false,
-    preroute: function(view, options) {
-        view.router.loadPage('login.html');
+    swipeBackPage: false
 
-    }
 
 });
 
@@ -16,7 +13,10 @@ var $$ = Dom7;
 // Add view
 var mainView = myApp.addView('.view-main', {
 
+    preroute: function(view, options) {
+        view.router.loadPage({ url: 'login.html', ignoreCache: true });
 
+    }
 
 });
 
