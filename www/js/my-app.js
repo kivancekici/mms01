@@ -8,6 +8,7 @@ var myApp = new Framework7({
 
 });
 
+
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
 
@@ -28,8 +29,9 @@ $$(document).on('deviceready', function() {
 var userLoggedIn = false;
 
 
+var lgnValue = window.localStorage.getItem("isLogin");
 
-
+myApp.alert(lgnValue);
 
 
 // Option 1. Using page callback for page (for "about" page in this case) (recommended way):
@@ -53,6 +55,7 @@ function checkLogin() {
         } else {
 
             mainView.router.loadPage({ url: 'create_order.html', ignoreCache: true });
+
         }
     } catch (e) {}
 }
@@ -75,6 +78,7 @@ $$(document).on('pageInit', function(e) {
             myApp.alert(response);
             if (response != 'NOK') {
                 mainView.router.loadPage({ url: 'create_order.html', ignoreCache: true });
+                window.localStorage.setItem("isLogin", "1");
             } else {
                 //mainView.router.loadPage({ url: 'index.html', ignoreCache: true });
             }
