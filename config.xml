@@ -7,7 +7,7 @@
     <author email="info@kivancekici.com" href="http://kivancekici.com">
         M.Sc. Computer Engineer Suleyman Kivanc Ekici
     </author>
-    <content src="language.html" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
