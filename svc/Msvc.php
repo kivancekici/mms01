@@ -59,8 +59,11 @@ switch ($opr) {
 	case "oldorders":
 		fOldOrders($decoded);
 		break;
-	case "messages":
+	case "getmessages":
 		fGetMessages($decoded);
+		break;
+	case "postmessages":
+		fPostMessages($decoded);
 		break;
 	case "manufacturers":
 		fGetManufacturers($decoded);
@@ -201,14 +204,35 @@ function fOldOrders($_jsondata) {
 
 function fGetMessages($_jsondata) {
 	//alanları ekle ve dbhelper methodunu yaz
-	$email=$_jsondata["email"];
-	$_items = DbHelper::getInstance()->getMessages($email);
+	$id_customer=$_jsondata["id_customer"];
+	$_items = DbHelper::getInstance()->getMessages($id_customer);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
 		send_response(Null);
 	}
 }
+
+
+
+function fPostMessages($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	//$id_customer=$_jsondata["id_customer"];
+	$_items = DbHelper::getInstance()->postMessages($_jsondata);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+
+
+
+
+
+
+
 
 
 

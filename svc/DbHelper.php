@@ -169,54 +169,6 @@ class DbHelper {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	function saveAddress($_infos) {
 		
 		$_res=false;
@@ -473,7 +425,7 @@ class DbHelper {
 		$_res=false;
 
 		$id_customer=$_infos2["id_customer"];
-		$sql = "SELECT * FROM ps_message where id_customer=$id_customer";
+		$sql = "SELECT id_employee,message,date_add FROM ps_customer_message where id_customer_thread=$id_customer";
         $result = $this->conn->query($sql);
 
         $items = array();
@@ -502,7 +454,91 @@ class DbHelper {
 		}
 		
         return $items;
+	}
+	
+
+	function postMessages($_infos2) {
+		
+		$_res=false;
+
+		$id_customer_thread=$_infos2["id_customer_thread"];
+
+		$message=$_infos2["message"];
+
+
+
+		$sql = "INSERT INTO ps_customer_message (id_customer_thread,id_employee, message, date_add, date_upd ) "."VALUES($id_customer_thread,'0', '$message', now(),now());";
+
+        $result = $this->conn->query($sql);
+
+
+        if ($result === TRUE) {
+           
+				$_res=true;
+            
+        } else {
+            //no results
+        }
+		
+        $this->conn->close();
+
+		if($_res){
+			$item="OK";
+		}else{
+			$rwitem["SQL"]="$sql";
+			return $rwitem;
+		}
+		
+        return $item;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 	function getManufacturers($_infos2) {
 		
