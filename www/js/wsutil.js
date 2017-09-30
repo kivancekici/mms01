@@ -72,6 +72,8 @@ function mobileRegister(email) {
         }
     
         var result = restfulPostCall(registerdata);
+
+        myApp.alert(result);
     
         if (result != "Error") {
     
