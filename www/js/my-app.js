@@ -95,8 +95,16 @@ $$(document).on('pageInit', function(e) {
             myApp.alert('Unuttum bişeyleri');
         });
 
-        $$('.btnRegister').on('click', function() {
-            mainView.router.loadPage({ url: 'register.html', ignoreCache: true });
+
+
+        $$('.btnRegister').on('click', function () {
+            myApp.prompt('Lütfen E-mail Adresini Giriniz', 'Kayıt Ekranı', function (value) {
+                var email = value;
+
+                var response = mobileRegister(email);
+
+                myApp.alert(response);
+            });
         });
 
     }
@@ -105,9 +113,6 @@ $$(document).on('pageInit', function(e) {
         myApp.alert('Sipariş yaratma sayfasına geldiniz.');
     }
     
-    if (page.name === 'register') {
-        myApp.alert('I came from login page.');
-    }
 
 });
 

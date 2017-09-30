@@ -63,3 +63,26 @@ function mobileLogin(email, passwd) {
     }
 
 }
+
+function mobileRegister(email) {
+    
+        var registerdata = {
+            'opr': 'register',
+            'email': email
+        }
+    
+        var result = restfulPostCall(registerdata);
+    
+        if (result != "Error") {
+    
+            if (result[0].status != "NOK") {
+                return result[0].pswd;
+            } else {
+                return "NOK";
+            }
+    
+        } else {
+            return "NOK"
+        }
+    
+}
