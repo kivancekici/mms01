@@ -13,10 +13,7 @@ var $$ = Dom7;
 // Add view
 var mainView = myApp.addView('.view-main', {
 
-    preroute: function(view, options) {
-        view.router.loadPage({ url: 'login.html', ignoreCache: true });
 
-    }
 
 });
 
@@ -43,7 +40,7 @@ myApp.onPageBeforeInit('index', function(page) {
 
 });
 
-/*
+
 
 var userLoggedIn = false;
 
@@ -65,7 +62,7 @@ function checkLogin() {
     } catch (e) {}
 }
 
-*/
+
 
 
 // Option 2. Using one 'pageInit' event handler for all pages:
@@ -98,12 +95,19 @@ $$(document).on('pageInit', function(e) {
             myApp.alert('Unuttum bişeyleri');
         });
 
+        $$('.btnRegister').on('click', function() {
+            mainView.router.loadPage({ url: 'register.html', ignoreCache: true });
+        });
+
     }
 
     if (page.name === 'create_order') {
         myApp.alert('Sipariş yaratma sayfasına geldiniz.');
     }
-
+    
+    if (page.name === 'register') {
+        myApp.alert('I came from login page.');
+    }
 
 });
 
