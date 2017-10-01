@@ -103,8 +103,7 @@ $$(document).on('pageInit', function(e) {
 
                 var response = mobileRegister(email);
 
-                if(response != "NOK"){   
-                myApp.alert(response);
+                if(response != "NOK"){  
                 mainView.router.loadPage({ url: 'account.html', ignoreCache: true });
                 }
 

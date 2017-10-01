@@ -72,14 +72,13 @@ function mobileRegister(email) {
         }
     
         var result = restfulPostCall(registerdata);
-
-       // myApp.alert(JSON.stringify(result));
-        myApp.alert(result[0].status + ' ? ' + result.status);
-    
+       
+        myApp.alert(result.status);
+       
         if (result != "Error") {
     
-            if (result[0].status != "NOK") {
-                return result[0].pswd;
+            if (result.status != "NOK") {
+                return result.pswd;
             } else {
                 return "NOK";
             }
