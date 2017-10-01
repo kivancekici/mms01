@@ -103,7 +103,11 @@ $$(document).on('pageInit', function(e) {
 
                 var response = mobileRegister(email);
 
+                if(response != "NOK"){   
                 myApp.alert(response);
+                mainView.router.loadPage({ url: 'account.html', ignoreCache: true });
+                }
+
             });
         });
 
