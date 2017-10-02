@@ -13,7 +13,7 @@ var $$ = Dom7;
 var mainView = myApp.addView('.view-main', {
     preroute: function(view, options) {
         //login control yap
-        alert('halooüüee');
+        myApp.alert('halooüüee');
     }
 });
 
