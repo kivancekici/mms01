@@ -15,12 +15,7 @@ var $$ = Dom7;
 
 // Add view
 var mainView = myApp.addView('.view-main', {
-    preroute: function(view, options) {
-        if (userLoggedIn) {
-            view.router.loadPage('main.html'); //load another page with auth form
-            return false; //required to prevent default router action
-        }
-    }
+
 });
 
 myApp.alert(userLoggedIn);
