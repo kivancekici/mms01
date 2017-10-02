@@ -24,16 +24,16 @@ myApp.alert(userLoggedIn);
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     console.log("Device is ready!");
+    if (userLoggedIn == true) {
+        mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
+    }
+
 });
 
 
 // Option 1. Using page callback for page (for "about" page in this case) (recommended way):
 myApp.onPageBeforeInit('index', function(page) {
 
-    if (userLoggedIn == true) {
-        mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
-        return false; //required to prevent default router action
-    }
 
 });
 
