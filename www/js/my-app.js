@@ -31,7 +31,7 @@ $$(document).on('deviceready', function() {
 myApp.onPageBeforeInit('index', function(page) {
 
     if (userLoggedIn == true) {
-        view.router.loadPage({ url: 'main.html', ignoreCache: true });
+        mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
         return false; //required to prevent default router action
     }
 
