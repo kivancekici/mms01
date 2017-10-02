@@ -6,8 +6,8 @@ var myApp = new Framework7({
     swipePanel: 'left',
     swipeBackPage: false
 
-
 });
+
 
 
 // If we need to use custom DOM library, let's save it to $$ variable:
@@ -16,27 +16,19 @@ var $$ = Dom7;
 // Add view
 var mainView = myApp.addView('.view-main', {
     preroute: function(view, options) {
-        if (userLoggedIn === true) {
+        if (userLoggedIn) {
             view.router.loadPage('main.html'); //load another page with auth form
             return false; //required to prevent default router action
         }
     }
 });
 
-
+myApp.alert(userLoggedIn);
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     console.log("Device is ready!");
 });
-
-
-
-
-
-
-
-
 
 
 // Option 1. Using page callback for page (for "about" page in this case) (recommended way):
@@ -47,19 +39,43 @@ myApp.onPageBeforeInit('index', function(page) {
 });
 
 
+// Following code will be executed for page with data-page attribute equal to "about"
+//myApp.alert('Here comes login page');
+$$('.btnLogin').on('click', function() {
+    var email = $$('#txtEmail').val();
+    var pass = $$('#txtPassword').val();
+
+    var response = mobileLogin(email, pass);
+    myApp.alert(response);
+    if (response != 'NOK') {
+        mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
+        window.localStorage.setItem("isLogin", true);
+        window.localStorage.setItem("userEmail", email);
+        window.localStorage.setItem("userPass", pass);
+    } else {
+        //mainView.router.loadPage({ url: 'index.html', ignoreCache: true });
+    }
+
+});
+
+$$('.btnForgetPassword').on('click', function() {
+    myApp.alert('Unuttum bişeyleri');
+});
 
 
 
-checkLogin();
+$$('.btnRegister').on('click', function() {
+    myApp.prompt('Lütfen E-mail Adresini Giriniz', 'Kayıt Ekranı', function(value) {
+        var email = value;
 
-function checkLogin() {
-    try {
-        if (userLoggedIn) {
+        var response = mobileRegister(email);
+
+        if (response != "NOK") {
             mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
         }
-    } catch (e) {}
-}
 
+    });
+});
 
 
 
@@ -68,47 +84,6 @@ $$(document).on('pageInit', function(e) {
     // Get page data from event data
     var page = e.detail.page;
 
-
-    if (page.name === 'index') {
-        // Following code will be executed for page with data-page attribute equal to "about"
-        //myApp.alert('Here comes login page');
-        $$('.btnLogin').on('click', function() {
-            var email = $$('#txtEmail').val();
-            var pass = $$('#txtPassword').val();
-
-            var response = mobileLogin(email, pass);
-            myApp.alert(response);
-            if (response != 'NOK') {
-                mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
-                window.localStorage.setItem("isLogin", true);
-                window.localStorage.setItem("userEmail", email);
-                window.localStorage.setItem("userPass", pass);
-            } else {
-                //mainView.router.loadPage({ url: 'index.html', ignoreCache: true });
-            }
-
-        });
-
-        $$('.btnForgetPassword').on('click', function() {
-            myApp.alert('Unuttum bişeyleri');
-        });
-
-
-
-        $$('.btnRegister').on('click', function() {
-            myApp.prompt('Lütfen E-mail Adresini Giriniz', 'Kayıt Ekranı', function(value) {
-                var email = value;
-
-                var response = mobileRegister(email);
-
-                if (response != "NOK") {
-                    mainView.router.loadPage({ url: 'account.html', ignoreCache: true });
-                }
-
-            });
-        });
-
-    }
 
     if (page.name === 'main') {
         myApp.alert('Ana sayfaya geldiniz.');
