@@ -13,8 +13,13 @@ var $$ = Dom7;
 var mainView = myApp.addView('.view-main', {
     preroute: function(view, options) {
         //login control yap
-        myApp.alert('halooüüee');
-        checkLogin();
+        if (!userLoggedIn) {
+            myApp.alert('halooüüee');
+            checkLogin();
+            return false; //required to prevent default router action
+        }
+        
+        
     }
 });
 
