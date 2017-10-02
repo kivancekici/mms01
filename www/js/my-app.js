@@ -21,14 +21,21 @@ var mainView = myApp.addView('.view-main', {
 
 myApp.alert(userLoggedIn);
 
+setTimeout(function() { myApp.alert("Hello"); }, 3000);
+
+
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     console.log("Device is ready!");
-    if (userLoggedIn == true) {
-        mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
-    }
+
 
 });
+
+
+
+if (userLoggedIn == true) {
+    mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
+}
 
 
 // Option 1. Using page callback for page (for "about" page in this case) (recommended way):
@@ -83,10 +90,14 @@ $$(document).on('pageInit', function(e) {
     // Get page data from event data
     var page = e.detail.page;
 
+    if (page.name === 'login') {
+        myApp.alert('Ana sayfaya geldiniz.');
+    }
 
     if (page.name === 'main') {
         myApp.alert('Ana sayfaya geldiniz.');
     }
+
 
 
 });
