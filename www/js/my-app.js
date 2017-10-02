@@ -4,6 +4,7 @@ var myApp = new Framework7({
     swipeBackPage:false,
     preroute: function(view, options) {
         //login control yap
+        alert('halooüüee');
     }
 
 });
