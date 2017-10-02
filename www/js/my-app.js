@@ -14,6 +14,7 @@ var mainView = myApp.addView('.view-main', {
     preroute: function(view, options) {
         //login control yap
         myApp.alert('halooüüee');
+        checkLogin();
     }
 });
 
@@ -41,7 +42,7 @@ myApp.onPageBeforeInit('index', function(page) {
 });
 
 
-checkLogin();
+
 
 function checkLogin() {
     try {
