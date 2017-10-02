@@ -1,3 +1,6 @@
+var userLoggedIn = window.localStorage.getItem("isLogin");
+
+
 // Initialize app
 var myApp = new Framework7({
     swipePanel: 'left',
@@ -12,9 +15,12 @@ var $$ = Dom7;
 
 // Add view
 var mainView = myApp.addView('.view-main', {
-
-
-
+    preroute: function(view, options) {
+        if (userLoggedIn === true) {
+            view.router.loadPage('main.html'); //load another page with auth form
+            return false; //required to prevent default router action
+        }
+    }
 });
 
 
@@ -42,22 +48,14 @@ myApp.onPageBeforeInit('index', function(page) {
 
 
 
-var userLoggedIn = false;
+
 
 checkLogin();
 
 function checkLogin() {
     try {
-        //var storedData = window.localStorage['baklava7-'+ '001'];
-        if (!userLoggedIn) {
-            //do your ajax login request here
-            // if successful do your login redirect  
-            mainView.router.loadPage({ url: 'login.html', ignoreCache: true });
-
-        } else {
-
-            mainView.router.loadPage({ url: 'create_order.html', ignoreCache: true });
-
+        if (userLoggedIn) {
+            mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
         }
     } catch (e) {}
 }
@@ -71,7 +69,7 @@ $$(document).on('pageInit', function(e) {
     var page = e.detail.page;
 
 
-    if (page.name === 'login') {
+    if (page.name === 'index') {
         // Following code will be executed for page with data-page attribute equal to "about"
         //myApp.alert('Here comes login page');
         $$('.btnLogin').on('click', function() {
@@ -81,8 +79,8 @@ $$(document).on('pageInit', function(e) {
             var response = mobileLogin(email, pass);
             myApp.alert(response);
             if (response != 'NOK') {
-                mainView.router.loadPage({ url: 'create_order.html', ignoreCache: true });
-                window.localStorage.setItem("isLogin", "1");
+                mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
+                window.localStorage.setItem("isLogin", true);
                 window.localStorage.setItem("userEmail", email);
                 window.localStorage.setItem("userPass", pass);
             } else {
@@ -97,14 +95,14 @@ $$(document).on('pageInit', function(e) {
 
 
 
-        $$('.btnRegister').on('click', function () {
-            myApp.prompt('Lütfen E-mail Adresini Giriniz', 'Kayıt Ekranı', function (value) {
+        $$('.btnRegister').on('click', function() {
+            myApp.prompt('Lütfen E-mail Adresini Giriniz', 'Kayıt Ekranı', function(value) {
                 var email = value;
 
                 var response = mobileRegister(email);
 
-                if(response != "NOK"){  
-                mainView.router.loadPage({ url: 'account.html', ignoreCache: true });
+                if (response != "NOK") {
+                    mainView.router.loadPage({ url: 'account.html', ignoreCache: true });
                 }
 
             });
@@ -112,10 +110,10 @@ $$(document).on('pageInit', function(e) {
 
     }
 
-    if (page.name === 'create_order') {
-        myApp.alert('Sipariş yaratma sayfasına geldiniz.');
+    if (page.name === 'main') {
+        myApp.alert('Ana sayfaya geldiniz.');
     }
-    
+
 
 });
 
