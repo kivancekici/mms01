@@ -4,15 +4,7 @@ var userLoggedIn = window.localStorage.getItem("isLogin");
 // Initialize app
 var myApp = new Framework7({
     swipePanel: 'left',
-    swipeBackPage: false,
-    preroute: function(view, options) {
-        alert("name:" + view.activePage.name + " url:" + view.activePage.url);
-
-        if (userLoggedIn == true && view.activePage.name == 'index') {
-            view.router.loadPage({ url: 'main.html', ignoreCache: true });
-            return false; //required to prevent default router action
-        }
-    }
+    swipeBackPage: false
 
 });
 
@@ -38,7 +30,10 @@ $$(document).on('deviceready', function() {
 // Option 1. Using page callback for page (for "about" page in this case) (recommended way):
 myApp.onPageBeforeInit('index', function(page) {
 
-
+    if (userLoggedIn == true) {
+        view.router.loadPage({ url: 'main.html', ignoreCache: true });
+        return false; //required to prevent default router action
+    }
 
 });
 
