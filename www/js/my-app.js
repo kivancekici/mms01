@@ -8,6 +8,7 @@ var myApp = new Framework7({
 
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
+var userLoggedIn = false;
 
 // Add view
 var mainView = myApp.addView('.view-main', {
@@ -15,7 +16,7 @@ var mainView = myApp.addView('.view-main', {
         //login control yap
         if (!userLoggedIn) {
             myApp.alert('halooüüee');
-            checkLogin();
+            view.router.loadPage({ url: 'login.html', ignoreCache: true });
             return false; //required to prevent default router action
         }
         
@@ -32,7 +33,7 @@ $$(document).on('deviceready', function() {
 
 
 
-var userLoggedIn = false;
+
 
 
 
