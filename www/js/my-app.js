@@ -15,6 +15,13 @@ var $$ = Dom7;
 
 // Add view
 var mainView = myApp.addView('.view-main', {
+    preroute: function(view, options) {
+        //login control yap
+        if (userLoggedIn == true && view.activePage.name == 'index') {
+            view.router.loadPage({ url: 'main.html', ignoreCache: true });
+            return false; //required to prevent default router action
+        }
+    }
 
 });
 
