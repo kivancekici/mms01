@@ -14,8 +14,8 @@ var userLoggedIn = false;
 var mainView = myApp.addView('.view-main', {
     preroute: function(view, options) {
         //login control yap
-        if (!userLoggedIn && view.url!='login.html') {
-            myApp.alert('halooüüee');
+        if (!userLoggedIn ) {
+            myApp.alert(view+" "+view.activePage);
             view.router.loadPage({ url: 'login.html', ignoreCache: true });
             return false; //required to prevent default router action
         }
