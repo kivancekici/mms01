@@ -1,11 +1,8 @@
 // Initialize app
 var myApp = new Framework7({
     swipePanel: 'left',
-    swipeBackPage:false,
-    preroute: function(view, options) {
-        //login control yap
-        alert('halooüüee');
-    }
+    swipeBackPage:false
+    
 
 });
 
@@ -14,7 +11,10 @@ var $$ = Dom7;
 
 // Add view
 var mainView = myApp.addView('.view-main', {
-
+    preroute: function(view, options) {
+        //login control yap
+        alert('halooüüee');
+    }
 });
 
 
