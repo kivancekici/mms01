@@ -4,7 +4,15 @@ var userLoggedIn = window.localStorage.getItem("isLogin");
 // Initialize app
 var myApp = new Framework7({
     swipePanel: 'left',
-    swipeBackPage: false
+    swipeBackPage: false,
+    preroute: function(view, options) {
+        alert("name:" + view.activePage.name + " url:" + view.activePage.url);
+
+        if (userLoggedIn == true && view.activePage.name == 'index') {
+            view.router.loadPage({ url: 'main.html', ignoreCache: true });
+            return false; //required to prevent default router action
+        }
+    }
 
 });
 
@@ -15,14 +23,7 @@ var $$ = Dom7;
 
 // Add view
 var mainView = myApp.addView('.view-main', {
-    preroute: function(view, options) {
-        myApp.alert("name:" + view.activePage.name + " url:" + view.activePage.url);
 
-        if (userLoggedIn == true && view.activePage.name == 'index') {
-            view.router.loadPage({ url: 'main.html', ignoreCache: true });
-            return false; //required to prevent default router action
-        }
-    }
 
 });
 
