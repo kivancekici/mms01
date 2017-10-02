@@ -19,70 +19,33 @@ var mainView = myApp.addView('.view-main', {
 
 });
 
-myApp.alert(userLoggedIn);
 
-setTimeout(function() { myApp.alert("Hello"); }, 3000);
+
+setTimeout(function() {
+    try {
+        if (userLoggedIn) {
+
+            mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
+
+        } else {
+
+            mainView.router.loadPage({ url: 'login.html', ignoreCache: true });
+        }
+    } catch (e) {}
+
+}, 3000);
 
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     console.log("Device is ready!");
-
-
 });
-
-
-
-if (userLoggedIn == true) {
-    mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
-}
 
 
 // Option 1. Using page callback for page (for "about" page in this case) (recommended way):
 myApp.onPageBeforeInit('index', function(page) {
 
-
 });
-
-
-// Following code will be executed for page with data-page attribute equal to "about"
-//myApp.alert('Here comes login page');
-$$('.btnLogin').on('click', function() {
-    var email = $$('#txtEmail').val();
-    var pass = $$('#txtPassword').val();
-
-    var response = mobileLogin(email, pass);
-    myApp.alert(response);
-    if (response != 'NOK') {
-        mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
-        window.localStorage.setItem("isLogin", true);
-        window.localStorage.setItem("userEmail", email);
-        window.localStorage.setItem("userPass", pass);
-    } else {
-        //mainView.router.loadPage({ url: 'index.html', ignoreCache: true });
-    }
-
-});
-
-$$('.btnForgetPassword').on('click', function() {
-    myApp.alert('Unuttum bişeyleri');
-});
-
-
-
-$$('.btnRegister').on('click', function() {
-    myApp.prompt('Lütfen E-mail Adresini Giriniz', 'Kayıt Ekranı', function(value) {
-        var email = value;
-
-        var response = mobileRegister(email);
-
-        if (response != "NOK") {
-            mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
-        }
-
-    });
-});
-
 
 
 // Option 2. Using one 'pageInit' event handler for all pages:
@@ -91,7 +54,42 @@ $$(document).on('pageInit', function(e) {
     var page = e.detail.page;
 
     if (page.name === 'login') {
-        myApp.alert('Ana sayfaya geldiniz.');
+        // Following code will be executed for page with data-page attribute equal to "about"
+        //myApp.alert('Here comes login page');
+        $$('.btnLogin').on('click', function() {
+            var email = $$('#txtEmail').val();
+            var pass = $$('#txtPassword').val();
+
+            var response = mobileLogin(email, pass);
+            myApp.alert(response);
+            if (response != 'NOK') {
+                mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
+                window.localStorage.setItem("isLogin", true);
+                window.localStorage.setItem("userEmail", email);
+                window.localStorage.setItem("userPass", pass);
+            } else {
+                //mainView.router.loadPage({ url: 'index.html', ignoreCache: true });
+            }
+
+        });
+
+        $$('.btnForgetPassword').on('click', function() {
+            myApp.alert('Unuttum bişeyleri');
+        });
+
+
+        $$('.btnRegister').on('click', function() {
+            myApp.prompt('Lütfen E-mail Adresini Giriniz', 'Kayıt Ekranı', function(value) {
+                var email = value;
+
+                var response = mobileRegister(email);
+
+                if (response != "NOK") {
+                    mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
+                }
+
+            });
+        });
     }
 
     if (page.name === 'main') {
