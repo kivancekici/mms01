@@ -81,4 +81,10 @@
     padding: 5px;
 }
 
+.page-bg-splash {
+    background-image: url("../images/baklava7logo.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
 /*Askin Bitir*/
