@@ -425,9 +425,11 @@ class DbHelper {
 		$_res=false;
 
 		$id_customer=$_infos2["id_customer"];
-		$sql = "SELECT id_employee,message,date_add FROM ps_customer_message where id_customer_thread=$id_customer";
-        $result = $this->conn->query($sql);
+		$sql = "SELECT cm.id_employee, cm.message,cm.date_add FROM ps_customer_message cm, ps_customer_thread ct 
+		where ct.id_customer=$id_customer AND cm.id_customer_thread= ct.id_customer_thread ORDER BY cm.date_add";
 
+		$result = $this->conn->query($sql);
+		
         $items = array();
 
         if ($result->num_rows > 0) {
@@ -459,84 +461,89 @@ class DbHelper {
 
 	function postMessages($_infos2) {
 		
-		$_res=false;
-
-		$id_customer_thread=$_infos2["id_customer_thread"];
+		$id_customer=$_infos2["id_customer"];
 
 		$message=$_infos2["message"];
 
 
+		$sql = "SELECT id_customer,id_customer_thread FROM ps_customer_thread WHERE id_customer = $id_customer;";
 
-		$sql = "INSERT INTO ps_customer_message (id_customer_thread,id_employee, message, date_add, date_upd ) "."VALUES($id_customer_thread,'0', '$message', now(),now());";
+		$result = $this->conn->query($sql);
 
-        $result = $this->conn->query($sql);
+		if ($result->num_rows > 0) {
+
+			$tmpsqltable = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
 
-        if ($result === TRUE) {
-           
-				$_res=true;
-            
-        } else {
-            //no results
-        }
-		
-        $this->conn->close();
+			$sql = "INSERT INTO ps_customer_message (id_customer_thread,id_employee, message, date_add, date_upd ) "."VALUES($tmpsqltable[id_customer_thread],'0', '$message', now(),now());";
 
-		if($_res){
-			$item="OK";
+			$result= $this->conn->query($sql);
+
+			if ($result === TRUE) {
+				$this->conn->close();
+				$sql = "UPDATE ps_customer_thread SET status = 'open' WHERE id_customer=$id_customer AND id_customer_thread = $tmpsqltable[id_customer_thread]; ";
+
+					
+				if ( ){
+					$result = 'Thread var, yeni mesaj eklendi ve thread tablosunda status guncellendi';	
+				}else{
+					//$result = 'Thread var, yeni mesaj eklendi ama thread tablosunda status guncellenemedi';	
+					$result = $this->conn->affected_rows();
+					
+				}
+				$this->conn->close();
+			}else{
+				$result= 'Thread var ve mesaj eklenmedi ve thread tablosunda status guncellenmedii.';
+				
+			}
+
 		}else{
-			$rwitem["SQL"]="$sql";
-			return $rwitem;
+
+			$sql = "INSERT INTO ps_customer_thread (id_customer,id_employee, message, date_add, date_upd ) "."VALUES($id_customer,'0', '$message', now(),now());";
+
+			$result= $this->conn->query($sql);
+			$tmpsqltable = $result->fetch_array(MYSQLI_ASSOC);
+			$this->conn->close();
+			if ($result === TRUE){
+					
+				$sql = "INSERT INTO ps_customer_message (id_customer_thread,id_employee, message, date_add, date_upd ) "
+				."VALUES($tmpsqltable[id_customer_thread],'0', '$message', now(),now());";
+	
+				$result= $this->conn->query($sql);
+				
+				$this->conn->close();
+				if ($result === TRUE){
+
+					$sql = "UPDATE ps_customer_thread SET status = 0 WHERE id_customer=$id_customer AND id_customer_thread = $tmpsqltable[id_customer_thread]; ";
+					
+									$result= $this->conn->query($sql);
+									$this->conn->close();
+									if ($result === TRUE){
+
+										$result='Thread yoktu açıldı ve mesaj eklendi ve thread status alanı guncellendi.';
+									}else{
+
+
+										$result='Thread yoktu açıldı ve mesaj eklendi ve thread status alanı guncellendi.';
+
+
+									}
+
+
+				}else{
+					$result = 'Thread yoktu ama açıldı, mesaj eklenemedi.';
+				}
+
+				}else{
+					$result = 'Thread yok ve açılamadı.';	
+				}
+
+
 		}
+
 		
-        return $item;
+        return $result;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	

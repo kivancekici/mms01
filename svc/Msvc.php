@@ -230,12 +230,6 @@ function fPostMessages($_jsondata) {
 
 
 
-
-
-
-
-
-
 function fGetManufacturers($_jsondata) {
 	//alanları ekle ve dbhelper methodunu yaz
 	$email=$_jsondata["email"];
