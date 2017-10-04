@@ -30,8 +30,6 @@ setTimeout(function() {
             mainView.showNavbar(false);
             mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
 
-
-
         } else {
 
             mainView.router.loadPage({ url: 'login.html', ignoreCache: true });
