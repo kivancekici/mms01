@@ -3,12 +3,13 @@ var userLoggedIn = window.localStorage.getItem("isLogin");
 
 // Initialize app
 var myApp = new Framework7({
-    swipePanel: 'left',
-    swipeBackPage: false
+    //swipePanel: 'left',
+    swipeBackPage: false,
+    swipePanelOnlyClose: true
 
 });
 
-myApp.hideNavbar('.navbar', false);
+
 
 
 // If we need to use custom DOM library, let's save it to $$ variable:
