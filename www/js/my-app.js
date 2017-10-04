@@ -25,9 +25,9 @@ setTimeout(function() {
     try {
         if (userLoggedIn) {
 
-
-            mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
             mainView.showNavbar(true);
+            mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
+
 
 
         } else {
