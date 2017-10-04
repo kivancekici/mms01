@@ -16,10 +16,18 @@ var $$ = Dom7;
 // Add view
 var mainView = myApp.addView('.view-main', {
 
-
 });
 
-mainView.hideNavbar(false);
+
+
+// Option 1. Using page callback for page (for "about" page in this case) (recommended way):
+myApp.onPageBeforeInit('splash', function(page) {
+    mainView.hideNavbar(false);
+});
+
+mainView.router.loadPage({ url: 'splash.html', ignoreCache: true });
+
+
 
 setTimeout(function() {
     try {
@@ -45,10 +53,6 @@ $$(document).on('deviceready', function() {
 });
 
 
-// Option 1. Using page callback for page (for "about" page in this case) (recommended way):
-myApp.onPageBeforeInit('index', function(page) {
-
-});
 
 
 // Option 2. Using one 'pageInit' event handler for all pages:
