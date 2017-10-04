@@ -4,7 +4,10 @@ var userLoggedIn = window.localStorage.getItem("isLogin");
 // Initialize app
 var myApp = new Framework7({
     swipePanel: 'left',
-    swipeBackPage: false
+    swipeBackPage: false,
+    preroute: function(view, options) {
+        view.hideNavbar(false);
+    }
 
 });
 
@@ -15,9 +18,7 @@ var $$ = Dom7;
 
 // Add view
 var mainView = myApp.addView('.view-main', {
-    preroute: function(view, options) {
-        view.hideNavbar(false);
-    }
+
 
 });
 
@@ -27,7 +28,7 @@ setTimeout(function() {
     try {
         if (userLoggedIn) {
 
-            mainView.showNavbar(true);
+
             mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
 
 
