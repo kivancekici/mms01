@@ -19,13 +19,16 @@ var mainView = myApp.addView('.view-main', {
 
 });
 
-
+mainView.hideNavbar(false);
 
 setTimeout(function() {
     try {
         if (userLoggedIn) {
 
+
             mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
+            mainView.showNavbar(true);
+
 
         } else {
 
