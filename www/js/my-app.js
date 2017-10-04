@@ -1,19 +1,27 @@
 // Initialize app
 var myApp = new Framework7({
     swipePanel: 'left',
-    swipeBackPage:false,
-    preroute: function(view, options) {
-        //login control yap
-    }
+    swipeBackPage:false
+    
 
 });
 
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
+var userLoggedIn = false;
 
 // Add view
 var mainView = myApp.addView('.view-main', {
-
+    preroute: function(view, options) {
+        //login control yap
+        if (!userLoggedIn ) {
+            myApp.alert(view+" "+view.activePage);
+            view.router.loadPage({ url: 'login.html', ignoreCache: true });
+            return false; //required to prevent default router action
+        }
+        
+        
+    }
 });
 
 
@@ -25,7 +33,7 @@ $$(document).on('deviceready', function() {
 
 
 
-var userLoggedIn = false;
+
 
 
 
@@ -40,7 +48,7 @@ myApp.onPageBeforeInit('index', function(page) {
 });
 
 
-checkLogin();
+
 
 function checkLogin() {
     try {
