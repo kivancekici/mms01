@@ -24,6 +24,11 @@ var mainView = myApp.addView('.view-main', {
 
 
 setTimeout(function() {
+    mainView.router.loadPage({ url: 'language.html', ignoreCache: true });
+}, 3000);
+
+function checkLogin(){
+
     try {
         if (userLoggedIn) {
 
@@ -36,8 +41,7 @@ setTimeout(function() {
         }
     } catch (e) {}
 
-}, 3000);
-
+}
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
@@ -92,9 +96,20 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'main') {
-        myApp.alert('Ana sayfaya geldiniz.');
+       
     }
+    
+    if (page.name === 'language') {
+        $$('.btnLangTr').on('click', function() {
+            myApp.alert('Türkçe');
+            checkLogin();
+        }); 
 
+        $$('.btnLangGer').on('click', function() {
+            myApp.alert('German');
+            checkLogin();
+        });    
+    }
 
 
 });
