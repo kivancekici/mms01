@@ -15,17 +15,11 @@ var $$ = Dom7;
 
 // Add view
 var mainView = myApp.addView('.view-main', {
+    preroute: function(view, options) {
+        view.hideNavbar(false);
+    }
 
 });
-
-
-
-// Option 1. Using page callback for page (for "about" page in this case) (recommended way):
-myApp.onPageBeforeInit('splash', function(page) {
-    mainView.hideNavbar(false);
-});
-
-mainView.router.loadPage({ url: 'splash.html', ignoreCache: true });
 
 
 
