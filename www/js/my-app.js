@@ -12,9 +12,7 @@ var myApp = new Framework7({
 
 });
 
-var mainHTML = Template7.templates.mainTemplate({
-    inp: 'Adres'
-});
+
 
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
