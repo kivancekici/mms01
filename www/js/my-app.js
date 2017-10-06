@@ -3,6 +3,7 @@ var userLoggedIn = window.localStorage.getItem("isLogin");
 
 // Initialize app
 var myApp = new Framework7({
+
     //swipePanel: 'left',
     swipeBackPage: false,
     swipePanelOnlyClose: true,
@@ -18,10 +19,9 @@ var myApp = new Framework7({
 });
 
 
-
-
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
+
 
 // Add view
 var mainView = myApp.addView('.view-main', {
@@ -37,6 +37,7 @@ setTimeout(function() {
 
 function checkLogin() {
 
+
     try {
         if (userLoggedIn) {
 
@@ -51,6 +52,7 @@ function checkLogin() {
     } catch (e) {}
 
 }
+
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
@@ -75,10 +77,12 @@ $$(document).on('pageInit', function(e) {
             var response = mobileLogin(email, pass);
             myApp.alert(response);
             if (response != 'NOK') {
+
                 mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
                 window.localStorage.setItem("isLogin", true);
                 window.localStorage.setItem("userEmail", email);
                 window.localStorage.setItem("userPass", pass);
+
             } else {
                 //mainView.router.loadPage({ url: 'index.html', ignoreCache: true });
             }
@@ -117,7 +121,10 @@ $$(document).on('pageInit', function(e) {
         $$('.btnLangGer').on('click', function() {
             myApp.alert('German');
             checkLogin();
+
         });
+
+
     }
 
 
