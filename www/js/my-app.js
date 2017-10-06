@@ -7,11 +7,12 @@ var myApp = new Framework7({
     //swipePanel: 'left',
     swipeBackPage: false,
     swipePanelOnlyClose: true,
-    precompileTemplates: true, //
     template7Pages: true
 
 });
 
+var mainTemplate = $('script#mainTemplate').html();
+var compiledMainTemplate = Template7.compile(mainTemplate);
 
 
 // If we need to use custom DOM library, let's save it to $$ variable:
@@ -23,7 +24,6 @@ var mainView = myApp.addView('.view-main', {
 
 
 });
-
 
 
 setTimeout(function() {
@@ -39,7 +39,7 @@ function checkLogin() {
             mainView.showNavbar(false);
             // mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
             mainView.router.load({
-                template: Template7.templates.mainTemplate, // template already compiled and available as a property of Template7.templates
+                template: compiledMainTemplate, // template already compiled and available as a property of Template7.templates
                 context: {
                     inp: 'John Doe'
                 }
