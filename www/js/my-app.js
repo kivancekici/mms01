@@ -5,7 +5,15 @@ var userLoggedIn = window.localStorage.getItem("isLogin");
 var myApp = new Framework7({
     //swipePanel: 'left',
     swipeBackPage: false,
-    swipePanelOnlyClose: true
+    swipePanelOnlyClose: true,
+    precompileTemplates: true, //
+    template7Pages: true, //enable Template7 rendering for pages
+    template7Data: {
+        // Data for contacts page
+        'page:main': {
+            inp: 'Adres',
+        }
+    }
 
 });
 
@@ -27,13 +35,14 @@ setTimeout(function() {
     mainView.router.loadPage({ url: 'language.html', ignoreCache: true });
 }, 3000);
 
-function checkLogin(){
+function checkLogin() {
 
     try {
         if (userLoggedIn) {
 
             mainView.showNavbar(false);
-            mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
+            // mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
+            mainView.router.loadPage({ template: Template7.templates.mainTemplate });
 
         } else {
 
@@ -96,19 +105,19 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'main') {
-       
+
     }
-    
+
     if (page.name === 'language') {
         $$('.btnLangTr').on('click', function() {
             myApp.alert('Türkçe');
             checkLogin();
-        }); 
+        });
 
         $$('.btnLangGer').on('click', function() {
             myApp.alert('German');
             checkLogin();
-        });    
+        });
     }
 
 
