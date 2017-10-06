@@ -43,7 +43,7 @@ function checkLogin() {
 
             mainView.showNavbar(false);
             // mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
-            mainView.router.loadPage({ template: Template7.templates.mainTemplate });
+            mainView.router.load({ template: Template7.templates.mainTemplate });
 
         } else {
 
