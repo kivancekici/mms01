@@ -7,14 +7,21 @@ var myApp = new Framework7({
     //swipePanel: 'left',
     swipeBackPage: false,
     swipePanelOnlyClose: true,
-    precompileTemplates: true
+    template7Pages: true, //enable Template7 rendering for pages
 
+    //Specify templates/pages data
+    template7Data: {
+
+        // This context will applied for page/template with data-page="contacts"
+        'page:main': {
+            tel: '(999)-111-22-33',
+            email: 'contact@john.doe'
+        }
+    }
 
 });
 
-var mainHTML = Template7.templates.carTemplate({
-    deneme: 'John Doen'
-});
+
 
 
 // If we need to use custom DOM library, let's save it to $$ variable:
