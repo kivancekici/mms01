@@ -8,17 +8,9 @@ var myApp = new Framework7({
     swipeBackPage: false,
     swipePanelOnlyClose: true,
     precompileTemplates: true,
-    template7Pages: true, //enable Template7 rendering for pages
+    template7Pages: true //enable Template7 rendering for pages
 
-    //Specify templates/pages data
-    template7Data: {
 
-        // This context will applied for page/template with data-page="contacts"
-        'page:main': {
-            tel: '(999)-111-22-33',
-            email: 'contact@john.doe'
-        }
-    }
 
 });
 
@@ -50,7 +42,11 @@ function checkLogin() {
             // mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
 
             mainView.router.load({
-                template: Template7.templates.mainTemplate // template already compiled and available as a property of Template7.templates
+                template: Template7.templates.mainTemplate,
+                context: {
+                    name: 'John Doe',
+                    age: 35
+                }
             });
 
 
