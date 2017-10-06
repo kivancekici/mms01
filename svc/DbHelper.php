@@ -185,12 +185,9 @@ class DbHelper {
         return $items;
     }
 	
-	function deleteAddress($_infos) {
+	function deleteAddress($_email) {
 		
 		$_res=false;
-
-		$id_address=$_infos["id_address"];
-		$id_customer=$_infos["id_customer"];
 
 		$sql = "update ps_address set deleted=1 where id_address=$id_address and id_customer=$id_customer";
         $result = $this->conn->query($sql);

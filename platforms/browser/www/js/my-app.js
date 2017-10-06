@@ -1,7 +1,6 @@
 // Initialize app
 var myApp = new Framework7({
     swipePanel: 'left',
-    swipeBackPage:false,
     preroute: function(view, options) {
         //login control yap
     }
@@ -52,7 +51,7 @@ function checkLogin() {
 
         } else {
 
-            mainView.router.loadPage({ url: 'index.html', ignoreCache: true });
+            mainView.router.loadPage({ url: 'create_order.html', ignoreCache: true });
         }
     } catch (e) {}
 }
@@ -74,7 +73,7 @@ $$(document).on('pageInit', function(e) {
             var response = mobileLogin(email, pass);
             myApp.alert(response);
             if (response != 'NOK') {
-                mainView.router.loadPage({ url: 'index.html', ignoreCache: true });
+                mainView.router.loadPage({ url: 'create_order.html', ignoreCache: true });
             } else {
                 //mainView.router.loadPage({ url: 'index.html', ignoreCache: true });
             }
@@ -99,4 +98,44 @@ $$(document).on('pageInit', function(e) {
 
 var calendarBirthday = myApp.calendar({
     input: '#calendarBirthday',
+});
+
+var postCodeSearch = myApp.autocomplete({
+    input: '#autocomplete-dropdown-ajax',
+    openIn: 'dropdown',
+    preloader: true, //enable preloader
+    valueProperty: 'id', //object's "value" property name
+    textProperty: 'name', //object's "text" property name
+    limit: 8, //limit to 8 results
+    dropdownPlaceholderText: '35394 Giessen"',
+    expandInput: true, // expand input
+    source: function(autocomplete, query, render) {
+        var results = [];
+        if (query.length === 0) {
+            render(results);
+            return;
+        }
+        // Show Preloader
+        autocomplete.showPreloader();
+        // Do Ajax request to Autocomplete data
+        $$.ajax({
+            url: 'autocomplete-languages.json',
+            method: 'GET',
+            dataType: 'json',
+            //send "query" to server. Useful in case you generate response dynamically
+            data: {
+                query: query
+            },
+            success: function(data) {
+                // Find matched items
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].name.toLowerCase().indexOf(query.toLowerCase()) >= 0) results.push(data[i]);
+                }
+                // Hide Preoloader
+                autocomplete.hidePreloader();
+                // Render items by passing array with result items
+                render(results);
+            }
+        });
+    }
 });

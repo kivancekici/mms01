@@ -199,8 +199,9 @@ function fGetMessages($_jsondata) {
 
 
 function fGetManufacturers($_jsondata) {
-
-	$_items = DbHelper::getInstance()->getManufacturers($_jsondata);
+	//alanları ekle ve dbhelper methodunu yaz
+	$email=$_jsondata["email"];
+	$_items = DbHelper::getInstance()->getManufacturers($email);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
