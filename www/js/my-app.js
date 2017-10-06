@@ -8,16 +8,13 @@ var myApp = new Framework7({
     swipeBackPage: false,
     swipePanelOnlyClose: true,
     precompileTemplates: true, //
-    template7Pages: true, //enable Template7 rendering for pages
-    template7Data: {
-        // Data for main page
-        'page:main': {
-            inp: 'Adres',
-        }
-    }
+    template7Pages: true
 
 });
 
+var mainHTML = Template7.templates.mainTemplate({
+    inp: 'Adres'
+});
 
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
@@ -43,7 +40,7 @@ function checkLogin() {
 
             mainView.showNavbar(false);
             // mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
-            mainView.router.load({ template: Template7.templates.mainTemplate });
+            mainView.router.load({ template: mainHTML });
 
         } else {
 
