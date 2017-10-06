@@ -38,7 +38,12 @@ function checkLogin() {
 
             mainView.showNavbar(false);
             // mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
-            mainView.router.load({ template: mainHTML });
+            mainView.router.load({
+                template: Template7.templates.mainTemplate, // template already compiled and available as a property of Template7.templates
+                context: {
+                    inp: 'John Doe'
+                }
+            });
 
         } else {
 
