@@ -7,6 +7,7 @@ var myApp = new Framework7({
     //swipePanel: 'left',
     swipeBackPage: false,
     swipePanelOnlyClose: true,
+    precompileTemplates: true,
     template7Pages: true, //enable Template7 rendering for pages
 
     //Specify templates/pages data
@@ -45,8 +46,11 @@ function checkLogin() {
     try {
         if (userLoggedIn) {
 
-            mainView.showNavbar(false);
-            mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
+            // mainView.showNavbar(false);
+            // mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
+            mainView.router.load({
+                template: Template7.templates.mainTemplate // template already compiled and available as a property of Template7.templates
+            })
 
 
         } else {
@@ -118,12 +122,12 @@ $$(document).on('pageInit', function(e) {
 
     if (page.name === 'language') {
         $$('.btnLangTr').on('click', function() {
-            myApp.alert('Türkçe');
+            // myApp.alert('Türkçe');
             checkLogin();
         });
 
         $$('.btnLangGer').on('click', function() {
-            myApp.alert('German');
+            // myApp.alert('German');
             checkLogin();
 
         });
