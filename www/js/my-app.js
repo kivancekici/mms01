@@ -50,7 +50,8 @@ function checkLogin() {
             // mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
             mainView.router.load({
                 template: Template7.templates.mainTemplate // template already compiled and available as a property of Template7.templates
-            })
+            });
+
 
 
         } else {
