@@ -9,7 +9,7 @@ var myApp = new Framework7({
     precompileTemplates: true, //
     template7Pages: true, //enable Template7 rendering for pages
     template7Data: {
-        // Data for contacts page
+        // Data for main page
         'page:main': {
             inp: 'Adres',
         }
