@@ -1,6 +1,7 @@
 // Initialize app
 var myApp = new Framework7({
     swipePanel: 'left',
+    swipeBackPage:false,
     preroute: function(view, options) {
         //login control yap
     }
@@ -139,3 +140,4 @@ var postCodeSearch = myApp.autocomplete({
         });
     }
 });
+
