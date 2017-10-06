@@ -7,11 +7,14 @@ var myApp = new Framework7({
     //swipePanel: 'left',
     swipeBackPage: false,
     swipePanelOnlyClose: true,
+    precompileTemplates: true
 
 
 });
 
-
+var mainHTML = Template7.templates.carTemplate({
+    deneme: 'John Doen'
+});
 
 
 // If we need to use custom DOM library, let's save it to $$ variable:
