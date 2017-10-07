@@ -37,8 +37,8 @@ function checkLogin() {
         if (userLoggedIn) {
 
             mainView.showNavbar(false);
-            // mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
-            mainView.router.load({ template: mainHTML });
+            mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
+            //mainView.router.load({ template: mainHTML });
 
         } else {
 
@@ -70,7 +70,7 @@ $$(document).on('pageInit', function(e) {
             var pass = $$('#txtPassword').val();
 
             var response = mobileLogin(email, pass);
-            myApp.alert(response);
+            
             if (response != 'NOK') {
 
                 mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
@@ -79,6 +79,7 @@ $$(document).on('pageInit', function(e) {
                 window.localStorage.setItem("userPass", pass);
 
             } else {
+                myApp.alert(response);
                 //mainView.router.loadPage({ url: 'index.html', ignoreCache: true });
             }
 
