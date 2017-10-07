@@ -36,7 +36,7 @@ function checkLogin() {
     try {
         if (userLoggedIn) {
 
-            mainView.showNavbar(false);
+            //mainView.showNavbar(false);
             mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
             //mainView.router.load({ template: mainTemplate });
 
