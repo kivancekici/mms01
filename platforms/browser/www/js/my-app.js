@@ -34,17 +34,21 @@ function checkLogin() {
 
 
     try {
+        myApp.alert(userLoggedIn);
         if (userLoggedIn) {
 
+            myApp.alert("main.htmlye gidiyor");
             mainView.showNavbar(false);
-            mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
-            //mainView.router.load({ template: mainHTML });
+            //mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
+            mainView.router.load({ template: mainTemplate });
 
         } else {
 
             mainView.router.loadPage({ url: 'login.html', ignoreCache: true });
         }
-    } catch (e) {}
+    } catch (e) {
+        myApp.alert(e);
+    }
 
 }
 
