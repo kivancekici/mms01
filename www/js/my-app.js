@@ -34,13 +34,11 @@ function checkLogin() {
 
 
     try {
-        myApp.alert(userLoggedIn);
         if (userLoggedIn) {
 
-            myApp.alert("main.htmlye gidiyor");
             mainView.showNavbar(false);
-            //mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
-            mainView.router.load({ template: mainTemplate });
+            mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
+            //mainView.router.load({ template: mainTemplate });
 
         } else {
 
@@ -114,12 +112,12 @@ $$(document).on('pageInit', function(e) {
 
     if (page.name === 'language') {
         $$('.btnLangTr').on('click', function() {
-            myApp.alert('Türkçe');
+            //myApp.alert('Türkçe');
             checkLogin();
         });
 
         $$('.btnLangGer').on('click', function() {
-            myApp.alert('German');
+            //myApp.alert('German');
             checkLogin();
 
         });
