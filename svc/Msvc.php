@@ -148,7 +148,7 @@ function fGetMyAddress($_jsondata) {
 function fDeleteAddress($_jsondata) {
 	//alanları ekle ve dbhelper methodunu yaz
 	$email=$_jsondata["email"];
-	$_items = DbHelper::getInstance()->deleteAddress($email);
+	$_items = DbHelper::getInstance()->deleteAddress($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
@@ -159,7 +159,7 @@ function fDeleteAddress($_jsondata) {
 function fUpdateAddress($_jsondata) {
 	//alanları ekle ve dbhelper methodunu yaz
 	$email=$_jsondata["email"];
-	$_items = DbHelper::getInstance()->updateAddress($email);
+	$_items = DbHelper::getInstance()->updateAddress($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
