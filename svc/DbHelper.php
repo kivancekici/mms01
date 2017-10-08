@@ -65,6 +65,41 @@ class DbHelper {
 
         return $items;
 	}
+
+
+
+	function checkAvaibleUser($_infos){
+
+
+		$email=$_infos["email"];
+
+		$sql = "SELECT id_customer FROM ps_customer WHERE email='$email';";
+		
+				$result = $this->conn->query($sql);
+		
+				if ($result->num_rows > 0) {
+		
+					$rwitem="OK";
+					return $rwitem;
+				}else {
+				$rwitem="NOK";
+				return $rwitem;
+	
+				}
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 	
 	function registerUser($_infos) {
 		$_res=false;
@@ -93,30 +128,44 @@ class DbHelper {
 		$is_guest=0;
 		$deleted=0;
 		
-		
-		$sql = "INSERT INTO ps_customer (id_shop_group,id_shop,id_gender,id_default_group,id_lang,id_risk,company,siret,ape,firstname,lastname,email,passwd,last_passwd_gen,birthday,newsletter,ip_registration_newsletter,newsletter_date_add,optin,website,active,is_guest,deleted,date_add,date_upd) "
-				."VALUES($id_shop_group,$id_shop,$id_gender,$id_default_group,$id_lang,$id_risk,'$company','$siret','$ape','$firstname','$lastname','$email','$passwd',now(),now(),$newsletter,'$ip_registration_newsletter',now(),$optin,'$website',$active,$is_guest,$deleted,now(),now());";
-        $result = $this->conn->query($sql);
 
-        if ($result === TRUE) {
-            $_res = TRUE;
-        }
 		
-        $this->conn->close();
+
+
+
+
+
+
+		$sql = "INSERT INTO ps_customer (id_shop_group,id_shop,id_gender,id_default_group,id_lang,id_risk,company,siret,ape,firstname,lastname,email,passwd,last_passwd_gen,birthday,newsletter,ip_registration_newsletter,newsletter_date_add,optin,website,active,is_guest,deleted,date_add,date_upd) "
+		."VALUES($id_shop_group,$id_shop,$id_gender,$id_default_group,$id_lang,$id_risk,'$company','$siret','$ape','$firstname','$lastname','$email','$passwd',now(),now(),$newsletter,'$ip_registration_newsletter',now(),$optin,'$website',$active,$is_guest,$deleted,now(),now());";
+		$result = $this->conn->query($sql);
+
+		if ($result === TRUE) {
+		$_res = TRUE;
+		}
+
+		$this->conn->close();
 
 		if($_res){
-			$rwitem=array();
-			$rwitem["status"]="OK";
-			$rwitem["pswd"]="$passwdOpen";
-			return $rwitem;
+		$rwitem=array();
+		$rwitem["status"]="OK";
+		$rwitem["pswd"]="$passwdOpen";
+		return $rwitem;
 		}else{
-			$rwitem=array();
-			$rwitem["status"]="NOK";
-			$rwitem["SQL"]="$sql";
-			return $rwitem;
+		$rwitem=array();
+		$rwitem["status"]="NOK";
+		$rwitem["SQL"]="$sql";
+		return $rwitem;
 		}
+
+
+
+
+
+
 		
-        return $item;
+	
+		
     }
 	
 
