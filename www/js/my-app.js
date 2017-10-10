@@ -1,13 +1,5 @@
 var userLoggedIn = window.localStorage.getItem("isLogin");
-/*
 var langIsSeleted = window.localStorage.getItem("langIsSelected");
-
-if (langIsSeleted) {
-    var langType = window.localStorage.getItem("lang");
-    loadLangJson(langType);
-}
-*/
-
 
 
 // Initialize app
@@ -20,23 +12,31 @@ var myApp = new Framework7({
 
 });
 
-
-
-
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
 
-
 // Add view
 var mainView = myApp.addView('.view-main', {
-
 
 });
 
 
 setTimeout(function() {
-    mainView.router.loadPage({ url: 'language.html', ignoreCache: true });
+    checkLanguage();
 }, 3000);
+
+function checkLanguage() {
+    try {
+        if (langIsSeleted) {
+            var langType = window.localStorage.getItem("lang");
+            loadLangJson(langType);
+            checkLogin();
+        } else {
+            mainView.router.loadPage({ url: 'language.html', ignoreCache: true });
+        }
+    } catch (e) {}
+}
+
 
 function checkLogin() {
 
@@ -139,21 +139,15 @@ $$(document).on('pageInit', function(e) {
     if (page.name === 'language') {
 
         $$('.btnLangTr').on('click', function() {
-            /*
             window.localStorage.setItem("langIsSelected", true);
             window.localStorage.setItem("lang", 'tr');
-            */
-
             loadLangJson("tr");
             checkLogin();
         });
 
         $$('.btnLangGer').on('click', function() {
-            /*
             window.localStorage.setItem("langIsSelected", true);
             window.localStorage.setItem("lang", 'ger');
-            */
-
             loadLangJson("ger");
             checkLogin();
         });
