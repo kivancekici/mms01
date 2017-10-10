@@ -1,16 +1,22 @@
 var userLoggedIn = window.localStorage.getItem("isLogin");
+/*
+var langIsSeleted = window.localStorage.getItem("langIsSelected");
+
+if (langIsSeleted) {
+    var langType = window.localStorage.getItem("lang");
+    loadLangJson(langType);
+}
+*/
+
 
 
 // Initialize app
 var myApp = new Framework7({
 
-    //swipePanel: 'left',
     swipeBackPage: false,
     swipePanelOnlyClose: true,
     precompileTemplates: true,
     template7Pages: true //enable Template7 rendering for pages
-
-
 
 });
 
@@ -34,12 +40,8 @@ setTimeout(function() {
 
 function checkLogin() {
 
-
     try {
         if (userLoggedIn) {
-
-            // mainView.showNavbar(false);
-            // mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
 
             mainView.router.load({
                 template: Template7.templates.mainTemplate,
@@ -49,13 +51,31 @@ function checkLogin() {
                 }
             });
 
-
-
         } else {
-
             mainView.router.loadPage({ url: 'login.html', ignoreCache: true });
         }
     } catch (e) {}
+
+}
+
+function loadLangJson(lang) {
+
+    switch (lang) {
+        case 'tr':
+            $$.getJSON('./languages/turkish.json', function(data) {
+                myApp.alert(data.hello);
+            });
+
+            break;
+        case 'ger':
+            $$.getJSON('./languages/german.json', function(data) {
+                myApp.alert(data.hello);
+            });
+
+            break;
+        default:
+
+    }
 
 }
 
@@ -86,8 +106,6 @@ $$(document).on('pageInit', function(e) {
 
                 mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
                 window.localStorage.setItem("isLogin", true);
-                window.localStorage.setItem("userEmail", email);
-                window.localStorage.setItem("userPass", pass);
 
             } else {
                 //mainView.router.loadPage({ url: 'index.html', ignoreCache: true });
@@ -119,17 +137,26 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'language') {
+
         $$('.btnLangTr').on('click', function() {
-            // myApp.alert('Türkçe');
+            /*
+            window.localStorage.setItem("langIsSelected", true);
+            window.localStorage.setItem("lang", 'tr');
+            */
+
+            loadLangJson("tr");
             checkLogin();
         });
 
         $$('.btnLangGer').on('click', function() {
-            // myApp.alert('German');
+            /*
+            window.localStorage.setItem("langIsSelected", true);
+            window.localStorage.setItem("lang", 'ger');
+            */
+
+            loadLangJson("ger");
             checkLogin();
-
         });
-
 
     }
 
