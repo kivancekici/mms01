@@ -3,7 +3,6 @@ var myApp = new Framework7({
 
     swipeBackPage: false,
     swipePanelOnlyClose: true,
-    // precompileTemplates: true,
     template7Pages: true, //enable Template7 rendering for pages
     template7Data: {
         // Plain data object
@@ -34,6 +33,8 @@ var myApp = new Framework7({
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
 
+var selectedLang = window.localStorage.getItem("lang");
+
 // Add view
 var mainView = myApp.addView('.view-main', {
 
@@ -48,8 +49,8 @@ function checkLanguage() {
     var langIsSeleted = window.localStorage.getItem("langIsSelected");
 
     if (langIsSeleted) {
-        var langType = window.localStorage.getItem("lang");
-        myApp.alert(langType);
+        selectedLang = window.localStorage.getItem("lang");
+        myApp.alert(selectedLang);
         //  loadLangJson(langType);
         checkLogin();
     } else {
@@ -58,27 +59,25 @@ function checkLanguage() {
 }
 
 
+function loadPageWithLang(pageName) {
 
+    var cntxName = 'languages.' + selectedLang + '.' + pageName;
+    var pgUrl = pageName + '.html';
+
+    mainView.router.load({
+        url: pgUrl,
+        contextName: cntxName
+    });
+
+}
 
 function checkLogin() {
     var userLoggedIn = window.localStorage.getItem("isLogin");
+
     try {
         if (userLoggedIn) {
 
-            mainView.router.load({
-                url: 'main.html',
-                contextName: 'languages.tr.main'
-            });
-
-            /*
-             mainView.router.load({
-                 template: Template7.templates.mainTemplate,
-                 context: {
-                     name: 'John Doe',
-                     age: 35
-                 }
-             });
-             */
+            loadPageWithLang('main');
 
         } else {
             mainView.router.loadPage({ url: 'login.html', ignoreCache: true });
@@ -171,6 +170,7 @@ $$(document).on('pageInit', function(e) {
             window.localStorage.setItem("langIsSelected", true);
             window.localStorage.setItem("lang", "tr");
             //  loadLangJson("tr");
+            selectedLang = "tr";
             checkLogin();
         });
 
@@ -178,6 +178,7 @@ $$(document).on('pageInit', function(e) {
             window.localStorage.setItem("langIsSelected", true);
             window.localStorage.setItem("lang", "ger");
             // loadLangJson("ger");
+            selectedLang = "ger";
             checkLogin();
         });
 
