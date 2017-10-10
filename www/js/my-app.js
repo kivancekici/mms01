@@ -1,7 +1,3 @@
-var userLoggedIn = window.localStorage.getItem("isLogin");
-var langIsSeleted = window.localStorage.getItem("langIsSelected");
-
-
 // Initialize app
 var myApp = new Framework7({
 
@@ -26,20 +22,21 @@ setTimeout(function() {
 }, 3000);
 
 function checkLanguage() {
-    try {
-        if (langIsSeleted) {
-            var langType = window.localStorage.getItem("lang");
-            loadLangJson(langType);
-            checkLogin();
-        } else {
-            mainView.router.loadPage({ url: 'language.html', ignoreCache: true });
-        }
-    } catch (e) {}
+    var langIsSeleted = window.localStorage.getItem("langIsSelected");
+
+    if (langIsSeleted) {
+        var langType = window.localStorage.getItem("lang");
+        myApp.alert(langType);
+        loadLangJson(langType);
+        checkLogin();
+    } else {
+        mainView.router.loadPage({ url: 'language.html', ignoreCache: true });
+    }
 }
 
 
 function checkLogin() {
-
+    var userLoggedIn = window.localStorage.getItem("isLogin");
     try {
         if (userLoggedIn) {
 
@@ -140,14 +137,14 @@ $$(document).on('pageInit', function(e) {
 
         $$('.btnLangTr').on('click', function() {
             window.localStorage.setItem("langIsSelected", true);
-            window.localStorage.setItem("lang", 'tr');
+            window.localStorage.setItem("lang", "tr");
             loadLangJson("tr");
             checkLogin();
         });
 
         $$('.btnLangGer').on('click', function() {
             window.localStorage.setItem("langIsSelected", true);
-            window.localStorage.setItem("lang", 'ger');
+            window.localStorage.setItem("lang", "ger");
             loadLangJson("ger");
             checkLogin();
         });
