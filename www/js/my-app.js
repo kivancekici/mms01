@@ -35,6 +35,8 @@ function checkLanguage() {
 }
 
 
+
+
 function checkLogin() {
     var userLoggedIn = window.localStorage.getItem("isLogin");
     try {
