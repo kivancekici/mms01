@@ -3,8 +3,31 @@ var myApp = new Framework7({
 
     swipeBackPage: false,
     swipePanelOnlyClose: true,
-    precompileTemplates: true,
-    template7Pages: true //enable Template7 rendering for pages
+    // precompileTemplates: true,
+    template7Pages: true, //enable Template7 rendering for pages
+    template7Data: {
+        // Plain data object
+        'languages': {
+            'tr': {
+                'main': {
+                    btnname: 'turkish'
+                },
+                'account': {
+
+                }
+
+            },
+            'ger': {
+                'main': {
+                    btnname: 'german'
+                },
+                'account': {
+
+                }
+
+            }
+        }
+    }
 
 });
 
@@ -27,7 +50,7 @@ function checkLanguage() {
     if (langIsSeleted) {
         var langType = window.localStorage.getItem("lang");
         myApp.alert(langType);
-        loadLangJson(langType);
+        //  loadLangJson(langType);
         checkLogin();
     } else {
         mainView.router.loadPage({ url: 'language.html', ignoreCache: true });
@@ -43,12 +66,19 @@ function checkLogin() {
         if (userLoggedIn) {
 
             mainView.router.load({
-                template: Template7.templates.mainTemplate,
-                context: {
-                    name: 'John Doe',
-                    age: 35
-                }
+                url: 'main.html',
+                contextName: 'languages.tr.main'
             });
+
+            /*
+             mainView.router.load({
+                 template: Template7.templates.mainTemplate,
+                 context: {
+                     name: 'John Doe',
+                     age: 35
+                 }
+             });
+             */
 
         } else {
             mainView.router.loadPage({ url: 'login.html', ignoreCache: true });
@@ -140,14 +170,14 @@ $$(document).on('pageInit', function(e) {
         $$('.btnLangTr').on('click', function() {
             window.localStorage.setItem("langIsSelected", true);
             window.localStorage.setItem("lang", "tr");
-            loadLangJson("tr");
+            //  loadLangJson("tr");
             checkLogin();
         });
 
         $$('.btnLangGer').on('click', function() {
             window.localStorage.setItem("langIsSelected", true);
             window.localStorage.setItem("lang", "ger");
-            loadLangJson("ger");
+            // loadLangJson("ger");
             checkLogin();
         });
 
