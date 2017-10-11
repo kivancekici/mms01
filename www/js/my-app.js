@@ -12,6 +12,7 @@ var myApp = new Framework7({
     swipeBackPage: false,
     swipePanelOnlyClose: true,
     template7Pages: true, //enable Template7 rendering for pages
+    imagesLazyLoadThreshold: 50,
     template7Data: {
         // Plain data object
         'languages': {
@@ -70,8 +71,6 @@ var mainView = myApp.addView('.view-main', {
 
 setTimeout(function() {
     checkLangStatus();
-    var bgimg = new Image();
-    bgimg.src = "../images/baklava7bg.jpg";
 }, 3000);
 
 
