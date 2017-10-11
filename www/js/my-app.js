@@ -1,3 +1,11 @@
+Template7.registerHelper('add', function(htmlElement, htmlContent) {
+    var ret = htmlElement + '="' + htmlContent + '"';
+
+    return ret;
+});
+
+
+
 // Initialize app
 var myApp = new Framework7({
 
@@ -32,12 +40,6 @@ var myApp = new Framework7({
         }
     }
 
-});
-
-Template7.registerHelper('add', function(htmlElement, htmlContent) {
-    var ret = htmlElement + '="' + htmlContent + '"';
-
-    return ret;
 });
 
 // If we need to use custom DOM library, let's save it to $$ variable:
