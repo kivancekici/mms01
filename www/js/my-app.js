@@ -13,7 +13,8 @@ var myApp = new Framework7({
                     alert: 'denemeAlertTurkish'
                 },
                 'login': {
-                    cardHeader: 'Giriş'
+                    cardHeader: 'Giriş',
+                    pass: ' Parola'
                 }
 
             },
@@ -23,13 +24,20 @@ var myApp = new Framework7({
                     alert: 'denemeAlertTurkish'
                 },
                 'login': {
-                    cardHeader: 'Login'
+                    cardHeader: 'Login',
+                    pass: ' Password'
                 }
 
             }
         }
     }
 
+});
+
+Template7.registerHelper('add', function(htmlElement, htmlContent) {
+    var ret = htmlElement + '="' + htmlContent + '"';
+
+    return ret;
 });
 
 // If we need to use custom DOM library, let's save it to $$ variable:
