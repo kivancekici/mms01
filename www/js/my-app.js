@@ -70,6 +70,8 @@ var mainView = myApp.addView('.view-main', {
 
 setTimeout(function() {
     checkLangStatus();
+    var bgimg = new Image();
+    bgimg.src = "../images/baklava7bg.jpg";
 }, 3000);
 
 
