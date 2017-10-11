@@ -9,19 +9,21 @@ var myApp = new Framework7({
         'languages': {
             'tr': {
                 'main': {
-                    btnname: 'turkish'
+                    btnname: 'turkish',
+                    alert: 'denemeAlertTurkish'
                 },
-                'account': {
-
+                'login': {
+                    cardHeader: 'Giriş'
                 }
 
             },
-            'ger': {
+            'de': {
                 'main': {
-                    btnname: 'german'
+                    btnname: 'german',
+                    alert: 'denemeAlertTurkish'
                 },
-                'account': {
-
+                'login': {
+                    cardHeader: 'Login'
                 }
 
             }
@@ -33,7 +35,16 @@ var myApp = new Framework7({
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
 
-var selectedLang = window.localStorage.getItem("lang");
+var langIsSeleted = window.localStorage.getItem("langIsSelected");
+var userLoggedIn = window.localStorage.getItem("isLogin");
+var selectedLang;
+
+if (langIsSeleted) {
+    selectedLang = window.localStorage.getItem("lang");
+} else {
+    selectedLang = "tr"; // Set turkish to default language
+}
+
 
 // Add view
 var mainView = myApp.addView('.view-main', {
@@ -42,17 +53,13 @@ var mainView = myApp.addView('.view-main', {
 
 
 setTimeout(function() {
-    checkLanguage();
+    checkLangStatus();
 }, 3000);
 
-function checkLanguage() {
-    var langIsSeleted = window.localStorage.getItem("langIsSelected");
 
+function checkLangStatus() {
     if (langIsSeleted) {
-        selectedLang = window.localStorage.getItem("lang");
-        myApp.alert(languages.tr.main.btnname);
-        //  loadLangJson(langType);
-        checkLogin();
+        checkLoginStatus();
     } else {
         mainView.router.loadPage({ url: 'language.html', ignoreCache: true });
     }
@@ -71,40 +78,22 @@ function loadPageWithLang(pageName) {
 
 }
 
-function checkLogin() {
-    var userLoggedIn = window.localStorage.getItem("isLogin");
+function checkLoginStatus() {
 
     try {
         if (userLoggedIn) {
-
             loadPageWithLang('main');
-
         } else {
-            mainView.router.loadPage({ url: 'login.html', ignoreCache: true });
+            loadPageWithLang('login');
         }
     } catch (e) {}
 
 }
 
-function loadLangJson(lang) {
-
-    switch (lang) {
-        case 'tr':
-            $$.getJSON('./languages/turkish.json', function(data) {
-                myApp.alert(data.hello);
-            });
-
-            break;
-        case 'ger':
-            $$.getJSON('./languages/german.json', function(data) {
-                myApp.alert(data.hello);
-            });
-
-            break;
-        default:
-
-    }
-
+function getLangJson() {
+    $$.getJSON('./languages/lang.json', function(data) {
+        myApp.alert(data.hello);
+    });
 }
 
 
@@ -127,16 +116,13 @@ $$(document).on('pageInit', function(e) {
         $$('.btnLogin').on('click', function() {
             var email = $$('#txtEmail').val();
             var pass = $$('#txtPassword').val();
-
             var response = mobileLogin(email, pass);
-            myApp.alert(response);
+
             if (response != 'NOK') {
-
-                mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
+                loadPageWithLang('main');
                 window.localStorage.setItem("isLogin", true);
-
             } else {
-                //mainView.router.loadPage({ url: 'index.html', ignoreCache: true });
+                window.localStorage.setItem("isLogin", false);
             }
 
         });
@@ -148,12 +134,12 @@ $$(document).on('pageInit', function(e) {
 
         $$('.btnRegister').on('click', function() {
             myApp.prompt('Lütfen E-mail Adresini Giriniz', 'Kayıt Ekranı', function(value) {
-                var email = value;
 
+                var email = value;
                 var response = mobileRegister(email);
 
                 if (response != "NOK") {
-                    mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
+                    loadPageWithLang('main');
                 }
 
             });
@@ -169,17 +155,15 @@ $$(document).on('pageInit', function(e) {
         $$('.btnLangTr').on('click', function() {
             window.localStorage.setItem("langIsSelected", true);
             window.localStorage.setItem("lang", "tr");
-            //  loadLangJson("tr");
             selectedLang = "tr";
-            checkLogin();
+            checkLoginStatus();
         });
 
         $$('.btnLangGer').on('click', function() {
             window.localStorage.setItem("langIsSelected", true);
-            window.localStorage.setItem("lang", "ger");
-            // loadLangJson("ger");
-            selectedLang = "ger";
-            checkLogin();
+            window.localStorage.setItem("lang", "de");
+            selectedLang = "de";
+            checkLoginStatus();
         });
 
     }
