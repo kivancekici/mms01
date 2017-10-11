@@ -50,7 +50,7 @@ function checkLanguage() {
 
     if (langIsSeleted) {
         selectedLang = window.localStorage.getItem("lang");
-        myApp.alert(selectedLang);
+        myApp.alert(languages.tr.main.btnname);
         //  loadLangJson(langType);
         checkLogin();
     } else {
