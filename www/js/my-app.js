@@ -1,5 +1,5 @@
-Template7.registerHelper('add', function(htmlElement, htmlContent) {
-    var ret = htmlElement + '="' + htmlContent + '"';
+Template7.registerHelper('placeholder', function(plchldrContent) {
+    var ret = 'placeholder="' + plchldrContent + '"';
 
     return ret;
 });
@@ -21,19 +21,25 @@ var myApp = new Framework7({
                     alert: 'denemeAlertTurkish'
                 },
                 'login': {
-                    cardHeader: 'Giriş',
-                    pass: ' Parola'
+                    cardHeader: 'Kullanıcı Girişi',
+                    pass: ' Parola',
+                    btnlogin: 'Giriş',
+                    btnforgetpass: 'Parolamı Unuttum',
+                    btnregister: 'Yeni Üye Kayıt'
                 }
 
             },
             'de': {
                 'main': {
                     btnname: 'german',
-                    alert: 'denemeAlertTurkish'
+                    alert: 'denemeAlertGerman'
                 },
                 'login': {
                     cardHeader: 'Login',
-                    pass: ' Password'
+                    pass: ' Passwort',
+                    btnlogin: 'Einloggen',
+                    btnforgetpass: 'Passwort Vergessen',
+                    btnregister: 'Registrierung'
                 }
 
             }
