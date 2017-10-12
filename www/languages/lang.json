@@ -1,7 +1,7 @@
 {
     "tr": {
         "main": {
-            "btnname": "turkish",
+            "btnname": "Adres Ekle",
             "alert": "denemeAlertTurkish"
         },
         "login": {
