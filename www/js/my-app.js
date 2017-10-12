@@ -35,6 +35,7 @@ var mainView = myApp.addView('.view-main', {
 
 setTimeout(function() {
 
+    getLangJson();
     checkLangStatus();
 
 }, 3000);
@@ -60,7 +61,7 @@ function loadPageWithLang(pageName) {
 }
 
 function checkLoginStatus() {
-    getLangJson();
+
     try {
         if (userLoggedIn) {
             loadPageWithLang('main');
