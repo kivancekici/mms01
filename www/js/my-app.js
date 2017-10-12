@@ -1,6 +1,5 @@
 Template7.registerHelper('placeholder', function(plchldrContent) {
     var ret = 'placeholder="' + plchldrContent + '"';
-
     return ret;
 });
 
@@ -9,7 +8,6 @@ Template7.registerHelper('placeholder', function(plchldrContent) {
 
 // Initialize app
 var myApp = new Framework7({
-
     swipeBackPage: false,
     swipePanelOnlyClose: true,
     template7Pages: true //enable Template7 rendering for pages
@@ -36,7 +34,7 @@ var mainView = myApp.addView('.view-main', {
 
 
 setTimeout(function() {
-    getLangJson();
+
     checkLangStatus();
 
 }, 3000);
@@ -52,7 +50,6 @@ function checkLangStatus() {
 
 
 function loadPageWithLang(pageName) {
-
     var cntxName = 'languages.' + selectedLang + '.' + pageName;
     var pgUrl = pageName + '.html';
 
@@ -60,11 +57,10 @@ function loadPageWithLang(pageName) {
         url: pgUrl,
         contextName: cntxName
     });
-
 }
 
 function checkLoginStatus() {
-
+    getLangJson();
     try {
         if (userLoggedIn) {
             loadPageWithLang('main');
