@@ -69,8 +69,9 @@ var mainView = myApp.addView('.view-main', {
 
 
 setTimeout(function() {
-    checkLangStatus();
     getLangJson();
+    checkLangStatus();
+
 }, 3000);
 
 
