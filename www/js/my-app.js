@@ -13,41 +13,6 @@ var myApp = new Framework7({
     swipeBackPage: false,
     swipePanelOnlyClose: true,
     template7Pages: true //enable Template7 rendering for pages
-        /*
-        template7Data: {
-            // Plain data object
-            'languages': {
-                'tr': {
-                    'main': {
-                        btnname: 'turkish',
-                        alert: 'denemeAlertTurkish'
-                    },
-                    'login': {
-                        cardHeader: 'Kullanıcı Girişi',
-                        pass: ' Parola',
-                        btnlogin: 'Giriş',
-                        btnforgetpass: 'Parolamı Unuttum',
-                        btnregister: 'Yeni Üye Kayıt'
-                    }
-
-                },
-                'de': {
-                    'main': {
-                        btnname: 'german',
-                        alert: 'denemeAlertGerman'
-                    },
-                    'login': {
-                        cardHeader: 'Login',
-                        pass: ' Passwort',
-                        btnlogin: 'Einloggen',
-                        btnforgetpass: 'Passwort Vergessen',
-                        btnregister: 'Registrierung'
-                    }
-
-                }
-            }
-        }
-        */
 });
 
 var $$ = Dom7;
@@ -114,7 +79,6 @@ function checkLoginStatus() {
 function getLangJson() {
     $$.getJSON('./languages/lang.json', function(data) {
         myApp.template7Data.languages = data.languages;
-        myApp.alert(myApp.template7Data.languages.tr.main.btnname);
     });
 }
 
