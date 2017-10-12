@@ -49,6 +49,7 @@ var myApp = new Framework7({
 
 });
 
+var $$ = Dom7;
 
 
 var langIsSeleted = window.localStorage.getItem("langIsSelected");
