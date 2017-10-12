@@ -4,6 +4,11 @@ Template7.registerHelper('placeholder', function(plchldrContent) {
     return ret;
 });
 
+var langfile;
+
+$.getJSON('./languages/lang.json', function(data) {
+    langfile = data;
+});
 
 
 // Initialize app
@@ -14,36 +19,7 @@ var myApp = new Framework7({
     template7Pages: true, //enable Template7 rendering for pages
     template7Data: {
         // Plain data object
-        'languages': {
-            'tr': {
-                'main': {
-                    btnname: 'turkish',
-                    alert: 'denemeAlertTurkish'
-                },
-                'login': {
-                    cardHeader: 'Kullanıcı Girişi',
-                    pass: ' Parola',
-                    btnlogin: 'Giriş',
-                    btnforgetpass: 'Parolamı Unuttum',
-                    btnregister: 'Yeni Üye Kayıt'
-                }
-
-            },
-            'de': {
-                'main': {
-                    btnname: 'german',
-                    alert: 'denemeAlertGerman'
-                },
-                'login': {
-                    cardHeader: 'Login',
-                    pass: ' Passwort',
-                    btnlogin: 'Einloggen',
-                    btnforgetpass: 'Passwort Vergessen',
-                    btnregister: 'Registrierung'
-                }
-
-            }
-        }
+        'languages': langfile
     }
 
 });
