@@ -4,13 +4,12 @@ Template7.registerHelper('placeholder', function(plchldrContent) {
 });
 
 
-
-
 // Initialize app
 var myApp = new Framework7({
     swipeBackPage: false,
     swipePanelOnlyClose: true,
-    template7Pages: true //enable Template7 rendering for pages
+    template7Pages: true,
+    precompileTemplates: true //enable Template7 rendering for pages
 });
 
 var $$ = Dom7;
