@@ -110,8 +110,8 @@ function checkLoginStatus() {
 
 function getLangJson() {
     $$.getJSON('./languages/lang.json', function(data) {
-        data.
-        myApp.template7Data = data;
+        myApp.alert(data.languages.tr.main.btnname);
+        myApp.template7Data = JSON.stringify(data);
     });
 }
 
