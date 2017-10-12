@@ -12,7 +12,6 @@ var myApp = new Framework7({
     swipeBackPage: false,
     swipePanelOnlyClose: true,
     template7Pages: true, //enable Template7 rendering for pages
-    animatePages: false,
     template7Data: {
         // Plain data object
         'languages': {
