@@ -70,7 +70,7 @@ var mainView = myApp.addView('.view-main', {
 
 
 setTimeout(function() {
-
+    getLangJson();
     checkLangStatus();
 
 }, 3000);
@@ -102,7 +102,7 @@ function checkLoginStatus() {
     try {
         if (userLoggedIn) {
             loadPageWithLang('main');
-            getLangJson();
+
         } else {
             loadPageWithLang('login');
         }
@@ -112,10 +112,8 @@ function checkLoginStatus() {
 
 function getLangJson() {
     $$.getJSON('./languages/lang.json', function(data) {
-        myApp.alert(data.languages.tr.main.btnname);
-        // myApp.template7Data = JSON.stringify(data);
+        myApp.template7Data = data;
     });
-
 }
 
 
