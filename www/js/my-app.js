@@ -4,9 +4,12 @@ Template7.registerHelper('placeholder', function(plchldrContent) {
     return ret;
 });
 
+// If we need to use custom DOM library, let's save it to $$ variable:
+var $$ = Dom7;
+
 var langfile;
 
-$.getJSON('./languages/lang.json', function(data) {
+$$.getJSON('./languages/lang.json', function(data) {
     langfile = data;
 });
 
@@ -24,8 +27,7 @@ var myApp = new Framework7({
 
 });
 
-// If we need to use custom DOM library, let's save it to $$ variable:
-var $$ = Dom7;
+
 
 var langIsSeleted = window.localStorage.getItem("langIsSelected");
 var userLoggedIn = window.localStorage.getItem("isLogin");
