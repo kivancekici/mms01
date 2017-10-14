@@ -48,6 +48,10 @@ function checkLangStatus() {
     }
 }
 
+function changePanelLanguage(){
+ 
+}
+
 
 function loadPageWithLang(pageName) {
     var cntxName = 'languages.' + selectedLang + '.' + pageName;

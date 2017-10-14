@@ -28,5 +28,7 @@
             }
 
         }
-    }
+    },
+
+    "panelTitle":"panel title"
 }
