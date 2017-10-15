@@ -96,7 +96,7 @@ function getAllManufacturersList(manufacturer) {
             'manufacturer': manufacturer
         }
     
-        var result = restfulPostCall(registerdata);
+        var result = restfulPostCall(searchData);
        
         if (result != "Error") {
     
