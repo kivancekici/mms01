@@ -17,7 +17,7 @@ var $$ = Dom7;
 var langIsSeleted = window.localStorage.getItem("langIsSelected");
 var userLoggedIn = window.localStorage.getItem("isLogin");
 var selectedLang;
-var languagesData;
+
 
 if (langIsSeleted) {
     selectedLang = window.localStorage.getItem("lang");
@@ -35,11 +35,11 @@ var mainView = myApp.addView('.view-main', {
 setTimeout(function() {
     
     getLangJson();
-    changePanelLanguage();
     checkLangStatus();
 
 }, 3000);
 
+changePanelLanguage();
 
 function checkLangStatus() {
     if (langIsSeleted) {
@@ -51,7 +51,7 @@ function checkLangStatus() {
 
 function changePanelLanguage(){
     
-    var panelData = languagesData + '.' + selectedLang + '.panel'; 
+    var panelData = myApp.template7Data.languages + '.' + selectedLang + '.panel'; 
 
     myApp.alert(panelData);
 
@@ -97,7 +97,6 @@ function checkLoginStatus() {
 
 function getLangJson() {
     $$.getJSON('./languages/lang.json', function(data) {
-        languagesData = data.languages;
         myApp.template7Data.languages = data.languages;
     });
 }
