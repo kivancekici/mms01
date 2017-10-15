@@ -166,7 +166,9 @@ $$(document).on('pageInit', function(e) {
             manufacturersList=getAllManufacturersList("");            
         }
 
-        listManufacturers.items=manufacturersList;
+        initListVirtualManufacturers();
+        listVirtualManufacturers.items=manufacturersList;
+        listVirtualManufacturers.update();
     }
 
 
