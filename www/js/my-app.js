@@ -32,7 +32,7 @@ var mainView = myApp.addView('.view-main', {
 
 
 setTimeout(function() {
-
+    changePanelLanguage();
     getLangJson();
     checkLangStatus();
 
