@@ -34,6 +34,9 @@ switch ($opr) {
         break;
     case "register":
         fRegisterUser($decoded);
+		break;
+	case "updateuserdata":
+        fUpdateUserData($decoded);
         break;
     case "saveaddress":
         fSaveAddress($decoded);
@@ -53,11 +56,14 @@ switch ($opr) {
 	case "openorderdetails":
 		fOpenOrderDetails($decoded);
 		break;
-	case "orldorders":
+	case "oldorders":
 		fOldOrders($decoded);
 		break;
-	case "messages":
+	case "getmessages":
 		fGetMessages($decoded);
+		break;
+	case "postmessages":
+		fPostMessages($decoded);
 		break;
 	case "manufacturers":
 		fGetManufacturers($decoded);
@@ -96,8 +102,7 @@ function fLogin($_jsondata) {
 }
 
 function fRegisterUser($_jsondata) {
-	$email=$_jsondata["email"];
-	$_items = DbHelper::getInstance()->registerUser($email);
+	$_items = DbHelper::getInstance()->registerUser($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
@@ -105,9 +110,22 @@ function fRegisterUser($_jsondata) {
 	}
 }
 
+
+
+function fUpdateUserData($_jsondata) {
+	$_items = DbHelper::getInstance()->updateuserdata($_jsondata);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+
+
+
 function fSaveAddress($_jsondata) {
-	$infos=$_jsondata["email"];
-	$_items = DbHelper::getInstance()->saveAddress($infos);
+	$_items = DbHelper::getInstance()->saveAddress($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
@@ -118,8 +136,7 @@ function fSaveAddress($_jsondata) {
 
 function fGetMyAddress($_jsondata) {
 	//alanları ekle ve dbhelper methodunu yaz
-	$email=$_jsondata["email"];
-	$_items = DbHelper::getInstance()->getMyAddress($email);
+	$_items = DbHelper::getInstance()->getMyAddress($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
@@ -187,14 +204,29 @@ function fOldOrders($_jsondata) {
 
 function fGetMessages($_jsondata) {
 	//alanları ekle ve dbhelper methodunu yaz
-	$email=$_jsondata["email"];
-	$_items = DbHelper::getInstance()->getMessages($email);
+	$id_customer=$_jsondata["id_customer"];
+	$_items = DbHelper::getInstance()->getMessages($id_customer);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
 		send_response(Null);
 	}
 }
+
+
+
+function fPostMessages($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	//$id_customer=$_jsondata["id_customer"];
+	$_items = DbHelper::getInstance()->postMessages($_jsondata);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+
 
 
 

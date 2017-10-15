@@ -69,10 +69,13 @@ function checkLoginStatus() {
         if (userLoggedIn) {
             loadPageWithLang('main');
 
+
         } else {
             loadPageWithLang('login');
         }
-    } catch (e) {}
+    } catch (e) {
+        myApp.alert(e);
+    }
 
 }
 
@@ -109,6 +112,7 @@ $$(document).on('pageInit', function(e) {
                 window.localStorage.setItem("isLogin", true);
             } else {
                 window.localStorage.setItem("isLogin", false);
+
             }
 
         });
@@ -139,6 +143,7 @@ $$(document).on('pageInit', function(e) {
     if (page.name === 'language') {
 
         $$('.btnLangTr').on('click', function() {
+
             window.localStorage.setItem("langIsSelected", true);
             window.localStorage.setItem("lang", "tr");
             selectedLang = "tr";
