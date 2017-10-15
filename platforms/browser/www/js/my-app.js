@@ -163,8 +163,10 @@ $$(document).on('pageInit', function(e) {
 
     if (page.name === 'manufacturers') {
         if(manufacturersList==null){
-            manufacturersList=getAllManufacturersList("");
+            manufacturersList=getAllManufacturersList("");            
         }
+
+        listManufacturers.items=manufacturersList;
     }
 
 
