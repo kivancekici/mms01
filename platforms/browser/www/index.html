@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <!--
         Customize this policy to fit your own app's needs. For more guidance, see:
@@ -10,8 +11,8 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
-
+    <!-- Aşkın http post request için kapattı. -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -22,7 +23,7 @@
     <title>Baklava7</title>
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
-	<link rel="stylesheet" href="lib/framework7/css/framework7.icons.css">
+    <link rel="stylesheet" href="lib/framework7/css/framework7.icons.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
@@ -34,100 +35,100 @@
     <div class="panel-overlay theme-orange"></div>
     <!-- Left panel with reveal effect-->
     <div class="panel panel-left panel-cover layout-white theme-orange">
-			<div class="list-block color-orange theme-orange">
-				<div class="item-divider">İşlemler</div>
-				<a href="index.html" class="item-link">
-				  <div class="item-content">
-					<div class="item-media"><i class="f7-icons">bag</i></div>
-					  <div class="item-inner">
-						<div class="item-title">Sipariş Ver</div>
-					  </div>
-				  </div>
-				</a>  
-				
-				<a href="shopping_cart.html" class="item-link">
-				  <div class="item-content">
-					<div class="item-media"><i class="f7-icons">bag_fill</i></div>
-					  <div class="item-inner">
-						<div class="item-title">Sipariş Sepetim</div>
-					  </div>
-				  </div>
-				</a> 
-			
-				<a href="account.html" class="item-link">
-				  <div class="item-content">
-					<div class="item-media"><i class="f7-icons">person</i></div>
-					  <div class="item-inner">
-						<div class="item-title">Hesabım</div>
-					  </div>
-				  </div>
-				</a>  
-				
-				<a href="my_addresses.html" class="item-link">
-				  <div class="item-content">
-					<div class="item-media"><i class="f7-icons">navigation</i></div>
-					  <div class="item-inner">
-						<div class="item-title">Adreslerim</div>
-					  </div>
-				  </div>
-				</a> 
-				
-				<a href="my_orders.html" class="item-link">
-				  <div class="item-content">
-					<div class="item-media"><i class="f7-icons">box</i></div>
-					  <div class="item-inner">
-						<div class="item-title">Siparişlerim</div>
-					  </div>
-				  </div>
-				</a> 
-				
-				<a href="how_it_works.html" class="item-link">
-				  <div class="item-content">
-					<div class="item-media"><i class="f7-icons">help</i></div>
-					  <div class="item-inner">
-						<div class="item-title">Nasıl Çalışır ?</div>
-					  </div>
-				  </div>
-				</a> 
-				
-				<a href="faq.html" class="item-link">
-				  <div class="item-content">
-					<div class="item-media"><i class="f7-icons">help</i></div>
-					  <div class="item-inner">
-						<div class="item-title">FAQ</div>
-					  </div>
-				  </div>
-				</a> 
-				
-				
-				<a href="impressum.html" class="item-link">
-				  <div class="item-content">
-					<div class="item-media"><i class="f7-icons">info</i></div>
-					  <div class="item-inner">
-						<div class="item-title">Impressum</div>
-					  </div>
-				  </div>
-				</a> 
-				
-				<a href="messages.html" class="item-link">
-				  <div class="item-content">
-					<div class="item-media"><i class="f7-icons">email</i></div>
-					  <div class="item-inner">
-						<div class="item-title">Mesajlar</div>
-					  </div>
-				  </div>
-				</a>
-			
-				<a href="index.html" class="item-link">
-				  <div class="item-content">
-					<div class="item-media"><i class="f7-icons">logout</i></div>
-					  <div class="item-inner">
-						<div class="item-title">Çıkış</div>
-					  </div>
-				  </div>
-				</a>  
-			</div>
-			
+        <div class="list-block color-orange theme-orange">
+            <div class="item-divider">İşlemler</div>
+            <a href="main.html" class="item-link">
+                <div class="item-content">
+                    <div class="item-media"><i class="f7-icons">bag</i></div>
+                    <div class="item-inner">
+                        <div class="item-title">Sipariş Ver</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="shopping_cart.html" class="item-link">
+                <div class="item-content">
+                    <div class="item-media"><i class="f7-icons">bag_fill</i></div>
+                    <div class="item-inner">
+                        <div class="item-title">Sipariş Sepetim</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="account.html" class="item-link">
+                <div class="item-content">
+                    <div class="item-media"><i class="f7-icons">person</i></div>
+                    <div class="item-inner">
+                        <div class="item-title">Hesabım</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="my_addresses.html" class="item-link">
+                <div class="item-content">
+                    <div class="item-media"><i class="f7-icons">navigation</i></div>
+                    <div class="item-inner">
+                        <div class="item-title">Adreslerim</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="my_orders.html" class="item-link">
+                <div class="item-content">
+                    <div class="item-media"><i class="f7-icons">box</i></div>
+                    <div class="item-inner">
+                        <div class="item-title">Siparişlerim</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="how_it_works.html" class="item-link">
+                <div class="item-content">
+                    <div class="item-media"><i class="f7-icons">help</i></div>
+                    <div class="item-inner">
+                        <div class="item-title">Nasıl Çalışır ?</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="faq.html" class="item-link">
+                <div class="item-content">
+                    <div class="item-media"><i class="f7-icons">help</i></div>
+                    <div class="item-inner">
+                        <div class="item-title">FAQ</div>
+                    </div>
+                </div>
+            </a>
+
+
+            <a href="impressum.html" class="item-link">
+                <div class="item-content">
+                    <div class="item-media"><i class="f7-icons">info</i></div>
+                    <div class="item-inner">
+                        <div class="item-title">Impressum</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="messages.html" class="item-link">
+                <div class="item-content">
+                    <div class="item-media"><i class="f7-icons">email</i></div>
+                    <div class="item-inner">
+                        <div class="item-title">Mesajlar</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="index.html" class="item-link">
+                <div class="item-content">
+                    <div class="item-media"><i class="f7-icons">logout</i></div>
+                    <div class="item-inner">
+                        <div class="item-title">Çıkış</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
     </div>
 
     <!-- Views -->
@@ -135,9 +136,9 @@
         <!-- Your main view, should have "view-main" class -->
         <div class="view view-main">
             <!-- Top Navbar-->
-            <div class="navbar">
+            <div class="navbar navbar-hidden">
                 <div class="navbar-inner">
-					
+
                     <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
                     <div class="center sliding">Baklava7</div>
                     <div class="right">
@@ -145,44 +146,36 @@
                           Right link contains only icon - additional "icon-only" class
                           Additional "open-panel" class tells app to open panel when we click on this link
                         -->
-                        <a href="#" class="link icon-only open-panel"><i class="f7-icons">bars</i></a>						
+                        <a href="#" class="link icon-only open-panel"><i class="f7-icons">bars</i></a>
                     </div>
                 </div>
             </div>
             <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
-            <div class="pages navbar-through toolbar-through">
+            <div class="pages">
                 <!-- Page, "data-page" contains page name -->
-                <div data-page="index" class="page">
+                <div data-page="index" class="page no-navbar">
                     <!-- Scrollable page content -->
-                    <div class="page-content page-bg-main">
-                        <div class="content-block cntmiddle">
-							<div class="list-block">
-							  <ul>
-								<li class="item-content">
-								  <div class="item-media"><i class="icon f7-icons">navigation_fill</i></div>
-								  
-								  <div class="item-input">
-									<input type="text" placeholder="PLZ" id="autocomplete-dropdown-ajax"></div>									
-								</li>
-							  </ul>
-							</div>
-							
-							<div class="content-block">
-								<a href="add_address.html" class="button button-big button-fill">Adres Ekle</a>
-							</div>
-                        </div>
-						
-						 
+                    <div class="page-content page-bg-splash">
+                        <div class="content-block cntbottom">
+                            <div style="margin-bottom: 13px;" class="row">
+                                <div class="col-33"></div>
+                                <div class="col-33 splashindicator"><span style="width:36px; height:36px" class="preloader"></span></div>
+                                <div class="col-33"></div>
+                            </div>
+                       </div>
                     </div>
                 </div>
+
+
             </div>
-			
         </div>
     </div>
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
+    <script type="text/javascript" src="js/wsutil.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
+
 </body>
 
 </html>

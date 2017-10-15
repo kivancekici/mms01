@@ -1,76 +1,173 @@
+Template7.registerHelper('placeholder', function(plchldrContent) {
+    var ret = 'placeholder="' + plchldrContent + '"';
+    return ret;
+});
+
+
 // Initialize app
 var myApp = new Framework7({
-        swipePanel: 'left'
-        // ... other parameters
-}
-);
+    swipeBackPage: false,
+    swipePanelOnlyClose: true,
+    template7Pages: true,
+    precompileTemplates: true //enable Template7 rendering for pages
+});
 
-
-// If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
+
+
+var langIsSeleted = window.localStorage.getItem("langIsSelected");
+var userLoggedIn = window.localStorage.getItem("isLogin");
+var selectedLang;
+
+if (langIsSeleted) {
+    selectedLang = window.localStorage.getItem("lang");
+} else {
+    selectedLang = "tr"; // Set turkish to default language
+}
+
 
 // Add view
 var mainView = myApp.addView('.view-main', {
-    // Because we want to use dynamic navbar, we need to enable it for this view:
-    dynamicNavbar: true
+
 });
+
+
+setTimeout(function() {
+
+    getLangJson();
+    checkLangStatus();
+
+}, 3000);
+
+
+function checkLangStatus() {
+    if (langIsSeleted) {
+        checkLoginStatus();
+    } else {
+        mainView.router.loadPage({ url: 'language.html', ignoreCache: true });
+    }
+}
+
+function changePanelLanguage(){
+ 
+}
+
+
+function loadPageWithLang(pageName) {
+    var cntxName = 'languages.' + selectedLang + '.' + pageName;
+    var pgUrl = pageName + '.html';
+
+    mainView.router.load({
+        url: pgUrl,
+        contextName: cntxName
+    });
+}
+
+function checkLoginStatus() {
+
+    try {
+        if (userLoggedIn) {
+            loadPageWithLang('main');
+
+
+        } else {
+            loadPageWithLang('login');
+        }
+    } catch (e) {
+        myApp.alert(e);
+    }
+
+}
+
+function getLangJson() {
+    $$.getJSON('./languages/lang.json', function(data) {
+        myApp.template7Data.languages = data.languages;
+    });
+}
+
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     console.log("Device is ready!");
 });
 
-var userLoggedIn=false;
-
-checkLogin();
-
-function checkLogin(){
-	 try{
-           //var storedData = window.localStorage['baklava7-'+ '001'];
-          if(!userLoggedIn) {
-              //do your ajax login request here
-              // if successful do your login redirect  
-                 mainView.router.loadPage({url:'login.html', ignoreCache:true, reload:true });
-				 
-           }
-       }catch(e){
-	   }
-}
 
 
-
-// Now we need to run the code that will be executed only for About page.
-
-// Option 1. Using page callback for page (for "about" page in this case) (recommended way):
-myApp.onPageInit('about', function (page) {
-      
-	
-
-});
 
 // Option 2. Using one 'pageInit' event handler for all pages:
-$$(document).on('pageInit', function (e) {
+$$(document).on('pageInit', function(e) {
     // Get page data from event data
     var page = e.detail.page;
-	
-	if(!userLoggedIn) {
-		return;
-	}
-	
-    if (page.name === 'about') {
+
+    if (page.name === 'login') {
         // Following code will be executed for page with data-page attribute equal to "about"
-        myApp.alert('Here comes about page');
+        //myApp.alert('Here comes login page');
+        $$('.btnLogin').on('click', function() {
+            var email = $$('#txtEmail').val();
+            var pass = $$('#txtPassword').val();
+            var response = mobileLogin(email, pass);
+
+            if (response != 'NOK') {
+                loadPageWithLang('main');
+                window.localStorage.setItem("isLogin", true);
+            } else {
+                window.localStorage.setItem("isLogin", false);
+
+            }
+
+        });
+
+        $$('.btnForgetPassword').on('click', function() {
+            myApp.alert('Unuttum bişeyleri');
+        });
+
+
+        $$('.btnRegister').on('click', function() {
+            myApp.prompt('Lütfen E-mail Adresini Giriniz', 'Kayıt Ekranı', function(value) {
+
+                var email = value;
+                var response = mobileRegister(email);
+
+                if (response != "NOK") {
+                    loadPageWithLang('main');
+                }
+
+            });
+        });
     }
+
+    if (page.name === 'main') {
+
+    }
+
+    if (page.name === 'language') {
+
+        $$('.btnLangTr').on('click', function() {
+
+            window.localStorage.setItem("langIsSelected", true);
+            window.localStorage.setItem("lang", "tr");
+            selectedLang = "tr";
+            checkLoginStatus();
+        });
+
+        $$('.btnLangGer').on('click', function() {
+            window.localStorage.setItem("langIsSelected", true);
+            window.localStorage.setItem("lang", "de");
+            selectedLang = "de";
+            checkLoginStatus();
+        });
+
+    }
+
+
 });
 
-function loginClick(){
-	userLoggedIn=true;
-	mainView.router.loadPage({url:'index.html', ignoreCache:true, reload:true });
-}
+
+
 
 var calendarBirthday = myApp.calendar({
     input: '#calendarBirthday',
-});  
+});
 
 var postCodeSearch = myApp.autocomplete({
     input: '#autocomplete-dropdown-ajax',
@@ -81,7 +178,7 @@ var postCodeSearch = myApp.autocomplete({
     limit: 8, //limit to 8 results
     dropdownPlaceholderText: '35394 Giessen"',
     expandInput: true, // expand input
-    source: function (autocomplete, query, render) {
+    source: function(autocomplete, query, render) {
         var results = [];
         if (query.length === 0) {
             render(results);
@@ -98,7 +195,7 @@ var postCodeSearch = myApp.autocomplete({
             data: {
                 query: query
             },
-            success: function (data) {
+            success: function(data) {
                 // Find matched items
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].name.toLowerCase().indexOf(query.toLowerCase()) >= 0) results.push(data[i]);
