@@ -8,8 +8,7 @@ Template7.registerHelper('placeholder', function(plchldrContent) {
 var myApp = new Framework7({
     swipeBackPage: false,
     swipePanelOnlyClose: true,
-    template7Pages: true,
-    precompileTemplates: true //enable Template7 rendering for pages
+    template7Pages: true
 });
 
 var $$ = Dom7;
@@ -49,6 +48,7 @@ function checkLangStatus() {
 }
 
 function changePanelLanguage(){
+    $$('#panelTitle').val('New value here');
  
 }
 
