@@ -52,6 +52,8 @@ function changePanelLanguage(){
     
     var panelData = myApp.template7Data.languages + '.' + selectedLang + '.panel'; 
 
+    myApp.alert(panelData);
+
     $$('#panelTitle').text(panelData.panelTitle);
     $$('#orderItem').text(panelData.orderItem);
     $$('#orderBoxItem').text(panelData.orderBoxItem);
