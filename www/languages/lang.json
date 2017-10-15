@@ -1,6 +1,19 @@
 {
     "languages": {
         "tr": {
+            "panel":{
+                "panelTitle":"İşlemler",
+                "orderItem":"Sipariş Ver",
+                "orderBoxItem":"Sipariş Sepetim",
+                "accountItem":"Hesabım",
+                "addressItem":"Adreslerim",
+                "myOrdersItem":"Siparişlerim",
+                "workItem":"Nasıl Çalışır?",
+                "helpItem":"Yardım",
+                "infoItem":"Hakkında",
+                "messageItem":"Mesajlarım",
+                "logoutItem":"Çıkış"
+            },
             "main": {
                 "btnname": "Adres Ekle",
                 "alert": "denemeAlertTurkish"
@@ -15,6 +28,20 @@
 
         },
         "de": {
+            "panel":{
+                "panelTitle":"",
+                "orderItem":"",
+                "orderBoxItem":"",
+                "accountItem":"",
+                "addressItem":"",
+                "myOrdersItem":"",
+                "workItem":"",
+                "helpItem":"",
+                "infoItem":"",
+                "messageItem":"",
+                "logoutItem":""
+                
+            },
             "main": {
                 "btnname": "german",
                 "alert": "denemeAlertGerman"

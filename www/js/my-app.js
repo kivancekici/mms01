@@ -32,8 +32,9 @@ var mainView = myApp.addView('.view-main', {
 
 
 setTimeout(function() {
-    changePanelLanguage();
+    
     getLangJson();
+    changePanelLanguage();
     checkLangStatus();
 
 }, 3000);
@@ -48,8 +49,20 @@ function checkLangStatus() {
 }
 
 function changePanelLanguage(){
-    $$('#panelTitle').text('sdasdad');
- 
+    
+    var panelData = myApp.template7Data.languages + '.' + selectedLang + '.panel'; 
+
+    $$('#panelTitle').text(panelData.panelTitle);
+    $$('#orderItem').text(panelData.orderItem);
+    $$('#orderBoxItem').text(panelData.orderBoxItem);
+    $$('#accountItem').text(panelData.accountItem);
+    $$('#addressItem').text(panelData.addressItem);
+    $$('#myOrdersItem').text(panelData.myOrdersItem);
+    $$('#workItem').text(panelData.workItem);
+    $$('#helpItem').text(panelData.helpItem);
+    $$('#infoItem').text(panelData.infoItem);
+    $$('#messageItem').text(panelData.messageItem);
+    $$('#logoutItem').text(panelData.logoutItem);
 }
 
 
