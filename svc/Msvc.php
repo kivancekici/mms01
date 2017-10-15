@@ -31,7 +31,10 @@ $opr=$decoded["opr"];
 switch ($opr) {
     case "login":
         fLogin($decoded);
-        break;
+		break;
+	case "checkAvaibleUser":
+        fcheckAvaibleUser($decoded);
+		break;
     case "register":
         fRegisterUser($decoded);
 		break;
@@ -101,6 +104,23 @@ function fLogin($_jsondata) {
 	}
 }
 
+
+
+function fcheckAvaibleUser($_jsondata) {
+	$_items = DbHelper::getInstance()->checkAvaibleUser($_jsondata);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+
+
+
+
+
+
 function fRegisterUser($_jsondata) {
 	$_items = DbHelper::getInstance()->registerUser($_jsondata);
 	if (!empty($_items)) {
@@ -148,7 +168,7 @@ function fGetMyAddress($_jsondata) {
 function fDeleteAddress($_jsondata) {
 	//alanları ekle ve dbhelper methodunu yaz
 	$email=$_jsondata["email"];
-	$_items = DbHelper::getInstance()->deleteAddress($email);
+	$_items = DbHelper::getInstance()->deleteAddress($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
@@ -159,7 +179,7 @@ function fDeleteAddress($_jsondata) {
 function fUpdateAddress($_jsondata) {
 	//alanları ekle ve dbhelper methodunu yaz
 	$email=$_jsondata["email"];
-	$_items = DbHelper::getInstance()->updateAddress($email);
+	$_items = DbHelper::getInstance()->updateAddress($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
@@ -231,7 +251,9 @@ function fPostMessages($_jsondata) {
 
 
 function fGetManufacturers($_jsondata) {
-	$_items = DbHelper::getInstance()->getManufacturers($_jsondata);
+	//alanları ekle ve dbhelper methodunu yaz
+	$email=$_jsondata["email"];
+	$_items = DbHelper::getInstance()->getManufacturers($email);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {

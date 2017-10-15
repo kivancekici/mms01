@@ -65,6 +65,43 @@ class DbHelper {
 
         return $items;
 	}
+
+
+
+
+
+	function checkAvaibleUser($_infos){
+
+
+		$email=$_infos["email"];
+
+		$sql = "SELECT id_customer FROM ps_customer WHERE email='$email';";
+		
+				$result = $this->conn->query($sql);
+		
+				if ($result->num_rows > 0) {
+		
+					$rwitem="OK";
+					return $rwitem;
+				}else {
+				$rwitem="NOK";
+				return $rwitem;
+	
+				}
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 	
 	function registerUser($_infos) {
 		$_res=false;
@@ -93,30 +130,44 @@ class DbHelper {
 		$is_guest=0;
 		$deleted=0;
 		
-		
-		$sql = "INSERT INTO ps_customer (id_shop_group,id_shop,id_gender,id_default_group,id_lang,id_risk,company,siret,ape,firstname,lastname,email,passwd,last_passwd_gen,birthday,newsletter,ip_registration_newsletter,newsletter_date_add,optin,website,active,is_guest,deleted,date_add,date_upd) "
-				."VALUES($id_shop_group,$id_shop,$id_gender,$id_default_group,$id_lang,$id_risk,'$company','$siret','$ape','$firstname','$lastname','$email','$passwd',now(),now(),$newsletter,'$ip_registration_newsletter',now(),$optin,'$website',$active,$is_guest,$deleted,now(),now());";
-        $result = $this->conn->query($sql);
 
-        if ($result === TRUE) {
-            $_res = TRUE;
-        }
 		
-        $this->conn->close();
+
+
+
+
+
+
+		$sql = "INSERT INTO ps_customer (id_shop_group,id_shop,id_gender,id_default_group,id_lang,id_risk,company,siret,ape,firstname,lastname,email,passwd,last_passwd_gen,birthday,newsletter,ip_registration_newsletter,newsletter_date_add,optin,website,active,is_guest,deleted,date_add,date_upd) "
+		."VALUES($id_shop_group,$id_shop,$id_gender,$id_default_group,$id_lang,$id_risk,'$company','$siret','$ape','$firstname','$lastname','$email','$passwd',now(),now(),$newsletter,'$ip_registration_newsletter',now(),$optin,'$website',$active,$is_guest,$deleted,now(),now());";
+		$result = $this->conn->query($sql);
+
+		if ($result === TRUE) {
+		$_res = TRUE;
+		}
+
+		$this->conn->close();
 
 		if($_res){
-			$rwitem=array();
-			$rwitem["status"]="OK";
-			$rwitem["pswd"]="$passwdOpen";
-			return $rwitem;
+		$rwitem=array();
+		$rwitem["status"]="OK";
+		$rwitem["pswd"]="$passwdOpen";
+		return $rwitem;
 		}else{
-			$rwitem=array();
-			$rwitem["status"]="NOK";
-			$rwitem["SQL"]="$sql";
-			return $rwitem;
+		$rwitem=array();
+		$rwitem["status"]="NOK";
+		$rwitem["SQL"]="$sql";
+		return $rwitem;
 		}
+
+
+
+
+
+
 		
-        return $item;
+	
+		
     }
 	
 
@@ -165,10 +216,6 @@ class DbHelper {
 
 
 
-
-
-
-
 	function saveAddress($_infos) {
 		
 		$_res=false;
@@ -176,8 +223,8 @@ class DbHelper {
 		$id_country=$_infos["id_country"];
 		$id_state=$_infos["id_state"];
 		$id_customer=$_infos["id_customer"];
-		$id_manufacturer=$_infos["id_manufacturer"];
-		$id_warehouse=$_infos["id_warehouse"];
+		//$id_manufacturer=$_infos["id_manufacturer"];
+		//$id_warehouse=$_infos["id_warehouse"];
 		$alias=$_infos["alias"];
 		$company=$_infos["company"];
 		$lastname=$_infos["lastname"];
@@ -186,29 +233,32 @@ class DbHelper {
 		$address2=$_infos["address2"];
 		$postcode=$_infos["postcode"];
 		$city=$_infos["city"];
-		$other=$_infos["other"];
+		//$other=$_infos["other"];
 		$phone=$_infos["phone"];
-		$phone_mobile=$_infos["phone_mobile"];
+		//$phone_mobile=$_infos["phone_mobile"];
 		$vat_number=$_infos["vat_number"];
-		$dni=$_infos["dni"];		
+		//$dni=$_infos["dni"];		
 		
-		$sql = "INSERT INTO ps_address (id_country, id_state, id_customer, id_manufacturer, id_supplier, id_warehouse, alias, company, lastname, firstname,address1,address2,postcode,city,other,phone,phone_mobile,vat_number,dni,date_add,date_upd,active,deleted) "+
-				+"VALUES($id_country, $id_state, $id_customer, $id_manufacturer, $id_supplier, $id_warehouse, '$alias', '$company', '$lastname', '$firstname', '$address1', '$address2','$postcode','$city','$other','$phone','$phone_mobile','$vat_number','$dni',now(),now(),1,0);";
+		$sql = "INSERT INTO ps_address (id_country, id_state, id_customer,  alias, company, lastname, firstname,address1,address2,postcode,city,phone,vat_number,date_add,date_upd,active,deleted) "
+				."VALUES($id_country, $id_state, $id_customer,  '$alias', '$company', '$lastname', '$firstname', '$address1', '$address2','$postcode','$city','$phone','$vat_number',now(),now(),1,0);";
         $result = $this->conn->query($sql);
 
         if ($result === TRUE) {
             $_res = TRUE;
         }
 		
-        $this->conn->close();
+        
 
 		if($_res){
+			
 			$item="OK";
+
 		}else{
 			$item="NOK";
 		}
 		
-        return $item;
+		return $item;
+		$this->conn->close();
     }
 	
 	function getMyAddress($_infos) {
@@ -216,7 +266,10 @@ class DbHelper {
 		$_res=false;
 
 		$id_customer=$_infos["id_customer"];
-		$sql = "SELECT * FROM ps_address where deleted=0 and id_customer=$id_customer";
+		$sql = "SELECT pa.alias,CONCAT(pa.firstname,' ', pa.lastname) AS 'name',pa.vat_number,pa.address1,pa.address2,CONCAT(pa.postcode,' ', pa.city) AS 'postcodecity', pl.name, pa.phone
+		 FROM ps_address pa, ps_customer pc, ps_country_lang pl WHERE pa.deleted=0 AND pa.id_customer=$id_customer AND pc.id_customer = pa.id_customer
+		 AND pl.id_country = pa.id_country AND pl.id_lang = pc.id_lang 
+		 ";
         $result = $this->conn->query($sql);
 
         $items = array();
@@ -239,7 +292,7 @@ class DbHelper {
             //no results
         }
 		
-        $this->conn->close();
+       
 
 		if($_res){
 			$item="OK";
@@ -248,14 +301,19 @@ class DbHelper {
 			return $item;
 		}
 		
-        return $items;
+		return $items;
+		
+		$this->conn->close();
     }
 	
-	function deleteAddress($_email) {
+	function deleteAddress($_infos) {
 		
 		$_res=false;
 
-		$sql = "update ps_address set deleted=1 where id_address=$id_address and id_customer=$id_customer";
+		$id_address =$_infos["id_address"];
+		$id_customer=$_infos["id_customer"];
+
+		$sql = "DELETE FROM ps_address WHERE id_address=$id_address AND id_customer=$id_customer";
         $result = $this->conn->query($sql);
 		if ($result === TRUE) {
             $_res = TRUE;
@@ -271,13 +329,14 @@ class DbHelper {
         return $item;
     }
 	
-	function updateAddress($_email) {
+	function updateAddress($_infos) {
 		
 		$_res=false;
 
-		$id_address=$_infos["id_address"];
+		$id_country=$_infos["id_country"];
 		$id_state=$_infos["id_state"];
 		$id_customer=$_infos["id_customer"];
+		$id_address=$_infos["id_address"];
 		$alias=$_infos["alias"];
 		$company=$_infos["company"];
 		$lastname=$_infos["lastname"];
@@ -286,21 +345,18 @@ class DbHelper {
 		$address2=$_infos["address2"];
 		$postcode=$_infos["postcode"];
 		$city=$_infos["city"];
-		$other=$_infos["other"];
 		$phone=$_infos["phone"];
 		$phone_mobile=$_infos["phone_mobile"];
 		$vat_number=$_infos["vat_number"];
-		$dni=$_infos["dni"];
-		$active=$_infos["active"];		
+		$other=$_infos["other"];
 		
-		$sql = "update ps_address set id_country=$id_country, id_state=$id_state, alias='$alias', lastname='$lastname', firstname='$firstname',address1='$address1',address2='$address2',postcode='$postcode',city='$city',other='$other',phone='$phone',phone_mobile='$phone_mobile',vat_number='$vat_number',dni='$dni',date_upd=now(),active=$active where id_address=$id_address and id_customer=$id_customer ";
+		$sql = "UPDATE ps_address SET id_country=$id_country, id_state=$id_state, alias='$alias', company='$company',lastname='$lastname', firstname='$firstname',address1='$address1',address2='$address2',postcode='$postcode',city='$city',phone='$phone',phone_mobile='$phone_mobile',vat_number='$vat_number', other='$other',date_upd=now(),active=1 WHERE id_address=$id_address AND id_customer=$id_customer;";
         $result = $this->conn->query($sql);
 
         if ($result === TRUE) {
             $_res = TRUE;
         }
 		
-        $this->conn->close();
 
 		if($_res){
 			$item="OK";
@@ -308,7 +364,9 @@ class DbHelper {
 			$item="NOK";
 		}
 		
-        return $item;
+		return $item;
+		
+		$this->conn->close();
     }
 	
 	function openOrders($_infos2) {
