@@ -19,6 +19,8 @@ var langIsSeleted = window.localStorage.getItem("langIsSelected");
 var userLoggedIn = window.localStorage.getItem("isLogin");
 var selectedLang;
 
+var manufacturersList=null;
+
 if (langIsSeleted) {
     selectedLang = window.localStorage.getItem("lang");
 } else {
@@ -157,6 +159,12 @@ $$(document).on('pageInit', function(e) {
             checkLoginStatus();
         });
 
+    }
+
+    if (page.name === 'manufacturers') {
+        if(manufacturersList==null){
+            manufacturersList=getAllManufacturersList("");
+        }
     }
 
 
