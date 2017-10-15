@@ -48,7 +48,7 @@ function checkLangStatus() {
 }
 
 function changePanelLanguage(){
-    $$('#panelTitle').val('New value here');
+    $$('#panelTitle').text('sdasdad');
  
 }
 
