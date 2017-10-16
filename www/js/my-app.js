@@ -54,7 +54,7 @@ function changePanelLanguage() {
     var langData;
 
     $$.getJSON('./languages/lang.json', function(data) {
-        langData = data.languages;
+        langData = data;
         myApp.alert(langData);
     });
 
