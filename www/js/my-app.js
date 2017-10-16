@@ -54,8 +54,9 @@ function checkLangStatus() {
 
 function changePanelLanguage() {
 
-    myApp.alert(langData);
+
     var panelData = langData + '.' + selectedLang + '.panel';
+    myApp.alert(panelData);
 
     $$('#panelTitle').text(panelData.panelTitle);
     $$('#orderItem').text(panelData.orderItem);
