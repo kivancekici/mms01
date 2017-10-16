@@ -97,7 +97,7 @@ function checkLoginStatus() {
 function getLangJson() {
     $$.getJSON('./languages/lang.json', function(data) {
         myApp.template7Data.languages = data.languages;
-        myApp.alert(data.languages);
+        myApp.alert(JSON.stringify(data.languages));
     });
 }
 
