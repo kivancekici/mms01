@@ -34,7 +34,7 @@ var mainView = myApp.addView('.view-main', {
 
 getLangJson();
 
-changePanelLanguage();
+
 
 setTimeout(function() {
 
@@ -101,7 +101,7 @@ function getLangJson() {
     $$.getJSON('./languages/lang.json', function(data) {
         myApp.template7Data.languages = data.languages;
         langData = JSON.stringify(data.languages);
-        myApp.alert(langData);
+        changePanelLanguage();
     });
 }
 
