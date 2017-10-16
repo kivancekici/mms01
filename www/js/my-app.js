@@ -33,7 +33,7 @@ var mainView = myApp.addView('.view-main', {
 
 
 setTimeout(function() {
-    
+
     getLangJson();
     checkLangStatus();
 
@@ -49,15 +49,18 @@ function checkLangStatus() {
     }
 }
 
-function changePanelLanguage(){
-    
+function changePanelLanguage() {
+
     var langData;
 
     $$.getJSON('./languages/lang.json', function(data) {
         langData = data.languages;
+        myApp.alert(data.languages);
     });
 
-    panelData = langData + '.' + selectedLang + '.panel'; 
+    myApp.alert(panelData);
+
+    panelData = langData + '.' + selectedLang + '.panel';
 
     myApp.alert(panelData);
 
