@@ -55,7 +55,7 @@ function checkLangStatus() {
 function changePanelLanguage() {
 
 
-    var panelData = 'myApp.template7Data.languages.' + selectedLang + '.panel';
+    var panelData = myApp.template7Data.languages[selectedLang].panel;
     myApp.alert(JSON.stringify(panelData));
 
     $$('#panelTitle').text(panelData.panelTitle);
