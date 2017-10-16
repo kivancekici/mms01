@@ -166,6 +166,7 @@ $$(document).on('pageInit', function(e) {
             window.localStorage.setItem("lang", "tr");
             selectedLang = "tr";
             checkLoginStatus();
+            changePanelLanguage();
         });
 
         $$('.btnLangGer').on('click', function() {
@@ -173,6 +174,7 @@ $$(document).on('pageInit', function(e) {
             window.localStorage.setItem("lang", "de");
             selectedLang = "de";
             checkLoginStatus();
+            changePanelLanguage();
         });
 
     }
