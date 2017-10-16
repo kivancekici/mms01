@@ -31,15 +31,17 @@ var mainView = myApp.addView('.view-main', {
 
 });
 
+getLangJson();
+
+changePanelLanguage();
 
 setTimeout(function() {
 
-    getLangJson();
     checkLangStatus();
 
 }, 3000);
 
-changePanelLanguage();
+
 
 function checkLangStatus() {
     if (langIsSeleted) {
