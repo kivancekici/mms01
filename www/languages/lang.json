@@ -1,18 +1,18 @@
 {
     "languages": {
         "tr": {
-            "panel":{
-                "panelTitle":"İşlemler",
-                "orderItem":"Sipariş Ver",
-                "orderBoxItem":"Sipariş Sepetim",
-                "accountItem":"Hesabım",
-                "addressItem":"Adreslerim",
-                "myOrdersItem":"Siparişlerim",
-                "workItem":"Nasıl Çalışır?",
-                "helpItem":"Yardım",
-                "infoItem":"Hakkında",
-                "messageItem":"Mesajlarım",
-                "logoutItem":"Çıkış"
+            "panel": {
+                "panelTitle": "Menü",
+                "orderItem": "Sipariş Ver",
+                "orderBoxItem": "Sipariş Sepetim",
+                "accountItem": "Hesabım",
+                "addressItem": "Adreslerim",
+                "myOrdersItem": "Siparişlerim",
+                "workItem": "Nasıl Çalışır?",
+                "helpItem": "Yardım",
+                "infoItem": "Hakkında",
+                "messageItem": "Mesaj Kutusu",
+                "logoutItem": "Çıkış"
             },
             "main": {
                 "btnname": "Adres Ekle",
@@ -28,19 +28,19 @@
 
         },
         "de": {
-            "panel":{
-                "panelTitle":"",
-                "orderItem":"",
-                "orderBoxItem":"",
-                "accountItem":"",
-                "addressItem":"",
-                "myOrdersItem":"",
-                "workItem":"",
-                "helpItem":"",
-                "infoItem":"",
-                "messageItem":"",
-                "logoutItem":""
-                
+            "panel": {
+                "panelTitle": "Menu",
+                "orderItem": "Bestellen",
+                "orderBoxItem": "Warenkorb",
+                "accountItem": "Mein Konto",
+                "addressItem": "Mein Addresse",
+                "myOrdersItem": "Bestellungen",
+                "workItem": "Wie es Funktioniert",
+                "helpItem": "Hilfe",
+                "infoItem": "Impressum",
+                "messageItem": "Message Box",
+                "logoutItem": "Ausloggen"
+
             },
             "main": {
                 "btnname": "german",

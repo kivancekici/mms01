@@ -17,7 +17,7 @@ var $$ = Dom7;
 var langIsSeleted = window.localStorage.getItem("langIsSelected");
 var userLoggedIn = window.localStorage.getItem("isLogin");
 var selectedLang;
-var langData;
+
 
 
 if (langIsSeleted) {
@@ -54,9 +54,7 @@ function checkLangStatus() {
 
 function changePanelLanguage() {
 
-
     var panelData = myApp.template7Data.languages[selectedLang].panel;
-    myApp.alert(JSON.stringify(panelData));
 
     $$('#panelTitle').text(panelData.panelTitle);
     $$('#orderItem').text(panelData.orderItem);
