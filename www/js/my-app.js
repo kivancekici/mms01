@@ -34,7 +34,6 @@ var mainView = myApp.addView('.view-main', {
 getLangJson();
 
 
-
 setTimeout(function() {
 
     checkLangStatus();
@@ -54,8 +53,6 @@ function checkLangStatus() {
 function changePanelLanguage() {
 
     var panelData = langData + '.' + selectedLang + '.panel';
-
-
 
     $$('#panelTitle').text(panelData.panelTitle);
     $$('#orderItem').text(panelData.orderItem);
