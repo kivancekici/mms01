@@ -55,14 +55,13 @@ function changePanelLanguage() {
 
     $$.getJSON('./languages/lang.json', function(data) {
         langData = data.languages;
-        myApp.alert(data.languages);
+        myApp.alert(langData);
     });
 
-    myApp.alert(panelData);
 
-    panelData = langData + '.' + selectedLang + '.panel';
+    var panelData = langData + '.' + selectedLang + '.panel';
 
-    myApp.alert(panelData);
+
 
     $$('#panelTitle').text(panelData.panelTitle);
     $$('#orderItem').text(panelData.orderItem);
