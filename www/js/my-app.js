@@ -56,7 +56,7 @@ function changePanelLanguage() {
 
 
     var panelData = 'langData.' + selectedLang + '.panel';
-    myApp.alert(panelData);
+    myApp.alert(myApp.template7Data.languages);
 
     $$('#panelTitle').text(panelData.panelTitle);
     $$('#orderItem').text(panelData.orderItem);
@@ -101,7 +101,6 @@ function checkLoginStatus() {
 function getLangJson() {
     $$.getJSON('./languages/lang.json', function(data) {
         myApp.template7Data.languages = data.languages;
-        langData = JSON.stringify(data.languages);
         changePanelLanguage();
     });
 }
