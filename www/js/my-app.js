@@ -17,6 +17,7 @@ var $$ = Dom7;
 var langIsSeleted = window.localStorage.getItem("langIsSelected");
 var userLoggedIn = window.localStorage.getItem("isLogin");
 var selectedLang;
+var langData;
 
 
 if (langIsSeleted) {
@@ -97,7 +98,7 @@ function checkLoginStatus() {
 function getLangJson() {
     $$.getJSON('./languages/lang.json', function(data) {
         myApp.template7Data.languages = data.languages;
-        myApp.alert(JSON.stringify(data.languages));
+        langData = JSON.stringify(data.languages);
     });
 }
 
