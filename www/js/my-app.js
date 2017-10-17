@@ -109,7 +109,9 @@ $$(document).on('deviceready', function() {
     console.log("Device is ready!");
 });
 
-
+$$('#orderItemBtn').on('click', function() {
+    loadPageWithLang('main');
+});
 
 
 // Option 2. Using one 'pageInit' event handler for all pages:
