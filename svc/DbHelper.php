@@ -89,18 +89,6 @@ class DbHelper {
 
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-	
 	function registerUser($_infos) {
 		$_res=false;
 		$id_shop_group=1;
@@ -158,13 +146,6 @@ class DbHelper {
 		return $rwitem;
 		}
 
-
-
-
-
-
-		
-	
 		
     }
 	
@@ -739,44 +720,113 @@ class DbHelper {
         return $items;
     }
 	
-	function getProductsList($_infos2) {
+
+
+
+
+  
+	function getHpProductsList($_infos2) {
+	
+		$keyword=$_infos2["keyword"];
+		$currency=$_infos2["currency"];
+		$langu=$_infos2["langu"];
+		$sql = "SELECT id_product, name,description_short, description FROM  ps_product_lang WHERE id_lang = $langu AND (description LIKE '%$keyword%' OR description_short LIKE '%$keyword%'  OR name LIKE '%$keyword%') ";
+
+		$result = $this->conn->query($sql);
+
 		
-		$_res=false;
-
-		$product_name=$_infos2["product_name"];
-		$sql = "select * from ps_product prd left join ps_product_lang prdlang on prd.id_product=prdlang.id_product and prdlang.id_lang=1 left join  ps_category_lang ctg on prd.id_category_default=ctg.id_category and ctg.id_lang=1 where id_manufacturer=$id_manufacturer order by prd.id_category_default";
-        $result = $this->conn->query($sql);
-
-        $items = array();
-
-        if ($result->num_rows > 0) {
-            while ($_infos = $result->fetch_assoc()) {
+		if ($result->num_rows > 0) {
+			$resulttable = array();
+			//$tmpsqltable =array();
+			$rowcounter = 0;
+            while ($row = $result->fetch_assoc()) {
 				
-				$menu=array();
-				$menu=array_merge($menu,$_infos);					
+
+				$sql ="SELECT CAST(((pr.price + pa.price) * (1 + tx.rate/100)) AS  decimal(10,2)) AS 'grossprice'   FROM ps_product pr, ps_tax_rule tr, ps_tax tx, ps_product_attribute pa  WHERE pr.id_product = $row[id_product] AND pr.id_tax_rules_group = tr.id_tax_rules_group AND tr.id_country = '1' AND tr.id_tax = tx.id_tax AND pa.id_product_attribute = pr.cache_default_attribute AND pa.id_product = pr.id_product";
 				
-                array_push($items,$menu);
+				$resultgross = $this->conn->query($sql);
+               $tmpsqltable = mysqli_fetch_array($resultgross , MYSQLI_ASSOC);
+
+				array_push($resulttable, $row);
+
+				$resulttable[$rowcounter]['description_short'] = str_replace("</p>","",str_replace("<p>","",$resulttable[$rowcounter]['description_short']));
+
+				$resulttable[$rowcounter]['description'] = str_replace("</p>","",str_replace("<p>","",$resulttable[$rowcounter]['description']));
 				
-				$_res=true;
+				$resulttable[$rowcounter] = $resulttable[$rowcounter] + $tmpsqltable;
+
+				$sql ="SELECT reduction,reduction_type FROM ps_specific_price WHERE id_product = $row[id_product]";
+				$resultreduction = $this->conn->query($sql);
+				if ($resultreduction->num_rows > 0) {
+					$reducedprice = array();
+					$tmpsqltable = mysqli_fetch_array($resultreduction , MYSQLI_ASSOC);
+			
+					if ($tmpsqltable['reduction_type'] == "percentage"){
+						
+						$reducedprice['reducedprice'] = number_format($resulttable[$rowcounter]['grossprice'] * (1-$tmpsqltable[reduction]),2);
+						$resulttable[$rowcounter] = $resulttable[$rowcounter] + $reducedprice;
+					}elseif($tmpsqltable['reduction_type'] == "amount"){
+						
+						$reducedprice['reducedprice'] =  number_format($resulttable[$rowcounter]['grossprice'] - $tmpsqltable[reduction],2);
+						$resulttable[$rowcounter] = $resulttable[$rowcounter] + $reducedprice;
+
+
+					}
+
+
+
+				}else{
+					
+					$reducedprice['reducedprice'] =  $resulttable[$rowcounter]['grossprice'];
+					$resulttable[$rowcounter] = $resulttable[$rowcounter] + $reducedprice;
+					
+				}
+
+
+				$imgdirectory="/"."prestashop"."/"."img"."/"."p";
+
+				$sql ="SELECT id_image FROM ps_image WHERE id_product = $row[id_product] AND cover = 1";
+
+				$resultimg = $this->conn->query($sql);
+				if ($resultimg->num_rows > 0) {
+
+					$tmpsqltable = mysqli_fetch_array($resultimg , MYSQLI_ASSOC);
+					$imgcounter = 0;
+
+					$tmpstring = $tmpsqltable['id_image'];
+
+
+					while($imgcounter < STRLEN($tmpstring))
+					{
+
+						
+
+						$imgdirectory .=  "/".SUBSTR($tmpstring ,$imgcounter,1);
+						
+					
+						$imgcounter = $imgcounter +1;
+					}
+
+					$imgdirectory .= "/".$tmpstring."-home_default.jpg";
+
+
+
+				}
+
+				$resulttable[$rowcounter]['imgdirectory '] = $imgdirectory;
+
+				$rowcounter = $rowcounter  + 1;
             }
-			
-			
-        } else {
-            //no results
-        }
-		
+		}
+
+		return $resulttable;
         $this->conn->close();
 
-		if($_res){
-			$item="OK";
-		}else{
-			$item="NOK";
-			return $item;
-		}
-		
-        return $items;
     }
 	
+
+
+
 	function placeOrder($_email) {
 		
 		$_res=false;

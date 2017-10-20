@@ -74,8 +74,8 @@ switch ($opr) {
 	case "manufacturersmenu":
 		fGetManufacturersMenu($decoded);
 		break;
-	case "productslist":
-		fGetProductsList($decoded);
+	case "hpproductslist":
+		fGetHpProductsList($decoded);
 		break;
 	case "placeorder":
 		fPlaceOrder($decoded);
@@ -240,8 +240,6 @@ function fPostMessages($_jsondata) {
 
 
 
-
-
 function fGetManufacturers($_jsondata) {
 	//alanları ekle ve dbhelper methodunu yaz
 	$email=$_jsondata["email"];
@@ -265,10 +263,9 @@ function fGetManufacturersMenu($_jsondata) {
 }
 
 
-function fGetProductsList($_jsondata) {
+function fGetHpProductsList($_jsondata) {
 	//alanları ekle ve dbhelper methodunu yaz
-	$email=$_jsondata["email"];
-	$_items = DbHelper::getInstance()->getProductsList($email);
+	$_items = DbHelper::getInstance()->getHpProductsList($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
