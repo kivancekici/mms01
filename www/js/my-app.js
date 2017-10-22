@@ -162,11 +162,11 @@ $$(document).on('pageInit', function(e) {
                             loadPageWithLang('main');
                         }
                     } else {
-                        myApp.alert("Mail adresi daha önceden kayıtlıdır.");
+                        myApp.alert('Mail adresi daha önceden kayıtlıdır.');
                     }
 
                 } else {
-                    myApp.alert("Geçerli Email Adresi Giriniz.");
+                    myApp.alert('Geçerli Email Adresi Giriniz.');
                 }
 
 
