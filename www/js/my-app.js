@@ -96,6 +96,11 @@ function checkLoginStatus() {
 
 }
 
+function validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
 function getLangJson() {
     $$.getJSON('./languages/lang.json', function(data) {
         myApp.template7Data.languages = data.languages;
@@ -143,20 +148,29 @@ $$(document).on('pageInit', function(e) {
 
 
         $$('.btnRegister').on('click', function() {
-            myApp.promptEmail('Lütfen E-mail Adresini Giriniz', 'Kayıt Ekranı', function(value) {
+            myApp.prompt('Lütfen E-mail Adresini Giriniz', 'Kayıt Ekranı', function(value) {
 
                 var email = value;
-                var avaibleuser = checkAvaibleUser(email);
 
-                if (avaibleuser == "OK") {
-                    var response = mobileRegister(email);
+                if (validateEmail(email)) {
+                    var avaibleuser = checkAvaibleUser(email);
 
-                    if (response != "NOK") {
-                        loadPageWithLang('main');
+                    if (avaibleuser == "OK") {
+                        var response = mobileRegister(email);
+
+                        if (response != "NOK") {
+                            loadPageWithLang('main');
+                        }
+                    } else {
+                        myApp.alert("Mail adresi daha önceden kayıtlıdır.");
                     }
+
                 } else {
-                    myApp.alert("Mail adresi daha önceden kayıtlıdır.");
+                    myApp.alert("Geçerli Email Adresi Giriniz.");
                 }
+
+
+
 
             });
         });

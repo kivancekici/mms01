@@ -3207,32 +3207,6 @@
                 }
             });
         };
-        /*Registerda input type email olmalı Aşkın BASLA*/
-        app.promptEmail = function(text, title, callbackOk, callbackCancel) {
-            if (typeof title === 'function') {
-                callbackCancel = arguments[2];
-                callbackOk = arguments[1];
-                title = undefined;
-            }
-            return app.modal({
-                text: text || '',
-                title: typeof title === 'undefined' ? app.params.modalTitle : title,
-                afterText: '<div class="input-field"><input type="email" class="modal-text-input"></div>',
-                buttons: [{
-                        text: app.params.modalButtonCancel
-                    },
-                    {
-                        text: app.params.modalButtonOk,
-                        bold: true
-                    }
-                ],
-                onClick: function(modal, index) {
-                    if (index === 0 && callbackCancel) callbackCancel($(modal).find('.modal-text-input').val());
-                    if (index === 1 && callbackOk) callbackOk($(modal).find('.modal-text-input').val());
-                }
-            });
-        };
-        /*Registerda input type email olmalı Aşkın BITIR*/
 
         app.modalLogin = function(text, title, callbackOk, callbackCancel) {
             if (typeof title === 'function') {
