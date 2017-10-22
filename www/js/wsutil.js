@@ -65,26 +65,50 @@ function mobileLogin(email, passwd) {
 }
 
 function mobileRegister(email) {
-    
-        var registerdata = {
-            'opr': 'register',
-            'email': email
-        }
-    
-        var result = restfulPostCall(registerdata);
-       
-        myApp.alert(result.status);
-       
-        if (result != "Error") {
-    
-            if (result.status != "NOK") {
-                return result.pswd;
-            } else {
-                return "NOK";
-            }
-    
+
+    var registerdata = {
+        'opr': 'register',
+        'email': email
+    }
+
+    var result = restfulPostCall(registerdata);
+
+    myApp.alert(result.status);
+
+    if (result != "Error") {
+
+        if (result.status != "NOK") {
+            return result.pswd;
         } else {
-            return "NOK"
+            return "NOK";
         }
-    
+
+    } else {
+        return "NOK"
+    }
+
+}
+
+function checkAvaibleUser(email) {
+
+    var registerdata = {
+        'opr': 'checkAvaibleUser',
+        'email': email
+    }
+
+    var result = restfulPostCall(registerdata);
+
+
+    if (result != "Error") {
+
+        if (result.status == "NOK") {
+            return "OK";
+        } else {
+            return "NOK";
+        }
+
+    } else {
+        return "NOK"
+    }
+
 }

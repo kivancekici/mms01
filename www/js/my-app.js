@@ -143,13 +143,19 @@ $$(document).on('pageInit', function(e) {
 
 
         $$('.btnRegister').on('click', function() {
-            myApp.prompt('Lütfen E-mail Adresini Giriniz', 'Kayıt Ekranı', function(value) {
+            myApp.promptEmail('Lütfen E-mail Adresini Giriniz', 'Kayıt Ekranı', function(value) {
 
                 var email = value;
-                var response = mobileRegister(email);
+                var avaibleuser = checkAvaibleUser(email);
 
-                if (response != "NOK") {
-                    loadPageWithLang('main');
+                if (avaibleuser == "OK") {
+                    var response = mobileRegister(email);
+
+                    if (response != "NOK") {
+                        loadPageWithLang('main');
+                    }
+                } else {
+                    myApp.alert("Mail adresi daha önceden kayıtlıdır.");
                 }
 
             });
