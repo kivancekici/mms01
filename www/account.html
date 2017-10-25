@@ -1,114 +1,101 @@
-<!-- We don't need a full layout in this file because this page will be parsed with Ajax. -->
-<div class="navbar">
-    <div class="navbar-inner">
-        <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-        <div class="center sliding">Hesabım</div>
-        <div class="right">
-            <a href="#" class="link icon-only open-panel"><i class="f7-icons">bars</i></a>
-        </div>
-    </div>
-</div>
+<div data-page="account" class="page">
+    <!-- Scrollable page content -->
+    <div div class="page-content page-bg-main lazy lazy-fadein" data-background="images/baklava7bg.jpg">
+        <div class="content-block">
 
-<div class="pages">
-    <div data-page="account" class="page">
-        <!-- Scrollable page content -->
-        <div div class="page-content page-bg-main lazy lazy-fadein" data-background="images/baklava7bg.jpg">
-            <div class="content-block">
+            <div class="card">
+                <div class="card-header account-card-header">
 
-                <div class="card">
-                    <div class="card-header account-card-header">
+                </div>
+                <div class="card-content">
+                    <div class="card-content-inner">
+                        <form>
+                            <div class="list-block">
+                                <ul>
+                                    <li class="item-content">
+                                        <div class="item-media"><i class="icon f7-icons">person</i></div>
+                                        <div class="item-inner">
 
-                    </div>
-                    <div class="card-content">
-                        <div class="card-content-inner">
-                            <form>
-                                <div class="list-block">
-                                    <ul>
-                                        <li class="item-content">
-                                            <div class="item-media"><i class="icon f7-icons">person</i></div>
-                                            <div class="item-inner">
-
-                                                <div class="item-input">
-                                                    <input type="text" name="name" {{placeholder name}}>
-                                                </div>
+                                            <div class="item-input">
+                                                <input type="text" name="name" {{placeholder name}}>
                                             </div>
-                                        </li>
+                                        </div>
+                                    </li>
 
-                                        <li class="item-content">
-                                            <div class="item-media"><i class="icon f7-icons">person</i></div>
-                                            <div class="item-inner">
+                                    <li class="item-content">
+                                        <div class="item-media"><i class="icon f7-icons">person</i></div>
+                                        <div class="item-inner">
 
-                                                <div class="item-input">
-                                                    <input type="text" name="surname" {{placeholder surname}}>
-                                                </div>
+                                            <div class="item-input">
+                                                <input type="text" name="surname" {{placeholder surname}}>
                                             </div>
-                                        </li>
+                                        </div>
+                                    </li>
 
 
 
-                                        <li class="item-content">
-                                            <div class="item-media"><i class="icon f7-icons">at_fill</i></div>
-                                            <div class="item-inner">
-                                                <div class="item-input">
-                                                    <input type="email" name="email" {{placeholder email}}>
-                                                </div>
+                                    <li class="item-content">
+                                        <div class="item-media"><i class="icon f7-icons">at_fill</i></div>
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <input type="email" name="email" {{placeholder email}}>
                                             </div>
-                                        </li>
-                                        <li class="item-content">
-                                            <div class="item-media"><i class="icon f7-icons">lock_fill</i></div>
-                                            <div class="item-inner">
-                                                <div class="item-input">
-                                                    <input type="password" name="password" {{placeholder password}}>
-                                                </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content">
+                                        <div class="item-media"><i class="icon f7-icons">lock_fill</i></div>
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <input type="password" name="password" {{placeholder password}}>
                                             </div>
-                                        </li>
+                                        </div>
+                                    </li>
 
-                                        <li class="item-content">
-                                            <div class="item-media"><i class="icon f7-icons">lock_fill</i></div>
-                                            <div class="item-inner">
-                                                <div class="item-input">
-                                                    <input type="password" name="repeatpassword" {{placeholder repeatpassword}}>
-                                                </div>
+                                    <li class="item-content">
+                                        <div class="item-media"><i class="icon f7-icons">lock_fill</i></div>
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <input type="password" name="repeatpassword" {{placeholder repeatpassword}}>
                                             </div>
-                                        </li>
+                                        </div>
+                                    </li>
 
-                                        <li class="item-content">
-                                            <div class="item-media"><i class="icon f7-icons">calendar</i></div>
-                                            <div class="item-inner">
-                                                <div class="item-input">
-                                                    <input type="date" name="birthday" placeholder="Doğum Günü">
-                                                </div>
+                                    <li class="item-content">
+                                        <div class="item-media"><i class="icon f7-icons">calendar</i></div>
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <input type="date" name="birthday" {{placeholder birthday}}>
                                             </div>
-                                        </li>
+                                        </div>
+                                    </li>
 
-                                        <li class="item-content">
-                                            <div class="item-media"><i class="icon f7-icons">persons</i></div>
-                                            <div class="item-inner">
-                                                <div class="item-input">
-                                                    <select required>
+                                    <li class="item-content">
+                                        <div class="item-media"><i class="icon f7-icons">persons</i></div>
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <select required>
                                                       <option value="" disabled selected>{{gender}}</option>
                                                       <option value="1">{{male}}</option>
                                                       <option value="2">{{female}}</option>
                                                     </select>
-                                                </div>
                                             </div>
-                                        </li>
+                                        </div>
+                                    </li>
 
-                                    </ul>
-                                </div>
-                            </form>
-                        </div>
+                                </ul>
+                            </div>
+                        </form>
                     </div>
-                    <div class="card-footer">
-                        <p>Bilgilendirme mailleri gönder.</p>
-                        <label class="label-switch">
+                </div>
+                <div class="card-footer">
+                    <p>Bilgilendirme mailleri gönder.</p>
+                    <label class="label-switch">
 											<input type="checkbox">
 											<div class="checkbox"></div>
 										</label>
-                    </div>
                 </div>
-
             </div>
+
         </div>
     </div>
 </div>

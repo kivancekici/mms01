@@ -35,6 +35,17 @@
                 "gender": " Cinsiyet",
                 "male": " Erkek",
                 "female": " Kadın"
+            },
+            "register": {
+                "name": "Adı",
+                "surname": "Soyadı",
+                "email": "E-mail",
+                "password": " Parola",
+                "repeatpassword": " Parola (Tekrar)",
+                "birthday": "Doğum Günü",
+                "gender": " Cinsiyet",
+                "male": " Erkek",
+                "female": " Kadın"
             }
 
         },

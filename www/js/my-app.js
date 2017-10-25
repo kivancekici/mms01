@@ -152,6 +152,9 @@ $$(document).on('pageInit', function(e) {
 
 
         $$('.btnRegister').on('click', function() {
+
+            loadPageWithLang('register');
+            /*
             myApp.prompt('Lütfen E-mail Adresini Giriniz', 'Kayıt Ekranı', function(value) {
 
                 var email = value;
@@ -177,12 +180,24 @@ $$(document).on('pageInit', function(e) {
 
 
             });
+            */
         });
     }
 
     if (page.name === 'main') {
 
     }
+
+    if (page.name === 'register') {
+
+        $$('.form-to-data').on('click', function() {
+            var formData = myApp.formToData('#registerform');
+            alert(JSON.stringify(formData));
+        });
+
+    }
+
+
 
     if (page.name === 'language') {
 
