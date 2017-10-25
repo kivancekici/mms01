@@ -118,6 +118,10 @@ $$('#orderItemBtn').on('click', function() {
     loadPageWithLang('main');
 });
 
+$$('#accountItemBtn').on('click', function() {
+    loadPageWithLang('account');
+});
+
 
 // Option 2. Using one 'pageInit' event handler for all pages:
 $$(document).on('pageInit', function(e) {
