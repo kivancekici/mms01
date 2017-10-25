@@ -29,7 +29,7 @@
                                             <div class="item-inner">
 
                                                 <div class="item-input">
-                                                    <input type="text" name="namesurname" placeholder="Adı Soyadı">
+                                                    <input type="text" name="name" {{placeholder name}}>
                                                 </div>
                                             </div>
                                         </li>
@@ -39,16 +39,18 @@
                                             <div class="item-inner">
 
                                                 <div class="item-input">
-                                                    <input type="text" name="username" placeholder="Kullanıcı Adı">
+                                                    <input type="text" name="surname" {{placeholder surname}}>
                                                 </div>
                                             </div>
                                         </li>
+
+
 
                                         <li class="item-content">
                                             <div class="item-media"><i class="icon f7-icons">at_fill</i></div>
                                             <div class="item-inner">
                                                 <div class="item-input">
-                                                    <input type="text" name="email" placeholder="E-mail">
+                                                    <input type="email" name="email" {{placeholder email}}>
                                                 </div>
                                             </div>
                                         </li>
@@ -56,7 +58,7 @@
                                             <div class="item-media"><i class="icon f7-icons">lock_fill</i></div>
                                             <div class="item-inner">
                                                 <div class="item-input">
-                                                    <input type="password" name="password" placeholder="Parola">
+                                                    <input type="password" name="password" {{placeholder password}}>
                                                 </div>
                                             </div>
                                         </li>
@@ -65,7 +67,7 @@
                                             <div class="item-media"><i class="icon f7-icons">lock_fill</i></div>
                                             <div class="item-inner">
                                                 <div class="item-input">
-                                                    <input type="password" name="password2" placeholder="Parola Tekrar">
+                                                    <input type="password" name="repeatpassword" {{placeholder repeatpassword}}>
                                                 </div>
                                             </div>
                                         </li>
@@ -74,7 +76,7 @@
                                             <div class="item-media"><i class="icon f7-icons">calendar</i></div>
                                             <div class="item-inner">
                                                 <div class="item-input">
-                                                    <input type="text" readonly id="calendarBirthday" name="birthdate" placeholder="Doğum Tarihi">
+                                                    <input type="date" name="birthday" value="2014-04-30" {{placeholder birthday}}>
                                                 </div>
                                             </div>
                                         </li>
@@ -83,7 +85,11 @@
                                             <div class="item-media"><i class="icon f7-icons">persons</i></div>
                                             <div class="item-inner">
                                                 <div class="item-input">
-                                                    <input type="text" name="sex" placeholder="Cinsiyet">
+                                                    <select>
+                                                      <option value="" disabled selected>{{gender}}</option>
+                                                      <option value="1">{{male}}</option>
+                                                      <option value="2">{{female}}</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </li>

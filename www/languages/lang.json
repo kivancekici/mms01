@@ -24,6 +24,17 @@
                 "btnlogin": "Giriş",
                 "btnforgetpass": "Parolamı Unuttum",
                 "btnregister": "Yeni Üye Kayıt"
+            },
+            "account": {
+                "name": "Adı",
+                "surname": "Soyadı",
+                "email": "E-mail",
+                "password": "Parola",
+                "repeatpassword": "Parola (Tekrar)",
+                "birthday": "Doğum Günü",
+                "gender": "Cinsiyet",
+                "male": "Erkek",
+                "female": "Kadın"
             }
 
         },
