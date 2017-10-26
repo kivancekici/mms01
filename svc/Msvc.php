@@ -33,10 +33,13 @@ switch ($opr) {
         fLogin($decoded);
 		break;
 	case "checkAvaibleUser":
-        fcheckAvaibleUser($decoded);
+	fcheckAvaibleUser ($decoded);
 		break;
     case "register":
-        fRegisterUser($decoded);
+	fRegisterUser($decoded);
+		break;
+	case "getuserinfo":
+	fGetUserInfo($decoded);
 		break;
 	case "updateuserdata":
         fUpdateUserData($decoded);
@@ -116,6 +119,18 @@ function fcheckAvaibleUser($_jsondata) {
 
 function fRegisterUser($_jsondata) {
 	$_items = DbHelper::getInstance()->registerUser($_jsondata);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+
+
+
+function fGetUserInfo($_jsondata) {
+	$_items = DbHelper::getInstance()->getuserinfo($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {

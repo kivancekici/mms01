@@ -79,10 +79,10 @@ class DbHelper {
 		
 				if ($result->num_rows > 0) {
 		
-					$rwitem="OK";
+					$rwitem["status"]="OK";
 					return $rwitem;
 				}else {
-				$rwitem="NOK";
+				$rwitem["status"]="NOK";
 				return $rwitem;
 	
 				}
@@ -93,20 +93,21 @@ class DbHelper {
 		$_res=false;
 		$id_shop_group=1;
 		$id_shop=1;
-		$id_gender=1;
+		$id_gender=$_infos["id_gender"];
 		$id_default_group=3;
 		$id_lang=1;
 		$id_risk=0; 
 		$company=" ";
 		$siret=" ";
 		$ape=" ";
-		$firstname=" ";
-		$lastname=" ";
+		$firstname=$_infos["firstname"];
+		$lastname=$_infos["lastname"];
 		$email=$_infos["email"];	
-		$passwdOpen=time();
+		$passwdOpen=$_infos["passwdOpen"];
 		$passwd= md5($passwdOpen);
 		$last_passwd_gen="";
-		$birthday="";
+		$birthday=$_infos["birthday"];
+		$birthday=date("Y-m-d",strtotime($birthday));
 		$newsletter=0;
 		$ip_registration_newsletter="";
 		$newsletter_date_add="";		
@@ -115,17 +116,9 @@ class DbHelper {
 		$active=1;
 		$is_guest=0;
 		$deleted=0;
-		
-
-		
-
-
-
-
-
 
 		$sql = "INSERT INTO ps_customer (id_shop_group,id_shop,id_gender,id_default_group,id_lang,id_risk,company,siret,ape,firstname,lastname,email,passwd,last_passwd_gen,birthday,newsletter,ip_registration_newsletter,newsletter_date_add,optin,website,active,is_guest,deleted,date_add,date_upd) "
-		."VALUES($id_shop_group,$id_shop,$id_gender,$id_default_group,$id_lang,$id_risk,'$company','$siret','$ape','$firstname','$lastname','$email','$passwd',now(),now(),$newsletter,'$ip_registration_newsletter',now(),$optin,'$website',$active,$is_guest,$deleted,now(),now());";
+		."VALUES($id_shop_group,$id_shop,$id_gender,$id_default_group,$id_lang,$id_risk,'$company','$siret','$ape','$firstname','$lastname','$email','$passwd',now(),'$birthday',$newsletter,'$ip_registration_newsletter',now(),$optin,'$website',$active,$is_guest,$deleted,now(),now());";
 		$result = $this->conn->query($sql);
 
 		if ($result === TRUE) {
@@ -137,18 +130,97 @@ class DbHelper {
 		if($_res){
 		$rwitem=array();
 		$rwitem["status"]="OK";
-		$rwitem["pswd"]="$passwdOpen";
+		//$rwitem["pswd"]="$passwdOpen";
 		return $rwitem;
 		}else{
 		$rwitem=array();
 		$rwitem["status"]="NOK";
-		$rwitem["SQL"]="$sql";
+		//$rwitem["SQL"]="$sql";
 		return $rwitem;
 		}
 
 		
     }
 	
+
+
+	function getuserinfo($_infos) {
+	
+		
+		//$id_gender=$_infos["id_gender"];
+		//$company=$_infos["company"];
+		//$firstname=$_infos["firstname"];
+		//$lastname=$_infos["lastname"];
+		//$email=$_infos["email"];	
+		//$passwd= md5($_infos["passwd"]);
+		//$birthday=$_infos["birthday"];
+		//$newsletter=$_infos["newsletter"];		
+		//$optin=$_infos["optin"];
+		//$website=$_infos["website"];
+		//$date_upd=$_infos["date_upd"];
+		$id_customer=$_infos["id_customer"];
+
+		$sql ="SELECT id_gender,company,firstname,lastname,email,passwd,birthday,newsletter,optin,website FROM ps_customer WHERE id_customer=$id_customer";
+		
+		$result = $this->conn->query($sql);
+
+		$tmpuserinfo = mysqli_fetch_array($result , MYSQLI_ASSOC);
+
+
+
+		return $tmpuserinfo;
+		$this->conn->close();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -164,12 +236,12 @@ class DbHelper {
 		$birthday=$_infos["birthday"];
 		$newsletter=$_infos["newsletter"];		
 		$optin=$_infos["optin"];
-		$website=$_infos["website"];
-		$date_upd=$_infos["date_upd"];
+		$website=$_infos["website"]; 
+		//$date_upd=$_infos["date_upd"];
 		$id_customer=$_infos["id_customer"];
 		
 		
-		$sql = "UPDATE ps_customer SET id_gender=$id_gender,company='$company',firstname='$firstname',lastname='$lastname',email='$email',passwd='$passwd',birthday=$birthday,newsletter=$newsletter,optin=$optin,website='$website',date_upd=$date_upd WHERE id_customer=$id_customer";
+		$sql = "UPDATE ps_customer SET id_gender=$id_gender,company='$company',firstname='$firstname',lastname='$lastname',email='$email',passwd='$passwd',birthday=$birthday,newsletter=$newsletter,optin=$optin,website='$website',date_upd=now() WHERE id_customer=$id_customer";
         $result = $this->conn->query($sql);
 
         if ($result === TRUE) {
@@ -181,12 +253,12 @@ class DbHelper {
 		if($_res){
 			$rwitem=array();
 			$rwitem["status"]="OK";
-			$rwitem["pswd"]="$passwdOpen";
+			//$rwitem["pswd"]="$passwdOpen";
 			return $rwitem;
 		}else{
 			$rwitem=array();
 			$rwitem["status"]="NOK";
-			$rwitem["SQL"]="$sql";
+			//$rwitem["SQL"]="$sql";
 			return $rwitem;
 		}
 		
@@ -730,6 +802,7 @@ class DbHelper {
 		$keyword=$_infos2["keyword"];
 		$currency=$_infos2["currency"];
 		$langu=$_infos2["langu"];
+		
 		$sql = "SELECT id_product, name,description_short, description FROM  ps_product_lang WHERE id_lang = $langu AND (description LIKE '%$keyword%' OR description_short LIKE '%$keyword%'  OR name LIKE '%$keyword%') ";
 
 		$result = $this->conn->query($sql);
