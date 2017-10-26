@@ -194,7 +194,7 @@ $$(document).on('pageInit', function(e) {
     if (page.name === 'register') {
 
         var calendarDefault = myApp.calendar({
-            input: '#calendar-default',
+            input: '#calendar-default'
         });
 
         $$('.registerBtn').on('click', function() {
