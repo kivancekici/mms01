@@ -46,7 +46,8 @@
                 "gender": " Cinsiyet",
                 "male": " Erkek",
                 "female": " Kadın",
-                "pageTitle": "Kayıt Ekranı"
+                "pageTitle": "Kayıt Ekranı",
+                "btnName": "Kayıt Ol"
             }
 
         },
