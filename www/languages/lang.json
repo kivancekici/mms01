@@ -45,7 +45,8 @@
                 "birthday": "Doğum Günü",
                 "gender": " Cinsiyet",
                 "male": " Erkek",
-                "female": " Kadın"
+                "female": " Kadın",
+                "pageTitle": "Kayıt Ekranı"
             }
 
         },
