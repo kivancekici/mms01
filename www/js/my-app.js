@@ -32,6 +32,8 @@ var mainView = myApp.addView('.view-main', {
 
 });
 
+var anotherView = myApp.addView('.another-view');
+
 getLangJson();
 
 
