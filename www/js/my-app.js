@@ -192,12 +192,14 @@ $$(document).on('pageInit', function(e) {
 
     if (page.name === 'register') {
 
-        $$('#registerBtn').on('click', function() {
+        myApp.alert('Hello');
+
+        $$('.registerBtn').on('click', function() {
             var formData = myApp.formToData('#registerform');
             myApp.alert(JSON.stringify(formData));
         });
 
-        $$('#backBtn').on('click', function() {
+        $$('.backBtn').on('click', function() {
             loadPageWithLang('login');
         });
 
