@@ -212,7 +212,8 @@ $$(document).on('pageInit', function(e) {
 
         $$('.registerBtn').on('click', function() {
 
-            var formData = myApp.formToData('#my-form');
+            var myform = document.getElementById("my-form");
+            var formData = myApp.formToData(myform);
             myApp.alert(JSON.stringify(formData));
 
 
