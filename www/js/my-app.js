@@ -193,8 +193,19 @@ $$(document).on('pageInit', function(e) {
 
     if (page.name === 'register') {
 
+        var registerPageData = myApp.template7Data.languages[selectedLang].register;
+
         var calendarDefault = myApp.calendar({
             input: '#calendar-default'
+        });
+
+
+        var pickerGender = myApp.picker({
+            input: '#picker-gender',
+            cols: [{
+                textAlign: 'center',
+                values: [registerPageData.male, registerPageData.female]
+            }]
         });
 
         $$('.registerBtn').on('click', function() {

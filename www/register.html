@@ -77,11 +77,9 @@
                             <div class="item-media"><i class="icon f7-icons">persons</i></div>
                             <div class="item-inner">
                                 <div class="item-input">
-                                    <select required>
-                                                      <option value="" disabled selected>{{gender}}</option>
-                                                      <option value="1">{{male}}</option>
-                                                      <option value="2">{{female}}</option>
-                                   </select>
+
+                                    <input type="text" {{placeholder gender}} readonly id="picker-gender">
+
                                 </div>
                             </div>
                         </li>
