@@ -195,6 +195,7 @@ $$(document).on('pageInit', function(e) {
         myApp.alert('Hello');
 
         $$('.registerBtn').on('click', function() {
+            myApp.alert('sdfsd');
             var formData = myApp.formToData('#registerform');
             myApp.alert(JSON.stringify(formData));
         });
