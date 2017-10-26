@@ -192,9 +192,13 @@ $$(document).on('pageInit', function(e) {
 
     if (page.name === 'register') {
 
-        $$('.form-to-data').on('click', function() {
+        $$('#registerBtn').on('click', function() {
             var formData = myApp.formToData('#registerform');
-            alert(JSON.stringify(formData));
+            myApp.alert(JSON.stringify(formData));
+        });
+
+        $$('#backBtn').on('click', function() {
+            loadPageWithLang('login');
         });
 
     }
@@ -225,12 +229,6 @@ $$(document).on('pageInit', function(e) {
 
 });
 
-
-
-
-var calendarBirthday = myApp.calendar({
-    input: '#calendarBirthday',
-});
 
 var postCodeSearch = myApp.autocomplete({
     input: '#autocomplete-dropdown-ajax',
