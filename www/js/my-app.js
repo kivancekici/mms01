@@ -211,6 +211,11 @@ $$(document).on('pageInit', function(e) {
 
 
         $$('.registerBtn').on('click', function() {
+
+            var formData = myApp.formToData('#my-form');
+            myApp.alert(JSON.stringify(formData));
+
+
             var col = pickerGender.cols[0];
             myApp.alert(col.activeIndex);
         });
