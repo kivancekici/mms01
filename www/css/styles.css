@@ -18,6 +18,7 @@
     /* background-image: url("../images/baklava7bg.jpg"); */
     background-size: cover;
     background-position: center;
+    position: fixed !important;
 }
 
 .cntbottom {
