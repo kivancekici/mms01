@@ -209,8 +209,10 @@ $$(document).on('pageInit', function(e) {
             }]
         });
 
-        $$('.registerBtn').on('click', function() {
 
+        $$('.registerBtn').on('click', function() {
+            var col = pickerGender.cols[0];
+            myApp.alert(col.activeIndex);
         });
 
         $$('.backBtn').on('click', function() {
