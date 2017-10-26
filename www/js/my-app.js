@@ -34,6 +34,9 @@ var mainView = myApp.addView('.view-main', {
 
 var anotherView = myApp.addView('.another-view');
 
+
+mainView.params.linksView = '.another-view';
+
 getLangJson();
 
 
