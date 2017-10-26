@@ -47,7 +47,8 @@
                 "male": " Erkek",
                 "female": " Kadın",
                 "pageTitle": "Kayıt Ekranı",
-                "btnName": "Kayıt Ol"
+                "btnName": "Kayıt Ol",
+                "toolbarText": "Tamam"
             }
 
         },

@@ -202,6 +202,7 @@ $$(document).on('pageInit', function(e) {
 
         var pickerGender = myApp.picker({
             input: '#picker-gender',
+            toolbarCloseText: registerPageData.toolbarText,
             cols: [{
                 textAlign: 'center',
                 values: [registerPageData.male, registerPageData.female]
