@@ -125,6 +125,7 @@ $$('#accountItemBtn').on('click', function() {
 });
 
 
+
 // Option 2. Using one 'pageInit' event handler for all pages:
 $$(document).on('pageInit', function(e) {
     // Get page data from event data
@@ -192,12 +193,12 @@ $$(document).on('pageInit', function(e) {
 
     if (page.name === 'register') {
 
-        myApp.alert('Hello');
+        var calendarDefault = myApp.calendar({
+            input: '#calendar-default',
+        });
 
         $$('.registerBtn').on('click', function() {
-            myApp.alert('sdfsd');
-            var formData = myApp.formToData('#registerform');
-            myApp.alert(JSON.stringify(formData));
+
         });
 
         $$('.backBtn').on('click', function() {
