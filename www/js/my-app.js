@@ -213,8 +213,26 @@ $$(document).on('pageInit', function(e) {
         $$('.registerBtn').on('click', function() {
 
 
-            var formData = myApp.formToJSON('#my-form');
-            myApp.alert(JSON.stringify(formData));
+            var formData = myApp.formToJSON('#register-form');
+
+            var email = formData.email;
+
+            if (validateEmail(email)) {
+                var avaibleuser = checkAvaibleUser(email);
+
+                if (avaibleuser == "OK") {
+                    var response = mobileRegister(email);
+
+                    if (response != "NOK") {
+                        loadPageWithLang('main');
+                    }
+                } else {
+                    myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
+                }
+
+            } else {
+                myApp.alert('Geçerli Email Adresi Giriniz.', 'Uyarı');
+            }
 
 
             var col = pickerGender.cols[0];
