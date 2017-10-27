@@ -119,21 +119,18 @@ function checkAvaibleUser(email) {
 
 function getUserInfo(userId) {
 
-    myApp.alert(userId);
 
     var userdata = {
         'opr': 'getuserinfo',
         'id_customer': userId
     }
 
-    var result = restfulPostCall(registerdata);
-
-    myApp.alert(result);
+    var result = restfulPostCall(userdata);
 
 
     if (result != "Error") {
 
-        return JSON.stringify(result);
+        return result;
 
     } else {
         return "NOK"
