@@ -26,6 +26,7 @@
                 "btnregister": "Yeni Üye Kayıt"
             },
             "account": {
+                "panelTitle": "Hesabım",
                 "name": "Adı",
                 "surname": "Soyadı",
                 "email": "E-mail",
@@ -67,6 +68,7 @@
 
             },
             "main": {
+                "panelTitle": "Baklava7",
                 "btnname": "german",
                 "alert": "denemeAlertGerman"
             },
