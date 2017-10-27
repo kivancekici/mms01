@@ -231,43 +231,32 @@ $$(document).on('pageInit', function(e) {
             var repeatpassword = formData.repeatpassword;
             var birthday = formData.birthday;
 
-            if (email == "" || name == "" || surname == "" || pass == "" ||
-                repeatpassword == "" || birthday == "" || genderId != 0 || genderId != 1) {
-                myApp.alert('Lütfen Tüm Alanları Doldurunuz.', 'Uyarı');
-                myApp.alert(name);
-                myApp.alert(surname);
-                myApp.alert(pass);
-                myApp.alert(repeatpassword);
-                myApp.alert(email);
-                myApp.alert(birthday);
+            if (pass !== repeatpassword) {
+                myApp.alert('Parolalar Eşleşmedi, Lütfen Kontrol Ediniz', 'Uyarı');
             } else {
 
-                if (pass !== repeatpassword) {
-                    myApp.alert('Parolalar Eşleşmedi, Lütfen Kontrol Ediniz', 'Uyarı');
-                } else {
+                if (validateEmail(email)) {
+                    var avaibleuser = checkAvaibleUser(email);
 
-                    if (validateEmail(email)) {
-                        var avaibleuser = checkAvaibleUser(email);
-
-                        if (avaibleuser == "OK") {
-                            var response = mobileRegister(email, name, surname, pass, genderId, birthday);
+                    if (avaibleuser == "OK") {
+                        var response = mobileRegister(email, name, surname, pass, genderId, birthday);
 
 
-                            if (response != "NOK") {
-                                loadPageWithLang('main');
-                            }
-                        } else {
-                            myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
+                        if (response != "NOK") {
+                            loadPageWithLang('main');
                         }
-
                     } else {
-                        myApp.alert('Geçerli Email Adresi Giriniz.', 'Uyarı');
+                        myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
                     }
 
+                } else {
+                    myApp.alert('Geçerli Email Adresi Giriniz.', 'Uyarı');
                 }
 
-
             }
+
+
+
 
         });
 
