@@ -2,7 +2,6 @@
     "languages": {
         "tr": {
             "panel": {
-                "panelTitle": "Menü",
                 "orderItem": "Sipariş Ver",
                 "orderBoxItem": "Sipariş Sepetim",
                 "accountItem": "Hesabım",
