@@ -193,7 +193,7 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'account') {
-
+        myApp.alert('Accont Page');
         var userId = window.localStorage.getItem("customerId");
         var response = getUserInfo(userId);
         myApp.alert(response);
