@@ -218,7 +218,7 @@ $$(document).on('pageInit', function(e) {
         });
 
 
-        $$('.registerBtn').on('click', function() {
+        $$('#registerBtn').on('click', function() {
 
 
             var formData = myApp.formToJSON('#register-form');
