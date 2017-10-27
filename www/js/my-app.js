@@ -243,7 +243,7 @@ $$(document).on('pageInit', function(e) {
 
 
                         if (response != "NOK") {
-                            loadPageWithLang('main');
+                            loadPageWithLang('login');
                         }
                     } else {
                         myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
