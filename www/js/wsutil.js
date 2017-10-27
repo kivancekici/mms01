@@ -64,21 +64,25 @@ function mobileLogin(email, passwd) {
 
 }
 
-function mobileRegister(email) {
+function mobileRegister(email, name, surname, pass, genderId, birthday) {
 
     var registerdata = {
         'opr': 'register',
-        'email': email
+        'id_gender': genderId,
+        'firstname': name,
+        'lastname': surname,
+        'email': email,
+        'passwdOpen': pass,
+        'birthday': birthday
     }
 
     var result = restfulPostCall(registerdata);
 
-    myApp.alert(result.status);
 
     if (result != "Error") {
 
         if (result.status != "NOK") {
-            return result.pswd;
+            return "OK";
         } else {
             return "NOK";
         }

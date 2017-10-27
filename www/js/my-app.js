@@ -205,7 +205,7 @@ $$(document).on('pageInit', function(e) {
             toolbarCloseText: registerPageData.toolbarText,
             cols: [{
                 textAlign: 'center',
-                values: [registerPageData.male, registerPageData.female]
+                values: [registerPageData.female, registerPageData.male]
             }]
         });
 
@@ -214,29 +214,57 @@ $$(document).on('pageInit', function(e) {
 
 
             var formData = myApp.formToJSON('#register-form');
+            var col = pickerGender.cols[0];
+            var genderId;
 
-            var email = formData.email;
-
-            if (validateEmail(email)) {
-                var avaibleuser = checkAvaibleUser(email);
-
-                if (avaibleuser == "OK") {
-                    var response = mobileRegister(email);
-
-                    if (response != "NOK") {
-                        loadPageWithLang('main');
-                    }
-                } else {
-                    myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
-                }
-
+            if (col.activeIndex != 1) {
+                genderId = 0;
             } else {
-                myApp.alert('Geçerli Email Adresi Giriniz.', 'Uyarı');
+                genderId = 1;
             }
 
-
-            var col = pickerGender.cols[0];
+            var gendeId = col.activeIndex;
             myApp.alert(col.activeIndex);
+
+            var email = formData.email;
+            var name = formData.firstname;
+            var surname = formData.surname;
+            var pass = formData.password;
+            var repeatpassword = formData.repeatpassword;
+            var birthday = formData.birthday;
+
+            if (email == "" || name == "" || surname == "" || pass == "" ||
+                repeatpassword == "" || birthday == "" || genderId != 0 || genderId != 1) {
+                myApp.alert('Lütfen Tüm Alanları Doldurunuz.', 'Uyarı');
+            } else {
+
+                if (pass !== repeatpassword) {
+                    myApp.alert('Parolalar Eşleşmedi, Lütfen Kontrol Ediniz', 'Uyarı');
+                } else {
+
+                    if (validateEmail(email)) {
+                        var avaibleuser = checkAvaibleUser(email);
+
+                        if (avaibleuser == "OK") {
+                            var response = mobileRegister(email, name, surname, pass, genderId, birthday);
+
+
+                            if (response != "NOK") {
+                                loadPageWithLang('main');
+                            }
+                        } else {
+                            myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
+                        }
+
+                    } else {
+                        myApp.alert('Geçerli Email Adresi Giriniz.', 'Uyarı');
+                    }
+
+                }
+
+
+            }
+
         });
 
         $$('.backBtn').on('click', function() {
