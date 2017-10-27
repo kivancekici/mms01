@@ -127,6 +127,8 @@ function getUserInfo(userId) {
 
     var result = restfulPostCall(userdata);
 
+    myApp.alert(result);
+
 
     if (result != "Error") {
 
