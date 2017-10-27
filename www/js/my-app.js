@@ -223,8 +223,6 @@ $$(document).on('pageInit', function(e) {
                 genderId = 1;
             }
 
-            var gendeId = col.activeIndex;
-            myApp.alert(col.activeIndex);
 
             var email = formData.email;
             var name = formData.firstname;
@@ -236,6 +234,12 @@ $$(document).on('pageInit', function(e) {
             if (email == "" || name == "" || surname == "" || pass == "" ||
                 repeatpassword == "" || birthday == "" || genderId != 0 || genderId != 1) {
                 myApp.alert('Lütfen Tüm Alanları Doldurunuz.', 'Uyarı');
+                myApp.alert(name);
+                myApp.alert(surname);
+                myApp.alert(pass);
+                myApp.alert(repeatpassword);
+                myApp.alert(email);
+                myApp.alert(birthday);
             } else {
 
                 if (pass !== repeatpassword) {
