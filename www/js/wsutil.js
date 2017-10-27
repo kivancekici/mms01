@@ -116,3 +116,23 @@ function checkAvaibleUser(email) {
     }
 
 }
+
+function getUserInfo(userId) {
+
+    var userdata = {
+        'opr': 'getuserinfo',
+        'id_customer': userId
+    }
+
+    var result = restfulPostCall(registerdata);
+
+
+    if (result != "Error") {
+
+        return JSON.stringify(result);
+
+    } else {
+        return "NOK"
+    }
+
+}

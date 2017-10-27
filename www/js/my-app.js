@@ -141,6 +141,7 @@ $$(document).on('pageInit', function(e) {
 
             if (response != 'NOK') {
                 loadPageWithLang('main');
+                window.localStorage.setItem("customerId", response);
                 window.localStorage.setItem("isLogin", true);
             } else {
                 window.localStorage.setItem("isLogin", false);
@@ -189,6 +190,13 @@ $$(document).on('pageInit', function(e) {
 
     if (page.name === 'main') {
 
+    }
+
+    if (page.name === 'account') {
+
+        var userId = window.localStorage.getItem("customerId");
+        var response = getUserInfo(userId);
+        myApp.alert(response);
     }
 
     if (page.name === 'register') {
