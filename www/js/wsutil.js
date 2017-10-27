@@ -13,7 +13,7 @@ function restfulGetCall(restSuccess) {
 
 function restfulPostCall(sendData) {
 
-    myApp.showPreloader();
+    // myApp.showPreloader();
 
     var response;
 
@@ -25,11 +25,11 @@ function restfulPostCall(sendData) {
         contentType: 'application/json',
         dataType: 'json',
         success: function(data, status, xmlRequest) {
-            myApp.hidePreloader();
+            // myApp.hidePreloader();
             response = data;
         },
         error: function(request, status, error) {
-            myApp.hidePreloader();
+            // myApp.hidePreloader();
             response = "Error";
         }
 
