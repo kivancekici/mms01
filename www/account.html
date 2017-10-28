@@ -7,7 +7,82 @@
             </div>
         </div>
     </div>
-    <div div class="page-content page-bg-main lazy lazy-fadein" data-background="images/baklava7bg.jpg">
+    <div div class="page-content">
+
+        <form id="account-form" class="list-block">
+            <ul>
+                <li class="item-content">
+                    <div class="item-media"><i class="icon f7-icons">person</i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="text" name="firstname" {{placeholder firstname}}>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="item-content">
+                    <div class="item-media"><i class="icon f7-icons">person</i></div>
+                    <div class="item-inner">
+
+                        <div class="item-input">
+                            <input type="text" name="surname" {{placeholder surname}}>
+                        </div>
+                    </div>
+                </li>
+
+
+
+                <li class="item-content">
+                    <div class="item-media"><i class="icon f7-icons">email_fill</i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="email" name="email" {{placeholder email}}>
+                        </div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-media"><i class="icon f7-icons">lock_fill</i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="password" name="password" {{placeholder password}}>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="item-content">
+                    <div class="item-media"><i class="icon f7-icons">lock_fill</i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="password" name="repeatpassword" {{placeholder repeatpassword}}>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="item-content">
+                    <div class="item-media"><i class="icon f7-icons">calendar</i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="text" name="birthday" readonly id="calendar-default" {{placeholder birthday}}>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="item-content">
+                    <div class="item-media"><i class="icon f7-icons">persons</i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+
+                            <input type="text" name="gender" {{placeholder gender}} readonly id="picker-gender">
+
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </form>
+
+
+
         <div class="content-block">
 
             <div class="card">

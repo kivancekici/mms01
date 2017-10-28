@@ -19,7 +19,7 @@ var userLoggedIn = window.localStorage.getItem("isLogin");
 var selectedLang;
 
 
-var manufacturersList=null;
+var manufacturersList = null;
 
 if (langIsSeleted) {
     selectedLang = window.localStorage.getItem("lang");
@@ -237,8 +237,6 @@ $$(document).on('pageInit', function(e) {
                 genderId = 1;
             }
 
-            myApp.alert(genderId);
-
             var email = formData.email;
             var name = formData.firstname;
             var surname = formData.surname;
@@ -247,31 +245,38 @@ $$(document).on('pageInit', function(e) {
             var birthday = formData.birthday;
 
             if (name == '' || surname == '' || pass == '' || repeatpassword == '' || email == '') {
-                myApp.alert('Lütfen zorunlu alanları doldurunuz.');
+                myApp.alert('Lütfen zorunlu alanları doldurunuz.', 'Bilgi');
             } else {
-                if (pass !== repeatpassword) {
-                    myApp.alert('Parolalar Eşleşmedi, Lütfen Kontrol Ediniz', 'Uyarı');
+                if (pass.length < 5) {
+                    myApp.alert('Parola en az 5 karakterden oluşmalıdır.', 'Bilgi');
                 } else {
 
-                    if (validateEmail(email)) {
-                        var avaibleuser = checkAvaibleUser(email);
+                    if (pass !== repeatpassword) {
+                        myApp.alert('Parolalar Eşleşmedi, Lütfen Kontrol Ediniz', 'Bilgi');
+                    } else {
 
-                        if (avaibleuser == "OK") {
-                            var response = mobileRegister(email, name, surname, pass, genderId, birthday);
+                        if (validateEmail(email)) {
+                            var avaibleuser = checkAvaibleUser(email);
+
+                            if (avaibleuser == "OK") {
+                                var response = mobileRegister(email, name, surname, pass, genderId, birthday);
 
 
-                            if (response != "NOK") {
-                                loadPageWithLang('login');
+                                if (response != "NOK") {
+                                    loadPageWithLang('login');
+                                }
+                            } else {
+                                myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
                             }
+
                         } else {
-                            myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
+                            myApp.alert('Geçerli Email Adresi Giriniz.', 'Bilgi');
                         }
 
-                    } else {
-                        myApp.alert('Geçerli Email Adresi Giriniz.', 'Uyarı');
                     }
 
                 }
+
             }
 
 
@@ -308,12 +313,12 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'manufacturers') {
-        if(manufacturersList==null){
-            manufacturersList=getAllManufacturersList("");            
+        if (manufacturersList == null) {
+            manufacturersList = getAllManufacturersList("");
         }
 
         initListVirtualManufacturers();
-        listVirtualManufacturers.items=manufacturersList;
+        listVirtualManufacturers.items = manufacturersList;
         listVirtualManufacturers.update();
     }
 
