@@ -47,18 +47,18 @@ function initListVirtualSearchResult() {
                 "description": "",
                 "grossprice": "5.62",
                 "reducedprice": "5.62",
-                "imgdirectory ": "/img/p/2/0/20-home_default.jpg"
+                "imgdirectory": "/img/p/2/0/20-home_default.jpg"
             }
         ],
         height: 61,
         template: '<li>' +
         '<a href="#" class="item-link item-content">' +
         '<div class="item-media">' +
-        '<img src="http://baklava7.de/{{imgdirectory}}" class="lazy" width="80">' +
+        '<img src="http://baklava7.de{{imgdirectory}}" class="lazy" width="80">' +
         '</div>' +
         '<div class="item-inner">' +
         '<div class="item-title-row">' +
-        '<div class="item-title">{{name}}</div>' +
+        '<div class="item-title">{{name}}{{imgdirectory}}</div>' +
         '<div class="item-after">{{reducedprice}}</div>' +
         '</div>' +
         '<div class="item-subtitle">{{description_short}}</div>' +

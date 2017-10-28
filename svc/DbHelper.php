@@ -898,7 +898,7 @@ class DbHelper {
 	
 					}
 	
-					$resulttable[$rowcounter]['imgdirectory '] = $imgdirectory;
+					$resulttable[$rowcounter]['imgdirectory'] = $imgdirectory;
 	
 					$rowcounter = $rowcounter  + 1;
 				}
