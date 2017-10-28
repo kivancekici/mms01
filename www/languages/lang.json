@@ -16,7 +16,9 @@
             "main": {
                 "pageTitle": "Baklava7",
                 "btnname": "Adres Ekle",
-                "alert": "denemeAlertTurkish"
+                "alert": "denemeAlertTurkish",
+                "allmanufacturers":"Üreticiler",     
+                "catalogue":"Katalog"           
             },
             "login": {
                 "cardHeader": "Kullanıcı Girişi",
@@ -70,7 +72,9 @@
             "main": {
                 "panelTitle": "Baklava7",
                 "btnname": "german",
-                "alert": "denemeAlertGerman"
+                "alert": "denemeAlertGerman",
+                "allmanufacturers":"Hersteller",     
+                "catalogue":"Katalog"  
             },
             "login": {
                 "cardHeader": "Login",
