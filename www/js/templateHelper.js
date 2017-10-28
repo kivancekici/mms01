@@ -1,4 +1,4 @@
-function initListVirtualManufacturers(){
+function initListVirtualManufacturers() {
     listVirtualManufacturers = myApp.virtualList('.list-block.virtual-list', {
         items: [
             {
@@ -10,7 +10,7 @@ function initListVirtualManufacturers(){
                 "active": "1"
             }
         ],
-        height:61,
+        height: 61,
         template: '<li>' +
         '<a href="#" class="item-link item-content">' +
         '<div class="item-media">' +
@@ -29,3 +29,39 @@ function initListVirtualManufacturers(){
 }
 
 var listVirtualManufacturers;
+
+
+var listVirtualSearchResult
+
+
+function initListVirtualSearchResult() {
+    listVirtualSearchResult = myApp.virtualList('.list-block.virtual-list', {
+        items: [
+
+            {
+                "id_product": "1",
+                "name": "Pistazien-Baklava mit Stevia",
+                "description_short": "",
+                "description": "",
+                "grossprice": "5.62",
+                "reducedprice": "5.62",
+                "imgdirectory ": "/img/p/2/0/20-home_default.jpg"
+            }
+        ],
+        height: 61,
+        template: '<li>' +
+        '<a href="#" class="item-link item-content">' +
+        '<div class="item-media">' +
+        //'<img src="http://baklava7.de/img/tmp/manufacturer_mini_{{id_manufacturer}}_1.jpg" class="lazy" width="80">' +
+        '<img src="http://baklava7.de/img/m/{{id_manufacturer}}-field_manufacture.jpg" class="lazy" width="80">' +
+        '</div>' +
+        '<div class="item-inner">' +
+        '<div class="item-title-row">' +
+        '<div class="item-title">{{name}}</div>' +
+        '<div class="item-after">lorem ipsum dolor sit amet...</div>' +
+        '</div>' +
+        '</div>' +
+        '</a>' +
+        '</li>'
+    });
+}

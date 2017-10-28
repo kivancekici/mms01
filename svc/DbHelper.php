@@ -871,7 +871,7 @@ class DbHelper {
 					}
 	
 	
-					$imgdirectory="/"."prestashop"."/"."img"."/"."p";
+					$imgdirectory="/"."img"."/"."p";
 	
 					$sql ="SELECT id_image FROM ps_image WHERE id_product = $row[id_product] AND cover = 1";
 	
