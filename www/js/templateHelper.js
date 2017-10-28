@@ -10,7 +10,7 @@ function initListVirtualManufacturers(){
                 "active": "1"
             }
         ],
-        height:44,
+        height:77,
         template: '<li>' +
         '<a href="#" class="item-link item-content">' +
         '<div class="item-media">' +
@@ -20,7 +20,7 @@ function initListVirtualManufacturers(){
         '<div class="item-inner">' +
         '<div class="item-title-row">' +
         '<div class="item-title">{{name}}</div>' +
-        '<div class="item-after">lorem ipsum</div>' +
+        '<div class="item-after">lorem ipsum dolor sit amet...</div>' +
         '</div>' +
         '</div>' +
         '</a>' +
