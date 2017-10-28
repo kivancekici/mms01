@@ -71,7 +71,7 @@
             },
             "main": {
                 "panelTitle": "Baklava7",
-                "btnname": "german",
+                "btnname": "Addresse Hinzufügen",
                 "alert": "denemeAlertGerman",
                 "allmanufacturers":"Hersteller",     
                 "catalogue":"Katalog"  
