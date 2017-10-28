@@ -1,5 +1,7 @@
+var listVirtualManufacturers;
+
 function initListVirtualManufacturers() {
-    listVirtualManufacturers = myApp.virtualList('.list-block.virtual-list', {
+    listVirtualManufacturers = myApp.virtualList('.lstmanufacturers', {
         items: [
             {
                 "status": "OK",
@@ -28,14 +30,14 @@ function initListVirtualManufacturers() {
     });
 }
 
-var listVirtualManufacturers;
 
 
-var listVirtualSearchResult
+
+var listVirtualSearchResult;
 
 
 function initListVirtualSearchResult() {
-    listVirtualSearchResult = myApp.virtualList('.list-block.virtual-list', {
+    listVirtualSearchResult = myApp.virtualList('.lstsearchresult', {
         items: [
 
             {
@@ -52,14 +54,15 @@ function initListVirtualSearchResult() {
         template: '<li>' +
         '<a href="#" class="item-link item-content">' +
         '<div class="item-media">' +
-        //'<img src="http://baklava7.de/img/tmp/manufacturer_mini_{{id_manufacturer}}_1.jpg" class="lazy" width="80">' +
-        '<img src="http://baklava7.de/img/m/{{id_manufacturer}}-field_manufacture.jpg" class="lazy" width="80">' +
+        '<img src="http://baklava7.de/{{imgdirectory}}" class="lazy" width="80">' +
         '</div>' +
         '<div class="item-inner">' +
         '<div class="item-title-row">' +
         '<div class="item-title">{{name}}</div>' +
-        '<div class="item-after">lorem ipsum dolor sit amet...</div>' +
+        '<div class="item-after">{{reducedprice}}</div>' +
         '</div>' +
+        '<div class="item-subtitle">{{description_short}}</div>' +
+        '<div class="item-text">{{description}}</div>' +
         '</div>' +
         '</a>' +
         '</li>'

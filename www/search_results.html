@@ -1,16 +1,18 @@
 <div data-page="search_results" class="page navbar-fixed">
+
     <div class="navbar bg-orange  border-orange color-white">
         <div class="navbar-inner">
-            <div class="center sliding color-white">Arama Sonuçları</div>
-            <div class="right">
-                <a href="#" class="link icon-only open-panel"><i class="f7-icons color-white">bars</i></a>
+            <div class="left">
+                <a href="#" class="link icon-only backBtn">
+                    <i class="f7-icons color-white">chevron_left</i>
+                </a>
             </div>
+            <div class="center">{{searchresult}}</div>
         </div>
     </div>
-    <!-- Scrollable page content -->
     <div class="page-content bg-white theme-orange">
-        <div class="content-block">
-
+        <div class="lstsearchresult list-block virtual-list theme-orange">
+            <!-- keep it empty -->
         </div>
     </div>
 </div>

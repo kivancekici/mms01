@@ -20,6 +20,8 @@ var selectedLang;
 
 
 var manufacturersList=null;
+var searchResultList=null;
+var searchKeyWord="";
 
 if (langIsSeleted) {
     selectedLang = window.localStorage.getItem("lang");
@@ -152,7 +154,7 @@ $$(document).on('pageInit', function(e) {
         });
 
         $$('.btnForgetPassword').on('click', function() {
-            myApp.alert('Unuttum bişeyleri');
+            //myApp.alert('Unuttum bişeyleri');
         });
 
 
@@ -306,6 +308,16 @@ $$(document).on('pageInit', function(e) {
         initListVirtualManufacturers();
         listVirtualManufacturers.items=manufacturersList;
         listVirtualManufacturers.update();
+    }
+
+    if (page.name === 'search_results') {
+        if(searchResultList==null){
+            searchResultList=getSearchResultList(searchKeyWord,selectedLang);            
+        }
+
+        initListVirtualSearchResult();
+        listVirtualSearchResult.items=searchResultList;
+        listVirtualSearchResult.update();
     }
 
 
