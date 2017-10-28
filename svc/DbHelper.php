@@ -840,9 +840,8 @@ class DbHelper {
 	
 					$resulttable[$rowcounter]['description'] = str_replace("</p>","",str_replace("<p>","",$resulttable[$rowcounter]['description']));
 					
-					//$resulttable[$rowcounter] = $resulttable[$rowcounter] + $tmpsqltable;
+					$resulttable[$rowcounter]['grossprice'] = $tmpsqltable['grossprice'];
 	
-					array_push($resulttable[$rowcounter], $tmpsqltable);
 
 					$sql ="SELECT reduction,reduction_type FROM ps_specific_price WHERE id_product = $row[id_product]";
 					$resultreduction = $this->conn->query($sql);
