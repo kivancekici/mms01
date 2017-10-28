@@ -2,11 +2,11 @@
     "languages": {
         "tr": {
             "panel": {
-                "orderItem": "Sipariş Ver",
-                "orderBoxItem": "Sipariş Sepetim",
+                "orderItem": " Sipariş Ver",
+                "orderBoxItem": " Sipariş Sepetim",
                 "accountItem": "Hesabım",
-                "addressItem": "Adreslerim",
-                "myOrdersItem": "Siparişlerim",
+                "addressItem": " Adreslerim",
+                "myOrdersItem": " Siparişlerim",
                 "workItem": "Nasıl Çalışır?",
                 "helpItem": "Yardım",
                 "infoItem": "Hakkında",
