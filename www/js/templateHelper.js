@@ -40,15 +40,6 @@ function initListVirtualSearchResult() {
     listVirtualSearchResult = myApp.virtualList('.lstsearchresult', {
         items: [
 
-            {
-                "id_product": "1",
-                "name": "Pistazien-Baklava mit Stevia",
-                "description_short": "",
-                "description": "",
-                "grossprice": "5.62",
-                "reducedprice": "5.62",
-                "imgdirectory": "/img/p/2/0/20-home_default.jpg"
-            }
         ],
         height: 61,
         template: '<li>' +

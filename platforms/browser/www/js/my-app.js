@@ -129,6 +129,16 @@ $$('#accountItemBtn').on('click', function() {
 });
 
 
+$$('#btnLogout').on('click', function() {
+    userLoggedIn=false;
+    window.localStorage.setItem("isLogin", false);
+    window.localStorage.setItem("customerId", "0");
+    window.localStorage.setItem("langIsSelected",false);
+    langIsSeleted=false;
+    checkLangStatus();
+
+});
+
 
 // Option 2. Using one 'pageInit' event handler for all pages:
 $$(document).on('pageInit', function(e) {
