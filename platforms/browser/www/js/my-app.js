@@ -8,7 +8,8 @@ Template7.registerHelper('placeholder', function(plchldrContent) {
 var myApp = new Framework7({
     swipeBackPage: false,
     swipePanelOnlyClose: true,
-    template7Pages: true
+    template7Pages: true,
+    pushState: true
 });
 
 var $$ = Dom7;
