@@ -1,7 +1,20 @@
 {
     "languages": {
         "tr": {
+            "panel": {
+                "orderItem": " Sipariş Ver",
+                "orderBoxItem": " Sipariş Sepetim",
+                "accountItem": "Hesabım",
+                "addressItem": " Adreslerim",
+                "myOrdersItem": " Siparişlerim",
+                "workItem": "Nasıl Çalışır?",
+                "helpItem": "Yardım",
+                "infoItem": "Hakkında",
+                "messageItem": "Mesaj Kutusu",
+                "logoutItem": "Çıkış"
+            },
             "main": {
+                "pageTitle": "Baklava7",
                 "btnname": "Adres Ekle",
                 "alert": "denemeAlertTurkish"
             },
@@ -11,11 +24,51 @@
                 "btnlogin": "Giriş",
                 "btnforgetpass": "Parolamı Unuttum",
                 "btnregister": "Yeni Üye Kayıt"
+            },
+            "account": {
+                "panelTitle": "Hesabım",
+                "name": "Adı",
+                "surname": "Soyadı",
+                "email": "E-mail",
+                "password": " Parola",
+                "repeatpassword": " Parola (Tekrar)",
+                "birthday": "Doğum Günü",
+                "gender": " Cinsiyet",
+                "male": " Erkek",
+                "female": " Kadın"
+            },
+            "register": {
+                "firstname": "Ad",
+                "surname": "Soyad",
+                "email": "E-mail",
+                "password": " Parola",
+                "repeatpassword": " Parola (Onay)",
+                "birthday": "Doğum Günü",
+                "gender": " Cinsiyet",
+                "male": " Erkek",
+                "female": " Kadın",
+                "pageTitle": "Kayıt Ekranı",
+                "btnName": "Kaydet",
+                "toolbarText": "Tamam"
             }
-
         },
         "de": {
+            "panel": {
+                "panelTitle": "Menu",
+                "orderItem": "Bestellen",
+                "orderBoxItem": "Warenkorb",
+                "accountItem": "Mein Konto",
+                "addressItem": "Mein Addresse",
+                "myOrdersItem": "Bestellungen",
+                "workItem": "Wie es Funktioniert",
+                "helpItem": "Hilfe",
+                "infoItem": "Impressum",
+                "messageItem": "Message Box",
+                "logoutItem": "Ausloggen"
+
+            },
             "main": {
+                "panelTitle": "Baklava7",
                 "btnname": "german",
                 "alert": "denemeAlertGerman"
             },
@@ -28,7 +81,5 @@
             }
 
         }
-    },
-
-    "panelTitle":"panel title"
+    }
 }

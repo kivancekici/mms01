@@ -8,8 +8,7 @@ Template7.registerHelper('placeholder', function(plchldrContent) {
 var myApp = new Framework7({
     swipeBackPage: false,
     swipePanelOnlyClose: true,
-    template7Pages: true,
-    precompileTemplates: true //enable Template7 rendering for pages
+    template7Pages: true
 });
 
 var $$ = Dom7;
@@ -18,6 +17,7 @@ var $$ = Dom7;
 var langIsSeleted = window.localStorage.getItem("langIsSelected");
 var userLoggedIn = window.localStorage.getItem("isLogin");
 var selectedLang;
+
 
 var manufacturersList=null;
 
@@ -34,12 +34,17 @@ var mainView = myApp.addView('.view-main', {
 });
 
 
+
+getLangJson();
+
+
+
 setTimeout(function() {
 
-    getLangJson();
     checkLangStatus();
 
 }, 3000);
+
 
 
 function checkLangStatus() {
@@ -50,8 +55,21 @@ function checkLangStatus() {
     }
 }
 
-function changePanelLanguage(){
- 
+function changePanelLanguage() {
+
+    var panelData = myApp.template7Data.languages[selectedLang].panel;
+
+    $$('#panelTitle').text(panelData.panelTitle);
+    $$('#orderItem').text(panelData.orderItem);
+    $$('#orderBoxItem').text(panelData.orderBoxItem);
+    $$('#accountItem').text(panelData.accountItem);
+    $$('#addressItem').text(panelData.addressItem);
+    $$('#myOrdersItem').text(panelData.myOrdersItem);
+    $$('#workItem').text(panelData.workItem);
+    $$('#helpItem').text(panelData.helpItem);
+    $$('#infoItem').text(panelData.infoItem);
+    $$('#messageItem').text(panelData.messageItem);
+    $$('#logoutItem').text(panelData.logoutItem);
 }
 
 
@@ -81,9 +99,15 @@ function checkLoginStatus() {
 
 }
 
+function validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
 function getLangJson() {
     $$.getJSON('./languages/lang.json', function(data) {
         myApp.template7Data.languages = data.languages;
+        changePanelLanguage();
     });
 }
 
@@ -93,6 +117,13 @@ $$(document).on('deviceready', function() {
     console.log("Device is ready!");
 });
 
+$$('#orderItemBtn').on('click', function() {
+    loadPageWithLang('main');
+});
+
+$$('#accountItemBtn').on('click', function() {
+    loadPageWithLang('account');
+});
 
 
 
@@ -111,6 +142,7 @@ $$(document).on('pageInit', function(e) {
 
             if (response != 'NOK') {
                 loadPageWithLang('main');
+                window.localStorage.setItem("customerId", response);
                 window.localStorage.setItem("isLogin", true);
             } else {
                 window.localStorage.setItem("isLogin", false);
@@ -125,22 +157,125 @@ $$(document).on('pageInit', function(e) {
 
 
         $$('.btnRegister').on('click', function() {
+
+            loadPageWithLang('register');
+            /*
             myApp.prompt('Lütfen E-mail Adresini Giriniz', 'Kayıt Ekranı', function(value) {
 
                 var email = value;
-                var response = mobileRegister(email);
 
-                if (response != "NOK") {
-                    loadPageWithLang('main');
+                if (validateEmail(email)) {
+                    var avaibleuser = checkAvaibleUser(email);
+
+                    if (avaibleuser == "OK") {
+                        var response = mobileRegister(email);
+
+                        if (response != "NOK") {
+                            loadPageWithLang('main');
+                        }
+                    } else {
+                        myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
+                    }
+
+                } else {
+                    myApp.alert('Geçerli Email Adresi Giriniz.', 'Uyarı');
                 }
 
+
+
+
             });
+            */
         });
     }
 
     if (page.name === 'main') {
 
     }
+
+    if (page.name === 'account') {
+        var userId = window.localStorage.getItem("customerId");
+        var response = getUserInfo(userId);
+        myApp.formFromJSON('#account-form', JSON.stringify(response));
+        myApp.alert(response);
+    }
+
+    if (page.name === 'register') {
+
+        var registerPageData = myApp.template7Data.languages[selectedLang].register;
+
+        var calendarDefault = myApp.calendar({
+            input: '#calendar-default'
+        });
+
+
+        var pickerGender = myApp.picker({
+            input: '#picker-gender',
+            toolbarCloseText: registerPageData.toolbarText,
+            cols: [{
+                textAlign: 'center',
+                values: [registerPageData.female, registerPageData.male]
+            }]
+        });
+
+
+        $$('.registerBtn').on('click', function() {
+
+
+            var formData = myApp.formToJSON('#register-form');
+            var col = pickerGender.cols[0];
+            var genderId;
+
+            if (col.activeIndex != 1) {
+                genderId = 0;
+            } else {
+                genderId = 1;
+            }
+
+
+            var email = formData.email;
+            var name = formData.firstname;
+            var surname = formData.surname;
+            var pass = formData.password;
+            var repeatpassword = formData.repeatpassword;
+            var birthday = formData.birthday;
+
+            if (pass !== repeatpassword) {
+                myApp.alert('Parolalar Eşleşmedi, Lütfen Kontrol Ediniz', 'Uyarı');
+            } else {
+
+                if (validateEmail(email)) {
+                    var avaibleuser = checkAvaibleUser(email);
+
+                    if (avaibleuser == "OK") {
+                        var response = mobileRegister(email, name, surname, pass, genderId, birthday);
+
+
+                        if (response != "NOK") {
+                            loadPageWithLang('login');
+                        }
+                    } else {
+                        myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
+                    }
+
+                } else {
+                    myApp.alert('Geçerli Email Adresi Giriniz.', 'Uyarı');
+                }
+
+            }
+
+
+
+
+        });
+
+        $$('.backBtn').on('click', function() {
+            loadPageWithLang('login');
+        });
+
+    }
+
+
 
     if (page.name === 'language') {
 
@@ -150,6 +285,7 @@ $$(document).on('pageInit', function(e) {
             window.localStorage.setItem("lang", "tr");
             selectedLang = "tr";
             checkLoginStatus();
+            changePanelLanguage();
         });
 
         $$('.btnLangGer').on('click', function() {
@@ -157,6 +293,7 @@ $$(document).on('pageInit', function(e) {
             window.localStorage.setItem("lang", "de");
             selectedLang = "de";
             checkLoginStatus();
+            changePanelLanguage();
         });
 
     }
@@ -174,12 +311,6 @@ $$(document).on('pageInit', function(e) {
 
 });
 
-
-
-
-var calendarBirthday = myApp.calendar({
-    input: '#calendarBirthday',
-});
 
 var postCodeSearch = myApp.autocomplete({
     input: '#autocomplete-dropdown-ajax',
