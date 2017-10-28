@@ -886,9 +886,6 @@ class DbHelper {
 	
 						while($imgcounter < STRLEN($tmpstring))
 						{
-	
-							
-	
 							$imgdirectory .=  "/".SUBSTR($tmpstring ,$imgcounter,1);
 							
 						
