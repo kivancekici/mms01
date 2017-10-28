@@ -82,6 +82,32 @@
                 "btnlogin": "Einloggen",
                 "btnforgetpass": "Passwort Vergessen",
                 "btnregister": "Registrierung"
+            },
+            "account": {
+                "panelTitle": "Mein Konto",
+                "name": "Name",
+                "surname": "Nachname",
+                "email": "E-mail",
+                "password": " Passwort",
+                "repeatpassword": " Passwort (Wieder)",
+                "birthday": "Geburtstag",
+                "gender": " Geschlecht",
+                "male": " Herr",
+                "female": " Frau"
+            },
+            "register": {
+                "firstname": "Name",
+                "surname": "Nachname",
+                "email": "E-mail",
+                "password": " Passwort",
+                "repeatpassword": " Passwort (Wieder)",
+                "birthday": "Geburtstag",
+                "gender": " Geschlecht",
+                "male": " Herr",
+                "female": " Frau",
+                "pageTitle": "Neu Benutzer",
+                "btnName": "Speichern",
+                "toolbarText": "OK"
             }
 
         }
