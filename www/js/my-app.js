@@ -225,12 +225,18 @@ $$(document).on('pageInit', function(e) {
             var col = pickerGender.cols[0];
             var genderId;
 
-            if (col.activeIndex != 1) {
-                genderId = 0;
-            } else {
+            var gender = formData.gender;
+
+
+            if (gender != '' && col.activeIndex != 1) {
+                genderId = 2;
+            }
+
+            if (col.activeIndex == 1) {
                 genderId = 1;
             }
 
+            myApp.alert(genderId);
 
             var email = formData.email;
             var name = formData.firstname;
@@ -239,30 +245,33 @@ $$(document).on('pageInit', function(e) {
             var repeatpassword = formData.repeatpassword;
             var birthday = formData.birthday;
 
-            if (pass !== repeatpassword) {
-                myApp.alert('Parolalar Eşleşmedi, Lütfen Kontrol Ediniz', 'Uyarı');
+            if (name == '' || surname == '' || pass == '' || repeatpassword == '' || email == '') {
+                myApp.alert('Lütfen zorunlu alanları doldurunuz.');
             } else {
+                if (pass !== repeatpassword) {
+                    myApp.alert('Parolalar Eşleşmedi, Lütfen Kontrol Ediniz', 'Uyarı');
+                } else {
 
-                if (validateEmail(email)) {
-                    var avaibleuser = checkAvaibleUser(email);
+                    if (validateEmail(email)) {
+                        var avaibleuser = checkAvaibleUser(email);
 
-                    if (avaibleuser == "OK") {
-                        var response = mobileRegister(email, name, surname, pass, genderId, birthday);
+                        if (avaibleuser == "OK") {
+                            var response = mobileRegister(email, name, surname, pass, genderId, birthday);
 
 
-                        if (response != "NOK") {
-                            loadPageWithLang('login');
+                            if (response != "NOK") {
+                                loadPageWithLang('login');
+                            }
+                        } else {
+                            myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
                         }
+
                     } else {
-                        myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
+                        myApp.alert('Geçerli Email Adresi Giriniz.', 'Uyarı');
                     }
 
-                } else {
-                    myApp.alert('Geçerli Email Adresi Giriniz.', 'Uyarı');
                 }
-
             }
-
 
 
 
