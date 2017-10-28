@@ -13,7 +13,7 @@ function restfulGetCall(restSuccess) {
 
 function restfulPostCall(sendData) {
 
-    myApp.showPreloader();
+    //  myApp.showPreloader();
 
     var response;
 
@@ -25,11 +25,11 @@ function restfulPostCall(sendData) {
         contentType: 'application/json',
         dataType: 'json',
         success: function(data, status, xmlRequest) {
-            myApp.hidePreloader();
+            //        myApp.hidePreloader();
             response = data;
         },
         error: function(request, status, error) {
-            myApp.hidePreloader();
+            //      myApp.hidePreloader();
             response = "Error";
         }
 
@@ -138,28 +138,28 @@ function getUserInfo(userId) {
         return "NOK"
     }
 
-    
+
 }
 
 function getAllManufacturersList(manufacturer) {
-    
-        var searchData = {
-            'opr': 'manufacturers',
-            'manufacturer': manufacturer
-        }
-    
-        var result = restfulPostCall(searchData);
-       
-        if (result != "Error") {
-    
-            if (result.status != "NOK") {
-                return result;
-            } else {
-                return "NOK";
-            }
-    
+
+    var searchData = {
+        'opr': 'manufacturers',
+        'manufacturer': manufacturer
+    }
+
+    var result = restfulPostCall(searchData);
+
+    if (result != "Error") {
+
+        if (result.status != "NOK") {
+            return result;
         } else {
-            return "NOK"
+            return "NOK";
         }
-    
+
+    } else {
+        return "NOK"
+    }
+
 }
