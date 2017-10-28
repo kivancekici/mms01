@@ -1,53 +1,90 @@
-var userLoggedIn = window.localStorage.getItem("isLogin");
+Template7.registerHelper('placeholder', function(plchldrContent) {
+    var ret = 'placeholder="' + plchldrContent + '"';
+    return ret;
+});
 
 
 // Initialize app
 var myApp = new Framework7({
-
-    //swipePanel: 'left',
     swipeBackPage: false,
     swipePanelOnlyClose: true,
-    precompileTemplates: true, //
-    template7Pages: true
-
+    template7Pages: true,
+    precompileTemplates: true //enable Template7 rendering for pages
 });
 
-
-
-// If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
+
+
+var langIsSeleted = window.localStorage.getItem("langIsSelected");
+var userLoggedIn = window.localStorage.getItem("isLogin");
+var selectedLang;
+
+var manufacturersList=null;
+
+if (langIsSeleted) {
+    selectedLang = window.localStorage.getItem("lang");
+} else {
+    selectedLang = "tr"; // Set turkish to default language
+}
 
 
 // Add view
 var mainView = myApp.addView('.view-main', {
 
-
 });
 
 
-
 setTimeout(function() {
-    mainView.router.loadPage({ url: 'language.html', ignoreCache: true });
+
+    getLangJson();
+    checkLangStatus();
+
 }, 3000);
 
-function checkLogin() {
 
+function checkLangStatus() {
+    if (langIsSeleted) {
+        checkLoginStatus();
+    } else {
+        mainView.router.loadPage({ url: 'language.html', ignoreCache: true });
+    }
+}
+
+function changePanelLanguage(){
+ 
+}
+
+
+function loadPageWithLang(pageName) {
+    var cntxName = 'languages.' + selectedLang + '.' + pageName;
+    var pgUrl = pageName + '.html';
+
+    mainView.router.load({
+        url: pgUrl,
+        contextName: cntxName
+    });
+}
+
+function checkLoginStatus() {
 
     try {
         if (userLoggedIn) {
+            loadPageWithLang('main');
 
-            //mainView.showNavbar(false);
-            mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
-            //mainView.router.load({ template: mainTemplate });
 
         } else {
-
-            mainView.router.loadPage({ url: 'login.html', ignoreCache: true });
+            loadPageWithLang('login');
         }
     } catch (e) {
         myApp.alert(e);
     }
 
+}
+
+function getLangJson() {
+    $$.getJSON('./languages/lang.json', function(data) {
+        myApp.template7Data.languages = data.languages;
+    });
 }
 
 
@@ -70,19 +107,14 @@ $$(document).on('pageInit', function(e) {
         $$('.btnLogin').on('click', function() {
             var email = $$('#txtEmail').val();
             var pass = $$('#txtPassword').val();
-
             var response = mobileLogin(email, pass);
-            
+
             if (response != 'NOK') {
-
-                mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
+                loadPageWithLang('main');
                 window.localStorage.setItem("isLogin", true);
-                window.localStorage.setItem("userEmail", email);
-                window.localStorage.setItem("userPass", pass);
-
             } else {
-                myApp.alert(response);
-                //mainView.router.loadPage({ url: 'index.html', ignoreCache: true });
+                window.localStorage.setItem("isLogin", false);
+
             }
 
         });
@@ -94,12 +126,12 @@ $$(document).on('pageInit', function(e) {
 
         $$('.btnRegister').on('click', function() {
             myApp.prompt('Lütfen E-mail Adresini Giriniz', 'Kayıt Ekranı', function(value) {
-                var email = value;
 
+                var email = value;
                 var response = mobileRegister(email);
 
                 if (response != "NOK") {
-                    mainView.router.loadPage({ url: 'main.html', ignoreCache: true });
+                    loadPageWithLang('main');
                 }
 
             });
@@ -111,18 +143,32 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'language') {
+
         $$('.btnLangTr').on('click', function() {
-            //myApp.alert('Türkçe');
-            checkLogin();
+
+            window.localStorage.setItem("langIsSelected", true);
+            window.localStorage.setItem("lang", "tr");
+            selectedLang = "tr";
+            checkLoginStatus();
         });
 
         $$('.btnLangGer').on('click', function() {
-            //myApp.alert('German');
-            checkLogin();
-
+            window.localStorage.setItem("langIsSelected", true);
+            window.localStorage.setItem("lang", "de");
+            selectedLang = "de";
+            checkLoginStatus();
         });
 
+    }
 
+    if (page.name === 'manufacturers') {
+        if(manufacturersList==null){
+            manufacturersList=getAllManufacturersList("");            
+        }
+
+        initListVirtualManufacturers();
+        listVirtualManufacturers.items=manufacturersList;
+        listVirtualManufacturers.update();
     }
 
 

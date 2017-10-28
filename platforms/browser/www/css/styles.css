@@ -15,11 +15,10 @@
 }
 
 .page-bg-main {
-    background-image: url("../images/baklava7bg.jpg");
+    /* background-image: url("../images/baklava7bg.jpg"); */
     background-size: cover;
     background-position: center;
 }
-
 
 .cntbottom {
     position: absolute;
@@ -75,7 +74,9 @@
     height: 80px!important;
 }
 
+
 /*Askin Başla*/
+
 .splashindicator {
     text-align: center;
     padding: 5px;
@@ -86,5 +87,6 @@
     background-size: cover;
     background-position: center;
 }
+
 
 /*Askin Bitir*/

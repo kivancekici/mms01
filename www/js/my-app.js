@@ -19,6 +19,7 @@ var userLoggedIn = window.localStorage.getItem("isLogin");
 var selectedLang;
 
 
+var manufacturersList=null;
 
 if (langIsSeleted) {
     selectedLang = window.localStorage.getItem("lang");
@@ -295,6 +296,16 @@ $$(document).on('pageInit', function(e) {
             changePanelLanguage();
         });
 
+    }
+
+    if (page.name === 'manufacturers') {
+        if(manufacturersList==null){
+            manufacturersList=getAllManufacturersList("");            
+        }
+
+        initListVirtualManufacturers();
+        listVirtualManufacturers.items=manufacturersList;
+        listVirtualManufacturers.update();
     }
 
 
