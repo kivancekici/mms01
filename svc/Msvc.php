@@ -267,9 +267,7 @@ function fGetManufacturers($_jsondata) {
 }
 
 function fGetManufacturersMenu($_jsondata) {
-	//alanları ekle ve dbhelper methodunu yaz
-	$email=$_jsondata["email"];
-	$_items = DbHelper::getInstance()->getManufacturersMenu($email);
+	$_items = DbHelper::getInstance()->getManufacturersMenu($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
@@ -279,7 +277,6 @@ function fGetManufacturersMenu($_jsondata) {
 
 
 function fGetHpProductsList($_jsondata) {
-	//alanları ekle ve dbhelper methodunu yaz
 	$_items = DbHelper::getInstance()->getHpProductsList($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
@@ -290,9 +287,7 @@ function fGetHpProductsList($_jsondata) {
 
 
 function fPlaceOrder($_jsondata) {
-	//alanları ekle ve dbhelper methodunu yaz
-	$email=$_jsondata["email"];
-	$_items = DbHelper::getInstance()->placeOrder($email);
+	$_items = DbHelper::getInstance()->placeOrder($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
