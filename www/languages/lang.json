@@ -35,7 +35,9 @@
                 "birthday": "Doğum Günü",
                 "gender": " Cinsiyet",
                 "male": " Erkek",
-                "female": " Kadın"
+                "female": " Kadın",
+                "optin": " Özel Teklifler Al",
+                "newsletter": " Haber Bülteni Al"
             },
             "register": {
                 "firstname": "Ad",
