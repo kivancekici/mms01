@@ -773,41 +773,111 @@ class DbHelper {
 		$_res=false;
 
 		$id_manufacturer=$_infos2["id_manufacturer"];
-		$sql = "select * from ps_product prd left join  ps_category_lang ctg on prd.id_category_default=ctg.id_category and ctg.id_lang=1 where id_manufacturer=$id_manufacturer order by prd.id_category_default";
-        $result = $this->conn->query($sql);
-
-        $items = array();
-
-        if ($result->num_rows > 0) {
-            while ($_infos = $result->fetch_assoc()) {
-				
-				$menu=array();
-				$menu=array_merge($menu,$_infos);					
-				
-                array_push($items,$menu);
-				
-				$_res=true;
-            }
-			
-			
-        } else {
-            //no results
-        }
-		
-        $this->conn->close();
-
-		if($_res){
-			$item="OK";
-		}else{
-			$item="NOK";
-			return $item;
-		}
-		
-        return $items;
+		$langu=$_infos2["langu"];
+		$resultate=$this->getManufacturersProductsList($id_manufacturer,$langu);
+		return $resultate;
     }
 	
 
 
+	function getManufacturersProductsList($id_manufacturer,$langu) {
+		
+			$keyword="";
+			$currency="EUR";
+
+			
+			
+			$sql = "SELECT prlang.id_product, prlang.name,prlang.description_short, prlang.description FROM  ps_product pr left join ps_product_lang prlang on pr.id_product=prlang.id_product  WHERE id_lang = $langu AND id_manufacturer= $id_manufacturer AND (description LIKE '%$keyword%' OR description_short LIKE '%$keyword%'  OR name LIKE '%$keyword%') ";
+	
+			$result = $this->conn->query($sql);
+	
+			
+			if ($result->num_rows > 0) {
+				$resulttable = array();
+				//$tmpsqltable =array();
+				$rowcounter = 0;
+				while ($row = $result->fetch_assoc()) {
+					
+	
+					$sql ="SELECT CAST(((pr.price + pa.price) * (1 + tx.rate/100)) AS  decimal(10,2)) AS 'grossprice'   FROM ps_product pr, ps_tax_rule tr, ps_tax tx, ps_product_attribute pa  WHERE pr.id_product = $row[id_product] AND pr.id_tax_rules_group = tr.id_tax_rules_group AND tr.id_country = '1' AND tr.id_tax = tx.id_tax AND pa.id_product_attribute = pr.cache_default_attribute AND pa.id_product = pr.id_product";
+					
+					$resultgross = $this->conn->query($sql);
+				   $tmpsqltable = mysqli_fetch_array($resultgross , MYSQLI_ASSOC);
+	
+					array_push($resulttable, $row);
+	
+					$resulttable[$rowcounter]['description_short'] = str_replace("</p>","",str_replace("<p>","",$resulttable[$rowcounter]['description_short']));
+	
+					$resulttable[$rowcounter]['description'] = str_replace("</p>","",str_replace("<p>","",$resulttable[$rowcounter]['description']));
+					
+					$resulttable[$rowcounter]['grossprice'] = $tmpsqltable['grossprice'];
+	
+
+					$sql ="SELECT reduction,reduction_type FROM ps_specific_price WHERE id_product = $row[id_product]";
+					$resultreduction = $this->conn->query($sql);
+					if ($resultreduction->num_rows > 0) {
+						$reducedprice = array();
+						$tmpsqltable = mysqli_fetch_array($resultreduction , MYSQLI_ASSOC);
+				
+						if ($tmpsqltable['reduction_type'] == "percentage"){
+							
+							$reducedprice['reducedprice'] = number_format($resulttable[$rowcounter]['grossprice'] * (1-$tmpsqltable[reduction]),2);
+							$resulttable[$rowcounter] = $resulttable[$rowcounter] + $reducedprice;
+						}elseif($tmpsqltable['reduction_type'] == "amount"){
+							
+							$reducedprice['reducedprice'] =  number_format($resulttable[$rowcounter]['grossprice'] - $tmpsqltable[reduction],2);
+							$resulttable[$rowcounter] = $resulttable[$rowcounter] + $reducedprice;
+	
+	
+						}
+	
+	
+	
+					}else{
+						
+						$reducedprice['reducedprice'] =  $resulttable[$rowcounter]['grossprice'];
+						$resulttable[$rowcounter] = $resulttable[$rowcounter] + $reducedprice;
+						
+					}
+	
+	
+					$imgdirectory="/"."img"."/"."p";
+	
+					$sql ="SELECT id_image FROM ps_image WHERE id_product = $row[id_product] AND cover = 1";
+	
+					$resultimg = $this->conn->query($sql);
+					if ($resultimg->num_rows > 0) {
+	
+						$tmpsqltable = mysqli_fetch_array($resultimg , MYSQLI_ASSOC);
+						$imgcounter = 0;
+	
+						$tmpstring = $tmpsqltable['id_image'];
+	
+	
+						while($imgcounter < STRLEN($tmpstring))
+						{
+							$imgdirectory .=  "/".SUBSTR($tmpstring ,$imgcounter,1);
+							
+						
+							$imgcounter = $imgcounter +1;
+						}
+	
+						$imgdirectory .= "/".$tmpstring."-home_default.jpg";
+	
+	
+	
+					}
+	
+					$resulttable[$rowcounter]['imgdirectory'] = $imgdirectory;
+	
+					$rowcounter = $rowcounter  + 1;
+				}
+			}
+	
+			return $resulttable;
+			$this->conn->close();
+	
+		}
 
 
   
@@ -816,6 +886,9 @@ class DbHelper {
 			$keyword=$_infos2["keyword"];
 			$currency=$_infos2["currency"];
 			$langu=$_infos2["langu"];
+			$id_manufacturer=$_infos2["id_manufacturer"];
+
+
 			
 			$sql = "SELECT id_product, name,description_short, description FROM  ps_product_lang WHERE id_lang = $langu AND (description LIKE '%$keyword%' OR description_short LIKE '%$keyword%'  OR name LIKE '%$keyword%') ";
 	
