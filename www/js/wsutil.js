@@ -221,11 +221,7 @@ function getManufacturersMenuList(id_manufacturer) {
        
         if (result != "Error") {
     
-            if (result.status != "NOK") {
-                return result;
-            } else {
-                return "NOK";
-            }
+            return result;
     
         } else {
             return "NOK"

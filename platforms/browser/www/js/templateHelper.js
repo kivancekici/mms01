@@ -68,7 +68,7 @@ function initListVirtualSearchResult() {
 var listManufacturersMenu;
 
 function initListManufacturersMenu() {
-    listVirtualSearchResult = myApp.virtualList('.lstManufacturersMenu', {
+    listManufacturersMenu = myApp.virtualList('.lstManufacturersMenu', {
         items: [
 
         ],
