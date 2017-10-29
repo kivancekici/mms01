@@ -324,10 +324,7 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'search_results') {
-        if(searchResultList==null){
             searchResultList=getSearchResultList(searchKeyWord,selectedLang);            
-        }
-
         initListVirtualSearchResult();
         listVirtualSearchResult.items=searchResultList;
         listVirtualSearchResult.update();
@@ -335,10 +332,8 @@ $$(document).on('pageInit', function(e) {
 
 
     if (page.name === 'manufacturers_menu') {
-        if(manufacturersMenuList==null){
-            manufacturersMenuList=getManufacturersMenuList(selectedManufacturerId);            
-        }
 
+        manufacturersMenuList=getManufacturersMenuList(selectedManufacturerId);            
         initListManufacturersMenu();
         listManufacturersMenu.items=manufacturersMenuList;
         listManufacturersMenu.update();

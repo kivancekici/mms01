@@ -201,7 +201,7 @@ function getSearchResultList(searchKeyword) {
 
 function getManufacturersMenuList(id_manufacturer) {
     if(id_manufacturer==0){
-        return;
+        //return;
     }
     var lang=1;
         if(selectedLang=="de"){

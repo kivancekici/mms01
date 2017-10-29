@@ -54,7 +54,7 @@ function initListVirtualSearchResult() {
         '</div>' +
         '<div class="item-inner">' +
         '<div class="item-title-row">' +
-        '<div class="item-title">{{name}}{{imgdirectory}}</div>' +
+        '<div class="item-title">{{name}}</div>' +
         '<div class="item-after">{{reducedprice}}</div>' +
         '</div>' +
         '<div class="item-subtitle">{{description_short}}</div>' +
@@ -80,7 +80,7 @@ function initListManufacturersMenu() {
         '</div>' +
         '<div class="item-inner">' +
         '<div class="item-title-row">' +
-        '<div class="item-title">{{name}}{{imgdirectory}}</div>' +
+        '<div class="item-title">{{name}}</div>' +
         '<div class="item-after">{{reducedprice}}</div>' +
         '</div>' +
         '<div class="item-subtitle">{{description_short}}</div>' +
