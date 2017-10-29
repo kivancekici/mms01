@@ -29,7 +29,8 @@ var searchKeyWord="";
 if (langIsSeleted) {
     selectedLang = window.localStorage.getItem("lang");
 } else {
-    selectedLang = "tr"; // Set turkish to default language
+    //selectedLang = "tr"; // Set turkish to default language
+    selectedLang = "de";
 }
 
 
