@@ -79,13 +79,18 @@ function changePanelLanguage() {
 }
 
 
+var currentCntx={
+    "prmTitle":"title",
+};
+
 function loadPageWithLang(pageName) {
     var cntxName = 'languages.' + selectedLang + '.' + pageName;
     var pgUrl = pageName + '.html';
 
     mainView.router.load({
         url: pgUrl,
-        contextName: cntxName
+        contextName: cntxName,
+        //context:currentCntx
     });
 }
 
@@ -94,7 +99,6 @@ function checkLoginStatus() {
     try {
         if (userLoggedIn) {
             loadPageWithLang('main');
-
 
         } else {
             loadPageWithLang('login');

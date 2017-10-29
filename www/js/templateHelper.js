@@ -33,6 +33,7 @@ function initListVirtualManufacturers() {
 function showManufacturerMenu(manufacturer_name,id_manufacturer){
     selectedManufacturerId=id_manufacturer;
     selectedManufacturerName=manufacturer_name;
+    currentCntx["selectedManufacturerName"]=selectedManufacturerName;
     loadPageWithLang("manufacturers_menu");
 }
 
