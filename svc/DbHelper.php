@@ -34,6 +34,14 @@ class DbHelper {
     }
 	
 	
+
+
+
+
+
+
+
+
 	function encrypt($passwd)
 	{
 		return md5(_COOKIE_KEY_.$passwd);
@@ -53,12 +61,14 @@ class DbHelper {
             while ($row = $result->fetch_assoc()) {
 				$rwitem=array();
 				$rwitem["status"]="OK";
+				$rwitem["pswd"]="$pwd";
 				$rwitem=array_merge($rwitem,$row);
                 array_push($items, $rwitem);
             }
         } else {
             $rwitem=array();
 				$rwitem["status"]="NOK";
+				$rwitem["pswd"]="$pwd";
                 array_push($items, $rwitem);
         }
         $this->conn->close();
@@ -104,7 +114,7 @@ class DbHelper {
 		$lastname=$_infos["lastname"];
 		$email=$_infos["email"];	
 		$passwdOpen=$_infos["passwdOpen"];
-		$passwd= md5($passwdOpen);
+		$pwd=$this->encrypt($passwdOpen);
 		$last_passwd_gen="";
 		$birthday=$_infos["birthday"];
 		$birthday=date("Y-m-d",strtotime($birthday));
@@ -112,13 +122,16 @@ class DbHelper {
 		$ip_registration_newsletter="";
 		$newsletter_date_add="";		
 		$optin=0;
-		$website=" ";		
+		$website=" ";
+		//$secure_key = md5(uniqid(rand(), true));
+		$secure_key = md5($passwdOpen);		
 		$active=1;
 		$is_guest=0;
 		$deleted=0;
 
-		$sql = "INSERT INTO ps_customer (id_shop_group,id_shop,id_gender,id_default_group,id_lang,id_risk,company,siret,ape,firstname,lastname,email,passwd,last_passwd_gen,birthday,newsletter,ip_registration_newsletter,newsletter_date_add,optin,website,active,is_guest,deleted,date_add,date_upd) "
-		."VALUES($id_shop_group,$id_shop,$id_gender,$id_default_group,$id_lang,$id_risk,'$company','$siret','$ape','$firstname','$lastname','$email','$passwd',now(),'$birthday',$newsletter,'$ip_registration_newsletter',now(),$optin,'$website',$active,$is_guest,$deleted,now(),now());";
+
+		$sql = "INSERT INTO ps_customer (id_shop_group,id_shop,id_gender,id_default_group,id_lang,id_risk,company,siret,ape,firstname,lastname,email,passwd,last_passwd_gen,birthday,newsletter,ip_registration_newsletter,newsletter_date_add,optin,website,secure_key,active,is_guest,deleted,date_add,date_upd) "
+		."VALUES($id_shop_group,$id_shop,$id_gender,$id_default_group,$id_lang,$id_risk,'$company','$siret','$ape','$firstname','$lastname','$email','$pwd',now(),'$birthday',$newsletter,'$ip_registration_newsletter',now(),$optin,'$website','$secure_key',$active,$is_guest,$deleted,now(),now());";
 		$result = $this->conn->query($sql);
 
 		if ($result === TRUE) {
@@ -130,7 +143,8 @@ class DbHelper {
 		if($_res){
 		$rwitem=array();
 		$rwitem["status"]="OK";
-		//$rwitem["pswd"]="$passwdOpen";
+		$rwitem["pswd"]="$pwd";
+		$rwitem["secure_key"]="$secure_key";
 		return $rwitem;
 		}else{
 		$rwitem=array();
