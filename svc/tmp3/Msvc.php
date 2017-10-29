@@ -33,13 +33,10 @@ switch ($opr) {
         fLogin($decoded);
 		break;
 	case "checkAvaibleUser":
-	fcheckAvaibleUser ($decoded);
+        fcheckAvaibleUser($decoded);
 		break;
     case "register":
-	fRegisterUser($decoded);
-		break;
-	case "getuserinfo":
-	fGetUserInfo($decoded);
+        fRegisterUser($decoded);
 		break;
 	case "updateuserdata":
         fUpdateUserData($decoded);
@@ -77,8 +74,8 @@ switch ($opr) {
 	case "manufacturersmenu":
 		fGetManufacturersMenu($decoded);
 		break;
-	case "hpproductslist":
-		fGetHpProductsList($decoded);
+	case "productslist":
+		fGetProductsList($decoded);
 		break;
 	case "placeorder":
 		fPlaceOrder($decoded);
@@ -107,6 +104,8 @@ function fLogin($_jsondata) {
 	}
 }
 
+
+
 function fcheckAvaibleUser($_jsondata) {
 	$_items = DbHelper::getInstance()->checkAvaibleUser($_jsondata);
 	if (!empty($_items)) {
@@ -115,6 +114,11 @@ function fcheckAvaibleUser($_jsondata) {
 		send_response(Null);
 	}
 }
+
+
+
+
+
 
 
 function fRegisterUser($_jsondata) {
@@ -126,17 +130,6 @@ function fRegisterUser($_jsondata) {
 	}
 }
 
-
-
-
-function fGetUserInfo($_jsondata) {
-	$_items = DbHelper::getInstance()->getuserinfo($_jsondata);
-	if (!empty($_items)) {
-		send_response($_items);
-	} else {
-		send_response(Null);
-	}
-}
 
 
 function fUpdateUserData($_jsondata) {
@@ -184,8 +177,6 @@ function fDeleteAddress($_jsondata) {
 }
 
 function fUpdateAddress($_jsondata) {
-	//alanları ekle ve dbhelper methodunu yaz
-	$email=$_jsondata["email"];
 	$_items = DbHelper::getInstance()->updateAddress($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
@@ -195,9 +186,7 @@ function fUpdateAddress($_jsondata) {
 }
 
 function fOpenOrders($_jsondata) {
-	//alanları ekle ve dbhelper methodunu yaz
-	$email=$_jsondata["email"];
-	$_items = DbHelper::getInstance()->openOrders($email);
+	$_items = DbHelper::getInstance()->openOrders($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
@@ -208,9 +197,7 @@ function fOpenOrders($_jsondata) {
 
 
 function fOpenOrderDetails($_jsondata) {
-	//alanları ekle ve dbhelper methodunu yaz
-	$email=$_jsondata["email"];
-	$_items = DbHelper::getInstance()->openOrderDetails($email);
+	$_items = DbHelper::getInstance()->openOrderDetails($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
@@ -219,9 +206,7 @@ function fOpenOrderDetails($_jsondata) {
 }
 
 function fOldOrders($_jsondata) {
-	//alanları ekle ve dbhelper methodunu yaz
-	$email=$_jsondata["email"];
-	$_items = DbHelper::getInstance()->oldOrders($email);
+	$_items = DbHelper::getInstance()->oldOrders($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
@@ -230,7 +215,6 @@ function fOldOrders($_jsondata) {
 }
 
 function fGetMessages($_jsondata) {
-	//alanları ekle ve dbhelper methodunu yaz
 	$id_customer=$_jsondata["id_customer"];
 	$_items = DbHelper::getInstance()->getMessages($id_customer);
 	if (!empty($_items)) {
@@ -243,8 +227,6 @@ function fGetMessages($_jsondata) {
 
 
 function fPostMessages($_jsondata) {
-	//alanları ekle ve dbhelper methodunu yaz
-	//$id_customer=$_jsondata["id_customer"];
 	$_items = DbHelper::getInstance()->postMessages($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
@@ -255,10 +237,10 @@ function fPostMessages($_jsondata) {
 
 
 
+
+
 function fGetManufacturers($_jsondata) {
-	//alanları ekle ve dbhelper methodunu yaz
-	$email=$_jsondata["email"];
-	$_items = DbHelper::getInstance()->getManufacturers($email);
+	$_items = DbHelper::getInstance()->getManufacturers($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
@@ -276,8 +258,8 @@ function fGetManufacturersMenu($_jsondata) {
 }
 
 
-function fGetHpProductsList($_jsondata) {
-	$_items = DbHelper::getInstance()->getHpProductsList($_jsondata);
+function fGetProductsList($_jsondata) {
+	$_items = DbHelper::getInstance()->getProductsList($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
