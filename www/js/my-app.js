@@ -21,6 +21,8 @@ var selectedLang;
 
 
 var manufacturersList=null;
+var manufacturersMenuList=null;
+var selectedManufacturerId=0;
 var searchResultList=null;
 var searchKeyWord="";
 
@@ -329,6 +331,17 @@ $$(document).on('pageInit', function(e) {
         initListVirtualSearchResult();
         listVirtualSearchResult.items=searchResultList;
         listVirtualSearchResult.update();
+    }
+
+
+    if (page.name === 'manufacturers_menu') {
+        if(manufacturersMenuList==null){
+            manufacturersMenuList=getManufacturersMenuList(selectedManufacturerId);            
+        }
+
+        initListManufacturersMenu();
+        listManufacturersMenu.items=manufacturersMenuList;
+        listManufacturersMenu.update();
     }
 
 
