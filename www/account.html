@@ -7,101 +7,110 @@
             </div>
         </div>
     </div>
-    <div div class="page-content page-bg-main lazy lazy-fadein" data-background="images/baklava7bg.jpg">
-        <div class="content-block">
+    <div div class="page-content bg-white theme-orange">
 
-            <div class="card">
-                <div class="card-header account-card-header">
-
-                </div>
-                <div class="card-content">
-                    <div class="card-content-inner">
-                        <form id="account-form" class="list-block">
-                            <ul>
-                                <li class="item-content">
-                                    <div class="item-media"><i class="icon f7-icons">person</i></div>
-                                    <div class="item-inner">
-
-                                        <div class="item-input">
-                                            <input type="text" name="firstname" {{placeholder name}}>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="item-content">
-                                    <div class="item-media"><i class="icon f7-icons">person</i></div>
-                                    <div class="item-inner">
-
-                                        <div class="item-input">
-                                            <input type="text" name="surname" {{placeholder surname}}>
-                                        </div>
-                                    </div>
-                                </li>
-
-
-
-                                <li class="item-content">
-                                    <div class="item-media"><i class="icon f7-icons">at_fill</i></div>
-                                    <div class="item-inner">
-                                        <div class="item-input">
-                                            <input type="email" name="email" {{placeholder email}}>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="item-content">
-                                    <div class="item-media"><i class="icon f7-icons">lock_fill</i></div>
-                                    <div class="item-inner">
-                                        <div class="item-input">
-                                            <input type="password" name="password" {{placeholder password}}>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="item-content">
-                                    <div class="item-media"><i class="icon f7-icons">lock_fill</i></div>
-                                    <div class="item-inner">
-                                        <div class="item-input">
-                                            <input type="password" name="repeatpassword" {{placeholder repeatpassword}}>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="item-content">
-                                    <div class="item-media"><i class="icon f7-icons">calendar</i></div>
-                                    <div class="item-inner">
-                                        <div class="item-input">
-                                            <input type="date" name="birthday" {{placeholder birthday}}>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="item-content">
-                                    <div class="item-media"><i class="icon f7-icons">persons</i></div>
-                                    <div class="item-inner">
-                                        <div class="item-input">
-                                            <select required>
-                                                      <option value="" disabled selected>{{gender}}</option>
-                                                      <option value="1">{{male}}</option>
-                                                      <option value="2">{{female}}</option>
-                                                    </select>
-                                        </div>
-                                    </div>
-                                </li>
-
-                            </ul>
-
-                        </form>
+        <form id="account-form" class="list-block">
+            <ul>
+                <li class="item-content">
+                    <div class="item-media"><i class="icon f7-icons">person</i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="text" name="firstname" {{placeholder firstname}}>
+                        </div>
                     </div>
-                </div>
-                <div class="card-footer">
-                    <p>Bilgilendirme mailleri gönder.</p>
-                    <label class="label-switch">
-											<input type="checkbox">
-											<div class="checkbox"></div>
-										</label>
-                </div>
-            </div>
+                </li>
 
-        </div>
+                <li class="item-content">
+                    <div class="item-media"><i class="icon f7-icons">person</i></div>
+                    <div class="item-inner">
+
+                        <div class="item-input">
+                            <input type="text" name="surname" {{placeholder surname}}>
+                        </div>
+                    </div>
+                </li>
+
+
+
+                <li class="item-content">
+                    <div class="item-media"><i class="icon f7-icons">email_fill</i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="email" name="email" {{placeholder email}}>
+                        </div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-media"><i class="icon f7-icons">lock_fill</i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="password" name="password" {{placeholder password}}>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="item-content">
+                    <div class="item-media"><i class="icon f7-icons">lock_fill</i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="password" name="repeatpassword" {{placeholder repeatpassword}}>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="item-content">
+                    <div class="item-media"><i class="icon f7-icons">calendar</i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="text" name="birthday" readonly id="calendar-default" {{placeholder birthday}}>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="item-content">
+                    <div class="item-media"><i class="icon f7-icons">persons</i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+
+                            <input type="text" name="gender" {{placeholder gender}} readonly id="picker-gender">
+
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon f7-icons">check</i></div>
+                        <div class="item-inner">
+                            <div class="item-title label">{{newsletter}}</div>
+                            <div class="item-input">
+                                <label class="label-switch">
+                                   <input type="checkbox">
+                                   <div class="checkbox"></div>
+                               </label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon f7-icons">check</i></div>
+                        <div class="item-inner">
+                            <div class="item-title label">{{optin}}</div>
+                            <div class="item-input">
+                                <label class="label-switch">
+                                   <input type="checkbox">
+                                   <div class="checkbox"></div>
+                               </label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </form>
+
+
     </div>
 </div>
