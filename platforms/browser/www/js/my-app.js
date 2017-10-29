@@ -79,18 +79,16 @@ function changePanelLanguage() {
 }
 
 
-var currentCntx={
-    "prmTitle":"title",
-};
+function setContextParameter(pageName,key,value){
+    myApp.template7Data.languages[selectedLang][pageName][key]=value;
+}
 
 function loadPageWithLang(pageName) {
     var cntxName = 'languages.' + selectedLang + '.' + pageName;
     var pgUrl = pageName + '.html';
-
     mainView.router.load({
         url: pgUrl,
-        contextName: cntxName,
-        //context:currentCntx
+        contextName: cntxName
     });
 }
 

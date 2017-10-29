@@ -3,14 +3,6 @@ var listVirtualManufacturers;
 function initListVirtualManufacturers() {
     listVirtualManufacturers = myApp.virtualList('.lstmanufacturers', {
         items: [
-            {
-                "status": "OK",
-                "id_manufacturer": "2",
-                "name": "Beispiel_Hersteller_1",
-                "date_add": "2017-05-17 22:14:13",
-                "date_upd": "2017-05-17 22:14:13",
-                "active": "1"
-            }
         ],
         height: 61,
         template: '<li>' +
@@ -33,7 +25,7 @@ function initListVirtualManufacturers() {
 function showManufacturerMenu(manufacturer_name,id_manufacturer){
     selectedManufacturerId=id_manufacturer;
     selectedManufacturerName=manufacturer_name;
-    currentCntx["selectedManufacturerName"]=selectedManufacturerName;
+    setContextParameter("manufacturers_menu","selectedManufacturerName",selectedManufacturerName);
     loadPageWithLang("manufacturers_menu");
 }
 

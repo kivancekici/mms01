@@ -52,6 +52,9 @@
                 "pageTitle": "Kayıt Ekranı",
                 "btnName": "Kaydet",
                 "toolbarText": "Tamam"
+            },
+            "manufacturers_menu": {
+                "pageTitle": "Baklava7"   
             }
         },
         "de": {
@@ -108,6 +111,9 @@
                 "pageTitle": "Neu Benutzer",
                 "btnName": "Speichern",
                 "toolbarText": "OK"
+            },
+            "manufacturers_menu": {
+                "pageTitle": "Baklava7"   
             }
 
         }
