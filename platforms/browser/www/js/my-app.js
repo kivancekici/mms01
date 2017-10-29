@@ -351,7 +351,7 @@ var postCodeSearch = myApp.autocomplete({
     valueProperty: 'id', //object's "value" property name
     textProperty: 'name', //object's "text" property name
     limit: 8, //limit to 8 results
-    dropdownPlaceholderText: '35394 Giessen"',
+    dropdownPlaceholderText: 'Produkte',
     expandInput: true, // expand input
     source: function(autocomplete, query, render) {
         var results = [];
