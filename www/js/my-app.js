@@ -39,6 +39,7 @@ if (langIsSeleted) {
 // Add view
 var mainView = myApp.addView('.view-main', {
 
+    domCache:true
 });
 
 
@@ -147,12 +148,14 @@ $$('#btnLogout').on('click', function() {
 });
 
 
+
+
 // Option 2. Using one 'pageInit' event handler for all pages:
 $$(document).on('pageInit', function(e) {
     // Get page data from event data
-    var page = e.detail.page;
+    var page = e.detail.page;  
 
-    
+   
 
     if (page.name === 'login') {
         // Following code will be executed for page with data-page attribute equal to "about"
@@ -212,14 +215,13 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'main') {
-
     }
 
     if (page.name === 'account') {
         var userId = window.localStorage.getItem("customerId");
         var response = getUserInfo(userId);
         myApp.formFromJSON('#account-form', JSON.stringify(response));
-        myApp.alert(response);
+        //myApp.alert(response);
     }
 
     if (page.name === 'register') {
