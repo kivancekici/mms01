@@ -230,8 +230,8 @@ $$(document).on('pageInit', function(e) {
             'password': pass,
             'repeatpassword': pass,
             'birthday': response.birthday,
-            'newsletter': response.newsletter,
-            'optin': response.optin,
+            'newsletter': ['yes'],
+            'optin': [response.optin],
             'gender': response.id_gender
         }
 
