@@ -218,13 +218,14 @@ $$(document).on('pageInit', function(e) {
 
         var userId = window.localStorage.getItem("customerId");
         var response = getUserInfo(userId);
+        var pass = window.localStorage.getItem('password');
 
         var formData = {
             'firstname': response.firstname,
             'surname': response.lastname,
             'email': response.email,
-            'password': window.localStorage.getItem('password'),
-            'repeatpassword': window.localStorage.getItem('password'),
+            'password': pass,
+            'repeatpassword': pass,
             'birthday': response.birthday,
             'newsletter': response.newsletter,
             'optin': response.optin,
