@@ -253,6 +253,8 @@ $$(document).on('pageInit', function(e) {
             var repeatpassword = accountData.repeatpassword;
             var birthday = accountData.birthday;
             var genderId = accountData.gender;
+            var newsletter = accountData.newsletter[0];
+            var optin = accountData.optin[0];
 
             if (name == '' || surname == '' || pass == '' || repeatpassword == '' || email == '') {
                 myApp.alert('Lütfen zorunlu alanları doldurunuz.', 'Bilgi');
@@ -270,7 +272,7 @@ $$(document).on('pageInit', function(e) {
 
                             if (avaibleuser == "OK") {
 
-                                var response = accountUpdate(email, name, surname, pass, genderId, birthday);
+                                var response = updateAccount(email, name, surname, pass, genderId, birthday, newsletter, optin, userId);
 
                                 if (response == "OK") {
                                     myApp.alert('Kullanıcı hesabınız güncellenmiştir.', 'Bilgi');

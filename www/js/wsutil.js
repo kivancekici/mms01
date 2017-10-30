@@ -93,6 +93,40 @@ function mobileRegister(email, name, surname, pass, genderId, birthday) {
 
 }
 
+function updateAccount(email, name, surname, pass, genderId, birthday, newsletter, optin, userId) {
+
+    var accountdata = {
+        'opr': 'updateuserdata',
+        'id_gender': genderId,
+        'company': '',
+        'firstname': name,
+        'lastname': surname,
+        'email': email,
+        'passwd': pass,
+        'birthday': birthday,
+        'newsletter': newsletter,
+        'optin': optin,
+        'id_customer': userId,
+        'website': ''
+    }
+
+    var result = restfulPostCall(accountdata);
+
+
+    if (result != "Error") {
+
+        if (result.status != "NOK") {
+            return "OK";
+        } else {
+            return "NOK";
+        }
+
+    } else {
+        return "NOK"
+    }
+
+}
+
 function checkAvaibleUser(email) {
 
     var registerdata = {
