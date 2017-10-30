@@ -232,6 +232,7 @@ $$(document).on('pageInit', function(e) {
             'birthday': response.birthday,
             'newsletter': ['yes'],
             'optin': [response.optin],
+            'switch': ['yes'],
             'gender': response.id_gender
         }
 
