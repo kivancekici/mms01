@@ -152,9 +152,14 @@ $$(document).on('pageInit', function(e) {
     // Get page data from event data
     var page = e.detail.page;
 
-    var cntxName = 'languages.' + selectedLang + '.' + pageName;
-    
-    page.context=template7Data['languages'][selectedLang][page.name];
+    var cntx=null;
+    try{
+    cntx=template7Data['languages'][selectedLang][page.name];
+    }catch(e){
+    }
+    if(cntx!=null){
+    page.context=cntx;
+    }
 
     
 
