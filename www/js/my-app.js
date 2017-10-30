@@ -218,8 +218,13 @@ $$(document).on('pageInit', function(e) {
 
         var userId = window.localStorage.getItem("customerId");
         var response = getUserInfo(userId);
+        myApp.alert(response);
+
         var pass = window.localStorage.getItem('password');
         var result = JSON.stringify(response);
+        myApp.alert(result);
+        myApp.alert(result.id_gender);
+
 
         var formData = {
             'firstname': result.firstname,
