@@ -164,6 +164,7 @@ $$(document).on('pageInit', function(e) {
                 loadPageWithLang('main');
                 window.localStorage.setItem("customerId", response);
                 window.localStorage.setItem("isLogin", true);
+                window.localStorage.setItem('password', pass);
             } else {
                 window.localStorage.setItem("isLogin", false);
 
@@ -219,10 +220,18 @@ $$(document).on('pageInit', function(e) {
         var response = getUserInfo(userId);
 
         var formData = {
-            'firstname': 'John',
-            'surname': 'com'
+            'firstname': response.firstname,
+            'surname': response.lastname,
+            'email': response.email,
+            'password': window.localStorage.getItem('password'),
+            'repeatpassword': window.localStorage.getItem('password'),
+            'birthday': response.birthday,
+            'newsletter': response.newsletter,
+            'optin': response.optin,
+            'gender': response.id_gender
         }
 
+        myApp.formFromJSON('#accountform', formData);
 
 
         $$('.backBtn').on('click', function() {
@@ -231,7 +240,7 @@ $$(document).on('pageInit', function(e) {
 
         $$('.updateBtn').on('click', function() {
 
-            myApp.formFromJSON('#accountform', formData);
+
 
         });
 
@@ -301,7 +310,9 @@ $$(document).on('pageInit', function(e) {
 
 
                                 if (response != "NOK") {
-                                    loadPageWithLang('login');
+                                    window.localStorage.setItem('password', pass);
+                                    window.localStorage.setItem("isLogin", true);
+                                    loadPageWithLang('main');
                                 }
                             } else {
                                 myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
