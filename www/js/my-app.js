@@ -152,6 +152,10 @@ $$(document).on('pageInit', function(e) {
     // Get page data from event data
     var page = e.detail.page;
 
+    var cntxName = 'languages.' + selectedLang + '.' + pageName;
+    
+    page.context=template7Data['languages'][selectedLang][page.name];
+
     
 
     if (page.name === 'login') {
