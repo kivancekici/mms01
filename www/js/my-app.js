@@ -236,7 +236,8 @@ $$(document).on('pageInit', function(e) {
         myApp.formFromData('#accountform', formData);
 
         var calendarDefault = myApp.calendar({
-            input: '#calendar-default'
+            input: '#calendar-default',
+            cssClass: 'theme-orange'
         });
 
         $$('.updateBtn').on('click', function() {
