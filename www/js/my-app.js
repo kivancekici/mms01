@@ -237,7 +237,7 @@ $$(document).on('pageInit', function(e) {
         }
 
 
-        myApp.formFromJSON('#accountform', formData);
+        myApp.formFromData('#accountform', formData);
 
 
 
@@ -272,7 +272,7 @@ $$(document).on('pageInit', function(e) {
         $$('.registerBtn').on('click', function() {
 
 
-            var formData = myApp.formToJSON('#register-form');
+            var formData = myApp.formToData('#register-form');
             var col = pickerGender.cols[0];
             var genderId;
 
