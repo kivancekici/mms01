@@ -157,14 +157,10 @@ function getAllManufacturersList(manufacturer) {
         } else {
             return "NOK";
         }
-<<<<<<< HEAD
 
     } else {
         return "NOK"
     }
-
-=======
-    
 }
 
 function getSearchResultList(searchKeyword) {
@@ -229,6 +225,4 @@ function getManufacturersMenuList(id_manufacturer) {
         } else {
             return "NOK"
         }
-    
->>>>>>> b5cf850c0390df337ce39d9467e82cae90dbd179
 }
