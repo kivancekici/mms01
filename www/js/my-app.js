@@ -243,7 +243,7 @@ $$(document).on('pageInit', function(e) {
         $$('.updateBtn').on('click', function() {
 
 
-            var accountData = myApp.formToData('#register-form');
+            var accountData = myApp.formToData('#accountform');
 
 
             var email = accountData.email;
