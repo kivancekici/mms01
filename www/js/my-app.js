@@ -231,8 +231,8 @@ $$(document).on('pageInit', function(e) {
             'repeatpassword': pass,
             'birthday': response.birthday,
             'newsletter': ['yes'],
-            'optin': ['1'],
-            'gender': [response.id_gender]
+            'optin': [1],
+            'gender': [2]
         }
 
 
