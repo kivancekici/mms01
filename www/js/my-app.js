@@ -215,14 +215,17 @@ $$(document).on('pageInit', function(e) {
 
     if (page.name === 'account') {
 
-        $$('.backBtn').on('click', function() {
-
-        });
-
         var userId = window.localStorage.getItem("customerId");
         var response = getUserInfo(userId);
-        myApp.formFromJSON('#accountform', JSON.stringify(response));
-        myApp.alert(response);
+
+        $$('.backBtn').on('click', function() {
+
+            myApp.formFromJSON('#accountform', JSON.stringify(response));
+            myApp.alert(response);
+        });
+
+
+
     }
 
     if (page.name === 'register') {
