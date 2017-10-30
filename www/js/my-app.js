@@ -224,25 +224,24 @@ $$(document).on('pageInit', function(e) {
 
         myApp.alert(response['firstname']);
         myApp.alert(response['lastname']);
+        myApp.alert(response.firstname);
+        /*
+         var formData = {
+             'firstname': response['firstname'],
+             'surname': result.lastname,
+             'email': result.email,
+             'password': pass,
+             'repeatpassword': pass,
+             'birthday': result.birthday,
+             'newsletter': result.newsletter,
+             'optin': result.optin,
+             'gender': result.id_gender
+         }
+         */
 
-        var formData = {
-            'firstname': response['firstname'],
-            'surname': result.lastname,
-            'email': result.email,
-            'password': pass,
-            'repeatpassword': pass,
-            'birthday': result.birthday,
-            'newsletter': result.newsletter,
-            'optin': result.optin,
-            'gender': result.id_gender
-        }
-
-        myApp.formFromJSON('#accountform', formData);
+        // myApp.formFromJSON('#accountform', formData);
 
 
-        $$('.backBtn').on('click', function() {
-            loadPageWithLang('main');
-        });
 
         $$('.updateBtn').on('click', function() {
 
@@ -338,9 +337,7 @@ $$(document).on('pageInit', function(e) {
 
         });
 
-        $$('.backBtn').on('click', function() {
-            loadPageWithLang('login');
-        });
+
 
     }
 
