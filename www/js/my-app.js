@@ -256,6 +256,10 @@ $$(document).on('pageInit', function(e) {
             var newsletter = accountData.newsletter[0];
             var optin = accountData.optin[0];
 
+
+            myApp.alert(birthday);
+            /*
+
             if (name == '' || surname == '' || pass == '' || repeatpassword == '' || email == '') {
                 myApp.alert('Lütfen zorunlu alanları doldurunuz.', 'Bilgi');
             } else {
@@ -291,6 +295,7 @@ $$(document).on('pageInit', function(e) {
                 }
 
             }
+            */
 
 
 
