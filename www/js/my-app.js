@@ -219,9 +219,7 @@ $$(document).on('pageInit', function(e) {
         var userId = window.localStorage.getItem("customerId");
         var response = getUserInfo(userId);
 
-
         var pass = window.localStorage.getItem('password');
-
 
         var formData = {
             'firstname': response.firstname,
@@ -230,15 +228,16 @@ $$(document).on('pageInit', function(e) {
             'password': pass,
             'repeatpassword': pass,
             'birthday': response.birthday,
-            'newsletter': ['1'],
-            'optin': ['1'],
+            'newsletter': [response.newsletter],
+            'optin': [response.optin],
             'gender': [response.id_gender]
         }
 
-
         myApp.formFromData('#accountform', formData);
 
-
+        var calendarDefault = myApp.calendar({
+            input: '#calendar-default'
+        });
 
         $$('.updateBtn').on('click', function() {
 
