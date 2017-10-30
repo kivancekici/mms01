@@ -219,17 +219,18 @@ $$(document).on('pageInit', function(e) {
         var userId = window.localStorage.getItem("customerId");
         var response = getUserInfo(userId);
         var pass = window.localStorage.getItem('password');
+        var result = JSON.stringify(response);
 
         var formData = {
-            'firstname': response.firstname,
-            'surname': response.lastname,
-            'email': response.email,
+            'firstname': result.firstname,
+            'surname': result.lastname,
+            'email': result.email,
             'password': pass,
             'repeatpassword': pass,
-            'birthday': response.birthday,
-            'newsletter': response.newsletter,
-            'optin': response.optin,
-            'gender': response.id_gender
+            'birthday': result.birthday,
+            'newsletter': result.newsletter,
+            'optin': result.optin,
+            'gender': result.id_gender
         }
 
         myApp.formFromJSON('#accountform', formData);
