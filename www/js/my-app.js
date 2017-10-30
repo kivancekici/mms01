@@ -21,11 +21,11 @@ var selectedLang;
 
 
 
-var manufacturersList=null;
-var manufacturersMenuList=null;
-var selectedManufacturerId=0;
-var searchResultList=null;
-var searchKeyWord="";
+var manufacturersList = null;
+var manufacturersMenuList = null;
+var selectedManufacturerId = 0;
+var searchResultList = null;
+var searchKeyWord = "";
 
 
 if (langIsSeleted) {
@@ -81,8 +81,8 @@ function changePanelLanguage() {
 }
 
 
-function setContextParameter(pageName,key,value){
-    myApp.template7Data.languages[selectedLang][pageName][key]=value;
+function setContextParameter(pageName, key, value) {
+    myApp.template7Data.languages[selectedLang][pageName][key] = value;
 }
 
 function loadPageWithLang(pageName) {
@@ -137,11 +137,11 @@ $$('#accountItemBtn').on('click', function() {
 
 
 $$('#btnLogout').on('click', function() {
-    userLoggedIn=false;
+    userLoggedIn = false;
     window.localStorage.setItem("isLogin", false);
     window.localStorage.setItem("customerId", "0");
-    window.localStorage.setItem("langIsSelected",false);
-    langIsSeleted=false;
+    window.localStorage.setItem("langIsSelected", false);
+    langIsSeleted = false;
     checkLangStatus();
 
 });
@@ -214,6 +214,11 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'account') {
+
+        $$('.backBtn').on('click', function() {
+
+        });
+
         var userId = window.localStorage.getItem("customerId");
         var response = getUserInfo(userId);
         myApp.formFromJSON('#accountform', JSON.stringify(response));
@@ -343,18 +348,18 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'search_results') {
-            searchResultList=getSearchResultList(searchKeyWord,selectedLang);            
+        searchResultList = getSearchResultList(searchKeyWord, selectedLang);
         initListVirtualSearchResult();
-        listVirtualSearchResult.items=searchResultList;
+        listVirtualSearchResult.items = searchResultList;
         listVirtualSearchResult.update();
     }
 
 
     if (page.name === 'manufacturers_menu') {
 
-        manufacturersMenuList=getManufacturersMenuList(selectedManufacturerId);            
+        manufacturersMenuList = getManufacturersMenuList(selectedManufacturerId);
         initListManufacturersMenu();
-        listManufacturersMenu.items=manufacturersMenuList;
+        listManufacturersMenu.items = manufacturersMenuList;
         listManufacturersMenu.update();
     }
 
