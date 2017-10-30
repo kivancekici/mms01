@@ -257,8 +257,7 @@ $$(document).on('pageInit', function(e) {
             var optin = accountData.optin[0];
 
 
-            myApp.alert(birthday);
-            /*
+
 
             if (name == '' || surname == '' || pass == '' || repeatpassword == '' || email == '') {
                 myApp.alert('Lütfen zorunlu alanları doldurunuz.', 'Bilgi');
@@ -295,7 +294,7 @@ $$(document).on('pageInit', function(e) {
                 }
 
             }
-            */
+
 
 
 
