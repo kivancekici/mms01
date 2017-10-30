@@ -256,6 +256,15 @@ $$(document).on('pageInit', function(e) {
             var newsletter = accountData.newsletter[0];
             var optin = accountData.optin[0];
 
+            if (newsletter != "1") {
+                newsletter = "0";
+            }
+
+            if (optin != "1") {
+                optin = "0";
+            }
+
+            myApp.alert(newsletter);
 
 
 
