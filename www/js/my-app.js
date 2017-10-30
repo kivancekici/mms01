@@ -222,8 +222,8 @@ $$(document).on('pageInit', function(e) {
 
         var pass = window.localStorage.getItem('password');
 
-        myApp.alert(response.id_gender);
-        myApp.alert(response.firstname);
+        myApp.alert(response[0].id_gender);
+        myApp.alert(response[0].firstname);
 
         var formData = {
             'firstname': result.firstname,
