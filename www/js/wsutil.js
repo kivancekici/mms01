@@ -228,3 +228,48 @@ function getManufacturersMenuList(id_manufacturer) {
         }
     
 }
+
+
+function getUserAddressesList(id_customer) {
+   
+        var searchData = {
+            "opr":"getmyaddresses",
+            "id_customer":id_customer
+        }
+    
+        var result = restfulPostCall(searchData);
+       
+        if (result != "Error") {
+    
+            return result;
+    
+        } else {
+            return "NOK"
+        }
+    
+}
+
+function getMessagesList(id_customer) {
+    
+         var searchData = {
+             "opr":"getmessages",
+             "id_customer":id_customer
+         }
+     
+         var result = restfulPostCall(searchData);
+        
+         if (result != "Error") {
+     
+             return result;
+     
+         } else {
+             return "NOK"
+         }
+     
+ }
+
+
+ 
+ 
+
+
