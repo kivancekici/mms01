@@ -243,6 +243,55 @@ $$(document).on('pageInit', function(e) {
         $$('.updateBtn').on('click', function() {
 
 
+            var accountData = myApp.formToData('#register-form');
+
+
+            var email = accountData.email;
+            var name = accountData.firstname;
+            var surname = accountData.surname;
+            var pass = accountData.password;
+            var repeatpassword = accountData.repeatpassword;
+            var birthday = accountData.birthday;
+            var genderId = accountData.gender;
+
+            if (name == '' || surname == '' || pass == '' || repeatpassword == '' || email == '') {
+                myApp.alert('Lütfen zorunlu alanları doldurunuz.', 'Bilgi');
+            } else {
+                if (pass.length < 5) {
+                    myApp.alert('Parola en az 5 karakterden oluşmalıdır.', 'Bilgi');
+                } else {
+
+                    if (pass !== repeatpassword) {
+                        myApp.alert('Parolalar Eşleşmedi, Lütfen Kontrol Ediniz', 'Bilgi');
+                    } else {
+
+                        if (validateEmail(email)) {
+                            var avaibleuser = checkAvaibleUser(email);
+
+                            if (avaibleuser == "OK") {
+
+                                var response = accountUpdate(email, name, surname, pass, genderId, birthday);
+
+                                if (response == "OK") {
+                                    myApp.alert('Kullanıcı hesabınız güncellenmiştir.', 'Bilgi');
+                                }
+
+                            } else {
+                                myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
+                            }
+
+                        } else {
+                            myApp.alert('Geçerli Email Adresi Giriniz.', 'Bilgi');
+                        }
+
+                    }
+
+                }
+
+            }
+
+
+
 
         });
 
@@ -251,20 +300,9 @@ $$(document).on('pageInit', function(e) {
 
     if (page.name === 'register') {
 
-        var registerPageData = myApp.template7Data.languages[selectedLang].register;
-
         var calendarDefault = myApp.calendar({
-            input: '#calendar-default'
-        });
-
-
-        var pickerGender = myApp.picker({
-            input: '#picker-gender',
-            toolbarCloseText: registerPageData.toolbarText,
-            cols: [{
-                textAlign: 'center',
-                values: [registerPageData.female, registerPageData.male]
-            }]
+            input: '#calendar-default',
+            cssClass: 'theme-orange'
         });
 
 
@@ -272,19 +310,7 @@ $$(document).on('pageInit', function(e) {
 
 
             var formData = myApp.formToData('#register-form');
-            var col = pickerGender.cols[0];
-            var genderId;
 
-            var gender = formData.gender;
-
-
-            if (gender != '' && col.activeIndex != 1) {
-                genderId = 2;
-            }
-
-            if (col.activeIndex == 1) {
-                genderId = 1;
-            }
 
             var email = formData.email;
             var name = formData.firstname;
@@ -292,6 +318,7 @@ $$(document).on('pageInit', function(e) {
             var pass = formData.password;
             var repeatpassword = formData.repeatpassword;
             var birthday = formData.birthday;
+            var genderId = formData.gender;
 
             if (name == '' || surname == '' || pass == '' || repeatpassword == '' || email == '') {
                 myApp.alert('Lütfen zorunlu alanları doldurunuz.', 'Bilgi');

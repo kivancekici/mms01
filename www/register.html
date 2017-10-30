@@ -75,7 +75,11 @@
                     <div class="item-inner">
                         <div class="item-input">
 
-                            <input type="text" name="gender" {{placeholder gender}} readonly id="picker-gender">
+                            <select name="gender" required>
+                            <option value="" disabled selected>{{gender}}</option>
+                            <option value="1">{{male}}</option>
+                            <option value="2">{{female}}</option>
+                            </select>
 
                         </div>
                     </div>
