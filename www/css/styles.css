@@ -112,5 +112,9 @@ option {
     align-items: center !important;
 }
 
+.itemLogo {
+    min-width: 50em !important;
+}
+
 
 /*Askin Bitir*/
