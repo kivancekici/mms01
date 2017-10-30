@@ -218,7 +218,7 @@ $$(document).on('pageInit', function(e) {
     if (page.name === 'account') {
         var userId = window.localStorage.getItem("customerId");
         var response = getUserInfo(userId);
-        myApp.formFromJSON('#accountform', JSON.stringify(response));
+        myApp.formFromJSON('#account-form', JSON.stringify(response));
         myApp.alert(response);
     }
 
