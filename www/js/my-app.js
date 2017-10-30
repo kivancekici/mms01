@@ -8,7 +8,8 @@ Template7.registerHelper('placeholder', function(plchldrContent) {
 var myApp = new Framework7({
     swipeBackPage: false,
     swipePanelOnlyClose: true,
-    template7Pages: true
+    template7Pages: true,
+    pushState: true
 });
 
 var $$ = Dom7;
@@ -19,12 +20,19 @@ var userLoggedIn = window.localStorage.getItem("isLogin");
 var selectedLang;
 
 
-var manufacturersList = null;
+
+var manufacturersList=null;
+var manufacturersMenuList=null;
+var selectedManufacturerId=0;
+var searchResultList=null;
+var searchKeyWord="";
+
 
 if (langIsSeleted) {
     selectedLang = window.localStorage.getItem("lang");
 } else {
-    selectedLang = "tr"; // Set turkish to default language
+    //selectedLang = "tr"; // Set turkish to default language
+    selectedLang = "de";
 }
 
 
@@ -73,10 +81,13 @@ function changePanelLanguage() {
 }
 
 
+function setContextParameter(pageName,key,value){
+    myApp.template7Data.languages[selectedLang][pageName][key]=value;
+}
+
 function loadPageWithLang(pageName) {
     var cntxName = 'languages.' + selectedLang + '.' + pageName;
     var pgUrl = pageName + '.html';
-
     mainView.router.load({
         url: pgUrl,
         contextName: cntxName
@@ -88,7 +99,6 @@ function checkLoginStatus() {
     try {
         if (userLoggedIn) {
             loadPageWithLang('main');
-
 
         } else {
             loadPageWithLang('login');
@@ -126,6 +136,16 @@ $$('#accountItemBtn').on('click', function() {
 });
 
 
+$$('#btnLogout').on('click', function() {
+    userLoggedIn=false;
+    window.localStorage.setItem("isLogin", false);
+    window.localStorage.setItem("customerId", "0");
+    window.localStorage.setItem("langIsSelected",false);
+    langIsSeleted=false;
+    checkLangStatus();
+
+});
+
 
 // Option 2. Using one 'pageInit' event handler for all pages:
 $$(document).on('pageInit', function(e) {
@@ -152,7 +172,7 @@ $$(document).on('pageInit', function(e) {
         });
 
         $$('.btnForgetPassword').on('click', function() {
-            myApp.alert('Unuttum bişeyleri');
+            //myApp.alert('Unuttum bişeyleri');
         });
 
 
@@ -322,6 +342,22 @@ $$(document).on('pageInit', function(e) {
         listVirtualManufacturers.update();
     }
 
+    if (page.name === 'search_results') {
+            searchResultList=getSearchResultList(searchKeyWord,selectedLang);            
+        initListVirtualSearchResult();
+        listVirtualSearchResult.items=searchResultList;
+        listVirtualSearchResult.update();
+    }
+
+
+    if (page.name === 'manufacturers_menu') {
+
+        manufacturersMenuList=getManufacturersMenuList(selectedManufacturerId);            
+        initListManufacturersMenu();
+        listManufacturersMenu.items=manufacturersMenuList;
+        listManufacturersMenu.update();
+    }
+
 
 });
 
@@ -333,7 +369,7 @@ var postCodeSearch = myApp.autocomplete({
     valueProperty: 'id', //object's "value" property name
     textProperty: 'name', //object's "text" property name
     limit: 8, //limit to 8 results
-    dropdownPlaceholderText: '35394 Giessen"',
+    dropdownPlaceholderText: 'Produkte',
     expandInput: true, // expand input
     source: function(autocomplete, query, render) {
         var results = [];

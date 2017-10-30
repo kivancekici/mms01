@@ -27,22 +27,27 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body class="theme-orange">
+<body class="">
     <!-- Status bar overlay for full screen mode (PhoneGap) -->
     <div class="statusbar-overlay"></div>
 
     <!-- Panels overlay-->
-    <div class="panel-overlay theme-orange"></div>
+    <div class="panel-overlay"></div>
     <!-- Left panel with reveal effect-->
 
-    <div class="panel panel-left panel-cover layout-white theme-orange">
-        <div class="list-block color-orange theme-orange">
-            <div class="item-divider">{{panelTitle}}</div>
-            <a href="main.html" class="item-link">
+    <div class="panel panel-left bg-white panel-cover">
+
+        <div style="padding-top: 0px !important; margin-top:0px !important;" class="list-block bg-white color-orange">
+
+            <div class="panelcenter">
+                <img src="images/navbarlogo.png" width="130">
+            </div>
+
+            <a id="orderItemBtn" href="#" class="item-link">
                 <div class="item-content">
                     <div class="item-media"><i class="f7-icons">bag</i></div>
                     <div class="item-inner">
-                        <div class="item-title">Sipariş Ver</div>
+                        <div class="item-title" id="orderItem"></div>
                     </div>
                 </div>
             </a>
@@ -51,17 +56,17 @@
                 <div class="item-content">
                     <div class="item-media"><i class="f7-icons">bag_fill</i></div>
                     <div class="item-inner">
-                        <div class="item-title">Sipariş Sepetim</div>
+                        <div class="item-title" id="orderBoxItem"></div>
                     </div>
                 </div>
             </a>
 
 
-            <a href="account.html" class="item-link">
+            <a id="accountItemBtn" href="#" class="item-link">
                 <div class="item-content">
                     <div class="item-media"><i class="f7-icons">person</i></div>
                     <div class="item-inner">
-                        <div class="item-title">Hesabım</div>
+                        <div class="item-title" id="accountItem"></div>
                     </div>
                 </div>
             </a>
@@ -70,16 +75,27 @@
                 <div class="item-content">
                     <div class="item-media"><i class="f7-icons">navigation</i></div>
                     <div class="item-inner">
-                        <div class="item-title">Adreslerim</div>
+                        <div class="item-title" id="addressItem"></div>
                     </div>
                 </div>
             </a>
+
+
+            <a href="messages.html" class="item-link">
+                <div class="item-content">
+                    <div class="item-media"><i class="f7-icons">email</i></div>
+                    <div class="item-inner">
+                        <div class="item-title" id="messageItem"></div>
+                    </div>
+                </div>
+            </a>
+
 
             <a href="my_orders.html" class="item-link">
                 <div class="item-content">
                     <div class="item-media"><i class="f7-icons">box</i></div>
                     <div class="item-inner">
-                        <div class="item-title">Siparişlerim</div>
+                        <div class="item-title" id="myOrdersItem"></div>
                     </div>
                 </div>
             </a>
@@ -88,71 +104,52 @@
                 <div class="item-content">
                     <div class="item-media"><i class="f7-icons">help</i></div>
                     <div class="item-inner">
-                        <div class="item-title">Nasıl Çalışır ?</div>
+                        <div class="item-title" id="workItem"></div>
                     </div>
                 </div>
             </a>
+
 
             <a href="faq.html" class="item-link">
                 <div class="item-content">
                     <div class="item-media"><i class="f7-icons">help</i></div>
                     <div class="item-inner">
-                        <div class="item-title">FAQ</div>
+                        <div class="item-title" id="helpItem"></div>
                     </div>
                 </div>
             </a>
-
 
             <a href="impressum.html" class="item-link">
                 <div class="item-content">
                     <div class="item-media"><i class="f7-icons">info</i></div>
                     <div class="item-inner">
-                        <div class="item-title">Impressum</div>
+                        <div class="item-title" id="infoItem"></div>
                     </div>
                 </div>
             </a>
 
-            <a href="messages.html" class="item-link">
-                <div class="item-content">
-                    <div class="item-media"><i class="f7-icons">email</i></div>
-                    <div class="item-inner">
-                        <div class="item-title">Mesajlar</div>
-                    </div>
-                </div>
-            </a>
 
-            <a href="index.html" class="item-link">
+
+            <a id="btnLogout" href="#" class="item-link">
                 <div class="item-content">
                     <div class="item-media"><i class="f7-icons">logout</i></div>
                     <div class="item-inner">
-                        <div class="item-title">Çıkış</div>
+                        <div class="item-title" id="logoutItem"></div>
                     </div>
                 </div>
             </a>
         </div>
 
     </div>
- 
+
 
     <!-- Views -->
     <div class="views">
         <!-- Your main view, should have "view-main" class -->
         <div class="view view-main">
-            <!-- Top Navbar-->
-            <div class="navbar navbar-hidden">
-                <div class="navbar-inner">
 
-                    <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-                    <div class="center sliding">Baklava7</div>
-                    <div class="right">
-                        <!--
-                          Right link contains only icon - additional "icon-only" class
-                          Additional "open-panel" class tells app to open panel when we click on this link
-                        -->
-                        <a href="#" class="link icon-only open-panel"><i class="f7-icons">bars</i></a>
-                    </div>
-                </div>
-            </div>
+            <!-- Top Navbar-->
+
             <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
             <div class="pages">
                 <!-- Page, "data-page" contains page name -->
@@ -170,11 +167,9 @@
                 </div>
 
 
-
-
-
             </div>
         </div>
+
     </div>
 
     <script type="text/javascript" src="cordova.js"></script>

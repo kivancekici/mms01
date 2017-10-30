@@ -34,14 +34,6 @@ class DbHelper {
     }
 	
 	
-
-
-
-
-
-
-
-
 	function encrypt($passwd)
 	{
 		return md5(_COOKIE_KEY_.$passwd);
@@ -61,20 +53,20 @@ class DbHelper {
             while ($row = $result->fetch_assoc()) {
 				$rwitem=array();
 				$rwitem["status"]="OK";
-				$rwitem["pswd"]="$pwd";
 				$rwitem=array_merge($rwitem,$row);
                 array_push($items, $rwitem);
             }
         } else {
             $rwitem=array();
 				$rwitem["status"]="NOK";
-				$rwitem["pswd"]="$pwd";
                 array_push($items, $rwitem);
         }
         $this->conn->close();
 
         return $items;
 	}
+
+
 
 
 
@@ -89,49 +81,65 @@ class DbHelper {
 		
 				if ($result->num_rows > 0) {
 		
-					$rwitem["status"]="OK";
+					$rwitem="OK";
 					return $rwitem;
 				}else {
-				$rwitem["status"]="NOK";
+				$rwitem="NOK";
 				return $rwitem;
 	
 				}
 
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+	
 	function registerUser($_infos) {
 		$_res=false;
 		$id_shop_group=1;
 		$id_shop=1;
-		$id_gender=$_infos["id_gender"];
+		$id_gender=1;
 		$id_default_group=3;
 		$id_lang=1;
 		$id_risk=0; 
 		$company=" ";
 		$siret=" ";
 		$ape=" ";
-		$firstname=$_infos["firstname"];
-		$lastname=$_infos["lastname"];
+		$firstname=" ";
+		$lastname=" ";
 		$email=$_infos["email"];	
-		$passwdOpen=$_infos["passwdOpen"];
-		$pwd=$this->encrypt($passwdOpen);
+		$passwdOpen=time();
+		$passwd= md5($passwdOpen);
 		$last_passwd_gen="";
-		$birthday=$_infos["birthday"];
-		$birthday=date("Y-m-d",strtotime($birthday));
+		$birthday="";
 		$newsletter=0;
 		$ip_registration_newsletter="";
 		$newsletter_date_add="";		
 		$optin=0;
-		$website=" ";
-		//$secure_key = md5(uniqid(rand(), true));
-		$secure_key = md5($passwdOpen);		
+		$website=" ";		
 		$active=1;
 		$is_guest=0;
 		$deleted=0;
+		
+
+		
 
 
-		$sql = "INSERT INTO ps_customer (id_shop_group,id_shop,id_gender,id_default_group,id_lang,id_risk,company,siret,ape,firstname,lastname,email,passwd,last_passwd_gen,birthday,newsletter,ip_registration_newsletter,newsletter_date_add,optin,website,secure_key,active,is_guest,deleted,date_add,date_upd) "
-		."VALUES($id_shop_group,$id_shop,$id_gender,$id_default_group,$id_lang,$id_risk,'$company','$siret','$ape','$firstname','$lastname','$email','$pwd',now(),'$birthday',$newsletter,'$ip_registration_newsletter',now(),$optin,'$website','$secure_key',$active,$is_guest,$deleted,now(),now());";
+
+
+
+
+		$sql = "INSERT INTO ps_customer (id_shop_group,id_shop,id_gender,id_default_group,id_lang,id_risk,company,siret,ape,firstname,lastname,email,passwd,last_passwd_gen,birthday,newsletter,ip_registration_newsletter,newsletter_date_add,optin,website,active,is_guest,deleted,date_add,date_upd) "
+		."VALUES($id_shop_group,$id_shop,$id_gender,$id_default_group,$id_lang,$id_risk,'$company','$siret','$ape','$firstname','$lastname','$email','$passwd',now(),now(),$newsletter,'$ip_registration_newsletter',now(),$optin,'$website',$active,$is_guest,$deleted,now(),now());";
 		$result = $this->conn->query($sql);
 
 		if ($result === TRUE) {
@@ -143,98 +151,25 @@ class DbHelper {
 		if($_res){
 		$rwitem=array();
 		$rwitem["status"]="OK";
-		$rwitem["pswd"]="$pwd";
-		$rwitem["secure_key"]="$secure_key";
+		$rwitem["pswd"]="$passwdOpen";
 		return $rwitem;
 		}else{
 		$rwitem=array();
 		$rwitem["status"]="NOK";
-		//$rwitem["SQL"]="$sql";
+		$rwitem["SQL"]="$sql";
 		return $rwitem;
 		}
 
+
+
+
+
+
+		
+	
 		
     }
 	
-
-
-	function getuserinfo($_infos) {
-	
-		
-		//$id_gender=$_infos["id_gender"];
-		//$company=$_infos["company"];
-		//$firstname=$_infos["firstname"];
-		//$lastname=$_infos["lastname"];
-		//$email=$_infos["email"];	
-		//$passwd= md5($_infos["passwd"]);
-		//$birthday=$_infos["birthday"];
-		//$newsletter=$_infos["newsletter"];		
-		//$optin=$_infos["optin"];
-		//$website=$_infos["website"];
-		//$date_upd=$_infos["date_upd"];
-		$id_customer=$_infos["id_customer"];
-
-		$sql ="SELECT id_gender,company,firstname,lastname,email,passwd,birthday,newsletter,optin,website FROM ps_customer WHERE id_customer=$id_customer";
-		
-		$result = $this->conn->query($sql);
-
-		$tmpuserinfo = mysqli_fetch_array($result , MYSQLI_ASSOC);
-
-
-
-		return $tmpuserinfo;
-		$this->conn->close();
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -250,12 +185,12 @@ class DbHelper {
 		$birthday=$_infos["birthday"];
 		$newsletter=$_infos["newsletter"];		
 		$optin=$_infos["optin"];
-		$website=$_infos["website"]; 
-		//$date_upd=$_infos["date_upd"];
+		$website=$_infos["website"];
+		$date_upd=$_infos["date_upd"];
 		$id_customer=$_infos["id_customer"];
 		
 		
-		$sql = "UPDATE ps_customer SET id_gender=$id_gender,company='$company',firstname='$firstname',lastname='$lastname',email='$email',passwd='$passwd',birthday=$birthday,newsletter=$newsletter,optin=$optin,website='$website',date_upd=now() WHERE id_customer=$id_customer";
+		$sql = "UPDATE ps_customer SET id_gender=$id_gender,company='$company',firstname='$firstname',lastname='$lastname',email='$email',passwd='$passwd',birthday=$birthday,newsletter=$newsletter,optin=$optin,website='$website',date_upd=$date_upd WHERE id_customer=$id_customer";
         $result = $this->conn->query($sql);
 
         if ($result === TRUE) {
@@ -267,12 +202,12 @@ class DbHelper {
 		if($_res){
 			$rwitem=array();
 			$rwitem["status"]="OK";
-			//$rwitem["pswd"]="$passwdOpen";
+			$rwitem["pswd"]="$passwdOpen";
 			return $rwitem;
 		}else{
 			$rwitem=array();
 			$rwitem["status"]="NOK";
-			//$rwitem["SQL"]="$sql";
+			$rwitem["SQL"]="$sql";
 			return $rwitem;
 		}
 		
@@ -773,219 +708,77 @@ class DbHelper {
 		$_res=false;
 
 		$id_manufacturer=$_infos2["id_manufacturer"];
-		$langu=$_infos2["langu"];
-		$resultate=$this->getManufacturersProductsList($id_manufacturer,$langu);
-		return $resultate;
+		$sql = "select * from ps_product prd left join  ps_category_lang ctg on prd.id_category_default=ctg.id_category and ctg.id_lang=1 where id_manufacturer=$id_manufacturer order by prd.id_category_default";
+        $result = $this->conn->query($sql);
+
+        $items = array();
+
+        if ($result->num_rows > 0) {
+            while ($_infos = $result->fetch_assoc()) {
+				
+				$menu=array();
+				$menu=array_merge($menu,$_infos);					
+				
+                array_push($items,$menu);
+				
+				$_res=true;
+            }
+			
+			
+        } else {
+            //no results
+        }
+		
+        $this->conn->close();
+
+		if($_res){
+			$item="OK";
+		}else{
+			$item="NOK";
+			return $item;
+		}
+		
+        return $items;
     }
 	
-
-
-	function getManufacturersProductsList($id_manufacturer,$langu) {
+	function getProductsList($_infos2) {
 		
-			$keyword="";
-			$currency="EUR";
+		$_res=false;
 
-			
-			
-			$sql = "SELECT prlang.id_product, prlang.name,prlang.description_short, prlang.description FROM  ps_product pr left join ps_product_lang prlang on pr.id_product=prlang.id_product  WHERE id_lang = $langu AND id_manufacturer= $id_manufacturer AND (description LIKE '%$keyword%' OR description_short LIKE '%$keyword%'  OR name LIKE '%$keyword%') ";
-	
-			$result = $this->conn->query($sql);
-	
-			
-			if ($result->num_rows > 0) {
-				$resulttable = array();
-				//$tmpsqltable =array();
-				$rowcounter = 0;
-				while ($row = $result->fetch_assoc()) {
-					
-	
-					$sql ="SELECT CAST(((pr.price + pa.price) * (1 + tx.rate/100)) AS  decimal(10,2)) AS 'grossprice'   FROM ps_product pr, ps_tax_rule tr, ps_tax tx, ps_product_attribute pa  WHERE pr.id_product = $row[id_product] AND pr.id_tax_rules_group = tr.id_tax_rules_group AND tr.id_country = '1' AND tr.id_tax = tx.id_tax AND pa.id_product_attribute = pr.cache_default_attribute AND pa.id_product = pr.id_product";
-					
-					$resultgross = $this->conn->query($sql);
-				   $tmpsqltable = mysqli_fetch_array($resultgross , MYSQLI_ASSOC);
-	
-					array_push($resulttable, $row);
-	
-					$resulttable[$rowcounter]['description_short'] = str_replace("</p>","",str_replace("<p>","",$resulttable[$rowcounter]['description_short']));
-	
-					$resulttable[$rowcounter]['description'] = str_replace("</p>","",str_replace("<p>","",$resulttable[$rowcounter]['description']));
-					
-					$resulttable[$rowcounter]['grossprice'] = $tmpsqltable['grossprice'];
-	
+		$product_name=$_infos2["product_name"];
+		$sql = "select * from ps_product prd left join ps_product_lang prdlang on prd.id_product=prdlang.id_product and prdlang.id_lang=1 left join  ps_category_lang ctg on prd.id_category_default=ctg.id_category and ctg.id_lang=1 where id_manufacturer=$id_manufacturer order by prd.id_category_default";
+        $result = $this->conn->query($sql);
 
-					$sql ="SELECT reduction,reduction_type FROM ps_specific_price WHERE id_product = $row[id_product]";
-					$resultreduction = $this->conn->query($sql);
-					if ($resultreduction->num_rows > 0) {
-						$reducedprice = array();
-						$tmpsqltable = mysqli_fetch_array($resultreduction , MYSQLI_ASSOC);
+        $items = array();
+
+        if ($result->num_rows > 0) {
+            while ($_infos = $result->fetch_assoc()) {
 				
-						if ($tmpsqltable['reduction_type'] == "percentage"){
-							
-							$reducedprice['reducedprice'] = number_format($resulttable[$rowcounter]['grossprice'] * (1-$tmpsqltable[reduction]),2);
-							$resulttable[$rowcounter] = $resulttable[$rowcounter] + $reducedprice;
-						}elseif($tmpsqltable['reduction_type'] == "amount"){
-							
-							$reducedprice['reducedprice'] =  number_format($resulttable[$rowcounter]['grossprice'] - $tmpsqltable[reduction],2);
-							$resulttable[$rowcounter] = $resulttable[$rowcounter] + $reducedprice;
-	
-	
-						}
-	
-	
-	
-					}else{
-						
-						$reducedprice['reducedprice'] =  $resulttable[$rowcounter]['grossprice'];
-						$resulttable[$rowcounter] = $resulttable[$rowcounter] + $reducedprice;
-						
-					}
-	
-	
-					$imgdirectory="/"."img"."/"."p";
-	
-					$sql ="SELECT id_image FROM ps_image WHERE id_product = $row[id_product] AND cover = 1";
-	
-					$resultimg = $this->conn->query($sql);
-					if ($resultimg->num_rows > 0) {
-	
-						$tmpsqltable = mysqli_fetch_array($resultimg , MYSQLI_ASSOC);
-						$imgcounter = 0;
-	
-						$tmpstring = $tmpsqltable['id_image'];
-	
-	
-						while($imgcounter < STRLEN($tmpstring))
-						{
-							$imgdirectory .=  "/".SUBSTR($tmpstring ,$imgcounter,1);
-							
-						
-							$imgcounter = $imgcounter +1;
-						}
-	
-						$imgdirectory .= "/".$tmpstring."-home_default.jpg";
-	
-	
-	
-					}
-	
-					$resulttable[$rowcounter]['imgdirectory'] = $imgdirectory;
-	
-					$rowcounter = $rowcounter  + 1;
-				}
-			}
-	
-			return $resulttable;
-			$this->conn->close();
-	
-		}
-
-
-  
-	function getHpProductsList($_infos2) {
+				$menu=array();
+				$menu=array_merge($menu,$_infos);					
+				
+                array_push($items,$menu);
+				
+				$_res=true;
+            }
+			
+			
+        } else {
+            //no results
+        }
 		
-			$keyword=$_infos2["keyword"];
-			$currency=$_infos2["currency"];
-			$langu=$_infos2["langu"];
-			$id_manufacturer=$_infos2["id_manufacturer"];
+        $this->conn->close();
 
-
-			
-			$sql = "SELECT id_product, name,description_short, description FROM  ps_product_lang WHERE id_lang = $langu AND (description LIKE '%$keyword%' OR description_short LIKE '%$keyword%'  OR name LIKE '%$keyword%') ";
-	
-			$result = $this->conn->query($sql);
-	
-			
-			if ($result->num_rows > 0) {
-				$resulttable = array();
-				//$tmpsqltable =array();
-				$rowcounter = 0;
-				while ($row = $result->fetch_assoc()) {
-					
-	
-					$sql ="SELECT CAST(((pr.price + pa.price) * (1 + tx.rate/100)) AS  decimal(10,2)) AS 'grossprice'   FROM ps_product pr, ps_tax_rule tr, ps_tax tx, ps_product_attribute pa  WHERE pr.id_product = $row[id_product] AND pr.id_tax_rules_group = tr.id_tax_rules_group AND tr.id_country = '1' AND tr.id_tax = tx.id_tax AND pa.id_product_attribute = pr.cache_default_attribute AND pa.id_product = pr.id_product";
-					
-					$resultgross = $this->conn->query($sql);
-				   $tmpsqltable = mysqli_fetch_array($resultgross , MYSQLI_ASSOC);
-	
-					array_push($resulttable, $row);
-	
-					$resulttable[$rowcounter]['description_short'] = str_replace("</p>","",str_replace("<p>","",$resulttable[$rowcounter]['description_short']));
-	
-					$resulttable[$rowcounter]['description'] = str_replace("</p>","",str_replace("<p>","",$resulttable[$rowcounter]['description']));
-					
-					$resulttable[$rowcounter]['grossprice'] = $tmpsqltable['grossprice'];
-	
-
-					$sql ="SELECT reduction,reduction_type FROM ps_specific_price WHERE id_product = $row[id_product]";
-					$resultreduction = $this->conn->query($sql);
-					if ($resultreduction->num_rows > 0) {
-						$reducedprice = array();
-						$tmpsqltable = mysqli_fetch_array($resultreduction , MYSQLI_ASSOC);
-				
-						if ($tmpsqltable['reduction_type'] == "percentage"){
-							
-							$reducedprice['reducedprice'] = number_format($resulttable[$rowcounter]['grossprice'] * (1-$tmpsqltable[reduction]),2);
-							$resulttable[$rowcounter] = $resulttable[$rowcounter] + $reducedprice;
-						}elseif($tmpsqltable['reduction_type'] == "amount"){
-							
-							$reducedprice['reducedprice'] =  number_format($resulttable[$rowcounter]['grossprice'] - $tmpsqltable[reduction],2);
-							$resulttable[$rowcounter] = $resulttable[$rowcounter] + $reducedprice;
-	
-	
-						}
-	
-	
-	
-					}else{
-						
-						$reducedprice['reducedprice'] =  $resulttable[$rowcounter]['grossprice'];
-						$resulttable[$rowcounter] = $resulttable[$rowcounter] + $reducedprice;
-						
-					}
-	
-	
-					$imgdirectory="/"."img"."/"."p";
-	
-					$sql ="SELECT id_image FROM ps_image WHERE id_product = $row[id_product] AND cover = 1";
-	
-					$resultimg = $this->conn->query($sql);
-					if ($resultimg->num_rows > 0) {
-	
-						$tmpsqltable = mysqli_fetch_array($resultimg , MYSQLI_ASSOC);
-						$imgcounter = 0;
-	
-						$tmpstring = $tmpsqltable['id_image'];
-	
-	
-						while($imgcounter < STRLEN($tmpstring))
-						{
-							$imgdirectory .=  "/".SUBSTR($tmpstring ,$imgcounter,1);
-							
-						
-							$imgcounter = $imgcounter +1;
-						}
-	
-						$imgdirectory .= "/".$tmpstring."-home_default.jpg";
-	
-	
-	
-					}
-	
-					$resulttable[$rowcounter]['imgdirectory'] = $imgdirectory;
-	
-					$rowcounter = $rowcounter  + 1;
-				}
-			}
-	
-			return $resulttable;
-			$this->conn->close();
-	
+		if($_res){
+			$item="OK";
+		}else{
+			$item="NOK";
+			return $item;
 		}
+		
+        return $items;
+    }
 	
-	
-
-
-
 	function placeOrder($_email) {
 		
 		$_res=false;

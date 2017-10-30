@@ -157,9 +157,78 @@ function getAllManufacturersList(manufacturer) {
         } else {
             return "NOK";
         }
+<<<<<<< HEAD
 
     } else {
         return "NOK"
     }
 
+=======
+    
+}
+
+function getSearchResultList(searchKeyword) {
+    
+    var lang=1;
+        if(selectedLang=="de"){
+            lang=1;
+        }else if(selectedLang=="tr"){
+            lang=2;
+        }else{
+            lang=1;
+        }
+        var searchData = {
+            "opr":"hpproductslist",
+            "keyword":searchKeyword,
+            "currency":"EUR",
+            "langu":lang
+        }
+    
+        var result = restfulPostCall(searchData);
+       
+        if (result != "Error") {
+    
+            if (result.status != "NOK") {
+                return result;
+            } else {
+                return "NOK";
+            }
+    
+        } else {
+            return "NOK"
+        }
+    
+}
+
+
+
+function getManufacturersMenuList(id_manufacturer) {
+    if(id_manufacturer==0){
+        //return;
+    }
+    var lang=1;
+        if(selectedLang=="de"){
+            lang=1;
+        }else if(selectedLang=="tr"){
+            lang=2;
+        }else{
+            lang=1;
+        }
+        var searchData = {
+            "opr":"manufacturersmenu",
+            "id_manufacturer":id_manufacturer,
+            "langu":lang
+        }
+    
+        var result = restfulPostCall(searchData);
+       
+        if (result != "Error") {
+    
+            return result;
+    
+        } else {
+            return "NOK"
+        }
+    
+>>>>>>> b5cf850c0390df337ce39d9467e82cae90dbd179
 }

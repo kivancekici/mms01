@@ -17,7 +17,7 @@
 .page-bg-main {
     /* background-image: url("../images/baklava7bg.jpg"); */
     background-size: cover;
-    background-position: center;
+    background-position: fixed !important;
 }
 
 .cntbottom {
@@ -29,7 +29,7 @@
 .cntmiddle {
     position: absolute;
     width: 100%;
-    top: 30%;
+    top: 25%;
 }
 
 .panelmenulist.li {
@@ -74,6 +74,9 @@
     height: 80px!important;
 }
 
+.list-item-manufacturer-details{
+    font-family: "Open Sans Condensed", "Helvetica", "Arial", "sans-serif";
+}
 
 /*Askin Başla*/
 
@@ -88,5 +91,26 @@
     background-position: center;
 }
 
+select:required:invalid {
+    color: gray;
+}
+
+option[value=""][disabled] {
+    display: none;
+}
+
+option {
+    color: black;
+}
+
+.panelcenter {
+    text-align: center !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    -webkit-align-items: center !important;
+    align-items: center !important;
+}
+
 
 /*Askin Bitir*/
+

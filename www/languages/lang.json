@@ -16,7 +16,9 @@
             "main": {
                 "pageTitle": "Baklava7",
                 "btnname": "Adres Ekle",
-                "alert": "denemeAlertTurkish"
+                "alert": "denemeAlertTurkish",
+                "allmanufacturers":"Üreticiler",     
+                "catalogue":"Katalog"           
             },
             "login": {
                 "cardHeader": "Kullanıcı Girişi",
@@ -52,6 +54,9 @@
                 "pageTitle": "Kayıt Ekranı",
                 "btnName": "Kaydet",
                 "toolbarText": "Tamam"
+            },
+            "manufacturers_menu": {
+                "pageTitle": "Baklava7"   
             }
         },
         "de": {
@@ -71,8 +76,10 @@
             },
             "main": {
                 "panelTitle": "Baklava7",
-                "btnname": "german",
-                "alert": "denemeAlertGerman"
+                "btnname": "Addresse Hinzufügen",
+                "alert": "denemeAlertGerman",
+                "allmanufacturers":"Hersteller",     
+                "catalogue":"Katalog"  
             },
             "login": {
                 "cardHeader": "Login",
@@ -80,6 +87,35 @@
                 "btnlogin": "Einloggen",
                 "btnforgetpass": "Passwort Vergessen",
                 "btnregister": "Registrierung"
+            },
+            "account": {
+                "panelTitle": "Mein Konto",
+                "name": "Name",
+                "surname": "Nachname",
+                "email": "E-mail",
+                "password": " Passwort",
+                "repeatpassword": " Passwort (Wieder)",
+                "birthday": "Geburtstag",
+                "gender": " Geschlecht",
+                "male": " Herr",
+                "female": " Frau"
+            },
+            "register": {
+                "firstname": "Name",
+                "surname": "Nachname",
+                "email": "E-mail",
+                "password": " Passwort",
+                "repeatpassword": " Passwort (Wieder)",
+                "birthday": "Geburtstag",
+                "gender": " Geschlecht",
+                "male": " Herr",
+                "female": " Frau",
+                "pageTitle": "Neu Benutzer",
+                "btnName": "Speichern",
+                "toolbarText": "OK"
+            },
+            "manufacturers_menu": {
+                "pageTitle": "Baklava7"   
             }
 
         }
