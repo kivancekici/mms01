@@ -83,3 +83,50 @@ function initListManufacturersMenu() {
         '</li>'
     });
 }
+
+
+var listVirtualUserAddresses;
+
+function initListVirtualUserAddresses() {
+    listVirtualUserAddresses = myApp.virtualList('.lstUserAddresses', {
+        items: [
+
+        ],
+        height: 61,
+        template: '<li>' +
+        '<a href="#" class="item-link item-content">' +
+        '<div class="item-inner">' +
+        '<div class="item-title-row">' +
+        '<div class="item-title">{{alias}}</div>' +
+        '<div class="item-after">{{name}} €</div>' +
+        '</div>' +
+        '<div class="item-subtitle">{{postcodecity}}</div>' +
+        '<div class="item-text">{{address1}} {{address2}} {{vatnumber}}</div>' +
+        '</div>' +
+        '</a>' +
+        '</li>'
+    });
+}
+
+
+var listVirtualUserMessages;
+
+function initListVirtualUserMessages() {
+    listVirtualUserMessages = myApp.virtualList('.lstUserMessages', {
+        items: [
+
+        ],
+        height: 61,
+        template: '<li>' +
+        '<a href="#" class="item-link item-content">' +
+        '<div class="item-inner">' +
+        '<div class="item-title-row">' +
+        '<div class="item-title">{{dateadd}}</div>' +
+        '</div>' +
+        '<div class="item-subtitle">{{from}}</div>' +
+        '<div class="item-text">{{message}}</div>' +
+        '</div>' +
+        '</a>' +
+        '</li>'
+    });
+}
