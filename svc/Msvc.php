@@ -41,6 +41,10 @@ switch ($opr) {
 	case "getuserinfo":
 	fGetUserInfo($decoded);
 		break;
+	case "checkbeforeupdateuserdata":
+		fCheckBeforeUpdateUserData($decoded);
+		break;
+		
 	case "updateuserdata":
         fUpdateUserData($decoded);
         break;
@@ -96,6 +100,9 @@ function send_response($response_data) {
     echo $json_response;
 }
 
+
+
+
 function fLogin($_jsondata) {
 	$email=$_jsondata["email"];
 	$pswd=$_jsondata["pswd"];
@@ -137,6 +144,20 @@ function fGetUserInfo($_jsondata) {
 		send_response(Null);
 	}
 }
+
+
+function fCheckBeforeUpdateUserData($_jsondata) {
+	$_items = DbHelper::getInstance()->checkBeforeUpdateUserdata($_jsondata);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+
+
+
 
 
 function fUpdateUserData($_jsondata) {
