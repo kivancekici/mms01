@@ -17,8 +17,8 @@
                 "pageTitle": "Baklava7",
                 "btnname": "Adres Ekle",
                 "alert": "denemeAlertTurkish",
-                "allmanufacturers":"Üreticiler",     
-                "catalogue":"Katalog"           
+                "allmanufacturers": "Üreticiler",
+                "catalogue": "Katalog"
             },
             "login": {
                 "cardHeader": "Kullanıcı Girişi",
@@ -39,7 +39,8 @@
                 "male": " Erkek",
                 "female": " Kadın",
                 "optin": " Özel Teklifler Al",
-                "newsletter": " Haber Bülteni Al"
+                "newsletter": " Haber Bülteni Al",
+                "btnName": "Kaydet"
             },
             "register": {
                 "firstname": "Ad",
@@ -56,7 +57,7 @@
                 "toolbarText": "Tamam"
             },
             "manufacturers_menu": {
-                "pageTitle": "Baklava7"   
+                "pageTitle": "Baklava7"
             }
         },
         "de": {
@@ -78,8 +79,8 @@
                 "panelTitle": "Baklava7",
                 "btnname": "Addresse Hinzufügen",
                 "alert": "denemeAlertGerman",
-                "allmanufacturers":"Hersteller",     
-                "catalogue":"Katalog"  
+                "allmanufacturers": "Hersteller",
+                "catalogue": "Katalog"
             },
             "login": {
                 "cardHeader": "Login",
@@ -115,7 +116,7 @@
                 "toolbarText": "OK"
             },
             "manufacturers_menu": {
-                "pageTitle": "Baklava7"   
+                "pageTitle": "Baklava7"
             }
 
         }

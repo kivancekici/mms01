@@ -218,12 +218,22 @@ $$(document).on('pageInit', function(e) {
         var userId = window.localStorage.getItem("customerId");
         var response = getUserInfo(userId);
 
-        $$('.backBtn').on('click', function() {
+        var formData = {
+            'firstname': 'John',
+            'surname': 'com'
+        }
 
-            myApp.formFromJSON('#accountform', JSON.stringify(response));
-            myApp.alert(response);
+
+
+        $$('.backBtn').on('click', function() {
+            loadPageWithLang('main');
         });
 
+        $$('.updateBtn').on('click', function() {
+
+            myApp.formFromJSON('#accountform', formData);
+
+        });
 
 
     }
