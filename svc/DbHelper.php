@@ -124,7 +124,7 @@ class DbHelper {
 		$optin=0;
 		$website=" ";
 		//$secure_key = md5(uniqid(rand(), true));
-		$secure_key = md5($passwdOpen);		
+		$secure_key = md5($passwdOpen);	
 		$active=1;
 		$is_guest=0;
 		$deleted=0;
@@ -138,6 +138,11 @@ class DbHelper {
 		$_res = TRUE;
 		}
 
+
+
+
+
+
 		$this->conn->close();
 
 		if($_res){
@@ -145,6 +150,7 @@ class DbHelper {
 		$rwitem["status"]="OK";
 		$rwitem["pswd"]="$pwd";
 		$rwitem["secure_key"]="$secure_key";
+		$rwitem["sql"]="$sql";
 		return $rwitem;
 		}else{
 		$rwitem=array();
@@ -189,50 +195,27 @@ class DbHelper {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	function checkBeforeUpdateUserdata($_infos){
+		
+		
+				$email=$_infos["email"];
+				$id_customer=$_infos["id_customer"];
+		
+				$sql = "SELECT id_customer FROM ps_customer WHERE email='$email' AND id_customer !='$id_customer' ;";
+				
+						$result = $this->conn->query($sql);
+				
+						if ($result->num_rows > 0) {
+				
+							$rwitem["status"]="OK";
+							return $rwitem;
+						}else {
+						$rwitem["status"]="NOK";
+						return $rwitem;
+			
+						}
+		
+			}
 
 
 
@@ -246,8 +229,11 @@ class DbHelper {
 		$firstname=$_infos["firstname"];
 		$lastname=$_infos["lastname"];
 		$email=$_infos["email"];	
-		$passwd= md5($_infos["passwd"]);
-		$birthday=$_infos["birthday"];
+		$passwd= $this->encrypt($_infos["passwd"]);
+		$birthday = $_infos["birthday"];
+
+		$birthday=date("Y-m-d",strtotime($birthday));
+		
 		$newsletter=$_infos["newsletter"];		
 		$optin=$_infos["optin"];
 		$website=$_infos["website"]; 
@@ -255,7 +241,7 @@ class DbHelper {
 		$id_customer=$_infos["id_customer"];
 		
 		
-		$sql = "UPDATE ps_customer SET id_gender=$id_gender,company='$company',firstname='$firstname',lastname='$lastname',email='$email',passwd='$passwd',birthday=$birthday,newsletter=$newsletter,optin=$optin,website='$website',date_upd=now() WHERE id_customer=$id_customer";
+		$sql = "UPDATE ps_customer SET id_gender=$id_gender,company='$company',firstname='$firstname',lastname='$lastname',email='$email',passwd='$passwd',birthday='$birthday',newsletter=$newsletter,optin=$optin,website='$website',date_upd=now() WHERE id_customer=$id_customer";
         $result = $this->conn->query($sql);
 
         if ($result === TRUE) {

@@ -20,11 +20,13 @@ var userLoggedIn = window.localStorage.getItem("isLogin");
 var selectedLang;
 
 
+
 var manufacturersList=null;
 var manufacturersMenuList=null;
 var selectedManufacturerId=0;
 var searchResultList=null;
 var searchKeyWord="";
+
 
 if (langIsSeleted) {
     selectedLang = window.localStorage.getItem("lang");
@@ -37,6 +39,7 @@ if (langIsSeleted) {
 // Add view
 var mainView = myApp.addView('.view-main', {
 
+    domCache:true
 });
 
 
@@ -145,10 +148,14 @@ $$('#btnLogout').on('click', function() {
 });
 
 
+
+
 // Option 2. Using one 'pageInit' event handler for all pages:
 $$(document).on('pageInit', function(e) {
     // Get page data from event data
-    var page = e.detail.page;
+    var page = e.detail.page;  
+
+   
 
     if (page.name === 'login') {
         // Following code will be executed for page with data-page attribute equal to "about"
@@ -208,14 +215,13 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'main') {
-
     }
 
     if (page.name === 'account') {
         var userId = window.localStorage.getItem("customerId");
         var response = getUserInfo(userId);
         myApp.formFromJSON('#account-form', JSON.stringify(response));
-        myApp.alert(response);
+        //myApp.alert(response);
     }
 
     if (page.name === 'register') {
@@ -244,12 +250,16 @@ $$(document).on('pageInit', function(e) {
             var col = pickerGender.cols[0];
             var genderId;
 
-            if (col.activeIndex != 1) {
-                genderId = 0;
-            } else {
-                genderId = 1;
+            var gender = formData.gender;
+
+
+            if (gender != '' && col.activeIndex != 1) {
+                genderId = 2;
             }
 
+            if (col.activeIndex == 1) {
+                genderId = 1;
+            }
 
             var email = formData.email;
             var name = formData.firstname;
@@ -258,30 +268,40 @@ $$(document).on('pageInit', function(e) {
             var repeatpassword = formData.repeatpassword;
             var birthday = formData.birthday;
 
-            if (pass !== repeatpassword) {
-                myApp.alert('Parolalar Eşleşmedi, Lütfen Kontrol Ediniz', 'Uyarı');
+            if (name == '' || surname == '' || pass == '' || repeatpassword == '' || email == '') {
+                myApp.alert('Lütfen zorunlu alanları doldurunuz.', 'Bilgi');
             } else {
+                if (pass.length < 5) {
+                    myApp.alert('Parola en az 5 karakterden oluşmalıdır.', 'Bilgi');
+                } else {
 
-                if (validateEmail(email)) {
-                    var avaibleuser = checkAvaibleUser(email);
-
-                    if (avaibleuser == "OK") {
-                        var response = mobileRegister(email, name, surname, pass, genderId, birthday);
-
-
-                        if (response != "NOK") {
-                            loadPageWithLang('login');
-                        }
+                    if (pass !== repeatpassword) {
+                        myApp.alert('Parolalar Eşleşmedi, Lütfen Kontrol Ediniz', 'Bilgi');
                     } else {
-                        myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
+
+                        if (validateEmail(email)) {
+                            var avaibleuser = checkAvaibleUser(email);
+
+                            if (avaibleuser == "OK") {
+                                var response = mobileRegister(email, name, surname, pass, genderId, birthday);
+
+
+                                if (response != "NOK") {
+                                    loadPageWithLang('login');
+                                }
+                            } else {
+                                myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
+                            }
+
+                        } else {
+                            myApp.alert('Geçerli Email Adresi Giriniz.', 'Bilgi');
+                        }
+
                     }
 
-                } else {
-                    myApp.alert('Geçerli Email Adresi Giriniz.', 'Uyarı');
                 }
 
             }
-
 
 
 
@@ -317,12 +337,12 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'manufacturers') {
-        if(manufacturersList==null){
-            manufacturersList=getAllManufacturersList("");            
+        if (manufacturersList == null) {
+            manufacturersList = getAllManufacturersList("");
         }
 
         initListVirtualManufacturers();
-        listVirtualManufacturers.items=manufacturersList;
+        listVirtualManufacturers.items = manufacturersList;
         listVirtualManufacturers.update();
     }
 
