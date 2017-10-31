@@ -152,6 +152,32 @@ function checkAvaibleUser(email) {
 
 }
 
+function checkAvaibleUserForAccountUpdate(email, userId) {
+
+    var userdata = {
+        'opr': 'checkbeforeupdateuserdata',
+        'email': email,
+        'id_customer': userId
+    }
+
+    var result = restfulPostCall(userdata);
+
+
+    if (result != "Error") {
+
+        if (result.status == "NOK") {
+            return "OK";
+        } else {
+            return "NOK";
+        }
+
+
+    } else {
+        return "NOK"
+    }
+
+}
+
 function getUserInfo(userId) {
 
 

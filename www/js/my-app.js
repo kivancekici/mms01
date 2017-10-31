@@ -280,7 +280,7 @@ $$(document).on('pageInit', function(e) {
                     } else {
 
                         if (validateEmail(email)) {
-                            var avaibleuser = checkAvaibleUser(email);
+                            var avaibleuser = checkAvaibleUserForAccountUpdate(email, userId);
 
                             if (avaibleuser == "OK") {
 
