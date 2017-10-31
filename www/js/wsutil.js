@@ -359,57 +359,60 @@ function getSearchResultList(searchKeyword) {
             return result;
 
 
+        }
+    }
 }
 
 
-function getOpenOrderDetailsList(id_customer,id_order) {
-    
-        var searchData = {
-            "opr": "openorderdetails",
-            "id_customer": id_customer,
-            "id_order":id_order
-        }
-    
-        var result = restfulPostCall(searchData);
-    
-        if (result != "Error") {
-    
-            if (result.status != "NOK") {
-                return result;
-            } else {
-                return "NOK";
-            }
-    
+function getOpenOrderDetailsList(id_customer, id_order) {
 
+    var searchData = {
+        "opr": "openorderdetails",
+        "id_customer": id_customer,
+        "id_order": id_order
+    }
+
+    var result = restfulPostCall(searchData);
+
+    if (result != "Error") {
+
+        if (result.status != "NOK") {
+            return result;
         } else {
             return "NOK";
         }
-    
+
+
+    } else {
+        return "NOK";
     }
 
+}
 
-    function getOldOrdersList(id_customer) {
-        
-            var searchData = {
-                "opr": "oldorders",
-                "id_customer": id_customer
-            }
-        
-            var result = restfulPostCall(searchData);
-        
-            if (result != "Error") {
-        
-                if (result.status != "NOK") {
-                    return result;
-                } else {
-                    return "NOK";
-                }
-        
-            } else {
-                return "NOK"
-            }
-        
+
+
+function getOldOrdersList(id_customer) {
+
+    var searchData = {
+        "opr": "oldorders",
+        "id_customer": id_customer
+    }
+
+    var result = restfulPostCall(searchData);
+
+    if (result != "Error") {
+
+        if (result.status != "NOK") {
+            return result;
+        } else {
+            return "NOK";
         }
+
+    } else {
+        return "NOK"
+    }
+
+}
 
 
 function getAllManufacturersList(manufacturer) {
@@ -544,27 +547,28 @@ function getMessagesList(id_customer) {
 
 
 function postMessages(id_customer, message) {
-    
-        var data = {
-            'opr': 'postmessages',
-            'id_customer': id_customer,
-            'message': message,
-        }
-    
-        var result = restfulPostCall(data);
-    
-    
-        if (result != "Error") {
-    
-            if (result.status == "NOK") {
-                return "OK";
-            } else {
-                return "NOK";
-            }
-    
-    
-        } else {
-            return "NOK"
-        }
-    
+
+    var data = {
+        'opr': 'postmessages',
+        'id_customer': id_customer,
+        'message': message,
     }
+
+    var result = restfulPostCall(data);
+
+
+    if (result != "Error") {
+
+        if (result.status == "NOK") {
+            return "OK";
+        } else {
+            return "NOK";
+        }
+
+
+    } else {
+        return "NOK"
+    }
+
+}
+
