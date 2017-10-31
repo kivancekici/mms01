@@ -2,11 +2,11 @@
     "languages": {
         "tr": {
             "panel": {
-                "orderItem": " Sipariş Ver",
-                "orderBoxItem": " Sipariş Sepetim",
+                "orderItem": "Sipariş Ver",
+                "orderBoxItem": "Sipariş Sepetim",
                 "accountItem": "Hesabım",
-                "addressItem": " Adreslerim",
-                "myOrdersItem": " Siparişlerim",
+                "addressItem": "Adreslerim",
+                "myOrdersItem": "Siparişlerim",
                 "workItem": "Nasıl Çalışır?",
                 "helpItem": "Yardım",
                 "infoItem": "Hakkında",
@@ -17,12 +17,12 @@
                 "pageTitle": "Baklava7",
                 "btnname": "Adres Ekle",
                 "alert": "denemeAlertTurkish",
-                "allmanufacturers":"Üreticiler",     
-                "catalogue":"Katalog"           
+                "allmanufacturers": "Üreticiler",
+                "catalogue": "Katalog"
             },
             "login": {
                 "cardHeader": "Kullanıcı Girişi",
-                "pass": " Parola",
+                "pass": "Parola",
                 "btnlogin": "Giriş",
                 "btnforgetpass": "Parolamı Unuttum",
                 "btnregister": "Yeni Üye Kayıt"
@@ -32,31 +32,32 @@
                 "firstname": "Ad",
                 "surname": "Soyad",
                 "email": "E-mail",
-                "password": " Parola",
-                "repeatpassword": " Parola (Onay)",
+                "password": "Parola",
+                "repeatpassword": "Parola (Onay)",
                 "birthday": "Doğum Günü",
-                "gender": " Cinsiyet",
-                "male": " Erkek",
-                "female": " Kadın",
-                "optin": " Özel Teklifler Al",
-                "newsletter": " Haber Bülteni Al"
+                "gender": "Cinsiyet",
+                "male": "Erkek",
+                "female": "Kadın",
+                "optin": "Özel Teklifler Al",
+                "newsletter": "Haber Bülteni Al",
+                "btnName": "Kaydet"
             },
             "register": {
                 "firstname": "Ad",
                 "surname": "Soyad",
                 "email": "E-mail",
-                "password": " Parola",
-                "repeatpassword": " Parola (Onay)",
+                "password": "Parola",
+                "repeatpassword": "Parola (Onay)",
                 "birthday": "Doğum Günü",
-                "gender": " Cinsiyet",
-                "male": " Erkek",
-                "female": " Kadın",
+                "gender": "Cinsiyet",
+                "male": "Erkek",
+                "female": "Kadın",
                 "pageTitle": "Kayıt Ekranı",
                 "btnName": "Kaydet",
                 "toolbarText": "Tamam"
             },
             "manufacturers_menu": {
-                "pageTitle": "Baklava7"   
+                "pageTitle": "Baklava7"
             }
         },
         "de": {
@@ -78,8 +79,8 @@
                 "panelTitle": "Baklava7",
                 "btnname": "Addresse Hinzufügen",
                 "alert": "denemeAlertGerman",
-                "allmanufacturers":"Hersteller",     
-                "catalogue":"Katalog"  
+                "allmanufacturers": "Hersteller",
+                "catalogue": "Katalog"
             },
             "login": {
                 "cardHeader": "Login",
@@ -93,29 +94,29 @@
                 "name": "Name",
                 "surname": "Nachname",
                 "email": "E-mail",
-                "password": " Passwort",
-                "repeatpassword": " Passwort (Wieder)",
+                "password": "Passwort",
+                "repeatpassword": "Passwort (Wieder)",
                 "birthday": "Geburtstag",
-                "gender": " Geschlecht",
-                "male": " Herr",
-                "female": " Frau"
+                "gender": "Geschlecht",
+                "male": "Herr",
+                "female": "Frau"
             },
             "register": {
                 "firstname": "Name",
                 "surname": "Nachname",
                 "email": "E-mail",
-                "password": " Passwort",
-                "repeatpassword": " Passwort (Wieder)",
+                "password": "Passwort",
+                "repeatpassword": "Passwort (Wieder)",
                 "birthday": "Geburtstag",
-                "gender": " Geschlecht",
-                "male": " Herr",
-                "female": " Frau",
+                "gender": "Geschlecht",
+                "male": "Herr",
+                "female": "Frau",
                 "pageTitle": "Neu Benutzer",
                 "btnName": "Speichern",
                 "toolbarText": "OK"
             },
             "manufacturers_menu": {
-                "pageTitle": "Baklava7"   
+                "pageTitle": "Baklava7"
             }
 
         }
