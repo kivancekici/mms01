@@ -88,10 +88,10 @@
                 <li>
                     <div class="item-content">
 
-                        <label class="label-switch">
+                        <label class="label-switch" style="max-width: 4em !important;">
                                    <input name="newsletter" type="checkbox" value="1">
                                    <div style="color: gray;" class="checkbox"></div>
-                    </label>
+                        </label>
                         <div style="color: gray;">{{newsletter}}</div>
                     </div>
 
@@ -101,13 +101,12 @@
                     <div class="item-content">
 
                         <div class="item-inner">
-                            <div class="item-input">
-                                <div style="color: gray;" class="item-title label">{{optin}}</div>
-                            </div>
+
                             <div class="item-input">
                                 <label class="label-switch">
                                    <input name="optin" type="checkbox" value="1">
-                                   <div class="checkbox"></div>       
+                                   <div class="checkbox"></div> 
+                                   <div style="color: gray;" class="item-title label">{{optin}}</div>      
                                </label>
 
                             </div>
