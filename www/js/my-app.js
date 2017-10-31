@@ -1,4 +1,4 @@
-Template7.registerHelper('placeholder', function(plchldrContent) {
+Template7.registerHelper('placeholder', function (plchldrContent) {
     var ret = 'placeholder="' + plchldrContent + '"';
     return ret;
 });
@@ -38,8 +38,7 @@ if (langIsSeleted) {
 
 // Add view
 var mainView = myApp.addView('.view-main', {
-
-    domCache:true
+    domCache: true
 });
 
 
@@ -48,7 +47,7 @@ getLangJson();
 
 
 
-setTimeout(function() {
+setTimeout(function () {
 
     checkLangStatus();
 
@@ -116,7 +115,7 @@ function validateEmail(email) {
 }
 
 function getLangJson() {
-    $$.getJSON('./languages/lang.json', function(data) {
+    $$.getJSON('./languages/lang.json', function (data) {
         myApp.template7Data.languages = data.languages;
         changePanelLanguage();
     });
@@ -124,20 +123,20 @@ function getLangJson() {
 
 
 // Handle Cordova Device Ready Event
-$$(document).on('deviceready', function() {
+$$(document).on('deviceready', function () {
     console.log("Device is ready!");
 });
 
-$$('#orderItemBtn').on('click', function() {
+$$('#orderItemBtn').on('click', function () {
     loadPageWithLang('main');
 });
 
-$$('#accountItemBtn').on('click', function() {
+$$('#accountItemBtn').on('click', function () {
     loadPageWithLang('account');
 });
 
 
-$$('#btnLogout').on('click', function() {
+$$('#btnLogout').on('click', function () {
     userLoggedIn = false;
     window.localStorage.setItem("isLogin", false);
     window.localStorage.setItem("customerId", "0");
@@ -151,16 +150,16 @@ $$('#btnLogout').on('click', function() {
 
 
 // Option 2. Using one 'pageInit' event handler for all pages:
-$$(document).on('pageInit', function(e) {
+$$(document).on('pageInit', function (e) {
     // Get page data from event data
-    var page = e.detail.page;  
+    var page = e.detail.page;
 
-   
+
 
     if (page.name === 'login') {
         // Following code will be executed for page with data-page attribute equal to "about"
         //myApp.alert('Here comes login page');
-        $$('.btnLogin').on('click', function() {
+        $$('.btnLogin').on('click', function () {
             var email = $$('#txtEmail').val();
             var pass = $$('#txtPassword').val();
             var response = mobileLogin(email, pass);
@@ -177,12 +176,7 @@ $$(document).on('pageInit', function(e) {
 
         });
 
-        $$('.btnForgetPassword').on('click', function() {
-            //myApp.alert('Unuttum bişeyleri');
-        });
-
-
-        $$('.btnRegister').on('click', function() {
+        $$('.btnRegister').on('click', function () {
 
             loadPageWithLang('register');
             /*
@@ -244,11 +238,10 @@ $$(document).on('pageInit', function(e) {
             cssClass: 'theme-orange'
         });
 
-        $$('.updateBtn').on('click', function() {
+        $$('.updateBtn').on('click', function () {
 
 
             var accountData = myApp.formToData('#accountform');
-
 
             var email = accountData.email;
             var name = accountData.firstname;
@@ -307,11 +300,6 @@ $$(document).on('pageInit', function(e) {
                 }
 
             }
-
-
-
-
-
         });
 
 
@@ -325,7 +313,7 @@ $$(document).on('pageInit', function(e) {
         });
 
 
-        $$('.registerBtn').on('click', function() {
+        $$('.registerBtn').on('click', function () {
 
 
             var formData = myApp.formToData('#register-form');
@@ -388,7 +376,7 @@ $$(document).on('pageInit', function(e) {
 
     if (page.name === 'language') {
 
-        $$('.btnLangTr').on('click', function() {
+        $$('.btnLangTr').on('click', function () {
 
             window.localStorage.setItem("langIsSelected", true);
             window.localStorage.setItem("lang", "tr");
@@ -397,7 +385,7 @@ $$(document).on('pageInit', function(e) {
             changePanelLanguage();
         });
 
-        $$('.btnLangGer').on('click', function() {
+        $$('.btnLangGer').on('click', function () {
             window.localStorage.setItem("langIsSelected", true);
             window.localStorage.setItem("lang", "de");
             selectedLang = "de";
@@ -446,7 +434,7 @@ var postCodeSearch = myApp.autocomplete({
     limit: 8, //limit to 8 results
     dropdownPlaceholderText: 'Produkte',
     expandInput: true, // expand input
-    source: function(autocomplete, query, render) {
+    source: function (autocomplete, query, render) {
         var results = [];
         if (query.length === 0) {
             render(results);
@@ -463,7 +451,7 @@ var postCodeSearch = myApp.autocomplete({
             data: {
                 query: query
             },
-            success: function(data) {
+            success: function (data) {
                 // Find matched items
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].name.toLowerCase().indexOf(query.toLowerCase()) >= 0) results.push(data[i]);
