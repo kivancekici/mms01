@@ -501,7 +501,7 @@ function getManufacturersMenuList(id_manufacturer) {
 }
 
 
-}
+
 
 
 function getUserAddressesList(id_customer) {
