@@ -223,10 +223,6 @@ $$(document).on('pageInit', function(e) {
         var userId = window.localStorage.getItem("customerId");
         var response = getUserInfo(userId);
         myApp.formFromJSON('#account-form', JSON.stringify(response));
-        //myApp.alert(response);
-    }
-
-
         var pass = window.localStorage.getItem('password');
 
         var formData = {
