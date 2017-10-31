@@ -74,9 +74,10 @@
     height: 80px!important;
 }
 
-.list-item-manufacturer-details{
+.list-item-manufacturer-details {
     font-family: "Open Sans Condensed", "Helvetica", "Arial", "sans-serif";
 }
+
 
 /*Askin Başla*/
 
@@ -111,6 +112,9 @@ option {
     align-items: center !important;
 }
 
+.itemLogo {
+    min-width: 2em !important;
+}
+
 
 /*Askin Bitir*/
-

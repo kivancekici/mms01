@@ -1,9 +1,12 @@
 <div data-page="account" class="page navbar-fixed">
     <div class="navbar bg-orange border-orange color-white">
         <div class="navbar-inner">
+            <div class="left">
+                <a href="#" class="link icon-only back backBtn"><i class="f7-icons color-white">chevron_left</i></a>
+            </div>
             <div class="center sliding color-white">{{pageTitle}}</div>
             <div class="right">
-                <a href="#" class="link icon-only open-panel"><i class="f7-icons color-white">bars</i></a>
+                <a href="#" class="link updateBtn color-white">{{btnName}}</a>
             </div>
         </div>
     </div>
@@ -12,7 +15,7 @@
         <form id="account-form" class="list-block">
             <ul>
                 <li class="item-content">
-                    <div class="item-media"><i class="icon f7-icons">person</i></div>
+                    <div class="item-media itemLogo"><i class="icon f7-icons">person</i></div>
                     <div class="item-inner">
                         <div class="item-input">
                             <input type="text" name="firstname" {{placeholder firstname}}>
@@ -21,7 +24,7 @@
                 </li>
 
                 <li class="item-content">
-                    <div class="item-media"><i class="icon f7-icons">person</i></div>
+                    <div class="item-media itemLogo"><i class="icon f7-icons">person</i></div>
                     <div class="item-inner">
 
                         <div class="item-input">
@@ -33,7 +36,7 @@
 
 
                 <li class="item-content">
-                    <div class="item-media"><i class="icon f7-icons">email_fill</i></div>
+                    <div class="item-media itemLogo"><i class="icon f7-icons">email_fill</i></div>
                     <div class="item-inner">
                         <div class="item-input">
                             <input type="email" name="email" {{placeholder email}}>
@@ -41,7 +44,7 @@
                     </div>
                 </li>
                 <li class="item-content">
-                    <div class="item-media"><i class="icon f7-icons">lock_fill</i></div>
+                    <div class="item-media itemLogo"><i class="icon f7-icons">lock_fill</i></div>
                     <div class="item-inner">
                         <div class="item-input">
                             <input type="password" name="password" {{placeholder password}}>
@@ -50,7 +53,7 @@
                 </li>
 
                 <li class="item-content">
-                    <div class="item-media"><i class="icon f7-icons">lock_fill</i></div>
+                    <div class="item-media itemLogo"><i class="icon f7-icons">lock_fill</i></div>
                     <div class="item-inner">
                         <div class="item-input">
                             <input type="password" name="repeatpassword" {{placeholder repeatpassword}}>
@@ -59,7 +62,7 @@
                 </li>
 
                 <li class="item-content">
-                    <div class="item-media"><i class="icon f7-icons">calendar</i></div>
+                    <div class="item-media itemLogo"><i class="icon f7-icons">calendar</i></div>
                     <div class="item-inner">
                         <div class="item-input">
                             <input type="text" name="birthday" readonly id="calendar-default" {{placeholder birthday}}>
@@ -68,11 +71,15 @@
                 </li>
 
                 <li class="item-content">
-                    <div class="item-media"><i class="icon f7-icons">persons</i></div>
+                    <div class="item-media itemLogo"><i class="icon f7-icons">persons</i></div>
                     <div class="item-inner">
                         <div class="item-input">
 
-                            <input type="text" name="gender" {{placeholder gender}} readonly id="picker-gender">
+                            <select name="gender" required>
+                            <option value="" disabled selected>{{gender}}</option>
+                            <option value="1">{{male}}</option>
+                            <option value="2">{{female}}</option>
+                            </select>
 
                         </div>
                     </div>
@@ -80,32 +87,41 @@
 
                 <li>
                     <div class="item-content">
-                        <div class="item-media"><i class="icon f7-icons">check</i></div>
+
                         <div class="item-inner">
-                            <div class="item-title label">{{newsletter}}</div>
+                            <div style="color: gray; width: 8em !important;" class="item-title label">{{newsletter}}</div>
+
                             <div class="item-input">
                                 <label class="label-switch">
-                                   <input type="checkbox">
-                                   <div class="checkbox"></div>
-                               </label>
+                                   <input name="newsletter" type="checkbox" value="1">
+                                   <div style="color: gray;" class="checkbox"></div>
+                            </label>
                             </div>
+
                         </div>
                     </div>
+
                 </li>
 
                 <li>
                     <div class="item-content">
-                        <div class="item-media"><i class="icon f7-icons">check</i></div>
+
                         <div class="item-inner">
-                            <div class="item-title label">{{optin}}</div>
+
+                            <div style="color: gray; width: 8em !important;" class="item-title label">{{optin}}</div>
+
                             <div class="item-input">
                                 <label class="label-switch">
-                                   <input type="checkbox">
-                                   <div class="checkbox"></div>
+                                   <input name="optin" type="checkbox" value="1">
+                                   <div class="checkbox"></div>  
                                </label>
                             </div>
+
+
                         </div>
+
                     </div>
+
                 </li>
 
             </ul>
