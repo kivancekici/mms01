@@ -39,7 +39,7 @@ function initListVirtualSearchResult() {
         items: [
 
         ],
-        height: 61,
+        height: 124,
         template: '<li>' +
         '<a href="#" class="item-link item-content">' +
         '<div class="item-media">' +
@@ -65,7 +65,7 @@ function initListManufacturersMenu() {
         items: [
 
         ],
-        height: 61,
+        height: 124,
         template: '<li>' +
         '<a href="#" class="item-link item-content">' +
         '<div class="item-media">' +
