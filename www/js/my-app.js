@@ -199,7 +199,7 @@ $$(document).on('pageInit', function(e) {
 
         var userId = window.localStorage.getItem("customerId");
         var response = getUserInfo(userId);
-        myApp.alert(response.firstname);
+
         var pass = window.localStorage.getItem('password');
 
         var formData = {
@@ -252,11 +252,11 @@ $$(document).on('pageInit', function(e) {
                 alertMessage('requiredField', 'info');
             } else {
                 if (pass.length < 5) {
-                    myApp.alert('Parola en az 5 karakterden oluşmalıdır.', 'Bilgi');
+                    alertMessage('passwordValidation', 'info');
                 } else {
 
                     if (pass !== repeatpassword) {
-                        myApp.alert('Parolalar Eşleşmedi, Lütfen Kontrol Ediniz', 'Bilgi');
+                        alertMessage('passwordMatch', 'info');
                     } else {
 
                         if (validateEmail(email)) {
@@ -267,15 +267,15 @@ $$(document).on('pageInit', function(e) {
                                 var response = updateAccount(email, name, surname, pass, genderId, birthday, newsletter, optin, userId);
 
                                 if (response == "OK") {
-                                    myApp.alert('Kullanıcı hesabınız güncellenmiştir.', 'Bilgi');
+                                    alertMessage('updateOk', 'info');
                                 }
 
                             } else {
-                                myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
+                                alertMessage('mailNotAvailable', 'info');
                             }
 
                         } else {
-                            myApp.alert('Geçerli Email Adresi Giriniz.', 'Bilgi');
+                            alertMessage('mailNotOk', 'info');
                         }
 
                     }
@@ -313,14 +313,14 @@ $$(document).on('pageInit', function(e) {
             var genderId = formData.gender;
 
             if (name == '' || surname == '' || pass == '' || repeatpassword == '' || email == '') {
-                myApp.alert('Lütfen zorunlu alanları doldurunuz.', 'Bilgi');
+                alertMessage('requiredField', 'info');
             } else {
                 if (pass.length < 5) {
-                    myApp.alert('Parola en az 5 karakterden oluşmalıdır.', 'Bilgi');
+                    alertMessage('passwordValidation', 'info');
                 } else {
 
                     if (pass !== repeatpassword) {
-                        myApp.alert('Parolalar Eşleşmedi, Lütfen Kontrol Ediniz', 'Bilgi');
+                        alertMessage('passwordMatch', 'info');
                     } else {
 
                         if (validateEmail(email)) {
@@ -336,11 +336,11 @@ $$(document).on('pageInit', function(e) {
                                     loadPageWithLang('main');
                                 }
                             } else {
-                                myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
+                                alertMessage('mailNotAvailable', 'info');
                             }
 
                         } else {
-                            myApp.alert('Geçerli Email Adresi Giriniz.', 'Bilgi');
+                            alertMessage('mailNotOk', 'info');
                         }
 
                     }
