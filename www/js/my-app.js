@@ -123,8 +123,8 @@ function getLangJson() {
 }
 
 function alertMessage(msgKey, msgTypeKey) {
-    var msg = 'languages.' + selectedLang + '.alertMessages.' + msgKey;
-    var msgType = 'languages.' + selectedLang + '.alertMessages.' + msgTypeKey;
+    var msg = ' myApp.template7Data.languages.' + selectedLang + '.alertMessages.' + msgKey;
+    var msgType = ' myApp.template7Data.languages.' + selectedLang + '.alertMessages.' + msgTypeKey;
 
     myApp.alert(msg, msgType);
 }
