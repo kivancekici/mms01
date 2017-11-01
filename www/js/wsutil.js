@@ -12,7 +12,7 @@ function restfulGetCall(restSuccess) {
 
 function restfulPostCall(sendData) {
 
-    myApp.showPreloader();
+    //  myApp.showPreloader();
 
     var response;
 
@@ -24,11 +24,11 @@ function restfulPostCall(sendData) {
         contentType: 'application/json',
         dataType: 'json',
         success: function(data, status, xmlRequest) {
-            myApp.hidePreloader();
+            //  myApp.hidePreloader();
             response = data;
         },
         error: function(request, status, error) {
-            myApp.hidePreloader();
+            //  myApp.hidePreloader();
             response = "Error";
         }
 
@@ -58,7 +58,7 @@ function mobileLogin(email, passwd) {
         }
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -87,7 +87,7 @@ function mobileRegister(email, name, surname, pass, genderId, birthday) {
         }
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -121,7 +121,7 @@ function updateAccount(email, name, surname, pass, genderId, birthday, newslette
         }
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -146,7 +146,7 @@ function checkAvaibleUser(email) {
 
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -172,7 +172,7 @@ function checkAvaibleUserForAccountUpdate(email, userId) {
 
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -191,10 +191,10 @@ function getUserInfo(userId) {
 
     if (result != "Error") {
 
-        return result
+        return result;
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 
@@ -237,7 +237,7 @@ function saveAddress(id_country, id_state, id_customer, alias, company, lastname
 
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -264,7 +264,7 @@ function deleteaddress(id_customer, alias, id_address) {
 
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -305,7 +305,7 @@ function updateAddress(id_country, id_state, id_customer, alias, company, lastna
 
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -329,7 +329,7 @@ function getOpenOrdersList(id_customer) {
         }
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 }
 
@@ -408,7 +408,7 @@ function getOldOrdersList(id_customer) {
         }
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -432,7 +432,7 @@ function getAllManufacturersList(manufacturer) {
         }
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -465,7 +465,7 @@ function getSearchResultList(searchKeyword) {
         }
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -497,7 +497,7 @@ function getManufacturersMenuList(id_manufacturer) {
         return result;
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -520,7 +520,7 @@ function getUserAddressesList(id_customer) {
         return result;
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -539,7 +539,7 @@ function getMessagesList(id_customer) {
         return result;
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
