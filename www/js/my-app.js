@@ -199,6 +199,7 @@ $$(document).on('pageInit', function(e) {
 
         var userId = window.localStorage.getItem("customerId");
         var response = getUserInfo(userId);
+        myApp.alert(response.firstname);
         myApp.formFromJSON('#account-form', JSON.stringify(response));
         var pass = window.localStorage.getItem('password');
 
