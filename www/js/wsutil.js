@@ -1,19 +1,18 @@
 var servicePath = "http://baklava7.de/mapi/Msvc.php";
 
 function restfulGetCall(restSuccess) {
-    $.get(servicePath, function (data) {
+    $.get(servicePath, function(data) {
         restSuccess(data);
-    }).fail(function () {
+    }).fail(function() {
 
     });
-
 
 }
 
 
 function restfulPostCall(sendData) {
 
-    myApp.showPreloader();
+    //  myApp.showPreloader();
 
     var response;
 
@@ -24,12 +23,12 @@ function restfulPostCall(sendData) {
         data: JSON.stringify(sendData),
         contentType: 'application/json',
         dataType: 'json',
-        success: function (data, status, xmlRequest) {
-            myApp.hidePreloader();
+        success: function(data, status, xmlRequest) {
+            //  myApp.hidePreloader();
             response = data;
         },
-        error: function (request, status, error) {
-            myApp.hidePreloader();
+        error: function(request, status, error) {
+            //  myApp.hidePreloader();
             response = "Error";
         }
 
@@ -59,7 +58,7 @@ function mobileLogin(email, passwd) {
         }
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -88,7 +87,7 @@ function mobileRegister(email, name, surname, pass, genderId, birthday) {
         }
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -122,7 +121,7 @@ function updateAccount(email, name, surname, pass, genderId, birthday, newslette
         }
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -147,7 +146,7 @@ function checkAvaibleUser(email) {
 
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -173,14 +172,14 @@ function checkAvaibleUserForAccountUpdate(email, userId) {
 
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
 
 function getUserInfo(userId) {
 
-
+    myApp.alert(userId);
     var userdata = {
         'opr': 'getuserinfo',
         'id_customer': userId
@@ -192,10 +191,10 @@ function getUserInfo(userId) {
 
     if (result != "Error") {
 
-        return result
+        return result;
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 
@@ -238,7 +237,7 @@ function saveAddress(id_country, id_state, id_customer, alias, company, lastname
 
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -265,7 +264,7 @@ function deleteaddress(id_customer, alias, id_address) {
 
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -306,7 +305,7 @@ function updateAddress(id_country, id_state, id_customer, alias, company, lastna
 
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -330,7 +329,7 @@ function getOpenOrdersList(id_customer) {
         }
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 }
 
@@ -363,7 +362,6 @@ function getSearchResultList(searchKeyword) {
     }
 }
 
-
 function getOpenOrderDetailsList(id_customer, id_order) {
 
     var searchData = {
@@ -373,7 +371,6 @@ function getOpenOrderDetailsList(id_customer, id_order) {
     }
 
     var result = restfulPostCall(searchData);
-
     if (result != "Error") {
 
         if (result.status != "NOK") {
@@ -388,8 +385,6 @@ function getOpenOrderDetailsList(id_customer, id_order) {
     }
 
 }
-
-
 
 function getOldOrdersList(id_customer) {
 
@@ -409,7 +404,7 @@ function getOldOrdersList(id_customer) {
         }
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -433,7 +428,7 @@ function getAllManufacturersList(manufacturer) {
         }
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -466,7 +461,7 @@ function getSearchResultList(searchKeyword) {
         }
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -498,7 +493,7 @@ function getManufacturersMenuList(id_manufacturer) {
         return result;
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -518,7 +513,7 @@ function getUserAddressesList(id_customer) {
         return result;
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -537,7 +532,7 @@ function getMessagesList(id_customer) {
         return result;
 
     } else {
-        return "NOK"
+        return "NOK";
     }
 
 }
@@ -561,11 +556,8 @@ function postMessages(id_customer, message) {
         } else {
             return "NOK";
         }
-
-
     } else {
-        return "NOK"
+        return "NOK";
     }
-
 }
 

@@ -58,6 +58,17 @@
             },
             "manufacturers_menu": {
                 "pageTitle": "Baklava7"
+            },
+            "alertMessages": {
+                "info": "Bilgi",
+                "warning": "Uyarı",
+                "error": "Hata",
+                "requiredField": "Lütfen zorunlu alanları doldurunuz",
+                "passwordValidation": "Parola en az 5 karakterden oluşmalıdır",
+                "passwordMatch": "Parolalar eşleşmedi, lütfen kontrol ediniz",
+                "updateOk": "Kullanıcı hesabınız başarı ile güncellenmiştir",
+                "mailNotAvailable": "Mail adresi daha önceden kayıtlıdır",
+                "mailNotOk": "Lütfen geçerli bir E-mail adresi girin"
             }
         },
         "de": {
