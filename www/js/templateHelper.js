@@ -39,7 +39,22 @@ function initListVirtualSearchResult() {
         items: [
 
         ],
-        height: 61,
+        searchAll: function (query, items) {
+            var foundItems = [];
+            for (var i = 0; i < items.length; i++) {
+                // Check if title contains query string
+                var found=false;
+
+                if (items[i].name.toLowerCase().indexOf(query.trim()) >= 0) found=true;
+                if (items[i].description_short.toLowerCase().indexOf(query.trim()) >= 0) found=true;
+                if (items[i].description.toLowerCase().indexOf(query.trim()) >= 0) found=true;
+                
+                if(found) foundItems.push(i);;
+            }
+            // Return array with indexes of matched items
+            return foundItems; 
+        },
+        height: 124,
         template: '<li>' +
         '<a href="#" class="item-link item-content">' +
         '<div class="item-media">' +
@@ -65,7 +80,7 @@ function initListManufacturersMenu() {
         items: [
 
         ],
-        height: 61,
+        height: 124,
         template: '<li>' +
         '<a href="#" class="item-link item-content">' +
         '<div class="item-media">' +

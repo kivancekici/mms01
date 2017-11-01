@@ -1,4 +1,4 @@
-Template7.registerHelper('placeholder', function(plchldrContent) {
+Template7.registerHelper('placeholder', function (plchldrContent) {
     var ret = 'placeholder="' + plchldrContent + '"';
     return ret;
 });
@@ -21,11 +21,11 @@ var selectedLang;
 
 
 
-var manufacturersList=null;
-var manufacturersMenuList=null;
-var selectedManufacturerId=0;
-var searchResultList=null;
-var searchKeyWord="";
+var manufacturersList = null;
+var manufacturersMenuList = null;
+var selectedManufacturerId = 0;
+var searchResultList = null;
+var searchKeyWord = "";
 
 
 if (langIsSeleted) {
@@ -38,8 +38,7 @@ if (langIsSeleted) {
 
 // Add view
 var mainView = myApp.addView('.view-main', {
-
-    domCache:true
+    domCache: true
 });
 
 
@@ -48,7 +47,7 @@ getLangJson();
 
 
 
-setTimeout(function() {
+setTimeout(function () {
 
     checkLangStatus();
 
@@ -82,8 +81,8 @@ function changePanelLanguage() {
 }
 
 
-function setContextParameter(pageName,key,value){
-    myApp.template7Data.languages[selectedLang][pageName][key]=value;
+function setContextParameter(pageName, key, value) {
+    myApp.template7Data.languages[selectedLang][pageName][key] = value;
 }
 
 function loadPageWithLang(pageName) {
@@ -116,7 +115,7 @@ function validateEmail(email) {
 }
 
 function getLangJson() {
-    $$.getJSON('./languages/lang.json', function(data) {
+    $$.getJSON('./languages/lang.json', function (data) {
         myApp.template7Data.languages = data.languages;
         changePanelLanguage();
     });
@@ -124,25 +123,25 @@ function getLangJson() {
 
 
 // Handle Cordova Device Ready Event
-$$(document).on('deviceready', function() {
+$$(document).on('deviceready', function () {
     console.log("Device is ready!");
 });
 
-$$('#orderItemBtn').on('click', function() {
+$$('#orderItemBtn').on('click', function () {
     loadPageWithLang('main');
 });
 
-$$('#accountItemBtn').on('click', function() {
+$$('#accountItemBtn').on('click', function () {
     loadPageWithLang('account');
 });
 
 
-$$('#btnLogout').on('click', function() {
-    userLoggedIn=false;
+$$('#btnLogout').on('click', function () {
+    userLoggedIn = false;
     window.localStorage.setItem("isLogin", false);
     window.localStorage.setItem("customerId", "0");
-    window.localStorage.setItem("langIsSelected",false);
-    langIsSeleted=false;
+    window.localStorage.setItem("langIsSelected", false);
+    langIsSeleted = false;
     checkLangStatus();
 
 });
@@ -151,16 +150,16 @@ $$('#btnLogout').on('click', function() {
 
 
 // Option 2. Using one 'pageInit' event handler for all pages:
-$$(document).on('pageInit', function(e) {
+$$(document).on('pageInit', function (e) {
     // Get page data from event data
-    var page = e.detail.page;  
+    var page = e.detail.page;
 
-   
+
 
     if (page.name === 'login') {
         // Following code will be executed for page with data-page attribute equal to "about"
         //myApp.alert('Here comes login page');
-        $$('.btnLogin').on('click', function() {
+        $$('.btnLogin').on('click', function () {
             var email = $$('#txtEmail').val();
             var pass = $$('#txtPassword').val();
             var response = mobileLogin(email, pass);
@@ -169,6 +168,7 @@ $$(document).on('pageInit', function(e) {
                 loadPageWithLang('main');
                 window.localStorage.setItem("customerId", response);
                 window.localStorage.setItem("isLogin", true);
+                window.localStorage.setItem('password', pass);
             } else {
                 window.localStorage.setItem("isLogin", false);
 
@@ -176,12 +176,7 @@ $$(document).on('pageInit', function(e) {
 
         });
 
-        $$('.btnForgetPassword').on('click', function() {
-            //myApp.alert('Unuttum bişeyleri');
-        });
-
-
-        $$('.btnRegister').on('click', function() {
+        $$('.btnRegister').on('click', function () {
 
             loadPageWithLang('register');
             /*
@@ -218,48 +213,111 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'account') {
+
         var userId = window.localStorage.getItem("customerId");
         var response = getUserInfo(userId);
         myApp.formFromJSON('#account-form', JSON.stringify(response));
-        //myApp.alert(response);
+        var pass = window.localStorage.getItem('password');
+
+        var formData = {
+            'firstname': response.firstname,
+            'surname': response.lastname,
+            'email': response.email,
+            'password': pass,
+            'repeatpassword': pass,
+            'birthday': response.birthday,
+            'newsletter': [response.newsletter],
+            'optin': [response.optin],
+            'gender': [response.id_gender]
+        }
+
+        myApp.formFromData('#accountform', formData);
+
+        var calendarDefault = myApp.calendar({
+            input: '#calendar-default',
+            cssClass: 'theme-orange'
+        });
+
+        $$('.updateBtn').on('click', function () {
+
+
+            var accountData = myApp.formToData('#accountform');
+
+            var email = accountData.email;
+            var name = accountData.firstname;
+            var surname = accountData.surname;
+            var pass = accountData.password;
+            var repeatpassword = accountData.repeatpassword;
+            var birthday = accountData.birthday;
+            var genderId = accountData.gender;
+            var newsletter = accountData.newsletter[0];
+            var optin = accountData.optin[0];
+
+            if (newsletter != "1") {
+                newsletter = "0";
+            }
+
+            if (optin != "1") {
+                optin = "0";
+            }
+
+            myApp.alert(newsletter);
+
+
+
+            if (name == '' || surname == '' || pass == '' || repeatpassword == '' || email == '') {
+                myApp.alert('Lütfen zorunlu alanları doldurunuz.', 'Bilgi');
+            } else {
+                if (pass.length < 5) {
+                    myApp.alert('Parola en az 5 karakterden oluşmalıdır.', 'Bilgi');
+                } else {
+
+                    if (pass !== repeatpassword) {
+                        myApp.alert('Parolalar Eşleşmedi, Lütfen Kontrol Ediniz', 'Bilgi');
+                    } else {
+
+                        if (validateEmail(email)) {
+                            var avaibleuser = checkAvaibleUserForAccountUpdate(email, userId);
+
+                            if (avaibleuser == "OK") {
+
+                                var response = updateAccount(email, name, surname, pass, genderId, birthday, newsletter, optin, userId);
+
+                                if (response == "OK") {
+                                    myApp.alert('Kullanıcı hesabınız güncellenmiştir.', 'Bilgi');
+                                }
+
+                            } else {
+                                myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
+                            }
+
+                        } else {
+                            myApp.alert('Geçerli Email Adresi Giriniz.', 'Bilgi');
+                        }
+
+                    }
+
+                }
+
+            }
+        });
+
+
     }
 
     if (page.name === 'register') {
 
-        var registerPageData = myApp.template7Data.languages[selectedLang].register;
-
         var calendarDefault = myApp.calendar({
-            input: '#calendar-default'
+            input: '#calendar-default',
+            cssClass: 'theme-orange'
         });
 
 
-        var pickerGender = myApp.picker({
-            input: '#picker-gender',
-            toolbarCloseText: registerPageData.toolbarText,
-            cols: [{
-                textAlign: 'center',
-                values: [registerPageData.female, registerPageData.male]
-            }]
-        });
+        $$('.registerBtn').on('click', function () {
 
 
-        $$('.registerBtn').on('click', function() {
+            var formData = myApp.formToData('#register-form');
 
-
-            var formData = myApp.formToJSON('#register-form');
-            var col = pickerGender.cols[0];
-            var genderId;
-
-            var gender = formData.gender;
-
-
-            if (gender != '' && col.activeIndex != 1) {
-                genderId = 2;
-            }
-
-            if (col.activeIndex == 1) {
-                genderId = 1;
-            }
 
             var email = formData.email;
             var name = formData.firstname;
@@ -267,6 +325,7 @@ $$(document).on('pageInit', function(e) {
             var pass = formData.password;
             var repeatpassword = formData.repeatpassword;
             var birthday = formData.birthday;
+            var genderId = formData.gender;
 
             if (name == '' || surname == '' || pass == '' || repeatpassword == '' || email == '') {
                 myApp.alert('Lütfen zorunlu alanları doldurunuz.', 'Bilgi');
@@ -287,7 +346,9 @@ $$(document).on('pageInit', function(e) {
 
 
                                 if (response != "NOK") {
-                                    loadPageWithLang('login');
+                                    window.localStorage.setItem('password', pass);
+                                    window.localStorage.setItem("isLogin", true);
+                                    loadPageWithLang('main');
                                 }
                             } else {
                                 myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
@@ -307,9 +368,7 @@ $$(document).on('pageInit', function(e) {
 
         });
 
-        $$('.backBtn').on('click', function() {
-            loadPageWithLang('login');
-        });
+
 
     }
 
@@ -317,7 +376,7 @@ $$(document).on('pageInit', function(e) {
 
     if (page.name === 'language') {
 
-        $$('.btnLangTr').on('click', function() {
+        $$('.btnLangTr').on('click', function () {
 
             window.localStorage.setItem("langIsSelected", true);
             window.localStorage.setItem("lang", "tr");
@@ -326,7 +385,7 @@ $$(document).on('pageInit', function(e) {
             changePanelLanguage();
         });
 
-        $$('.btnLangGer').on('click', function() {
+        $$('.btnLangGer').on('click', function () {
             window.localStorage.setItem("langIsSelected", true);
             window.localStorage.setItem("lang", "de");
             selectedLang = "de";
@@ -347,18 +406,18 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'search_results') {
-            searchResultList=getSearchResultList(searchKeyWord,selectedLang);            
+        searchResultList = getSearchResultList(searchKeyWord, selectedLang);
         initListVirtualSearchResult();
-        listVirtualSearchResult.items=searchResultList;
+        listVirtualSearchResult.items = searchResultList;
         listVirtualSearchResult.update();
     }
 
 
     if (page.name === 'manufacturers_menu') {
 
-        manufacturersMenuList=getManufacturersMenuList(selectedManufacturerId);            
+        manufacturersMenuList = getManufacturersMenuList(selectedManufacturerId);
         initListManufacturersMenu();
-        listManufacturersMenu.items=manufacturersMenuList;
+        listManufacturersMenu.items = manufacturersMenuList;
         listManufacturersMenu.update();
     }
 
@@ -375,7 +434,7 @@ var postCodeSearch = myApp.autocomplete({
     limit: 8, //limit to 8 results
     dropdownPlaceholderText: 'Produkte',
     expandInput: true, // expand input
-    source: function(autocomplete, query, render) {
+    source: function (autocomplete, query, render) {
         var results = [];
         if (query.length === 0) {
             render(results);
@@ -392,7 +451,7 @@ var postCodeSearch = myApp.autocomplete({
             data: {
                 query: query
             },
-            success: function(data) {
+            success: function (data) {
                 // Find matched items
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].name.toLowerCase().indexOf(query.toLowerCase()) >= 0) results.push(data[i]);

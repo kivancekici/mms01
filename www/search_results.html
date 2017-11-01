@@ -1,5 +1,8 @@
 <div data-page="search_results" class="page navbar-fixed">
 
+
+
+
     <div class="navbar bg-orange  border-orange color-white">
         <div class="navbar-inner">
             <div class="left">
@@ -10,8 +13,23 @@
             <div class="center">{{searchresult}}</div>
         </div>
     </div>
+
+    <form class="searchbar searchbar-init theme-orange" data-search-list=".lstsearchresult" data-search-in=".item-title" data-found=".searchbar-found" data-not-found=".searchbar-not-found">
+        <div class="searchbar-input">
+            <input type="search" placeholder="Suchen">
+            <a href="#" class="searchbar-clear"></a>
+        </div>
+        <a href="#" class="searchbar-cancel">Abbrechen</a>
+    </form>
+
+
+    <div class="content-block searchbar-not-found">
+        Nothing found
+    </div>
+
+
     <div class="page-content bg-white theme-orange">
-        <div class="lstsearchresult list-block media-list virtual-list theme-orange">
+        <div class="lstsearchresult list-block media-list virtual-list list-block-search searchbar-found theme-orange">
             <!-- keep it empty -->
         </div>
     </div>

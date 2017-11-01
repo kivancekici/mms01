@@ -362,8 +362,6 @@ function getSearchResultList(searchKeyword) {
     }
 }
 
-
-
 function getOpenOrderDetailsList(id_customer, id_order) {
 
     var searchData = {
@@ -373,7 +371,6 @@ function getOpenOrderDetailsList(id_customer, id_order) {
     }
 
     var result = restfulPostCall(searchData);
-
     if (result != "Error") {
 
         if (result.status != "NOK") {
@@ -388,7 +385,6 @@ function getOpenOrderDetailsList(id_customer, id_order) {
     }
 
 }
-
 
 function getOldOrdersList(id_customer) {
 
@@ -503,9 +499,6 @@ function getManufacturersMenuList(id_manufacturer) {
 }
 
 
-
-
-
 function getUserAddressesList(id_customer) {
 
     var searchData = {
@@ -563,10 +556,8 @@ function postMessages(id_customer, message) {
         } else {
             return "NOK";
         }
-
-
     } else {
         return "NOK";
     }
-
 }
+
