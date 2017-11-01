@@ -359,211 +359,214 @@ function getSearchResultList(searchKeyword) {
 
 
         }
+    }
+}
 
 
-        function getOpenOrderDetailsList(id_customer, id_order) {
 
-            var searchData = {
-                "opr": "openorderdetails",
-                "id_customer": id_customer,
-                "id_order": id_order
-            }
+function getOpenOrderDetailsList(id_customer, id_order) {
 
-            var result = restfulPostCall(searchData);
+    var searchData = {
+        "opr": "openorderdetails",
+        "id_customer": id_customer,
+        "id_order": id_order
+    }
 
-            if (result != "Error") {
+    var result = restfulPostCall(searchData);
 
-                if (result.status != "NOK") {
-                    return result;
-                } else {
-                    return "NOK";
-                }
+    if (result != "Error") {
 
-
-            } else {
-                return "NOK";
-            }
-
+        if (result.status != "NOK") {
+            return result;
+        } else {
+            return "NOK";
         }
 
 
-        function getOldOrdersList(id_customer) {
+    } else {
+        return "NOK";
+    }
 
-            var searchData = {
-                "opr": "oldorders",
-                "id_customer": id_customer
-            }
+}
 
-            var result = restfulPostCall(searchData);
 
-            if (result != "Error") {
+function getOldOrdersList(id_customer) {
 
-                if (result.status != "NOK") {
-                    return result;
-                } else {
-                    return "NOK";
-                }
+    var searchData = {
+        "opr": "oldorders",
+        "id_customer": id_customer
+    }
 
-            } else {
-                return "NOK"
-            }
+    var result = restfulPostCall(searchData);
 
+    if (result != "Error") {
+
+        if (result.status != "NOK") {
+            return result;
+        } else {
+            return "NOK";
+        }
+
+    } else {
+        return "NOK"
+    }
+
+}
+
+
+function getAllManufacturersList(manufacturer) {
+
+    var searchData = {
+        'opr': 'manufacturers',
+        'manufacturer': manufacturer
+    }
+
+    var result = restfulPostCall(searchData);
+
+    if (result != "Error") {
+
+        if (result.status != "NOK") {
+            return result;
+        } else {
+            return "NOK";
+        }
+
+    } else {
+        return "NOK"
+    }
+
+}
+
+function getSearchResultList(searchKeyword) {
+
+    var lang = 1;
+    if (selectedLang == "de") {
+        lang = 1;
+    } else if (selectedLang == "tr") {
+        lang = 2;
+    } else {
+        lang = 1;
+    }
+    var searchData = {
+        "opr": "hpproductslist",
+        "keyword": searchKeyword,
+        "currency": "EUR",
+        "langu": lang
+    }
+
+    var result = restfulPostCall(searchData);
+
+    if (result != "Error") {
+
+        if (result.status != "NOK") {
+            return result;
+        } else {
+            return "NOK";
+        }
+
+    } else {
+        return "NOK"
+    }
+
+}
+
+
+
+function getManufacturersMenuList(id_manufacturer) {
+    if (id_manufacturer == 0) {
+        //return;
+    }
+    var lang = 1;
+    if (selectedLang == "de") {
+        lang = 1;
+    } else if (selectedLang == "tr") {
+        lang = 2;
+    } else {
+        lang = 1;
+    }
+    var searchData = {
+        "opr": "manufacturersmenu",
+        "id_manufacturer": id_manufacturer,
+        "langu": lang
+    }
+
+    var result = restfulPostCall(searchData);
+
+    if (result != "Error") {
+
+        return result;
+
+    } else {
+        return "NOK"
+    }
+
+}
+
+
+
+
+
+function getUserAddressesList(id_customer) {
+
+    var searchData = {
+        "opr": "getmyaddresses",
+        "id_customer": id_customer
+    }
+
+    var result = restfulPostCall(searchData);
+
+    if (result != "Error") {
+
+        return result;
+
+    } else {
+        return "NOK"
+    }
+
+}
+
+function getMessagesList(id_customer) {
+
+    var searchData = {
+        "opr": "getmessages",
+        "id_customer": id_customer
+    }
+
+    var result = restfulPostCall(searchData);
+
+    if (result != "Error") {
+
+        return result;
+
+    } else {
+        return "NOK"
+    }
+
+}
+
+
+function postMessages(id_customer, message) {
+
+    var data = {
+        'opr': 'postmessages',
+        'id_customer': id_customer,
+        'message': message,
+    }
+
+    var result = restfulPostCall(data);
+
+
+    if (result != "Error") {
+
+        if (result.status == "NOK") {
+            return "OK";
+        } else {
+            return "NOK";
         }
 
 
-        function getAllManufacturersList(manufacturer) {
+    } else {
+        return "NOK";
+    }
 
-            var searchData = {
-                'opr': 'manufacturers',
-                'manufacturer': manufacturer
-            }
-
-            var result = restfulPostCall(searchData);
-
-            if (result != "Error") {
-
-                if (result.status != "NOK") {
-                    return result;
-                } else {
-                    return "NOK";
-                }
-
-            } else {
-                return "NOK"
-            }
-
-        }
-
-        function getSearchResultList(searchKeyword) {
-
-            var lang = 1;
-            if (selectedLang == "de") {
-                lang = 1;
-            } else if (selectedLang == "tr") {
-                lang = 2;
-            } else {
-                lang = 1;
-            }
-            var searchData = {
-                "opr": "hpproductslist",
-                "keyword": searchKeyword,
-                "currency": "EUR",
-                "langu": lang
-            }
-
-            var result = restfulPostCall(searchData);
-
-            if (result != "Error") {
-
-                if (result.status != "NOK") {
-                    return result;
-                } else {
-                    return "NOK";
-                }
-
-            } else {
-                return "NOK"
-            }
-
-        }
-
-
-
-        function getManufacturersMenuList(id_manufacturer) {
-            if (id_manufacturer == 0) {
-                //return;
-            }
-            var lang = 1;
-            if (selectedLang == "de") {
-                lang = 1;
-            } else if (selectedLang == "tr") {
-                lang = 2;
-            } else {
-                lang = 1;
-            }
-            var searchData = {
-                "opr": "manufacturersmenu",
-                "id_manufacturer": id_manufacturer,
-                "langu": lang
-            }
-
-            var result = restfulPostCall(searchData);
-
-            if (result != "Error") {
-
-                return result;
-
-            } else {
-                return "NOK"
-            }
-
-        }
-
-
-
-
-
-        function getUserAddressesList(id_customer) {
-
-            var searchData = {
-                "opr": "getmyaddresses",
-                "id_customer": id_customer
-            }
-
-            var result = restfulPostCall(searchData);
-
-            if (result != "Error") {
-
-                return result;
-
-            } else {
-                return "NOK"
-            }
-
-        }
-
-        function getMessagesList(id_customer) {
-
-            var searchData = {
-                "opr": "getmessages",
-                "id_customer": id_customer
-            }
-
-            var result = restfulPostCall(searchData);
-
-            if (result != "Error") {
-
-                return result;
-
-            } else {
-                return "NOK"
-            }
-
-        }
-
-
-        function postMessages(id_customer, message) {
-
-            var data = {
-                'opr': 'postmessages',
-                'id_customer': id_customer,
-                'message': message,
-            }
-
-            var result = restfulPostCall(data);
-
-
-            if (result != "Error") {
-
-                if (result.status == "NOK") {
-                    return "OK";
-                } else {
-                    return "NOK";
-                }
-
-
-            } else {
-                return "NOK"
-            }
-
-        }
+}
