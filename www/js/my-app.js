@@ -39,7 +39,7 @@ if (langIsSeleted) {
 // Add view
 var mainView = myApp.addView('.view-main', {
 
-    domCache:true
+    domCache: true
 });
 
 
@@ -122,6 +122,13 @@ function getLangJson() {
     });
 }
 
+function alertMessage(msgKey, msgTypeKey) {
+    var msg = 'languages.' + selectedLang + '.alertMessages.' + msgKey;
+    var msgType = 'languages.' + selectedLang + '.alertMessages.' + msgTypeKey;
+
+    myApp.alert(msg, msgType);
+}
+
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
@@ -153,13 +160,12 @@ $$('#btnLogout').on('click', function() {
 // Option 2. Using one 'pageInit' event handler for all pages:
 $$(document).on('pageInit', function(e) {
     // Get page data from event data
-    var page = e.detail.page;  
+    var page = e.detail.page;
 
-   
+
 
     if (page.name === 'login') {
-        // Following code will be executed for page with data-page attribute equal to "about"
-        //myApp.alert('Here comes login page');
+
         $$('.btnLogin').on('click', function() {
             var email = $$('#txtEmail').val();
             var pass = $$('#txtPassword').val();
@@ -183,40 +189,11 @@ $$(document).on('pageInit', function(e) {
 
 
         $$('.btnRegister').on('click', function() {
-
             loadPageWithLang('register');
-            /*
-            myApp.prompt('Lütfen E-mail Adresini Giriniz', 'Kayıt Ekranı', function(value) {
-
-                var email = value;
-
-                if (validateEmail(email)) {
-                    var avaibleuser = checkAvaibleUser(email);
-
-                    if (avaibleuser == "OK") {
-                        var response = mobileRegister(email);
-
-                        if (response != "NOK") {
-                            loadPageWithLang('main');
-                        }
-                    } else {
-                        myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
-                    }
-
-                } else {
-                    myApp.alert('Geçerli Email Adresi Giriniz.', 'Uyarı');
-                }
-
-
-
-
-            });
-            */
         });
     }
 
-    if (page.name === 'main') {
-    }
+    if (page.name === 'main') {}
 
     if (page.name === 'account') {
 
@@ -268,12 +245,11 @@ $$(document).on('pageInit', function(e) {
                 optin = "0";
             }
 
-            myApp.alert(newsletter);
 
 
 
             if (name == '' || surname == '' || pass == '' || repeatpassword == '' || email == '') {
-                myApp.alert('Lütfen zorunlu alanları doldurunuz.', 'Bilgi');
+                alertMessage('requiredField', 'info');
             } else {
                 if (pass.length < 5) {
                     myApp.alert('Parola en az 5 karakterden oluşmalıdır.', 'Bilgi');
@@ -307,9 +283,6 @@ $$(document).on('pageInit', function(e) {
                 }
 
             }
-
-
-
 
 
         });
