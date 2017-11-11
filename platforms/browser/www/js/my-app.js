@@ -121,6 +121,13 @@ function getLangJson() {
     });
 }
 
+function alertMessage(msgKey, msgTypeKey) {
+    var msg = myApp.template7Data.languages[selectedLang]['alertMessages'][msgKey];
+    var msgType = myApp.template7Data.languages[selectedLang]['alertMessages'][msgTypeKey];
+
+    myApp.alert(msg, msgType);
+}
+
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function () {
@@ -157,9 +164,7 @@ $$(document).on('pageInit', function (e) {
 
 
     if (page.name === 'login') {
-        // Following code will be executed for page with data-page attribute equal to "about"
-        //myApp.alert('Here comes login page');
-        $$('.btnLogin').on('click', function () {
+        $$('.btnLogin').on('click', function() {
             var email = $$('#txtEmail').val();
             var pass = $$('#txtPassword').val();
             var response = mobileLogin(email, pass);
@@ -176,47 +181,19 @@ $$(document).on('pageInit', function (e) {
 
         });
 
+
         $$('.btnRegister').on('click', function () {
-
             loadPageWithLang('register');
-            /*
-            myApp.prompt('Lütfen E-mail Adresini Giriniz', 'Kayıt Ekranı', function(value) {
-
-                var email = value;
-
-                if (validateEmail(email)) {
-                    var avaibleuser = checkAvaibleUser(email);
-
-                    if (avaibleuser == "OK") {
-                        var response = mobileRegister(email);
-
-                        if (response != "NOK") {
-                            loadPageWithLang('main');
-                        }
-                    } else {
-                        myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
-                    }
-
-                } else {
-                    myApp.alert('Geçerli Email Adresi Giriniz.', 'Uyarı');
-                }
-
-
-
-
-            });
-            */
         });
     }
 
-    if (page.name === 'main') {
-    }
+    if (page.name === 'main') {}
 
     if (page.name === 'account') {
 
         var userId = window.localStorage.getItem("customerId");
         var response = getUserInfo(userId);
-        myApp.formFromJSON('#account-form', JSON.stringify(response));
+
         var pass = window.localStorage.getItem('password');
 
         var formData = {
@@ -261,19 +238,18 @@ $$(document).on('pageInit', function (e) {
                 optin = "0";
             }
 
-            myApp.alert(newsletter);
 
 
 
             if (name == '' || surname == '' || pass == '' || repeatpassword == '' || email == '') {
-                myApp.alert('Lütfen zorunlu alanları doldurunuz.', 'Bilgi');
+                alertMessage('requiredField', 'info');
             } else {
                 if (pass.length < 5) {
-                    myApp.alert('Parola en az 5 karakterden oluşmalıdır.', 'Bilgi');
+                    alertMessage('passwordValidation', 'info');
                 } else {
 
                     if (pass !== repeatpassword) {
-                        myApp.alert('Parolalar Eşleşmedi, Lütfen Kontrol Ediniz', 'Bilgi');
+                        alertMessage('passwordMatch', 'info');
                     } else {
 
                         if (validateEmail(email)) {
@@ -284,15 +260,15 @@ $$(document).on('pageInit', function (e) {
                                 var response = updateAccount(email, name, surname, pass, genderId, birthday, newsletter, optin, userId);
 
                                 if (response == "OK") {
-                                    myApp.alert('Kullanıcı hesabınız güncellenmiştir.', 'Bilgi');
+                                    alertMessage('updateOk', 'info');
                                 }
 
                             } else {
-                                myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
+                                alertMessage('mailNotAvailable', 'info');
                             }
 
                         } else {
-                            myApp.alert('Geçerli Email Adresi Giriniz.', 'Bilgi');
+                            alertMessage('mailNotOk', 'info');
                         }
 
                     }
@@ -328,14 +304,14 @@ $$(document).on('pageInit', function (e) {
             var genderId = formData.gender;
 
             if (name == '' || surname == '' || pass == '' || repeatpassword == '' || email == '') {
-                myApp.alert('Lütfen zorunlu alanları doldurunuz.', 'Bilgi');
+                alertMessage('requiredField', 'info');
             } else {
                 if (pass.length < 5) {
-                    myApp.alert('Parola en az 5 karakterden oluşmalıdır.', 'Bilgi');
+                    alertMessage('passwordValidation', 'info');
                 } else {
 
                     if (pass !== repeatpassword) {
-                        myApp.alert('Parolalar Eşleşmedi, Lütfen Kontrol Ediniz', 'Bilgi');
+                        alertMessage('passwordMatch', 'info');
                     } else {
 
                         if (validateEmail(email)) {
@@ -351,11 +327,11 @@ $$(document).on('pageInit', function (e) {
                                     loadPageWithLang('main');
                                 }
                             } else {
-                                myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
+                                alertMessage('mailNotAvailable', 'info');
                             }
 
                         } else {
-                            myApp.alert('Geçerli Email Adresi Giriniz.', 'Bilgi');
+                            alertMessage('mailNotOk', 'info');
                         }
 
                     }
