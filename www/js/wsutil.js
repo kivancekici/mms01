@@ -541,9 +541,9 @@ function getMessagesList(id_customer) {
 function postMessages(id_customer, message) {
 
     var data = {
-        'opr': 'postmessages',
-        'id_customer': id_customer,
-        'message': message,
+        "opr": "postmessages",
+        "id_customer": id_customer,
+        "message": message
     }
 
     var result = restfulPostCall(data);
@@ -551,7 +551,7 @@ function postMessages(id_customer, message) {
 
     if (result != "Error") {
 
-        if (result.status == "NOK") {
+        if (result != "NOK") {
             return "OK";
         } else {
             return "NOK";
