@@ -399,13 +399,46 @@ $$(document).on('pageInit', function (e) {
     }
 
     if(page.name === 'messages'){
-
+     
+     var myMessages = myApp.messages('.messages', {
+            autoLayout:true
+     });
+           
+    
+     var myMessagebar = myApp.messagebar('.messagebar');
+    
      var userId = window.localStorage.getItem("customerId");
 
      var msgDatas = getMessagesList(userId);
+
+
      
      for (var i = 0; i < msgDatas.length; i++) { 
-        myApp.alert(msgDatas[i].message);
+        
+        var msgType = "";
+        var name = "";
+        var msg = msgDatas[i].message;
+        var idEmployee = msgDatas[i].id_employee;
+        
+        
+        
+        if(idEmployee == "0"){
+         msgType = 'sent';
+         name = 'you';
+        }else{
+         msgType = 'received';
+         name = 'baklava7 admin'; 
+        }
+
+        myMessages.addMessage({
+         
+            text: msg,
+         
+            type: msgType,
+    
+            name: name
+        });
+
      }
     
     }
