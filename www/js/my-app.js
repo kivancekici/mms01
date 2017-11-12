@@ -27,6 +27,8 @@ var selectedManufacturerId = 0;
 var searchResultList = null;
 var searchKeyWord = "";
 
+var conversationStarted = false;
+
 
 if (langIsSeleted) {
     selectedLang = window.localStorage.getItem("lang");
@@ -397,6 +399,17 @@ $$(document).on('pageInit', function (e) {
         listManufacturersMenu.update();
     }
 
+    if(page.name === 'messages'){
+
+     var userId = window.localStorage.getItem("customerId");
+
+     var msgDatas = getMessagesList(userId);
+
+     for(var msg in msgDatas) {
+        myApp.alert(msg.message);
+     }
+    
+    }
 
 });
 
