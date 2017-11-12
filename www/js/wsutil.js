@@ -179,7 +179,6 @@ function checkAvaibleUserForAccountUpdate(email, userId) {
 
 function getUserInfo(userId) {
 
-    myApp.alert(userId);
     var userdata = {
         'opr': 'getuserinfo',
         'id_customer': userId
