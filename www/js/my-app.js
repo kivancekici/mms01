@@ -390,7 +390,6 @@ $$(document).on('pageInit', function (e) {
         listVirtualSearchResult.update();
     }
 
-
     if (page.name === 'manufacturers_menu') {
 
         manufacturersMenuList = getManufacturersMenuList(selectedManufacturerId);
