@@ -59,6 +59,11 @@
             "manufacturers_menu": {
                 "pageTitle": "Baklava7"
             },
+            "messages":{
+                "pageTitle":"Mesajlar",
+                "btnSend":"Gönder",
+                "msgPlaceholder":"Mesaj"
+            },
             "alertMessages": {
                 "info": "Bilgi",
                 "warning": "Uyarı",

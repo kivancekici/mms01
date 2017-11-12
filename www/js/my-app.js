@@ -155,6 +155,10 @@ $$('#btnLogout').on('click', function () {
 
 });
 
+$$('#msgBoxBtn').on('click', function () {
+    loadPageWithLang('messages');
+});
+
 
 
 
@@ -465,10 +469,7 @@ $$(document).on('pageInit', function (e) {
             // Random message type
             type: messageType,
             
-            name: name,
-            // Day
-            day: !conversationStarted ? 'Today' : false,
-            time: !conversationStarted ? (new Date()).getHours() + ':' + (new Date()).getMinutes() : false
+            name: name
           });
 
         }else{
