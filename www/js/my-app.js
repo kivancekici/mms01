@@ -403,12 +403,9 @@ $$(document).on('pageInit', function (e) {
      var userId = window.localStorage.getItem("customerId");
 
      var msgDatas = getMessagesList(userId);
-
-     myApp.alert(msgDatas[0].message);
-     myApp.alert(msgDatas[0][message]);
-
-     for(var msg in msgDatas) {
-        myApp.alert(msg.status);
+     
+     for (var i = 0; i < msgDatas.length; i++) { 
+        myApp.alert(msgDatas[i].message);
      }
     
     }
