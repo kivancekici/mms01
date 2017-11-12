@@ -440,6 +440,46 @@ $$(document).on('pageInit', function (e) {
         });
 
      }
+
+     $$('.messagebar .link').on('click', function () {
+        // Message text
+        var messageText = myMessagebar.value().trim();
+        // Exit if empy message
+        if (messageText.length === 0) return;
+       
+        // Empty messagebar
+        myMessagebar.clear()
+       
+        // Message type
+        var messageType = 'sent';
+       
+        var name = 'you';
+
+        var response = postMessages(userId, messageText);
+
+        if(response == "OK"){
+            // Add message
+           myMessages.addMessage({
+            // Message text
+            text: messageText,
+            // Random message type
+            type: messageType,
+            
+            name: name,
+            // Day
+            day: !conversationStarted ? 'Today' : false,
+            time: !conversationStarted ? (new Date()).getHours() + ':' + (new Date()).getMinutes() : false
+          });
+
+        }else{
+            myApp.alert("Mesaj gönderilirken bir hata oluştu.");
+        }
+
+        
+      });                
+
+
+
     
     }
 
