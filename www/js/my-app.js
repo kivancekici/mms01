@@ -405,8 +405,11 @@ $$(document).on('pageInit', function (e) {
 
      var msgDatas = getMessagesList(userId);
 
+     myApp.alert(msgDatas[0].message);
+     myApp.alert(msgDatas[0][message]);
+
      for(var msg in msgDatas) {
-        myApp.alert(msg[message]);
+        myApp.alert(msg.status);
      }
     
     }
