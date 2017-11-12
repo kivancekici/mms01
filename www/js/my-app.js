@@ -406,7 +406,7 @@ $$(document).on('pageInit', function (e) {
      var msgDatas = getMessagesList(userId);
 
      for(var msg in msgDatas) {
-        myApp.alert(msg.message);
+        myApp.alert(msg[message]);
      }
     
     }
