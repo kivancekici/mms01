@@ -73,7 +73,8 @@
                 "passwordMatch": "Parolalar eşleşmedi, lütfen kontrol ediniz",
                 "updateOk": "Kullanıcı hesabınız başarı ile güncellenmiştir",
                 "mailNotAvailable": "Mail adresi daha önceden kayıtlıdır",
-                "mailNotOk": "Lütfen geçerli bir E-mail adresi girin"
+                "mailNotOk": "Lütfen geçerli bir E-mail adresi girin",
+                "msgSendError" : "Mesaj gönderilirken bir hata oluştu, daha sonra tekrar deneyin"
             }
         },
         "de": {

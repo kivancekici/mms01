@@ -420,7 +420,6 @@ $$(document).on('pageInit', function (e) {
      for (var i = 0; i < msgDatas.length; i++) { 
         
         var msgType = "";
-        var name = "";
         var msg = msgDatas[i].message;
         var idEmployee = msgDatas[i].id_employee;
         
@@ -428,19 +427,15 @@ $$(document).on('pageInit', function (e) {
         
         if(idEmployee == "0"){
          msgType = 'sent';
-         name = 'you';
         }else{
-         msgType = 'received';
-         name = 'baklava7 admin'; 
+         msgType = 'received';    
         }
 
         myMessages.addMessage({
          
             text: msg,
          
-            type: msgType,
-    
-            name: name
+            type: msgType
         });
 
      }
@@ -456,9 +451,7 @@ $$(document).on('pageInit', function (e) {
        
         // Message type
         var messageType = 'sent';
-       
-        var name = 'you';
-
+      
         var response = postMessages(userId, messageText);
 
         if(response == "OK"){
@@ -467,13 +460,12 @@ $$(document).on('pageInit', function (e) {
             // Message text
             text: messageText,
             // Random message type
-            type: messageType,
-            
-            name: name
+            type: messageType
+          
           });
 
         }else{
-            myApp.alert("Mesaj gönderilirken bir hata oluştu.");
+            alertMessage('msgSendError', 'info');
         }
 
         
