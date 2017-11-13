@@ -1,4 +1,4 @@
-Template7.registerHelper('placeholder', function (plchldrContent) {
+Template7.registerHelper('placeholder', function(plchldrContent) {
     var ret = 'placeholder="' + plchldrContent + '"';
     return ret;
 });
@@ -49,7 +49,7 @@ getLangJson();
 
 
 
-setTimeout(function () {
+setTimeout(function() {
 
     checkLangStatus();
 
@@ -117,7 +117,7 @@ function validateEmail(email) {
 }
 
 function getLangJson() {
-    $$.getJSON('./languages/lang.json', function (data) {
+    $$.getJSON('./languages/lang.json', function(data) {
         myApp.template7Data.languages = data.languages;
         changePanelLanguage();
     });
@@ -132,20 +132,20 @@ function alertMessage(msgKey, msgTypeKey) {
 
 
 // Handle Cordova Device Ready Event
-$$(document).on('deviceready', function () {
+$$(document).on('deviceready', function() {
     console.log("Device is ready!");
 });
 
-$$('#orderItemBtn').on('click', function () {
+$$('#orderItemBtn').on('click', function() {
     loadPageWithLang('main');
 });
 
-$$('#accountItemBtn').on('click', function () {
+$$('#accountItemBtn').on('click', function() {
     loadPageWithLang('account');
 });
 
 
-$$('#btnLogout').on('click', function () {
+$$('#btnLogout').on('click', function() {
     userLoggedIn = false;
     window.localStorage.setItem("isLogin", false);
     window.localStorage.setItem("customerId", "0");
@@ -155,7 +155,7 @@ $$('#btnLogout').on('click', function () {
 
 });
 
-$$('#msgBoxBtn').on('click', function () {
+$$('#msgBoxBtn').on('click', function() {
     loadPageWithLang('messages');
 });
 
@@ -163,7 +163,7 @@ $$('#msgBoxBtn').on('click', function () {
 
 
 // Option 2. Using one 'pageInit' event handler for all pages:
-$$(document).on('pageInit', function (e) {
+$$(document).on('pageInit', function(e) {
     // Get page data from event data
     var page = e.detail.page;
 
@@ -188,7 +188,7 @@ $$(document).on('pageInit', function (e) {
         });
 
 
-        $$('.btnRegister').on('click', function () {
+        $$('.btnRegister').on('click', function() {
             loadPageWithLang('register');
         });
     }
@@ -221,7 +221,7 @@ $$(document).on('pageInit', function (e) {
             cssClass: 'theme-orange'
         });
 
-        $$('.updateBtn').on('click', function () {
+        $$('.updateBtn').on('click', function() {
 
 
             var accountData = myApp.formToData('#accountform');
@@ -295,7 +295,7 @@ $$(document).on('pageInit', function (e) {
         });
 
 
-        $$('.registerBtn').on('click', function () {
+        $$('.registerBtn').on('click', function() {
 
 
             var formData = myApp.formToData('#register-form');
@@ -358,7 +358,7 @@ $$(document).on('pageInit', function (e) {
 
     if (page.name === 'language') {
 
-        $$('.btnLangTr').on('click', function () {
+        $$('.btnLangTr').on('click', function() {
 
             window.localStorage.setItem("langIsSelected", true);
             window.localStorage.setItem("lang", "tr");
@@ -367,7 +367,7 @@ $$(document).on('pageInit', function (e) {
             changePanelLanguage();
         });
 
-        $$('.btnLangGer').on('click', function () {
+        $$('.btnLangGer').on('click', function() {
             window.localStorage.setItem("langIsSelected", true);
             window.localStorage.setItem("lang", "de");
             selectedLang = "de";
@@ -402,78 +402,81 @@ $$(document).on('pageInit', function (e) {
         listManufacturersMenu.update();
     }
 
-    if(page.name === 'messages'){
-     
-     var myMessages = myApp.messages('.messages', {
-            autoLayout:true
-     });
-           
-    
-     var myMessagebar = myApp.messagebar('.messagebar');
-    
-     var userId = window.localStorage.getItem("customerId");
+    if (page.name === 'messages') {
 
-     var msgDatas = getMessagesList(userId);
-
-
-     
-     for (var i = 0; i < msgDatas.length; i++) { 
-        
-        var msgType = "";
-        var msg = msgDatas[i].message;
-        var idEmployee = msgDatas[i].id_employee;
-        
-        
-        
-        if(idEmployee == "0"){
-         msgType = 'sent';
-        }else{
-         msgType = 'received';    
-        }
-
-        myMessages.addMessage({
-         
-            text: msg,
-         
-            type: msgType
+        var myMessages = myApp.messages('.messages', {
+            autoLayout: true
         });
 
-     }
 
-     $$('.messagebar .link').on('click', function () {
-        // Message text
-        var messageText = myMessagebar.value().trim();
-        // Exit if empy message
-        if (messageText.length === 0) return;
-       
-        // Empty messagebar
-        myMessagebar.clear()
-       
-        // Message type
-        var messageType = 'sent';
-      
-        var response = postMessages(userId, messageText);
+        var myMessagebar = myApp.messagebar('.messagebar');
 
-        if(response == "OK"){
-            // Add message
-           myMessages.addMessage({
-            // Message text
-            text: messageText,
-            // Random message type
-            type: messageType
-          
-          });
+        var userId = window.localStorage.getItem("customerId");
 
-        }else{
-            alertMessage('msgSendError', 'info');
+        var msgDatas = getMessagesList(userId);
+
+
+
+        for (var i = 0; i < msgDatas.length; i++) {
+
+            var msgType = "";
+            var msg = msgDatas[i].message;
+            var idEmployee = msgDatas[i].id_employee;
+            var msgdate = msgDatas[i].date_add;
+
+
+
+            if (idEmployee == "0") {
+                msgType = 'sent';
+            } else {
+                msgType = 'received';
+            }
+
+            myMessages.addMessage({
+
+                text: msg,
+
+                type: msgType,
+
+                date: new Date(msgdate)
+            });
+
         }
 
-        
-      });                
+        $$('.messagebar .link').on('click', function() {
+            // Message text
+            var messageText = myMessagebar.value().trim();
+            // Exit if empy message
+            if (messageText.length === 0) return;
+
+            // Empty messagebar
+            myMessagebar.clear()
+
+            // Message type
+            var messageType = 'sent';
+
+            var response = postMessages(userId, messageText);
+
+            if (response == "OK") {
+                // Add message
+                myMessages.addMessage({
+                    // Message text
+                    text: messageText,
+                    // Random message type
+                    type: messageType
+
+                });
+
+            } else {
+                alertMessage('msgSendError', 'info');
+            }
+
+
+        });
 
 
 
-    
+
     }
 
 });
@@ -488,7 +491,7 @@ var postCodeSearch = myApp.autocomplete({
     limit: 8, //limit to 8 results
     dropdownPlaceholderText: 'Produkte',
     expandInput: true, // expand input
-    source: function (autocomplete, query, render) {
+    source: function(autocomplete, query, render) {
         var results = [];
         if (query.length === 0) {
             render(results);
@@ -505,7 +508,7 @@ var postCodeSearch = myApp.autocomplete({
             data: {
                 query: query
             },
-            success: function (data) {
+            success: function(data) {
                 // Find matched items
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].name.toLowerCase().indexOf(query.toLowerCase()) >= 0) results.push(data[i]);
