@@ -59,11 +59,11 @@ function checkNewMessage(userId) {
     var diff = receiveMsgCnt - msgCount;
 
     if (diff > 0) {
-        $$('msgCountBadge').show();
-        $$('msgCountBadge').text(diff);
+        $$('#msgCountBadge').show();
+        $$('#msgCountBadge').text(diff);
     } else {
-        $$('msgCountBadge').hide();
-        $$('msgCountBadge').text('');
+        $$('#msgCountBadge').hide();
+        $$('#msgCountBadge').text('');
     }
 }
 
