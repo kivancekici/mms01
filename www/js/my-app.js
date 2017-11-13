@@ -27,7 +27,7 @@ var selectedManufacturerId = 0;
 var searchResultList = null;
 var searchKeyWord = "";
 
-var conversationStarted = false;
+var msgReadFlag = false;
 
 
 if (langIsSeleted) {
@@ -55,7 +55,38 @@ setTimeout(function() {
 
 }, 3000);
 
+function checkNewMessage(userId) {
+    var msgCount = window.localStorage.getItem("msgCount");
+    var receiveMsgCnt = getReceiveMsgCount(userId);
+    var diff = receiveMsgCnt - msgCount;
 
+    if ((diff > 0) && (msgReadFlag == false)) {
+        $$('msgCountBadge').show();
+        $$('msgCountBadge').text(diff);
+    } else {
+        $$('msgCountBadge').show();
+        $$('msgCountBadge').text('');
+    }
+}
+
+function getReceiveMsgCount(userId) {
+
+    var msgDatas = getMessagesList(userId);
+
+    var receiveMsgCnt = 0;
+
+    for (var i = 0; i < msgDatas.length; i++) {
+
+        var idEmployee = msgDatas[i].id_employee;
+
+        if (idEmployee != "0") {
+            receiveMsgCnt++;
+        }
+    }
+
+    return receiveMsgCnt;
+
+}
 
 function checkLangStatus() {
     if (langIsSeleted) {
@@ -404,10 +435,7 @@ $$(document).on('pageInit', function(e) {
 
     if (page.name === 'messages') {
 
-        var myMessages = myApp.messages('.messages', {
-            autoLayout: true
-        });
-
+        var myMessages = myApp.messages('.messages');
 
         var myMessagebar = myApp.messagebar('.messagebar');
 
@@ -415,7 +443,7 @@ $$(document).on('pageInit', function(e) {
 
         var msgDatas = getMessagesList(userId);
 
-
+        var receiveMsgCnt = 0;
 
         for (var i = 0; i < msgDatas.length; i++) {
 
@@ -434,6 +462,7 @@ $$(document).on('pageInit', function(e) {
                 msgType = 'sent';
             } else {
                 msgType = 'received';
+                receiveMsgCnt++;
             }
 
             myMessages.addMessage({
@@ -445,6 +474,7 @@ $$(document).on('pageInit', function(e) {
                 date: msgfulldate
             });
 
+            window.localStorage.setItem("msgCount", receiveMsgCnt);
         }
 
         $$('.messagebar .link').on('click', function() {
@@ -481,7 +511,7 @@ $$(document).on('pageInit', function(e) {
         });
 
 
-
+        msgReadFlag = true;
 
     }
 
