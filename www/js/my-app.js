@@ -58,8 +58,6 @@ function checkNewMessage(userId) {
     var receiveMsgCnt = getReceiveMsgCount(userId);
     var diff = receiveMsgCnt - msgCount;
 
-    diff = 3;
-
     if (diff > 0) {
         $$('#msgCountBadge').show();
         $$('#msgCountBadge').text(diff);
