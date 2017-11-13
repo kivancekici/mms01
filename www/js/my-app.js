@@ -424,6 +424,11 @@ $$(document).on('pageInit', function(e) {
             var idEmployee = msgDatas[i].id_employee;
             var msgdate = msgDatas[i].date_add;
 
+            var fulldate = new Date(msgdate);
+
+            var msgDay = fulldate.getDay();
+            var msgTime = fulldate.getHours() + ':' + fulldate.getMinutes();
+
 
 
             if (idEmployee == "0") {
@@ -438,7 +443,9 @@ $$(document).on('pageInit', function(e) {
 
                 type: msgType,
 
-                date: new Date(msgdate)
+                day: msgDay,
+
+                time: msgTime
             });
 
         }
