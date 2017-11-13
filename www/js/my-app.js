@@ -436,6 +436,9 @@ $$(document).on('pageInit', function(e) {
 
     if (page.name === 'messages') {
 
+        $$('#msgCountBadge').hide();
+        $$('#msgCountBadge').text('');
+
         var myMessages = myApp.messages('.messages');
 
         var myMessagebar = myApp.messagebar('.messagebar');
