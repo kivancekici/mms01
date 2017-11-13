@@ -426,7 +426,7 @@ $$(document).on('pageInit', function(e) {
 
             var fulldate = new Date(msgdate);
 
-            var msgDay = fulldate.getDay();
+            var msgDay = fulldate.toDateString();
             var msgTime = fulldate.getHours() + ':' + fulldate.getMinutes();
 
 
@@ -443,9 +443,7 @@ $$(document).on('pageInit', function(e) {
 
                 type: msgType,
 
-                day: msgDay,
-
-                time: msgTime
+                date: msgDay + '-' + msgTime
             });
 
         }
