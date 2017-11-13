@@ -467,7 +467,9 @@ $$(document).on('pageInit', function(e) {
                     // Message text
                     text: messageText,
                     // Random message type
-                    type: messageType
+                    type: messageType,
+
+                    date: new Date().toLocaleString()
 
                 });
 
