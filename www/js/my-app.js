@@ -27,8 +27,6 @@ var selectedManufacturerId = 0;
 var searchResultList = null;
 var searchKeyWord = "";
 
-var msgReadFlag = false;
-
 
 if (langIsSeleted) {
     selectedLang = window.localStorage.getItem("lang");
@@ -60,11 +58,11 @@ function checkNewMessage(userId) {
     var receiveMsgCnt = getReceiveMsgCount(userId);
     var diff = receiveMsgCnt - msgCount;
 
-    if ((diff > 0) && (msgReadFlag == false)) {
+    if (diff > 0) {
         $$('msgCountBadge').show();
         $$('msgCountBadge').text(diff);
     } else {
-        $$('msgCountBadge').show();
+        $$('msgCountBadge').hide();
         $$('msgCountBadge').text('');
     }
 }
@@ -224,7 +222,10 @@ $$(document).on('pageInit', function(e) {
         });
     }
 
-    if (page.name === 'main') {}
+    if (page.name === 'main') {
+        var userId = window.localStorage.getItem("customerId");
+        checkNewMessage(userId);
+    }
 
     if (page.name === 'account') {
 
@@ -457,7 +458,6 @@ $$(document).on('pageInit', function(e) {
             var msgfulldate = fulldate.toLocaleString();
 
 
-
             if (idEmployee == "0") {
                 msgType = 'sent';
             } else {
@@ -510,8 +510,6 @@ $$(document).on('pageInit', function(e) {
 
         });
 
-
-        msgReadFlag = true;
 
     }
 
