@@ -64,6 +64,15 @@
                 "btnSend":"Gönder",
                 "msgPlaceholder":"Mesaj"
             },
+            "add_address":{
+                "btnName": "Kaydet",
+                "pageTitle": "Adres Ekle",
+                "firstname": "Ad",
+                "surname": "Soyad",
+                "phone":"Telefon",
+                "address":"Adres",
+                "address2":"Adres(2. Satır)"
+            },
             "alertMessages": {
                 "info": "Bilgi",
                 "warning": "Uyarı",
