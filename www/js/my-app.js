@@ -434,6 +434,14 @@ $$(document).on('pageInit', function(e) {
         listManufacturersMenu.update();
     }
 
+    if (page.name === 'my_addresses') {
+        
+        $$('.btnAddAddress').on('click', function() {
+            loadPageWithLang('add_address');
+        });
+               
+    }
+
     if (page.name === 'messages') {
 
         $$('#msgCountBadge').hide();
