@@ -80,6 +80,24 @@ switch ($opr) {
 	case "hpproductslist":
 		fGetHpProductsList($decoded);
 		break;
+	case "hpitemproductslist":
+		fGetIpProductsList($decoded);
+		break;
+	case "hpitemproductsprice":
+		fGetIpProductsPrice($decoded);
+		break; 
+
+	case "hpitemproductunitname":
+		fGetIpProductUnitName($decoded);
+		break; 
+
+	case "hpitemproductunitvalue":
+		fGetIpProductUnitValue($decoded);
+		break; 
+
+	case "hpproductattribute":
+		fGetIpProductAttribute($decoded);
+		break; 	
 	case "placeorder":
 		fPlaceOrder($decoded);
 		break;
@@ -287,6 +305,78 @@ function fGetHpProductsList($_jsondata) {
 		send_response(Null);
 	}
 }
+
+
+function fGetIpProductsList($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	$_items = DbHelper::getInstance()->getIpProductsList($_jsondata);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+
+
+
+
+function fGetIpProductsPrice($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	$_items = DbHelper::getInstance()->getIpProductsPrice($_jsondata);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+function fGetIpProductAttribute($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	$_items = DbHelper::getInstance()->getProductIdatrribute($_jsondata);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+
+
+function fGetIpProductUnitName($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	$_items = DbHelper::getInstance()->getProducUnitName($_jsondata);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+
+
+function fGetIpProductUnitValue($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	$_items = DbHelper::getInstance()->getProducUnitValue($_jsondata);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+
+
+
 
 
 function fPlaceOrder($_jsondata) {

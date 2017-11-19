@@ -857,9 +857,7 @@ class DbHelper {
 						$reducedprice['reducedprice'] =  number_format($resulttable[$rowcounter]['grossprice'] - $tmpsqltable[reduction],2);
 						$resulttable[$rowcounter] = $resulttable[$rowcounter] + $reducedprice;
 
-
 					}
-
 
 
 				}else{
@@ -900,7 +898,7 @@ class DbHelper {
 
 				}
 
-				$resulttable[$rowcounter]['imgdirectory '] = $imgdirectory;
+				$resulttable[$rowcounter]['imgdirectory'] = $imgdirectory;
 
 				$rowcounter = $rowcounter  + 1;
             }
@@ -911,6 +909,216 @@ class DbHelper {
 
     }
 	
+
+	function getIpProductsList($_infosItemMain){
+		
+		$id_product=$_infosItemMain["id_product"];
+		$id_lang=$_infosItemMain["id_lang"];
+
+
+		 $sql ="SELECT ma.name as 'manufacname', prla.name as 'productname' FROM ps_product pr, ps_manufacturer ma, ps_product_lang prla where pr.id_product = $id_product and pr.id_manufacturer = ma.id_manufacturer and prla.id_product = pr.id_product and prla.id_lang = $id_lang";
+
+		$result = $this->conn->query($sql);
+		$items = array();
+		if ($result->num_rows > 0) {
+            while ($_infos = $result->fetch_assoc()) {
+				
+				
+				
+
+
+
+
+
+				$imgdirectory="/"."prestashop"."/"."img"."/"."p";
+				
+								$sql ="SELECT id_image FROM ps_image WHERE id_product = $id_product AND cover = 1";
+				
+								$resultimg = $this->conn->query($sql);
+								if ($resultimg->num_rows > 0) {
+				
+									$tmpsqltable = mysqli_fetch_array($resultimg , MYSQLI_ASSOC);
+									$imgcounter = 0;
+				
+									$tmpstring = $tmpsqltable['id_image'];
+				
+				
+									while($imgcounter < STRLEN($tmpstring))
+									{
+				
+										
+				
+										$imgdirectory .=  "/".SUBSTR($tmpstring ,$imgcounter,1);
+										
+									
+										$imgcounter = $imgcounter +1;
+									}
+				
+									$imgdirectory .= "/".$tmpstring."-home_default.jpg";
+				
+				
+				
+								}
+								$_infos['imgdirectory']=$imgdirectory;
+								array_push($items,$_infos);
+            }
+
+
+		}
+
+		return $items;
+        $this->conn->close();
+
+	}
+
+ 
+
+
+	function getIpProductsPrice($_infosItemMain){
+
+		$id_product=$_infosItemMain["id_product"];
+		//$id_lang=$_infosItemMain["id_lang"];
+		$defaultproductattribute=$_infosItemMain["id_product_attribute"];
+
+
+		if ($defaultproductattribute == '') {
+			$sql ="SELECT CAST(((pr.price + pa.price) * (1 + tx.rate/100)) AS  decimal(10,2)) AS 'grossprice'   FROM ps_product pr, ps_tax_rule tr, ps_tax tx, ps_product_attribute pa  WHERE pr.id_product = $id_product AND pr.id_tax_rules_group = tr.id_tax_rules_group AND tr.id_country = '1' AND tr.id_tax = tx.id_tax AND pa.id_product_attribute = pr.cache_default_attribute AND pa.id_product = pr.id_product";
+
+		}else{
+			$sql ="SELECT CAST(((pr.price + pa.price) * (1 + tx.rate/100)) AS  decimal(10,2)) AS 'grossprice'   FROM ps_product pr, ps_tax_rule tr, ps_tax tx, ps_product_attribute pa  WHERE pr.id_product = $id_product AND pr.id_tax_rules_group = tr.id_tax_rules_group AND tr.id_country = '1' AND tr.id_tax = tx.id_tax AND pa.id_product_attribute = $defaultproductattribute AND pa.id_product = pr.id_product";
+		}
+		
+		
+
+
+		$resultgrossitem = $this->conn->query($sql);
+		$tmpsqltableitem = mysqli_fetch_array($resultgrossitem , MYSQLI_ASSOC);
+
+		$sql ="SELECT reduction,reduction_type FROM ps_specific_price WHERE id_product = $id_product";
+		$resultreduction = $this->conn->query($sql);
+		if ($resultreduction->num_rows > 0) {
+			$reducedprice = array();
+			$tmpsqltable = mysqli_fetch_array($resultreduction , MYSQLI_ASSOC);
+	
+			if ($tmpsqltable['reduction_type'] == "percentage"){
+				
+				$tmpsqltableitem['reducedprice'] = number_format($tmpsqltableitem['grossprice'] * (1-$tmpsqltable[reduction]),2);
+				
+			}elseif($tmpsqltable['reduction_type'] == "amount"){
+				
+				$tmpsqltableitem['reducedprice'] =  number_format($tmpsqltableitem['grossprice'] - $tmpsqltable[reduction],2);
+			
+			}
+
+
+		}else{
+			
+			$tmpsqltableitem['reducedprice'] =  number_format($tmpsqltableitem['grossprice'],2);
+		}
+
+
+
+	return $tmpsqltableitem;
+
+	$this->conn->close();
+	}
+
+
+
+
+	function getProductIdatrribute($_ProductIdatrribute){
+
+		$id_product=$_ProductIdatrribute["id_product"];
+		
+		$id_attribute=$_ProductIdatrribute["id_attribute"];
+
+		$sql = "SELECT pa.id_product_attribute  as 'id_product_attribute ' FROM ps_product_attribute pa , ps_product_attribute_combination pac  WHERE pa.id_product = $id_product  and pa.id_product_attribute = pac.id_product_attribute and pac.id_attribute =$id_attribute";
+
+		$resultidproductattribute = $this->conn->query($sql);
+
+		if ($resultidproductattribute->num_rows > 0) {
+			
+			$tmpsqltable = mysqli_fetch_array($resultidproductattribute , MYSQLI_ASSOC);
+
+		}
+
+		return $tmpsqltable;
+		$this->conn->close();
+
+	}
+
+
+
+	function getProducUnitName($_ProductUnitName){
+		
+				$id_product=$_ProductUnitName["id_product"];
+				
+				$id_lang=$_ProductUnitName["id_lang"];
+		
+			
+				$sql = "SELECT al.name FROM  ps_product pr,	ps_product_attribute_combination pac, ps_attribute pa,	ps_attribute_group_lang al WHERE  pr.id_product = $id_product AND pr.cache_default_attribute = pac.id_product_attribute AND pa.id_attribute = pac.id_attribute AND pa.id_attribute_group = al.id_attribute_group AND al.id_lang = $id_lang";
+				
+				$resultidproducUnitName = $this->conn->query($sql);
+				
+				if ($resultidproducUnitName->num_rows > 0) {
+					
+					$tmpsqltable = mysqli_fetch_array($resultidproducUnitName , MYSQLI_ASSOC);
+		
+				}
+				
+				return $tmpsqltable;
+				$this->conn->close();
+		
+	}
+
+
+
+	function getProducUnitValue($_ProductUnitValue){
+		
+				$id_product=$_ProductUnitValue["id_product"];
+				
+				$id_lang=$_ProductUnitValue["id_lang"];
+		
+			
+				$sql = "SELECT al.id_attribute, al.name FROM ps_product_attribute pa, ps_product_attribute_combination pac, ps_attribute_lang  al WHERE pa.id_product = $id_product AND pac.id_product_attribute = pa.id_product_attribute AND pac.id_attribute = al.id_attribute AND al.id_lang = $id_lang ORDER BY al.id_attribute ";
+				
+				$resultidproducUnitValue = $this->conn->query($sql);
+				
+				if ($resultidproducUnitValue->num_rows > 0) {
+					$tmpsqltable = array();
+					while ($row = $resultidproducUnitValue->fetch_assoc()) {
+
+
+
+						array_push($tmpsqltable , $row);
+
+					}
+
+
+
+					//$tmpsqltable = mysqli_fetch_array($resultidproducUnitValue , MYSQLI_ASSOC);
+		
+				}
+				
+				return $tmpsqltable;
+				$this->conn->close();
+		
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
