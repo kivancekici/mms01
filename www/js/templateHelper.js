@@ -107,6 +107,7 @@ function initListVirtualUserAddresses() {
         items: [
 
         ],
+        height: 61,
         template: '<li class="swipeout">' +
                   '<div class="swipeout-content"><a href="#" class="item-link item-content">'+
                   '<div class="item-inner">'+
@@ -114,7 +115,7 @@ function initListVirtualUserAddresses() {
                   '<div class="item-title">{{alias}}</div>' +
                   '<div class="item-after"></div>' +
                   '</div>' +
-                  '<div class="item-subtitle">{{postcodecity}}-{{name}}</div>' +
+                  '<div class="item-subtitle">{{postcodecity}} - {{name}}</div>' +
                   '<div class="item-text">{{address1}} {{address2}}</div>'+
                   '</div></a></div>' +
                   '<div class="swipeout-actions-right"><a href="#" class="demo-actions">{{updateBtn}}</a><a href="#" class="demo-mark bg-orange">Mark</a><a href="#" data-confirm="Are you sure you want to delete this item?" class="swipeout-delete swipeout-overswipe">Delete</a></div>' +
