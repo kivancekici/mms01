@@ -188,6 +188,9 @@ $$('#msgBoxBtn').on('click', function() {
     loadPageWithLang('messages');
 });
 
+$$('#myAddressesItemBtn').on('click', function() {
+    loadPageWithLang('my_addresses');
+});
 
 
 
