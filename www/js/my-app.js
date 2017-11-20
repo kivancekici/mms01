@@ -440,6 +440,7 @@ $$(document).on('pageInit', function(e) {
         var response = getUserAddressesList(userId);
 
         if(response != "NOK"){
+           initListVirtualUserAddresses();
            listVirtualUserAddresses.items = response;
            listVirtualUserAddresses.update();
         }
