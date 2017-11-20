@@ -107,7 +107,6 @@ function initListVirtualUserAddresses() {
         items: [
 
         ],
-        height: 61,
         template: '<li class="swipeout">' +
                   '<div class="swipeout-content">' +
                   '<a href="#" class="item-link item-content">' +
