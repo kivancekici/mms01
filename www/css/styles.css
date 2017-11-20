@@ -78,8 +78,11 @@
     font-family: "Open Sans Condensed", "Helvetica", "Arial", "sans-serif";
 }
 
-
 /*Askin Başla*/
+
+.list-item-addresses {
+    font-family: "Open Sans Condensed", "Helvetica", "Arial", "sans-serif";
+}
 
 .splashindicator {
     text-align: center;

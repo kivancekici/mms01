@@ -435,6 +435,14 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'my_addresses') {
+
+        var userId = window.localStorage.getItem("customerId");
+        var response = getUserAddressesList(userId);
+
+        if(response != "NOK"){
+           listVirtualUserAddresses.items = response;
+           listVirtualUserAddresses.update();
+        }
         
         $$('.btnAddAddress').on('click', function() {
             loadPageWithLang('add_address');
