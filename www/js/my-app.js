@@ -446,7 +446,7 @@ $$(document).on('pageInit', function(e) {
            initListVirtualUserAddresses();
            listVirtualUserAddresses.items = response;
            listVirtualUserAddresses.update();
-           $$('.swipeout-delete').text('Sil');
+           $$('.deleteSwipeAction').text('Sil');
         }
         
         $$('.btnAddAddress').on('click', function() {
