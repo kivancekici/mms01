@@ -108,18 +108,22 @@ function initListVirtualUserAddresses() {
 
         ],
         height: 61,
-        template: '<li>' +
-        '<a href="#" class="item-link item-content">' +
-        '<div class="item-inner">' +
-        '<div class="item-title-row">' +
-        '<div class="item-title">{{alias}}</div>' +
-        '<div class="item-after">{{name}} €</div>' +
-        '</div>' +
-        '<div class="item-subtitle">{{postcodecity}}</div>' +
-        '<div class="item-text">{{address1}} {{address2}} {{vatnumber}}</div>' +
-        '</div>' +
-        '</a>' +
-        '</li>'
+        template: '<li class="swipeout">' +
+                  '<div class="swipeout-content">' +
+                  '<a href="#" class="item-link item-content">' +
+                  '<div class="item-inner">' +
+                  '<div class="item-title-row">' +
+                  '<div class="item-title">{{alias}}</div>' +
+                  '</div>' +
+                  '<div class="item-subtitle">{{postcodecity}} - {{name}}</div>' +
+                  '<div class="item-text">{{address1}} {{address2}}</div>' +
+                  '</div>'+
+                  '</a>'+
+                  '</div>'+
+                  '<div class="swipeout-actions-left"><a href="#" class="bg-green swipeout-overswipe demo-reply">Reply</a><a href="#" class="demo-forward bg-blue">Forward</a></div>' +
+                  '<div class="swipeout-actions-right"><a href="#" class="demo-actions">More</a><a href="#" class="demo-mark bg-orange">Mark</a><a href="#" data-confirm="Are you sure you want to delete this item?" class="swipeout-delete swipeout-overswipe">Delete</a></div>' +
+                  '</li>'
+        
     });
 }
 
