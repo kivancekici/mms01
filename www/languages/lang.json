@@ -73,6 +73,9 @@
                 "address":"Adres",
                 "address2":"Adres(2. Satır)"
             },
+            "my_addresses":{
+                "updateBtn": "Düzenle"
+            },
             "alertMessages": {
                 "info": "Bilgi",
                 "warning": "Uyarı",
