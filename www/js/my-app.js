@@ -448,7 +448,7 @@ $$(document).on('pageInit', function(e) {
            listVirtualUserAddresses.update();
            $$('.deleteSwipeAction').text(myApp.template7Data.languages[selectedLang]['my_addresses']['deleteBtn']);
            $$('.deleteSwipeAction').on('click', function() {
-            myApp.alert('Delete mi');
+            myApp.alert('Adres Silme İşlemleri');
            });
 
         }
