@@ -446,7 +446,11 @@ $$(document).on('pageInit', function(e) {
            initListVirtualUserAddresses();
            listVirtualUserAddresses.items = response;
            listVirtualUserAddresses.update();
-           $$('.deleteSwipeAction').text('Sil');
+           $$('.deleteSwipeAction').text(myApp.template7Data.languages[selectedLang]['my_addresses']['deleteBtn']);
+           $$('.deleteSwipeAction').on('click', function() {
+            myApp.alert('Delete mi');
+           });
+
         }
         
         $$('.btnAddAddress').on('click', function() {

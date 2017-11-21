@@ -74,7 +74,7 @@
                 "address2":"Adres(2. Satır)"
             },
             "my_addresses":{
-                "updateBtn": "Düzenle"
+                "deleteBtn": "Düzenle"
             },
             "alertMessages": {
                 "info": "Bilgi",
