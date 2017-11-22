@@ -115,15 +115,21 @@ function initListVirtualUserAddresses() {
                   '<div class="item-title">{{alias}}</div>' +
                   '<div class="item-after"></div>' +
                   '</div>' +
-                  '<div class="item-subtitle">{{postcodecity}} - {{name}}</div>' +
+                  '<div class="item-subtitle">{{postcode}}, {{city}}/{{name}}</div>' +
                   '<div class="item-text">{{address1}} {{address2}}</div>'+
                   '</div></a></div>' +
-                  '<div class="swipeout-actions-right"><a href="#" class="deleteSwipeAction bg-red"></a></div>' +
+                  '<div class="swipeout-actions-right"><a onclick="deleteAddress('+"'{{alias}}'"+',{{id_address}});" href="#" class="deleteSwipeAction bg-red"></a></div>' +
                   '</li>'
         
     });
 }
 
+
+function deleteAddress(addressAlias,addressId){
+    var userId = window.localStorage.getItem("customerId");
+    var response = deleteaddress(userId, addressAlias, addressId);
+    myApp.alert(response);
+}
 
 var listVirtualUserMessages;
 
