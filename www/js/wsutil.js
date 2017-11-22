@@ -255,7 +255,7 @@ function deleteaddress(id_customer, alias, id_address) {
 
     if (result != "Error") {
 
-        if (result.status == "NOK") {
+        if (result.status == "OK") {
             return "OK";
         } else {
             return "NOK";
