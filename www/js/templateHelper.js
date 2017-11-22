@@ -128,7 +128,6 @@ function initListVirtualUserAddresses() {
 function deleteAddress(addressAlias,addressId){
     var userId = window.localStorage.getItem("customerId");
     deleteaddress(userId, addressAlias, addressId);
-   
 }
 
 var listVirtualUserMessages;
