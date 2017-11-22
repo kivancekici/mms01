@@ -108,7 +108,7 @@ function initListVirtualUserAddresses() {
 
         ],
         height: 105,
-        template: '<li class="swipeout {{id_address}}">' +
+        template: '<li class="swipeout">' +
                   '<div class="swipeout-content"><a href="#" class="item-link item-content">'+
                   '<div class="item-inner">'+
                   '<div class="item-title-row">' +
@@ -129,7 +129,7 @@ function deleteAddress(addressAlias,addressId){
     var userId = window.localStorage.getItem("customerId");
     var response = deleteaddress(userId, addressAlias, addressId);
     if (response == "OK"){
-     myApp.swipeoutDelete('.'+addressId, function () { myApp.alert('Silindi');});
+     myApp.swipeoutDelete(clicked.parents('.swipeout'));
     } 
 }
 
