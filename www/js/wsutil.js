@@ -332,7 +332,7 @@ function getOpenOrdersList(id_customer) {
     }
 }
 
-function getSearchResultList(searchKeyword) {
+function getSearchResultListold(searchKeyword) {
 
     var lang = 1;
     if (selectedLang == "de") {
