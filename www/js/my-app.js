@@ -188,6 +188,9 @@ $$('#msgBoxBtn').on('click', function() {
     loadPageWithLang('messages');
 });
 
+$$('#myAddressesItemBtn').on('click', function() {
+    loadPageWithLang('my_addresses');
+});
 
 
 
@@ -225,6 +228,11 @@ $$(document).on('pageInit', function(e) {
     if (page.name === 'main') {
         var userId = window.localStorage.getItem("customerId");
         checkNewMessage(userId);
+
+        searchResultList = getSearchResultList(searchKeyWord, selectedLang);
+        initListVirtualSearchResult();
+        listVirtualSearchResult.items = searchResultList;
+        listVirtualSearchResult.update();
     }
 
     if (page.name === 'account') {
@@ -432,6 +440,24 @@ $$(document).on('pageInit', function(e) {
         initListManufacturersMenu();
         listManufacturersMenu.items = manufacturersMenuList;
         listManufacturersMenu.update();
+    }
+
+    if (page.name === 'my_addresses') {
+
+        var userId = window.localStorage.getItem("customerId");
+        var response = getUserAddressesList(userId);
+
+        if(response != "NOK"){
+           initListVirtualUserAddresses();
+           listVirtualUserAddresses.items = response;
+           listVirtualUserAddresses.update();
+           $$('.deleteSwipeAction').text(myApp.template7Data.languages[selectedLang]['my_addresses']['deleteBtn']);        
+        }
+        
+        $$('.btnAddAddress').on('click', function() {
+            loadPageWithLang('add_address');
+        });
+               
     }
 
     if (page.name === 'messages') {
