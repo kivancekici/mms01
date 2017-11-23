@@ -228,6 +228,11 @@ $$(document).on('pageInit', function(e) {
     if (page.name === 'main') {
         var userId = window.localStorage.getItem("customerId");
         checkNewMessage(userId);
+
+        searchResultList = getSearchResultList(searchKeyWord, selectedLang);
+        initListVirtualSearchResult();
+        listVirtualSearchResult.items = searchResultList;
+        listVirtualSearchResult.update();
     }
 
     if (page.name === 'account') {
