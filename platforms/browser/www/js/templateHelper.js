@@ -107,22 +107,28 @@ function initListVirtualUserAddresses() {
         items: [
 
         ],
-        height: 61,
-        template: '<li>' +
-        '<a href="#" class="item-link item-content">' +
-        '<div class="item-inner">' +
-        '<div class="item-title-row">' +
-        '<div class="item-title">{{alias}}</div>' +
-        '<div class="item-after">{{name}} €</div>' +
-        '</div>' +
-        '<div class="item-subtitle">{{postcodecity}}</div>' +
-        '<div class="item-text">{{address1}} {{address2}} {{vatnumber}}</div>' +
-        '</div>' +
-        '</a>' +
-        '</li>'
+        height: 105,
+        template: '<li class="swipeout">' +
+                  '<div class="swipeout-content"><a href="#" class="item-link item-content">'+
+                  '<div class="item-inner">'+
+                  '<div class="item-title-row">' +
+                  '<div class="item-title">{{alias}}</div>' +
+                  '<div class="item-after"></div>' +
+                  '</div>' +
+                  '<div class="item-subtitle">{{postcode}}, {{city}}/{{name}}</div>' +
+                  '<div class="item-text">{{address1}} {{address2}}</div>'+
+                  '</div></a></div>' +
+                  '<div class="swipeout-actions-right"><a onclick="deleteAddress('+"'{{alias}}'"+',{{id_address}});" href="#" class="swipeout-delete deleteSwipeAction bg-red"></a></div>' +
+                  '</li>'
+        
     });
 }
 
+
+function deleteAddress(addressAlias,addressId){
+    var userId = window.localStorage.getItem("customerId");
+    deleteaddress(userId, addressAlias, addressId);
+}
 
 var listVirtualUserMessages;
 
