@@ -58,6 +58,35 @@
             },
             "manufacturers_menu": {
                 "pageTitle": "Baklava7"
+            },
+            "messages":{
+                "pageTitle":"Mesajlar",
+                "btnSend":"Gönder",
+                "msgPlaceholder":"Mesaj"
+            },
+            "add_address":{
+                "btnName": "Kaydet",
+                "pageTitle": "Adres Ekle",
+                "firstname": "Ad",
+                "surname": "Soyad",
+                "phone":"Telefon",
+                "address":"Adres",
+                "address2":"Adres(2. Satır)"
+            },
+            "my_addresses":{
+                "deleteBtn": "Sil"
+            },
+            "alertMessages": {
+                "info": "Bilgi",
+                "warning": "Uyarı",
+                "error": "Hata",
+                "requiredField": "Lütfen zorunlu alanları doldurunuz",
+                "passwordValidation": "Parola en az 5 karakterden oluşmalıdır",
+                "passwordMatch": "Parolalar eşleşmedi, lütfen kontrol ediniz",
+                "updateOk": "Kullanıcı hesabınız başarı ile güncellenmiştir",
+                "mailNotAvailable": "Mail adresi daha önceden kayıtlıdır",
+                "mailNotOk": "Lütfen geçerli bir E-mail adresi girin",
+                "msgSendError" : "Mesaj gönderilirken bir hata oluştu, daha sonra tekrar deneyin"
             }
         },
         "de": {
