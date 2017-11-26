@@ -281,12 +281,60 @@ class DbHelper {
 
 
 
+
+
+
+
+	function getcountries($_infos) {
+		
+		$id_lang=$_infos["id_lang"];
+
+		$sql = "SELECT pl.id_country, pl.name FROM ps_country_lang pl WHERE pl.id_lang=$id_lang ";
+	   $result = $this->conn->query($sql);
+
+	   $items = array();
+	   
+			if ($result->num_rows > 0) {
+				$addr=array();
+				   while ($_infos = $result->fetch_assoc()) {
+					   
+
+					   $addr=array_merge($addr,$_infos);           
+					   
+					   array_push($items,$addr);
+					   
+					   $_res=true;
+				   }
+				}
+
+				   if($_res){
+					$item="OK";
+				   }else{
+					$item="NOK";
+					return $item;
+				   }
+			
+				return $items;
+				
+				$this->conn->close();
+
+
+
+
+	}
+
+
+
+
+
+
+
 	function saveAddress($_infos) {
 		
 		$_res=false;
 
 		$id_country=$_infos["id_country"];
-		$id_state=$_infos["id_state"];
+		$id_state= 0 ; //$_infos["id_state"];
 		$id_customer=$_infos["id_customer"];
 		//$id_manufacturer=$_infos["id_manufacturer"];
 		//$id_warehouse=$_infos["id_warehouse"];
@@ -331,7 +379,7 @@ class DbHelper {
 		$_res=false;
 
 		$id_customer=$_infos["id_customer"];
-		$sql = "SELECT pa.id_address, pa.alias,CONCAT(pa.firstname,' ', pa.lastname) AS 'name',pa.vat_number,pa.address1,pa.address2,pa.postcode, pa.city, pl.name, pa.phone
+		$sql = "SELECT pl.id_country, pa.id_address, pa.alias,CONCAT(pa.firstname,' ', pa.lastname) AS 'name',pa.vat_number,pa.address1,pa.address2,pa.postcode, pa.city, pl.name, pa.phone
 		 FROM ps_address pa, ps_customer pc, ps_country_lang pl WHERE pa.deleted=0 AND pa.id_customer=$id_customer AND pc.id_customer = pa.id_customer
 		 AND pl.id_country = pa.id_country AND pl.id_lang = pc.id_lang 
 		 ";
@@ -399,7 +447,7 @@ class DbHelper {
 		$_res=false;
 
 		$id_country=$_infos["id_country"];
-		$id_state=$_infos["id_state"];
+		$id_state=0;   //$_infos["id_state"];
 		$id_customer=$_infos["id_customer"];
 		$id_address=$_infos["id_address"];
 		$alias=$_infos["alias"];

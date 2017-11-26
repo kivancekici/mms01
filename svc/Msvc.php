@@ -43,6 +43,9 @@ switch ($opr) {
 		break;
 	case "updateuserdata":
         fUpdateUserData($decoded);
+		break;
+		case "getcountries":
+        fgetcountries($decoded);
         break;
     case "saveaddress":
         fSaveAddress($decoded);
@@ -165,6 +168,18 @@ function fUpdateUserData($_jsondata) {
 		send_response(Null);
 	}
 }
+
+
+
+function fgetcountries($_jsondata) {
+	$_items = DbHelper::getInstance()->getcountries($_jsondata);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
 
 
 
