@@ -123,4 +123,9 @@ option {
  background-color: #788F00;
 }
 
+.toolbar .tabbar .toolbar-inner .tab-link .active{
+ background-color: #ffffff !important;
+ color: #ff9500 !important;
+}
+
 /*Askin Bitir*/
