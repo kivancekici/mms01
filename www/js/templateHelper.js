@@ -130,24 +130,23 @@ function deleteAddress(addressAlias,addressId){
     deleteaddress(userId, addressAlias, addressId);
 }
 
-var listVirtualUserMessages;
+var listVirtualCategories;
 
-function initListVirtualUserMessages() {
-    listVirtualUserMessages = myApp.virtualList('.lstUserMessages', {
+function initListVirtualCategories() {
+    listVirtualCategories = myApp.virtualList('.lstCategories', {
         items: [
 
         ],
-        height: 61,
-        template: '<li>' +
-        '<a href="#" class="item-link item-content">' +
-        '<div class="item-inner">' +
-        '<div class="item-title-row">' +
-        '<div class="item-title">{{dateadd}}</div>' +
+        height: 60,
+        template: '<div class="row">' +
+        '<div class="col-auto">' +
+        '<div class="card">' +
+        '<div class="card-content">' +
+        '<div class="card-content-inner"><img src="http://baklava7.de{{imgdirectory}}" class="lazy" width="40"></div>' +
         '</div>' +
-        '<div class="item-subtitle">{{from}}</div>' +
-        '<div class="item-text">{{message}}</div>' +
         '</div>' +
-        '</a>' +
-        '</li>'
+        '</div>' +
+        '<div class="col-auto"></div>' +
+        '</div>'
     });
 }

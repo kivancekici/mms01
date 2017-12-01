@@ -26,6 +26,7 @@ var manufacturersMenuList = null;
 var selectedManufacturerId = 0;
 var searchResultList = null;
 var searchKeyWord = "";
+var categoriesList = null;
 
 
 if (langIsSeleted) {
@@ -229,10 +230,21 @@ $$(document).on('pageInit', function(e) {
         var userId = window.localStorage.getItem("customerId");
         checkNewMessage(userId);
 
+        /*
         searchResultList = getSearchResultList(searchKeyWord, selectedLang);
         initListVirtualSearchResult();
         listVirtualSearchResult.items = searchResultList;
         listVirtualSearchResult.update();
+        */
+
+        if (categoriesList == null) {
+            categoriesList = getAllManufacturersList("");
+        }
+
+        initListVirtualCategories();
+        listVirtualCategories.items = categoriesList;
+        listVirtualCategories.update();
+       
     }
 
     if (page.name === 'account') {
