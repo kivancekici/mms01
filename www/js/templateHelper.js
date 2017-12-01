@@ -142,7 +142,7 @@ function initListVirtualCategories() {
         '<div class="col-auto">' +
         '<div class="card">' +
         '<div class="card-content">' +
-        '<div class="card-content-inner"><img src="http://baklava7.de{{imgdirectory}}" class="lazy" width="40"></div>' +
+        '<div class="card-content-inner"><img src="http://baklava7.de{{imgdirectory}}" class="lazy" height="40"></div>' +
         '</div>' +
         '</div>' +
         '</div>' +
