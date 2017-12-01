@@ -54,7 +54,7 @@ function initListVirtualSearchResult() {
             // Return array with indexes of matched items
             return foundItems; 
         },
-        height: 124,
+        height: 140,
         template: '<li>' +
         '<a href="#" class="item-link item-content">' +
         '<div class="item-media">' +
