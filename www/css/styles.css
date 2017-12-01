@@ -124,12 +124,12 @@ option {
 }
 
 .tabbar a.active {
-  color: #007aff !important;
+  color:#ff9500 !important;
   background-color: #ffffff !important;
 }
 
 .tabbar a.active i {
-  color: #007aff !important;
+  color:#ff9500 !important;
 }
 
 /*Askin Bitir*/
