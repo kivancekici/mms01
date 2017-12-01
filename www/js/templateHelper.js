@@ -146,7 +146,13 @@ function initListVirtualCategories() {
         '</div>' +
         '</div>' +
         '</div>' +
-        '<div class="col-auto"></div>' +
+        '<div class="col-auto">' +
+        '<div class="card">' +
+        '<div class="card-content">' +
+        '<div class="card-content-inner"><img src="http://baklava7.de{{imgdirectory}}" class="lazy" height="20" width="20"></div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
         '</div>'
     });
 }
