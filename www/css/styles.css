@@ -135,4 +135,8 @@ option {
 .toolbar-inner {    
 padding: 0px !important;
 }
+
+#mainContentBlock {
+margin-bottom: 20px !important;
+}
 /*Askin Bitir*/
