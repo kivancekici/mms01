@@ -125,6 +125,11 @@ option {
 
 .tabbar a.active {
   color: #007aff !important;
+  background-color: #ffffff !important;
+}
+
+.tabbar a.active i {
+  color: #007aff !important;
 }
 
 /*Askin Bitir*/
