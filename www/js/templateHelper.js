@@ -142,14 +142,14 @@ function initListVirtualCategories() {
         '<div class="col-auto">' +
         '<div class="card">' +
         '<div class="card-content">' +
-        '<div class="card-content-inner"><img src="http://baklava7.de{{imgdirectory}}" class="lazy" height="20" width="20"></div>' +
+        '<div class="card-content-inner"><img src="http://baklava7.de/img/m/{{id_manufacturer}}-field_manufacture.jpg" class="lazy" width="20" height="20"></div>' +
         '</div>' +
         '</div>' +
         '</div>' +
         '<div class="col-auto">' +
         '<div class="card">' +
         '<div class="card-content">' +
-        '<div class="card-content-inner"><img src="http://baklava7.de{{imgdirectory}}" class="lazy" height="20" width="20"></div>' +
+        '<div class="card-content-inner"><img src="http://baklava7.de/img/m/{{id_manufacturer}}-field_manufacture.jpg" class="lazy" width="20" height="20"></div>' +
         '</div>' +
         '</div>' +
         '</div>' +
