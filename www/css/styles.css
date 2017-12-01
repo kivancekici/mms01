@@ -123,9 +123,8 @@ option {
  background-color: #788F00;
 }
 
-.tab-link .active{
- background-color: #ffffff !important;
- color: #ff9500 !important;
+.tabbar a.active {
+  color: #007aff !important;
 }
 
 /*Askin Bitir*/
