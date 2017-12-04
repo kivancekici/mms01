@@ -144,4 +144,8 @@ margin-bottom: 10px !important;
      overflow: auto;
      -webkit-overflow-scrolling: touch;
 }
+
+#middleToolbar{
+ height: 30px !important;
+}
 /*Askin Bitir*/
