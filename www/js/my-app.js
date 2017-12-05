@@ -239,10 +239,13 @@ $$(document).on('pageInit', function(e) {
         var userId = window.localStorage.getItem("customerId");
         checkNewMessage(userId);
 
-        if (productResultList == null) {
-            productResultList = getSearchResultList(searchKeyWord, selectedLang);
-            initlistProduct();
+        
+
+        if (productResultList != null) {
+            listProductResult.destroy();       
         }
+        productResultList = getSearchResultList(searchKeyWord, selectedLang); 
+        initlistProduct();
         listProductResult.items = productResultList;
         listProductResult.update();
         
