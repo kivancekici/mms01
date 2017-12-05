@@ -9,7 +9,16 @@ var myApp = new Framework7({
     swipeBackPage: false,
     swipePanelOnlyClose: true,
     template7Pages: true,
-    pushState: true
+    pushState: true,
+    imagesLazyLoadThreshold:100,
+    imagesLazyLoadPlaceholder: 'Loading',
+   
+    onAjaxStart: function (xhr) {
+        myApp.showIndicator();
+    },
+    onAjaxComplete: function (xhr) {
+        myApp.hideIndicator();
+    }
 });
 
 var $$ = Dom7;
@@ -24,7 +33,7 @@ var selectedLang;
 var manufacturersList = null;
 var manufacturersMenuList = null;
 var selectedManufacturerId = 0;
-var searchResultList = null;
+var productResultList = null;
 var searchKeyWord = "";
 var categoriesList = null;
 
@@ -230,13 +239,13 @@ $$(document).on('pageInit', function(e) {
         var userId = window.localStorage.getItem("customerId");
         checkNewMessage(userId);
 
-        if (searchResultList == null) {
-            searchResultList = getSearchResultList(searchKeyWord, selectedLang);
+        if (productResultList == null) {
+            productResultList = getSearchResultList(searchKeyWord, selectedLang);
         }
         
-        initListVirtualSearchResult();
-        listVirtualSearchResult.items = searchResultList;
-        listVirtualSearchResult.update();
+        initlistProduct();
+        listProductResult.items = productResultList;
+        listProductResult.update();
 
     }
 
