@@ -255,7 +255,7 @@ $$(document).on('pageInit', function(e) {
 
         
 
-        if (productResultList != null) {
+        if (productResultList == null) {
             productResultList = getSearchResultList(searchKeyWord, selectedLang); 
             initlistProduct();      
         }
