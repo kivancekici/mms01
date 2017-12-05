@@ -12,6 +12,7 @@ var myApp = new Framework7({
     pushState: true,
     imagesLazyLoadThreshold:200,
     imagesLazyLoadPlaceholder: 'Loading',
+    imagesLazyLoadSequential:false,
    
     onAjaxStart: function (xhr) {
         myApp.showIndicator();
