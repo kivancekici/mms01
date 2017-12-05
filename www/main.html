@@ -22,7 +22,7 @@
                 <div class="card-header">What would you like to eat?</div>
                 <div class="card-content">
                     <div class="card-content-inner">
-                        <form class="searchbar searchbar-init bgYesil color-white" data-search-list=".lstsearchresult" data-search-in=".item-title" data-found=".searchbar-found" data-not-found=".searchbar-not-found">
+                        <form class="searchbar searchbar-init bgYesil color-white" data-search-list=".lstproduct" data-search-in=".item-title" data-found=".searchbar-found" data-not-found=".searchbar-not-found">
                             <div class="searchbar-input">
                                 <input type="search" placeholder="Suchen">
                                 <a href="#" class="searchbar-clear"></a>
@@ -36,7 +36,7 @@
 
 
 
-        <div id="middleToolbar" class="toolbar tabbar tabbar-labels bg-orange color-white border-orange">
+        <div class="toolbar tabbar tabbar-labels bg-orange color-white border-orange">
             <div class="toolbar-inner">
                 <a href="#tab-1" class="tab-link active">
                    <i class="color-white f7-icons">list</i>
@@ -56,7 +56,11 @@
         <div class="tabs-swipeable-wrap">
             <div class="tabs">
                 <div id="tab-1" class="tab bg-white active">
-                    <div class="lstsearchresult list-block media-list virtual-list list-block-search searchbar-found theme-orange">
+                    <div class="content-block searchbar-not-found">
+                    <div style="padding-top:60px;">Nothing found</div>
+                     
+                     </div>
+                    <div class="lstproduct list-block media-list virtual-list list-block-search searchbar-found theme-orange">
                         <!-- keep it empty -->
                     </div>
                 </div>

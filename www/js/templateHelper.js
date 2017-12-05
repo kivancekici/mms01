@@ -31,11 +31,11 @@ function showManufacturerMenu(manufacturer_name,id_manufacturer){
 
 
 
-var listVirtualSearchResult;
+var listProductResult;
 
 
-function initListVirtualSearchResult() {
-    listVirtualSearchResult = myApp.virtualList('.lstsearchresult', {
+function initlistProduct() {
+       listProductResult = myApp.virtualList('.lstproduct', {
         items: [
 
         ],
