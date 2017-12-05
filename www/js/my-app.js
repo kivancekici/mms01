@@ -238,16 +238,6 @@ $$(document).on('pageInit', function(e) {
         listVirtualSearchResult.items = searchResultList;
         listVirtualSearchResult.update();
 
-        
-        /*
-        if (categoriesList == null) {
-            categoriesList = getAllManufacturersList("");
-        }
-
-        initListVirtualCategories();
-        listVirtualCategories.items = categoriesList;
-        listVirtualCategories.update();
-        */
     }
 
     if (page.name === 'account') {
@@ -442,12 +432,6 @@ $$(document).on('pageInit', function(e) {
         listVirtualManufacturers.update();
     }
 
-    if (page.name === 'search_results') {
-        searchResultList = getSearchResultList(searchKeyWord, selectedLang);
-        initListVirtualSearchResult();
-        listVirtualSearchResult.items = searchResultList;
-        listVirtualSearchResult.update();
-    }
 
     if (page.name === 'manufacturers_menu') {
 
