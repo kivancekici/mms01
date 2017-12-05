@@ -54,8 +54,6 @@ function initlistProduct() {
             // Return array with indexes of matched items
             return foundItems; 
         },
-        updatableScroll: true,
-        cache:false,
         height: 124,
         template: '<li>' +
         '<a href="#" class="item-link item-content">' +

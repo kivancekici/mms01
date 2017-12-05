@@ -10,7 +10,7 @@ var myApp = new Framework7({
     swipePanelOnlyClose: true,
     template7Pages: true,
     pushState: true,
-    imagesLazyLoadThreshold:100,
+    imagesLazyLoadThreshold:200,
     imagesLazyLoadPlaceholder: 'Loading',
    
     onAjaxStart: function (xhr) {
@@ -241,11 +241,12 @@ $$(document).on('pageInit', function(e) {
 
         if (productResultList == null) {
             productResultList = getSearchResultList(searchKeyWord, selectedLang);
+            initlistProduct();
+            listProductResult.items = productResultList;
+            listProductResult.update();
         }
         
-        initlistProduct();
-        listProductResult.items = productResultList;
-        listProductResult.update();
+        
 
     }
 
