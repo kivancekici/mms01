@@ -20,7 +20,7 @@ function initListVirtualManufacturers() {
             // Return array with indexes of matched items
             return foundItems; 
         },
-        height: 100,
+        height: 61,
         template: '<li>' +
         '<a href="#" onclick="showManufacturerMenu('+"'{{name}}'"+',{{id_manufacturer}});" class="item-link item-content">' +
         '<div class="item-media">' +
