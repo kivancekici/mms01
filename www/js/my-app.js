@@ -242,10 +242,9 @@ $$(document).on('pageInit', function(e) {
         if (productResultList == null) {
             productResultList = getSearchResultList(searchKeyWord, selectedLang);
             initlistProduct();
-            listProductResult.items = productResultList;
-            listProductResult.update();
         }
-        
+        listProductResult.items = productResultList;
+        listProductResult.update();
         
 
     }
