@@ -129,10 +129,24 @@ function setContextParameter(pageName, key, value) {
 function loadPageWithLang(pageName) {
     var cntxName = 'languages.' + selectedLang + '.' + pageName;
     var pgUrl = pageName + '.html';
+
+    if(pageName == 'main'){
+      
     mainView.router.load({
+        url: pgUrl,
+        contextName: cntxName,
+        ignoreCache:true
+    });
+
+    }else {
+
+     mainView.router.load({
         url: pgUrl,
         contextName: cntxName
     });
+
+    }
+    
 }
 
 function checkLoginStatus() {
@@ -242,10 +256,10 @@ $$(document).on('pageInit', function(e) {
         
 
         if (productResultList != null) {
-            listProductResult.destroy();       
+            productResultList = getSearchResultList(searchKeyWord, selectedLang); 
+            initlistProduct();      
         }
-        productResultList = getSearchResultList(searchKeyWord, selectedLang); 
-        initlistProduct();
+        
         listProductResult.items = productResultList;
         listProductResult.update();
         
