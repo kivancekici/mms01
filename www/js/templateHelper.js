@@ -74,7 +74,7 @@ function initlistProduct() {
         template: '<li>' +
         '<a href="#" class="item-link item-content">' +
         '<div class="item-media">' +
-        '<img src="http://baklava7.de{{imgdirectory}}" class="lazy" width="80">' +
+        '<img src="http://baklava7.de{{imgdirectory}}" width="70">' +
         '</div>' +
         '<div class="item-inner">' +
         '<div class="item-title-row">' +
