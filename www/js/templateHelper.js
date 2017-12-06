@@ -25,7 +25,7 @@ function initListVirtualManufacturers() {
         '<a href="#" onclick="showManufacturerMenu('+"'{{name}}'"+',{{id_manufacturer}});" class="item-link item-content">' +
         '<div class="item-media">' +
         //'<img src="http://baklava7.de/img/tmp/manufacturer_mini_{{id_manufacturer}}_1.jpg" class="lazy" width="80">' +
-        '<img src="http://baklava7.de/img/m/{{id_manufacturer}}-field_manufacture.jpg" class="lazy" width="80">' +
+        '<img src="http://baklava7.de/img/m/{{id_manufacturer}}-field_manufacture.jpg" width="70">' +
         '</div>' +
         '<div class="item-inner">' +
         '<div class="item-title-row">' +
