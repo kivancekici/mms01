@@ -70,19 +70,8 @@ function initlistProduct() {
             // Return array with indexes of matched items
             return foundItems; 
         },
-        emptyTemplate:'<li>' +
-        '<a href="#" class="item-link item-content">' +
-        '<div class="item-inner">' +
-        '<div class="item-title-row">' +
-        '<div class="item-title">EMPTY</div>' +
-        '<div class="item-after">EMPTY</div>' +
-        '</div>' +
-        '<div class="item-subtitle">EMPTY</div>' +
-        '<div class="item-text">EMPTY</div>' +
-        '</div>' +
-        '</a>' +
-        '</li>',
-        height: 110,
+        height: 124,
+        dynamicHeightBufferSize: 3,
         template: '<li>' +
         '<a href="#" class="item-link item-content">' +
         '<div class="item-media">' +
@@ -165,6 +154,7 @@ function initListVirtualCategories() {
         items: [
 
         ],
+        cols:2,
         height: 60,
         template: '<div class="row">' +
         '<div class="col-auto">' +
