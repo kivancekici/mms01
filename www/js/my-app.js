@@ -10,9 +10,6 @@ var myApp = new Framework7({
     swipePanelOnlyClose: true,
     template7Pages: true,
     pushState: true,
-    imagesLazyLoadThreshold:200,
-    imagesLazyLoadPlaceholder: 'Loading',
-    imagesLazyLoadSequential:false,
    
     onAjaxStart: function (xhr) {
         myApp.showIndicator();

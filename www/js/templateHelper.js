@@ -71,7 +71,6 @@ function initlistProduct() {
             return foundItems; 
         },
         height: 124,
-        dynamicHeightBufferSize: 3,
         template: '<li>' +
         '<a href="#" class="item-link item-content">' +
         '<div class="item-media">' +
