@@ -72,11 +72,11 @@ function initlistProduct() {
             // Return array with indexes of matched items
             return foundItems; 
         },
-        height: 124,
+        height: 80,
         template: '<li>' +
         '<a href="#" class="item-link item-content">' +
         '<div class="item-media">' +
-        '<img src="http://baklava7.de{{imgdirectory}}" class="lazy" width="70">' +
+        '<img src="http://baklava7.de{{imgdirectory}}" class="lazy" height="70">' +
         '</div>' +
         '<div class="item-inner">' +
         '<div class="item-title-row">' +
