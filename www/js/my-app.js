@@ -10,9 +10,6 @@ var myApp = new Framework7({
     swipePanelOnlyClose: true,
     template7Pages: true,
     pushState: true,
-    imagesLazyLoadThreshold:200,
-    imagesLazyLoadPlaceholder: 'Loading',
-    imagesLazyLoadSequential:false,
    
     onAjaxStart: function (xhr) {
         myApp.showIndicator();
@@ -255,7 +252,7 @@ $$(document).on('pageInit', function(e) {
         checkNewMessage(userId);
 
         
-
+        /*Product listesini doldur*/
         if (productResultList == null) {
             productResultList = getSearchResultList(searchKeyWord, selectedLang);      
         }
@@ -263,6 +260,16 @@ $$(document).on('pageInit', function(e) {
         initlistProduct(); 
         listProductResult.items = productResultList;
         listProductResult.update();
+        
+        /*Üreticiler Listesini Doldur*/
+         if (manufacturersList == null) {
+            manufacturersList = getAllManufacturersList("");
+        }
+
+        initListVirtualManufacturers();
+        listVirtualManufacturers.items = manufacturersList;
+        listVirtualManufacturers.update();
+
         
 
     }
@@ -450,13 +457,7 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'manufacturers') {
-        if (manufacturersList == null) {
-            manufacturersList = getAllManufacturersList("");
-        }
-
-        initListVirtualManufacturers();
-        listVirtualManufacturers.items = manufacturersList;
-        listVirtualManufacturers.update();
+       
     }
 
 
