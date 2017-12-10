@@ -138,16 +138,16 @@ function initListVirtualUserAddresses() {
                   '<div class="item-subtitle">{{postcode}}, {{city}}/{{name}}</div>' +
                   '<div class="item-text">{{address1}} {{address2}}</div>'+
                   '</div></a></div>' +
-                  '<div class="swipeout-actions-right"><a onclick="deleteAddress({{id_address}});" href="#" class="swipeout-delete deleteSwipeAction bg-red"></a></div>' +
+                  '<div class="swipeout-actions-right"><a onclick="deleteUserAddress({{id_address}});" href="#" class="swipeout-delete deleteSwipeAction bg-red"></a></div>' +
                   '</li>'
         
     });
 }
 
 
-function deleteAddress(idAddress){
+function deleteUserAddress(idAddress){
     var userId = window.localStorage.getItem("customerId");
-    deleteaddress(userId, idAddress);
+    deleteAddress(userId, idAddress);
 }
 
 var listVirtualCategories;
