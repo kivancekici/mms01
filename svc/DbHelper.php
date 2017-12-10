@@ -789,7 +789,7 @@ class DbHelper {
 				$_res=true;
             }
 			
-			
+		
         } else {
             //no results
         }
