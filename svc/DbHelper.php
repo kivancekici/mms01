@@ -190,54 +190,6 @@ class DbHelper {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	function updateuserdata($_infos) {
 		$_res=false;
 		
@@ -837,7 +789,7 @@ class DbHelper {
 				$_res=true;
             }
 			
-			
+		
         } else {
             //no results
         }
@@ -857,104 +809,138 @@ class DbHelper {
 
 
 
+
   
 	function getHpProductsList($_infos2) {
 	
 		$keyword=$_infos2["keyword"];
 		$currency=$_infos2["currency"];
 		$langu=$_infos2["langu"];
+		$iscategorysearch = $_infos2["iscategorysearch"];
+		$categorylist = '';
+
+
+	if($iscategorysearch){
+
+
+
+		foreach ($_infos2 as $key => $jsons) { // This will search in the 2 jsons
+			//foreach($jsons as $key => $value) {
 		
+				if($key != 'keyword' &&  $key != 'currency' &&  $key != 'langu' &&  $key != 'opr' &&  $key != 'iscategorysearch'){
+
+
+				$categorylist .= '\''. $jsons. '\''.',';
+
+				//}
+
+	  		 }
+
+   		}
+
+   		$categorylist = '('. substr("$categorylist",0,-1). ')';
+
+   		$sql = "SELECT pl.id_product, pl.name, pl.description_short, description FROM  ps_product_lang pl, ps_product p WHERE pl.id_lang = $langu AND p.id_product = pl.id_product AND p.id_category_default IN "."$categorylist";
+   
+
+	}else{
+
 		$sql = "SELECT id_product, name,description_short, description FROM  ps_product_lang WHERE id_lang = $langu AND (description LIKE '%$keyword%' OR description_short LIKE '%$keyword%'  OR name LIKE '%$keyword%') ";
 
-		$result = $this->conn->query($sql);
+	}
 
-		
-		if ($result->num_rows > 0) {
-			$resulttable = array();
-			//$tmpsqltable =array();
-			$rowcounter = 0;
-            while ($row = $result->fetch_assoc()) {
-				
 
-				$sql ="SELECT CAST(((pr.price + pa.price) * (1 + tx.rate/100)) AS  decimal(10,2)) AS 'grossprice'   FROM ps_product pr, ps_tax_rule tr, ps_tax tx, ps_product_attribute pa  WHERE pr.id_product = $row[id_product] AND pr.id_tax_rules_group = tr.id_tax_rules_group AND tr.id_country = '1' AND tr.id_tax = tx.id_tax AND pa.id_product_attribute = pr.cache_default_attribute AND pa.id_product = pr.id_product";
-				
-				$resultgross = $this->conn->query($sql);
-               $tmpsqltable = mysqli_fetch_array($resultgross , MYSQLI_ASSOC);
 
-				array_push($resulttable, $row);
-
-				$resulttable[$rowcounter]['description_short'] = str_replace("</p>","",str_replace("<p>","",$resulttable[$rowcounter]['description_short']));
-
-				$resulttable[$rowcounter]['description'] = str_replace("</p>","",str_replace("<p>","",$resulttable[$rowcounter]['description']));
-				
-				$resulttable[$rowcounter]['grossprice'] = $tmpsqltable['grossprice'];
-
-				$sql ="SELECT reduction,reduction_type FROM ps_specific_price WHERE id_product = $row[id_product]";
-				$resultreduction = $this->conn->query($sql);
-				if ($resultreduction->num_rows > 0) {
-					$reducedprice = array();
-					$tmpsqltable = mysqli_fetch_array($resultreduction , MYSQLI_ASSOC);
+	$result = $this->conn->query($sql);
+	
 			
-					if ($tmpsqltable['reduction_type'] == "percentage"){
+			if ($result->num_rows > 0) {
+				$resulttable = array();
+				//$tmpsqltable =array();
+				$rowcounter = 0;
+				while ($row = $result->fetch_assoc()) {
+					
+	
+					$sql ="SELECT CAST(((pr.price + pa.price) * (1 + tx.rate/100)) AS  decimal(10,2)) AS 'grossprice'   FROM ps_product pr, ps_tax_rule tr, ps_tax tx, ps_product_attribute pa  WHERE pr.id_product = $row[id_product] AND pr.id_tax_rules_group = tr.id_tax_rules_group AND tr.id_country = '1' AND tr.id_tax = tx.id_tax AND pa.id_product_attribute = pr.cache_default_attribute AND pa.id_product = pr.id_product";
+					
+					$resultgross = $this->conn->query($sql);
+				   $tmpsqltable = mysqli_fetch_array($resultgross , MYSQLI_ASSOC);
+	
+					array_push($resulttable, $row);
+	
+					$resulttable[$rowcounter]['description_short'] = str_replace("</p>","",str_replace("<p>","",$resulttable[$rowcounter]['description_short']));
+	
+					$resulttable[$rowcounter]['description'] = str_replace("</p>","",str_replace("<p>","",$resulttable[$rowcounter]['description']));
+					
+					$resulttable[$rowcounter]['grossprice'] = $tmpsqltable['grossprice'];
+	
+					$sql ="SELECT reduction,reduction_type FROM ps_specific_price WHERE id_product = $row[id_product]";
+					$resultreduction = $this->conn->query($sql);
+					if ($resultreduction->num_rows > 0) {
+						$reducedprice = array();
+						$tmpsqltable = mysqli_fetch_array($resultreduction , MYSQLI_ASSOC);
+				
+						if ($tmpsqltable['reduction_type'] == "percentage"){
+							
+							$reducedprice['reducedprice'] = number_format($resulttable[$rowcounter]['grossprice'] * (1-$tmpsqltable[reduction]),2);
+							$resulttable[$rowcounter] = $resulttable[$rowcounter] + $reducedprice;
+						}elseif($tmpsqltable['reduction_type'] == "amount"){
+							
+							$reducedprice['reducedprice'] =  number_format($resulttable[$rowcounter]['grossprice'] - $tmpsqltable[reduction],2);
+							$resulttable[$rowcounter] = $resulttable[$rowcounter] + $reducedprice;
+	
+						}
+	
+	
+					}else{
 						
-						$reducedprice['reducedprice'] = number_format($resulttable[$rowcounter]['grossprice'] * (1-$tmpsqltable[reduction]),2);
+						$reducedprice['reducedprice'] =  $resulttable[$rowcounter]['grossprice'];
 						$resulttable[$rowcounter] = $resulttable[$rowcounter] + $reducedprice;
-					}elseif($tmpsqltable['reduction_type'] == "amount"){
 						
-						$reducedprice['reducedprice'] =  number_format($resulttable[$rowcounter]['grossprice'] - $tmpsqltable[reduction],2);
-						$resulttable[$rowcounter] = $resulttable[$rowcounter] + $reducedprice;
-
 					}
-
-
-				}else{
-					
-					$reducedprice['reducedprice'] =  $resulttable[$rowcounter]['grossprice'];
-					$resulttable[$rowcounter] = $resulttable[$rowcounter] + $reducedprice;
-					
-				}
-
-
-				//$imgdirectory="/"."prestashop"."/"."img"."/"."p";
-				$imgdirectory="/"."img"."/"."p";
-				$sql ="SELECT id_image FROM ps_image WHERE id_product = $row[id_product] AND cover = 1";
-
-				$resultimg = $this->conn->query($sql);
-				if ($resultimg->num_rows > 0) {
-
-					$tmpsqltable = mysqli_fetch_array($resultimg , MYSQLI_ASSOC);
-					$imgcounter = 0;
-
-					$tmpstring = $tmpsqltable['id_image'];
-
-
-					while($imgcounter < STRLEN($tmpstring))
-					{
-
+	
+	
+					$imgdirectory="/"."prestashop"."/"."img"."/"."p";
+	
+					$sql ="SELECT id_image FROM ps_image WHERE id_product = $row[id_product] AND cover = 1";
+	
+					$resultimg = $this->conn->query($sql);
+					if ($resultimg->num_rows > 0) {
+	
+						$tmpsqltable = mysqli_fetch_array($resultimg , MYSQLI_ASSOC);
+						$imgcounter = 0;
+	
+						$tmpstring = $tmpsqltable['id_image'];
+	
+	
+						while($imgcounter < STRLEN($tmpstring))
+						{
+	
+							
+	
+							$imgdirectory .=  "/".SUBSTR($tmpstring ,$imgcounter,1);
+							
 						
-
-						$imgdirectory .=  "/".SUBSTR($tmpstring ,$imgcounter,1);
-						
-					
-						$imgcounter = $imgcounter +1;
+							$imgcounter = $imgcounter +1;
+						}
+	
+						$imgdirectory .= "/".$tmpstring."-home_default.jpg";
+	
+	
+	
 					}
-
-					$imgdirectory .= "/".$tmpstring."-home_default.jpg";
-
-
-
+	
+					$resulttable[$rowcounter]['imgdirectory'] = $imgdirectory;
+	
+					$rowcounter = $rowcounter  + 1;
 				}
+			}
+	
+			return $resulttable;
+			$this->conn->close();
 
-				$resulttable[$rowcounter]['imgdirectory'] = $imgdirectory;
-
-				$rowcounter = $rowcounter  + 1;
-            }
-		}
-
-		return $resulttable;
-        $this->conn->close();
-
-    }
+	
+ }
 	
 
 	function getIpProductsList($_infosItemMain){
@@ -977,8 +963,7 @@ class DbHelper {
 
 
 
-				//$imgdirectory="/"."prestashop"."/"."img"."/"."p";
-				$imgdirectory="/"."img"."/"."p";
+				$imgdirectory="/"."prestashop"."/"."img"."/"."p";
 				
 								$sql ="SELECT id_image FROM ps_image WHERE id_product = $id_product AND cover = 1";
 				
@@ -1152,6 +1137,54 @@ class DbHelper {
 				$this->conn->close();
 		
 	}
+
+
+
+
+
+
+
+	function getcategorytree($_ProductUnitValue){
+		
+				$id_lang=$_ProductUnitValue["id_lang"];
+		
+			
+				$sql = " SELECT c.id_category, c.id_parent,  c.level_depth ,  c.level_depth, c.position, c.is_root_category, cl1.name  AS 'categoryname', cl2.name AS 'parentname' FROM ps_category c, ps_category_lang cl1, ps_category_lang cl2    WHERE   c.id_category =cl1.id_category  AND  c.id_parent = cl2.id_category  AND cl1.id_lang = $id_lang AND   cl2.id_lang = $id_lang    order by id_parent, id_category";
+				
+				$resultidproducUnitValue = $this->conn->query($sql);
+				
+				if ($resultidproducUnitValue->num_rows > 0) {
+					$tmpsqltable = array();
+					while ($row = $resultidproducUnitValue->fetch_assoc()) {
+
+
+
+						array_push($tmpsqltable , $row);
+
+					}
+
+
+
+					//$tmpsqltable = mysqli_fetch_array($resultidproducUnitValue , MYSQLI_ASSOC);
+		
+				}
+				
+				return $tmpsqltable;
+				$this->conn->close();
+		
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
