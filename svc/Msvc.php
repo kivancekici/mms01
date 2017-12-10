@@ -101,6 +101,10 @@ switch ($opr) {
 	case "hpproductattribute":
 		fGetIpProductAttribute($decoded);
 		break; 	
+	case "categorytree":
+		fGetcategorytree($decoded);
+		break; 	
+
 	case "placeorder":
 		fPlaceOrder($decoded);
 		break;
@@ -388,6 +392,21 @@ function fGetIpProductUnitValue($_jsondata) {
 		send_response(Null);
 	}
 }
+
+
+
+
+function fGetcategorytree($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	$_items = DbHelper::getInstance()->getcategorytree($_jsondata);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
+
 
 
 

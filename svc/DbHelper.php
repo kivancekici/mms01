@@ -190,54 +190,6 @@ class DbHelper {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	function updateuserdata($_infos) {
 		$_res=false;
 		
@@ -1152,6 +1104,54 @@ class DbHelper {
 				$this->conn->close();
 		
 	}
+
+
+
+
+
+
+
+	function getcategorytree($_ProductUnitValue){
+		
+				$id_lang=$_ProductUnitValue["id_lang"];
+		
+			
+				$sql = " SELECT c.id_category, c.id_parent,  c.level_depth ,  c.level_depth, c.position, c.is_root_category, cl1.name  AS 'categoryname', cl2.name AS 'parentname' FROM ps_category c, ps_category_lang cl1, ps_category_lang cl2    WHERE   c.id_category =cl1.id_category  AND  c.id_parent = cl2.id_category  AND cl1.id_lang = $id_lang AND   cl2.id_lang = $id_lang    order by id_parent, id_category";
+				
+				$resultidproducUnitValue = $this->conn->query($sql);
+				
+				if ($resultidproducUnitValue->num_rows > 0) {
+					$tmpsqltable = array();
+					while ($row = $resultidproducUnitValue->fetch_assoc()) {
+
+
+
+						array_push($tmpsqltable , $row);
+
+					}
+
+
+
+					//$tmpsqltable = mysqli_fetch_array($resultidproducUnitValue , MYSQLI_ASSOC);
+		
+				}
+				
+				return $tmpsqltable;
+				$this->conn->close();
+		
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
