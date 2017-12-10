@@ -857,7 +857,6 @@ class DbHelper {
 
 
 
-
   
 	function getHpProductsList($_infos2) {
 	

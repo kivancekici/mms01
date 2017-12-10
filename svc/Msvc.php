@@ -149,7 +149,6 @@ function fRegisterUser($_jsondata) {
 
 
 
-
 function fGetUserInfo($_jsondata) {
 	$_items = DbHelper::getInstance()->getuserinfo($_jsondata);
 	if (!empty($_items)) {
