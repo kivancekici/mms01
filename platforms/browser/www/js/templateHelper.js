@@ -128,7 +128,7 @@ function initListVirtualUserAddresses() {
 
         ],
         height: 105,
-        template: '<li class="swipeout">' +
+        template: '<li class="swipeout cls{{id_address}}">' +
                   '<div class="swipeout-content"><a href="#" class="item-link item-content">'+
                   '<div class="item-inner">'+
                   '<div class="item-title-row">' +
@@ -152,6 +152,7 @@ function deleteUserAddress(idAddress){
     var okBtn = myApp.template7Data.languages[selectedLang]['alertMessages']['delAdrOkBtn'];
     var cancelBtn = myApp.template7Data.languages[selectedLang]['alertMessages']['delAdrCancelBtn'];
 
+    
     myApp.modal({
     title:  mdlTitle,
     text: mdlText,
@@ -159,7 +160,9 @@ function deleteUserAddress(idAddress){
       {
         text: okBtn,
         onClick: function() {
-          myApp.alert('You clicked ok button!')
+          myApp.alert('You clicked ok button!');
+          var delId = 'cls' + idAddress;
+          myApp.swipeoutDelete(delId, function(){});
         }
       },
       {
