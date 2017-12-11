@@ -123,4 +123,26 @@ option {
  background-color: #788F00;
 }
 
+.tabbar a.active {
+  color:#ff9500 !important;
+  background-color: #ffffff !important;
+}
+
+.tabbar a.active i {
+  color:#ff9500 !important;
+}
+
+.toolbar-inner {    
+padding: 0px !important;
+}
+
+#mainContentBlock {
+margin-bottom: 10px !important;
+}
+
+.tabs-swipeable-wrap > .tabs > .tab  {
+     overflow: auto;
+     -webkit-overflow-scrolling: touch;
+}    
+
 /*Askin Bitir*/

@@ -9,7 +9,14 @@ var myApp = new Framework7({
     swipeBackPage: false,
     swipePanelOnlyClose: true,
     template7Pages: true,
-    pushState: true
+    pushState: true,
+   
+    onAjaxStart: function (xhr) {
+        myApp.showIndicator();
+    },
+    onAjaxComplete: function (xhr) {
+        myApp.hideIndicator();
+    }
 });
 
 var $$ = Dom7;
@@ -24,8 +31,9 @@ var selectedLang;
 var manufacturersList = null;
 var manufacturersMenuList = null;
 var selectedManufacturerId = 0;
-var searchResultList = null;
+var productResultList = null;
 var searchKeyWord = "";
+var categoriesList = null;
 
 
 if (langIsSeleted) {
@@ -38,7 +46,7 @@ if (langIsSeleted) {
 
 // Add view
 var mainView = myApp.addView('.view-main', {
-    domCache: true
+   // domCache: true
 });
 
 
@@ -119,10 +127,24 @@ function setContextParameter(pageName, key, value) {
 function loadPageWithLang(pageName) {
     var cntxName = 'languages.' + selectedLang + '.' + pageName;
     var pgUrl = pageName + '.html';
+
+    if(pageName == 'main'){
+      
     mainView.router.load({
+        url: pgUrl,
+        contextName: cntxName,
+        ignoreCache:true
+    });
+
+    }else {
+
+     mainView.router.load({
         url: pgUrl,
         contextName: cntxName
     });
+
+    }
+    
 }
 
 function checkLoginStatus() {
@@ -229,10 +251,27 @@ $$(document).on('pageInit', function(e) {
         var userId = window.localStorage.getItem("customerId");
         checkNewMessage(userId);
 
-        searchResultList = getSearchResultList(searchKeyWord, selectedLang);
-        initListVirtualSearchResult();
-        listVirtualSearchResult.items = searchResultList;
-        listVirtualSearchResult.update();
+        
+        /*Product listesini doldur*/
+        if (productResultList == null) {
+            productResultList = getSearchResultList(searchKeyWord, selectedLang);      
+        }
+        
+        initlistProduct(); 
+        listProductResult.items = productResultList;
+        listProductResult.update();
+        
+        /*Üreticiler Listesini Doldur*/
+         if (manufacturersList == null) {
+            manufacturersList = getAllManufacturersList("");
+        }
+
+        initListVirtualManufacturers();
+        listVirtualManufacturers.items = manufacturersList;
+        listVirtualManufacturers.update();
+
+        
+
     }
 
     if (page.name === 'account') {
@@ -418,21 +457,9 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'manufacturers') {
-        if (manufacturersList == null) {
-            manufacturersList = getAllManufacturersList("");
-        }
-
-        initListVirtualManufacturers();
-        listVirtualManufacturers.items = manufacturersList;
-        listVirtualManufacturers.update();
+       
     }
 
-    if (page.name === 'search_results') {
-        searchResultList = getSearchResultList(searchKeyWord, selectedLang);
-        initListVirtualSearchResult();
-        listVirtualSearchResult.items = searchResultList;
-        listVirtualSearchResult.update();
-    }
 
     if (page.name === 'manufacturers_menu') {
 
