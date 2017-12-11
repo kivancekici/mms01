@@ -77,7 +77,7 @@
                 "zipcode":"Posta Kodu",
                 "city":"Şehir",
                 "countryPlc":"Ülke",
-                "country":"Almanya",
+                "country":"Almanya"
             },
             "my_addresses":{
                 "deleteBtn": "Sil"
