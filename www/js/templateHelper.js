@@ -162,18 +162,23 @@ function deleteUserAddress(idAddress){
         onClick: function() {
           myApp.alert('You clicked ok button!');
           var delId = '.cls' + idAddress;
-          myApp.swipeoutDelete(delId);
+          var response = deleteAddress(userId, idAddress);
+          if(response == "OK"){
+            myApp.swipeoutDelete(delId);
+          }else {
+           alertMessage('delAdrError', 'error');
+          }
         }
       },
       {
         text: cancelBtn,
         onClick: function() {
-          myApp.alert('You clicked cancel button!')
+          
         }
       }
     ]
   })
-  //  deleteAddress(userId, idAddress);
+  //  
 }
 
 var listVirtualCategories;

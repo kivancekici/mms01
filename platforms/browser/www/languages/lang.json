@@ -90,7 +90,8 @@
                 "delAdrTitle" : "Adres Silme",
                 "delAdrText" : "Adres silme işlemini onaylıyormusunuz?",
                 "delAdrOkBtn" : "Evet",
-                "delAdrCancelBtn" : "Hayır"
+                "delAdrCancelBtn" : "Hayır",
+                "delAdrError": "Adres silinemedi"
             }
         },
         "de": {
