@@ -86,7 +86,11 @@
                 "updateOk": "Kullanıcı hesabınız başarı ile güncellenmiştir",
                 "mailNotAvailable": "Mail adresi daha önceden kayıtlıdır",
                 "mailNotOk": "Lütfen geçerli bir E-mail adresi girin",
-                "msgSendError" : "Mesaj gönderilirken bir hata oluştu, daha sonra tekrar deneyin"
+                "msgSendError" : "Mesaj gönderilirken bir hata oluştu, daha sonra tekrar deneyin",
+                "delAdrTitle" : "Adres Silme",
+                "delAdrText" : "Adres silme işlemini onaylıyormusunuz?",
+                "delAdrOkBtn" : "Evet",
+                "delAdrCancelBtn" : "Hayır"
             }
         },
         "de": {
