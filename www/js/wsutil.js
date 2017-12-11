@@ -1,4 +1,4 @@
-var servicePath = "http://baklava7.de/mapi/Msvc.php";
+var servicePath = "https://baklava7.de/mapi/Msvc.php";
 
 function restfulGetCall(restSuccess) {
     $.get(servicePath, function(data) {
