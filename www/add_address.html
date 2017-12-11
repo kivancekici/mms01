@@ -12,7 +12,7 @@
     </div>
     <div div class="page-content bg-white theme-orange">
 
-        <form id="accountform" class="list-block">
+        <form id="adrform" class="list-block">
             <ul>
                 <li class="item-content">
                     <div class="item-media itemLogo"><i class="icon f7-icons">person</i></div>
@@ -45,7 +45,7 @@
                     <div class="item-media itemLogo"><i class="icon f7-icons">home_fill</i></div>
                     <div class="item-inner">
                         <div class="item-input">
-                            <input type="text" name="address" {{placeholder address2}}>
+                            <input type="text" name="address2" {{placeholder address2}}>
                         </div>
                     </div>
                 </li>
@@ -54,89 +54,52 @@
                     <div class="item-media itemLogo"><i class="icon f7-icons">home_fill</i></div>
                     <div class="item-inner">
                         <div class="item-input">
-                            <input type="tel" name="phone" {{placeholder phone}}>
-                        </div>
-                    </div>
-                </li>
-                <li class="item-content">
-                    <div class="item-media itemLogo"><i class="icon f7-icons">lock_fill</i></div>
-                    <div class="item-inner">
-                        <div class="item-input">
-                            <input type="password" name="password" {{placeholder password}}>
+                            <input type="number" name="zipcode" {{placeholder zipcode}}>
                         </div>
                     </div>
                 </li>
 
                 <li class="item-content">
-                    <div class="item-media itemLogo"><i class="icon f7-icons">lock_fill</i></div>
+                    <div class="item-media itemLogo"><i class="icon f7-icons">home_fill</i></div>
                     <div class="item-inner">
                         <div class="item-input">
-                            <input type="password" name="repeatpassword" {{placeholder repeatpassword}}>
+                            <input type="text" name="city" {{placeholder city}}>
                         </div>
                     </div>
                 </li>
+                
 
-                <li class="item-content">
-                    <div class="item-media itemLogo"><i class="icon f7-icons">calendar</i></div>
-                    <div class="item-inner">
-                        <div class="item-input">
-                            <input type="text" name="birthday" readonly id="calendar-default" {{placeholder birthday}}>
-                        </div>
-                    </div>
-                </li>
 
                 <li class="item-content">
                     <div class="item-media itemLogo"><i class="icon f7-icons">persons</i></div>
                     <div class="item-inner">
                         <div class="item-input">
 
-                            <select name="gender" required>
-                            <option value="" disabled selected>{{gender}}</option>
-                            <option value="1">{{male}}</option>
-                            <option value="2">{{female}}</option>
+                            <select name="country" required>
+                            <option value="" disabled selected>{{countryPlc}}</option>
+                            <option value="1">{{country}}</option>
                             </select>
 
                         </div>
                     </div>
                 </li>
-
-                <li>
-                    <div class="item-content">
-
-                        <div class="item-inner">
-                            <div style="color: gray; width: 8em !important;" class="item-title label">{{newsletter}}</div>
-
-                            <div class="item-input">
-                                <label class="label-switch">
-                                   <input name="newsletter" type="checkbox" value="1">
-                                   <div style="color: gray;" class="checkbox"></div>
-                            </label>
-                            </div>
-
+                
+                <li class="item-content">
+                    <div class="item-media itemLogo"><i class="icon f7-icons">phone_fill</i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="tel" name="homephone" {{placeholder homephone}}>
                         </div>
                     </div>
-
                 </li>
 
-                <li>
-                    <div class="item-content">
-
-                        <div class="item-inner">
-
-                            <div style="color: gray; width: 8em !important;" class="item-title label">{{optin}}</div>
-
-                            <div class="item-input">
-                                <label class="label-switch">
-                                   <input name="optin" type="checkbox" value="1">
-                                   <div class="checkbox"></div>  
-                               </label>
-                            </div>
-
-
+                <li class="item-content">
+                    <div class="item-media itemLogo"><i class="icon f7-icons">phone_fill</i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="tel" name="mobilephone" {{placeholder mobilephone}}>
                         </div>
-
                     </div>
-
                 </li>
 
             </ul>

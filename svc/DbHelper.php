@@ -318,9 +318,6 @@ class DbHelper {
 				
 				$this->conn->close();
 
-
-
-
 	}
 
 
