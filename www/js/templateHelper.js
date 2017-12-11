@@ -161,8 +161,8 @@ function deleteUserAddress(idAddress){
         text: okBtn,
         onClick: function() {
           myApp.alert('You clicked ok button!');
-          var delId = 'cls' + idAddress;
-          myApp.swipeoutDelete('cls62', function(){});
+          var delId = '.cls' + idAddress;
+          myApp.swipeoutDelete(delId);
         }
       },
       {
