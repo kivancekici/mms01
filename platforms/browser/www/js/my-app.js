@@ -484,6 +484,12 @@ $$(document).on('pageInit', function(e) {
         $$('.btnAddAddress').on('click', function() {
             loadPageWithLang('add_address');
         });
+
+        $$('.btnUpdateAddress').on('click', function() {
+           // loadPageWithLang('add_address');
+        });
+
+        
                
     }
 

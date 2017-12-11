@@ -78,7 +78,7 @@ function initlistProduct() {
         template: '<li>' +
         '<a href="#" class="item-link item-content">' +
         '<div class="item-media">' +
-        '<img src="http://baklava7.de{{imgdirectory}}" class="lazy" height="70">' +
+        '<img src="http://baklava7.de{{imgdirectory}}" class="lazy" width="80">' +
         '</div>' +
         '<div class="item-inner">' +
         '<div class="item-title-row">' +
@@ -128,8 +128,8 @@ function initListVirtualUserAddresses() {
 
         ],
         height: 105,
-        template: '<li class="swipeout">' +
-                  '<div class="swipeout-content"><a href="#" class="item-link item-content">'+
+        template: '<li class="swipeout cls{{id_address}}">' +
+                  '<div class="swipeout-content"><a href="#" class="btnUpdateAddress item-link item-content">'+
                   '<div class="item-inner">'+
                   '<div class="item-title-row">' +
                   '<div class="item-title">{{alias}}</div>' +
@@ -138,16 +138,46 @@ function initListVirtualUserAddresses() {
                   '<div class="item-subtitle">{{postcode}}, {{city}}/{{name}}</div>' +
                   '<div class="item-text">{{address1}} {{address2}}</div>'+
                   '</div></a></div>' +
-                  '<div class="swipeout-actions-right"><a onclick="deleteAddress('+"'{{alias}}'"+',{{id_address}});" href="#" class="swipeout-delete deleteSwipeAction bg-red"></a></div>' +
+                  '<div class="swipeout-actions-right"><a onclick="deleteUserAddress({{id_address}});" href="#" class="deleteSwipeAction bg-red"></a></div>' +
                   '</li>'
         
     });
 }
 
 
-function deleteAddress(addressAlias,addressId){
+function deleteUserAddress(idAddress){
     var userId = window.localStorage.getItem("customerId");
-    deleteaddress(userId, addressAlias, addressId);
+    var mdlTitle = myApp.template7Data.languages[selectedLang]['alertMessages']['delAdrTitle'];
+    var mdlText = myApp.template7Data.languages[selectedLang]['alertMessages']['delAdrText'];
+    var okBtn = myApp.template7Data.languages[selectedLang]['alertMessages']['delAdrOkBtn'];
+    var cancelBtn = myApp.template7Data.languages[selectedLang]['alertMessages']['delAdrCancelBtn'];
+
+    
+    myApp.modal({
+    title:  mdlTitle,
+    text: mdlText,
+    buttons: [
+      {
+        text: okBtn,
+        onClick: function() {
+          var delId = '.cls' + idAddress;
+          var response = deleteAddress(userId, idAddress);
+          if(response == "OK"){
+            myApp.swipeoutDelete(delId);
+          }else {
+           alertMessage('delAdrError', 'error');
+          }
+        }
+      },
+      {
+        text: cancelBtn,
+        onClick: function() {
+          
+        }
+      }
+    ]
+  })
+  //  
 }
 
 var listVirtualCategories;

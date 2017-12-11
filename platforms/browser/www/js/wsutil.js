@@ -241,12 +241,11 @@ function saveAddress(id_country, id_state, id_customer, alias, company, lastname
 
 }
 
-function deleteaddress(id_customer, alias, id_address) {
+function deleteAddress(id_customer, id_address) {
 
     var data = {
         'opr': 'deleteaddress',
         'id_customer': id_customer,
-        'alias': alias,
         'id_address': id_address
     }
 
@@ -255,12 +254,11 @@ function deleteaddress(id_customer, alias, id_address) {
 
     if (result != "Error") {
 
-        if (result.status == "OK") {
+        if (result == "OK") {
             return "OK";
         } else {
             return "NOK";
         }
-
 
     } else {
         return "NOK";
