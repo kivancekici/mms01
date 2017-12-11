@@ -160,7 +160,6 @@ function deleteUserAddress(idAddress){
       {
         text: okBtn,
         onClick: function() {
-          myApp.alert('You clicked ok button!');
           var delId = '.cls' + idAddress;
           var response = deleteAddress(userId, idAddress);
           if(response == "OK"){
