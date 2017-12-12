@@ -117,6 +117,7 @@ option {
 
 .itemLogo {
     min-width: 2em !important;
+    text-align: center !important;
 }
 
 .bgYesil{
