@@ -100,7 +100,8 @@
                 "delAdrOkBtn" : "Evet",
                 "delAdrCancelBtn" : "Hayır",
                 "delAdrError": "Adres silinemedi",
-                "addressError" : "Adres eklenemedi"
+                "addressError" : "Adres eklenemedi",
+                "zipcodeError" : "Geçersiz Posta Kodu"
             }
         },
         "de": {

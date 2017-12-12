@@ -10,11 +10,11 @@ var myApp = new Framework7({
     swipePanelOnlyClose: true,
     template7Pages: true,
     pushState: true,
-   
-    onAjaxStart: function (xhr) {
+
+    onAjaxStart: function(xhr) {
         myApp.showIndicator();
     },
-    onAjaxComplete: function (xhr) {
+    onAjaxComplete: function(xhr) {
         myApp.hideIndicator();
     }
 });
@@ -46,7 +46,7 @@ if (langIsSeleted) {
 
 // Add view
 var mainView = myApp.addView('.view-main', {
-   // domCache: true
+    // domCache: true
 });
 
 
@@ -128,23 +128,23 @@ function loadPageWithLang(pageName) {
     var cntxName = 'languages.' + selectedLang + '.' + pageName;
     var pgUrl = pageName + '.html';
 
-    if(pageName == 'main'){
-      
-    mainView.router.load({
-        url: pgUrl,
-        contextName: cntxName,
-        ignoreCache:true
-    });
+    if (pageName == 'main') {
 
-    }else {
+        mainView.router.load({
+            url: pgUrl,
+            contextName: cntxName,
+            ignoreCache: true
+        });
 
-     mainView.router.load({
-        url: pgUrl,
-        contextName: cntxName
-    });
+    } else {
+
+        mainView.router.load({
+            url: pgUrl,
+            contextName: cntxName
+        });
 
     }
-    
+
 }
 
 function checkLoginStatus() {
@@ -251,18 +251,18 @@ $$(document).on('pageInit', function(e) {
         var userId = window.localStorage.getItem("customerId");
         checkNewMessage(userId);
 
-        
+
         /*Product listesini doldur*/
         if (productResultList == null) {
-            productResultList = getSearchResultList(searchKeyWord, selectedLang);      
+            productResultList = getSearchResultList(searchKeyWord, selectedLang);
         }
-        
-        initlistProduct(); 
+
+        initlistProduct();
         listProductResult.items = productResultList;
         listProductResult.update();
-        
+
         /*Üreticiler Listesini Doldur*/
-         if (manufacturersList == null) {
+        if (manufacturersList == null) {
             manufacturersList = getAllManufacturersList("");
         }
 
@@ -270,7 +270,7 @@ $$(document).on('pageInit', function(e) {
         listVirtualManufacturers.items = manufacturersList;
         listVirtualManufacturers.update();
 
-        
+
 
     }
 
@@ -457,7 +457,7 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'manufacturers') {
-       
+
     }
 
 
@@ -474,27 +474,27 @@ $$(document).on('pageInit', function(e) {
         var userId = window.localStorage.getItem("customerId");
         var response = getUserAddressesList(userId);
 
-        if(response != "NOK"){
-           initListVirtualUserAddresses();
-           listVirtualUserAddresses.items = response;
-           listVirtualUserAddresses.update();
-           $$('.deleteSwipeAction').text(myApp.template7Data.languages[selectedLang]['my_addresses']['deleteBtn']);        
+        if (response != "NOK") {
+            initListVirtualUserAddresses();
+            listVirtualUserAddresses.items = response;
+            listVirtualUserAddresses.update();
+            $$('.deleteSwipeAction').text(myApp.template7Data.languages[selectedLang]['my_addresses']['deleteBtn']);
         }
-        
+
         $$('.btnAddAddress').on('click', function() {
             loadPageWithLang('add_address');
         });
 
         $$('.btnUpdateAddress').on('click', function() {
-           // loadPageWithLang('add_address');
+            // loadPageWithLang('add_address');
         });
 
-        
-               
+
+
     }
 
-    if (page.name === 'add_address'){
-        
+    if (page.name === 'add_address') {
+
         var userId = window.localStorage.getItem("customerId");
         var response = getUserInfo(userId);
 
@@ -502,11 +502,11 @@ $$(document).on('pageInit', function(e) {
             'firstname': response.firstname,
             'surname': response.lastname
         }
-   
+
         myApp.formFromData('#adrform', formData);
-       
+
         $$('.saveAddressBtn').on('click', function() {
-            
+
             var addressData = myApp.formToData('#adrform');
 
             var alias = addressData.alias;
@@ -522,18 +522,26 @@ $$(document).on('pageInit', function(e) {
             var company = addressData.company;
             var vatno = addressData.vatno;
 
-            if (name == '' || surname == '' || mobilephone == '' || address == '' || zipcode == '' || city == '' || countryId == '' ) {
+            if (name == '' || surname == '' || mobilephone == '' || address == '' || zipcode == '' || city == '' || countryId == '') {
                 alertMessage('requiredField', 'info');
-            }else{
+            } else {
 
-                var response = saveAddress(countryId, userId, alias, company, surname, name, address, address2, zipcode, city, homephone, mobilephone, vatno);
-                
-                if (response == "OK") {
-                  loadPageWithLang('my_addresses');
-                }else{
-                 alertMessage('addressError', 'info'); 
+                if (zipcode.length < 5) {
+                    
+                    alertMessage('zipcodeError', 'error');
+
+                } else {
+
+                    var response = saveAddress(countryId, userId, alias, company, surname, name, address, address2, zipcode, city, homephone, mobilephone, vatno);
+
+                    if (response == "OK") {
+                        loadPageWithLang('my_addresses');
+                    } else {
+                        alertMessage('addressError', 'info');
+                    }
                 }
-                
+
+
             }
         });
 
