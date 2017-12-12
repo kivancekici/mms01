@@ -493,6 +493,20 @@ $$(document).on('pageInit', function(e) {
                
     }
 
+    if (page.name === 'add_address'){
+        
+        var userId = window.localStorage.getItem("customerId");
+        var response = getUserInfo(userId);
+
+        var formData = {
+            'firstname': response.firstname,
+            'surname': response.lastname
+        }
+
+        myApp.formFromData('#addressForm', formData);
+
+    }
+
     if (page.name === 'messages') {
 
         $$('#msgCountBadge').hide();

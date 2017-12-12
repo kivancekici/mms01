@@ -12,8 +12,17 @@
     </div>
     <div div class="page-content bg-white theme-orange color-orange">
 
-        <form id="adrform" class="list-block">
+        <form id="addressForm" class="list-block">
             <ul>
+                <li class="item-content">
+                    <div class="item-media itemLogo"><i class="fa fa-bookmark-o fa-lg" aria-hidden="true"></i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="text" name="alias" {{placeholder alias}}>
+                        </div>
+                    </div>
+                </li>
+
                 <li class="item-content">
                     <div class="item-media itemLogo"><i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i></div>
                     <div class="item-inner">
@@ -102,11 +111,22 @@
                     </div>
                 </li>
 
+              
+
                 <li class="item-content">
-                    <div class="item-media itemLogo"><i class="fa fa-bookmark-o fa-lg" aria-hidden="true"></i></div>
+                    <div class="item-media itemLogo"><i class="fa fa-building fa-lg" aria-hidden="true"></i></div>
                     <div class="item-inner">
                         <div class="item-input">
-                            <input type="text" name="alias" {{placeholder alias}}>
+                            <input type="text" name="company" {{placeholder company}}>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="item-content">
+                    <div class="item-media itemLogo"><i class="fa fa-newspaper-o fa-lg" aria-hidden="true"></i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="text" name="vatno" {{placeholder vatNo}}>
                         </div>
                     </div>
                 </li>
