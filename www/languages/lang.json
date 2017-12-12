@@ -67,17 +67,19 @@
             "add_address":{
                 "btnName": "Kaydet",
                 "pageTitle": "Adres Ekle",
-                "firstname": "Ad",
-                "surname": "Soyad",
+                "firstname": "Ad*",
+                "surname": "Soyad*",
                 "homephone":"Telefon",
-                "mobilephone":"Cep Telefonu",
-                "address":"Adres",
+                "mobilephone":"Cep Telefonu*",
+                "address":"Adres*",
                 "address2":"Adres(2. Satır)",
-                "alias":"Adresin Adı",
-                "zipcode":"Posta Kodu",
-                "city":"Şehir",
-                "countryPlc":"Ülke",
-                "country":"Almanya"
+                "alias":"Adres Başlığı",
+                "zipcode":"Posta Kodu*",
+                "city":"Şehir*",
+                "countryPlc":"Ülke*",
+                "country":"Almanya",
+                "vatNo":"Kdv Numarası",
+                "company":"Şirket"
             },
             "my_addresses":{
                 "deleteBtn": "Sil"
