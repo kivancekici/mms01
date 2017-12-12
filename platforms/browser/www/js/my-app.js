@@ -486,7 +486,7 @@ $$(document).on('pageInit', function(e) {
         });
 
         $$('.btnUpdateAddress').on('click', function() {
-            // loadPageWithLang('update_address');
+             loadPageWithLang('update_address');
         });
 
 
