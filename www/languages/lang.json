@@ -100,8 +100,7 @@
                 "delAdrOkBtn" : "Evet",
                 "delAdrCancelBtn" : "Hayır",
                 "delAdrError": "Adres silinemedi",
-                "addressOk" : "Adres başarı ile eklenmiştir.",
-                "addressError" : "Adres eklenemedi."
+                "addressError" : "Adres eklenemedi"
             }
         },
         "de": {
