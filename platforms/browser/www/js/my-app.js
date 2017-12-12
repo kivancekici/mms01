@@ -502,8 +502,39 @@ $$(document).on('pageInit', function(e) {
             'firstname': response.firstname,
             'surname': response.lastname
         }
-
+   
         myApp.formFromData('#adrform', formData);
+       
+        $$('.saveAddressBtn').on('click', function() {
+            
+            var addressData = myApp.formToData('#adrform');
+
+            var alias = addressData.alias;
+            var name = addressData.firstname;
+            var surname = addressData.surname;
+            var address = addressData.address;
+            var address2 = addressData.address2;
+            var zipcode = addressData.zipcode;
+            var city = addressData.city;
+            var countryId = addressData.country;
+            var homephone = addressData.homephone;
+            var mobilephone = addressData.mobilephone;
+            var company = addressData.company;
+            var vatno = addressData.vatno;
+
+            if (name == '' || surname == '' || mobilephone == '' || address == '' || zipcode == '' || city == '' || countryId == '' ) {
+                alertMessage('requiredField', 'info');
+            }else{
+
+                var response = saveAddress(countryId, userId, alias, company, surname, name, address, address2, zipcode, city, homephone, mobilephone, vatno);
+                
+                if (response == "OK") {
+                 alertMessage('addressOk', 'info');
+                }else{
+                 alertMessage('addressError', 'info'); 
+                }
+            }
+        });
 
     }
 

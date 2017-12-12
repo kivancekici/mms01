@@ -99,7 +99,9 @@
                 "delAdrText" : "Adres silme işlemini onaylıyormusunuz?",
                 "delAdrOkBtn" : "Evet",
                 "delAdrCancelBtn" : "Hayır",
-                "delAdrError": "Adres silinemedi"
+                "delAdrError": "Adres silinemedi",
+                "addressOk" : "Adres başarı ile eklenmiştir.",
+                "addressError" : "Adres eklenemedi."
             }
         },
         "de": {

@@ -200,12 +200,11 @@ function getUserInfo(userId) {
 }
 
 
-function saveAddress(id_country, id_state, id_customer, alias, company, lastname, firstname, address1, address2, postcode, city, phone, vat_number, date_add, date_upd, active, deleted) {
+function saveAddress(id_country, id_customer, alias, company, lastname, firstname, address1, address2, postcode, city, phone, mobile_phone, vat_number) {
 
     var data = {
         'opr': 'saveaddress',
         'id_country': id_country,
-        'id_state': id_state,
         'id_customer': id_customer,
         'alias': alias,
         'company': company,
@@ -216,6 +215,7 @@ function saveAddress(id_country, id_state, id_customer, alias, company, lastname
         'postcode': postcode,
         'city': city,
         'phone': phone,
+        'phone_mobile':mobile_phone,
         'vat_number': vat_number,
         'date_add': date_add,
         'date_upd': date_upd,
@@ -228,10 +228,10 @@ function saveAddress(id_country, id_state, id_customer, alias, company, lastname
 
     if (result != "Error") {
 
-        if (result.status == "NOK") {
-            return "OK";
-        } else {
+        if (result == "NOK") {
             return "NOK";
+        } else {
+            return "OK";
         }
 
 
