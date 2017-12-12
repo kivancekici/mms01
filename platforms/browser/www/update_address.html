@@ -1,0 +1,137 @@
+<div data-page="update_address" class="page navbar-fixed">
+    <div class="navbar bg-orange border-orange color-white">
+        <div class="navbar-inner">
+            <div class="left">
+                <a href="#" class="link icon-only back backBtn"><i class="f7-icons color-white">chevron_left</i></a>
+            </div>
+            <div class="center sliding color-white">{{pageTitle}}</div>
+            <div class="right">
+                <a href="#" class="link saveAddressBtn color-white">{{btnName}}</a>
+            </div>
+        </div>
+    </div>
+    <div div class="page-content bg-white theme-orange color-orange">
+
+        <form id="updateadrform" class="list-block">
+            <ul>
+                <li class="item-content">
+                    <div class="item-media itemLogo"><i class="fa fa-bookmark-o fa-lg" aria-hidden="true"></i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="text" name="alias" {{placeholder alias}}>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="item-content">
+                    <div class="item-media itemLogo"><i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="text" name="firstname" {{placeholder firstname}}>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="item-content">
+                    <div class="item-media itemLogo"><i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i></div>
+                    <div class="item-inner">
+
+                        <div class="item-input">
+                            <input type="text" name="surname" {{placeholder surname}}>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="item-content">
+                    <div class="item-media itemLogo"><i class="fa fa-home fa-lg" aria-hidden="true"></i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="text" name="address" {{placeholder address}}>
+                        </div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-media itemLogo"><i class="fa fa-home fa-lg" aria-hidden="true"></i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="text" name="address2" {{placeholder address2}}>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="item-content">
+                    <div class="item-media itemLogo"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="number" name="zipcode" {{placeholder zipcode}}>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="item-content">
+                    <div class="item-media itemLogo"><i class="fa fa-map-marker fa-lg" aria-hidden="true"></i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="text" name="city" {{placeholder city}}>
+                        </div>
+                    </div>
+                </li>
+                
+
+
+                <li class="item-content">
+                    <div class="item-media itemLogo"><i class="fa fa-map fa-lg" aria-hidden="true"></i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+
+                            <select name="country" required>
+                            <option value="" disabled selected>{{countryPlc}}</option>
+                            <option value="1">{{country}}</option>
+                            </select>
+
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="item-content">
+                    <div class="item-media itemLogo"><i class="fa fa-phone fa-lg" aria-hidden="true"></i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="tel" name="homephone" {{placeholder homephone}}>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="item-content">
+                    <div class="item-media itemLogo"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="tel" name="mobilephone" {{placeholder mobilephone}}>
+                        </div>
+                    </div>
+                </li>
+
+              
+
+                <li class="item-content">
+                    <div class="item-media itemLogo"><i class="fa fa-building fa-lg" aria-hidden="true"></i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="text" name="company" {{placeholder company}}>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="item-content">
+                    <div class="item-media itemLogo"><i class="fa fa-newspaper-o fa-lg" aria-hidden="true"></i></div>
+                    <div class="item-inner">
+                        <div class="item-input">
+                            <input type="text" name="vatno" {{placeholder vatNo}}>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </form>
+    </div>
+</div>

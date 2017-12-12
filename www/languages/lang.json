@@ -81,6 +81,10 @@
                 "vatNo":"Kdv Numarası",
                 "company":"Şirket"
             },
+            "update_address":{
+                "btnName": "Güncelle",
+                "pageTitle": "Adres Güncelle"
+            },
             "my_addresses":{
                 "deleteBtn": "Sil"
             },

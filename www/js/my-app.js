@@ -486,7 +486,7 @@ $$(document).on('pageInit', function(e) {
         });
 
         $$('.btnUpdateAddress').on('click', function() {
-            // loadPageWithLang('add_address');
+            // loadPageWithLang('update_address');
         });
 
 
@@ -544,6 +544,10 @@ $$(document).on('pageInit', function(e) {
 
             }
         });
+
+    }
+
+    if (page.name === 'update_address'){
 
     }
 
