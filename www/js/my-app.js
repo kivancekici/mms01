@@ -489,8 +489,6 @@ $$(document).on('pageInit', function(e) {
              loadPageWithLang('update_address');
         });
 
-
-
     }
 
     if (page.name === 'add_address') {
