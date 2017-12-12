@@ -216,11 +216,7 @@ function saveAddress(id_country, id_customer, alias, company, lastname, firstnam
         'city': city,
         'phone': phone,
         'phone_mobile':mobile_phone,
-        'vat_number': vat_number,
-        'date_add': date_add,
-        'date_upd': date_upd,
-        'active': active,
-        'deleted': deleted
+        'vat_number': vat_number
     }
 
     var result = restfulPostCall(data);

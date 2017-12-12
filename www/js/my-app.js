@@ -529,10 +529,11 @@ $$(document).on('pageInit', function(e) {
                 var response = saveAddress(countryId, userId, alias, company, surname, name, address, address2, zipcode, city, homephone, mobilephone, vatno);
                 
                 if (response == "OK") {
-                 alertMessage('addressOk', 'info');
+                  loadPageWithLang('my_addresses');
                 }else{
                  alertMessage('addressError', 'info'); 
                 }
+                
             }
         });
 
