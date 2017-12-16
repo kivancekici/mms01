@@ -67,11 +67,23 @@
             "add_address":{
                 "btnName": "Kaydet",
                 "pageTitle": "Adres Ekle",
-                "firstname": "Ad",
-                "surname": "Soyad",
-                "phone":"Telefon",
-                "address":"Adres",
-                "address2":"Adres(2. Satır)"
+                "firstname": "Ad*",
+                "surname": "Soyad*",
+                "homephone":"Telefon",
+                "mobilephone":"Cep Telefonu*",
+                "address":"Adres*",
+                "address2":"Adres(2. Satır)",
+                "alias":"Adres Başlığı",
+                "zipcode":"Posta Kodu*",
+                "city":"Şehir*",
+                "countryPlc":"Ülke*",
+                "country":"Almanya",
+                "vatNo":"Kdv Numarası",
+                "company":"Şirket"
+            },
+            "update_address":{
+                "btnName": "Güncelle",
+                "pageTitle": "Adres Güncelle"
             },
             "my_addresses":{
                 "deleteBtn": "Sil"
@@ -91,7 +103,9 @@
                 "delAdrText" : "Adres silme işlemini onaylıyormusunuz?",
                 "delAdrOkBtn" : "Evet",
                 "delAdrCancelBtn" : "Hayır",
-                "delAdrError": "Adres silinemedi"
+                "delAdrError": "Adres silinemedi",
+                "addressError" : "Adres eklenemedi",
+                "zipcodeError" : "Geçersiz Posta Kodu"
             }
         },
         "de": {
