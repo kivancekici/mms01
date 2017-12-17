@@ -13,49 +13,67 @@ define('PS_SHOP_PATH', 'http://localhost/prestashop/');
 define('PS_WS_AUTH_KEY', 'UBVD43GE7E14WIT35UFH2XJTVL5SJ7TU');
 require_once('./PSWebServiceLibrary.php');
  
+
+
+
+
+function CreateOrder($_infos){
+
+
+
+
+
+
+
 // If != 0, we don't create the corresponding structure
-$id_customer    = 6;
-$id_address     = 0;
-$id_cart        = 0;
+$id_customer    = $_infos["id_customer"];
+$id_address     = $_infos["id_address"];
+$id_cart        = $_infos["id_cart"];
+$id_currency = $_infos["id_currency"];
+$id_lang = $_infos["id_lang"];
+$id_carrier = $_infos["id_carrier"];
+$order_module = $_infos["order_module"];
+$order_payment  = $_infos["order_payment"];
+$total_paid  = $_infos["total_paid"];
+$total_paid_real  = $_infos["total_paid_real"];
+$total_products  = $_infos["total_products"];
+$total_products_wt  = $_infos["total_products_wt"];
+$total_discounts  = $_infos["total_discounts"];
+$total_discounts_tax_incl  = $_infos["total_discounts_tax_incl"];
+$total_discounts_tax_excl  = $_infos["total_discounts_tax_excl"];
+$total_paid_tax_incl = $_infos["total_paid_tax_incl"];
+$total_paid_tax_excl = $_infos["total_paid_tax_excl"];
+$total_shipping = $_infos["total_shipping"];
+$total_shipping_tax_incl = $_infos["total_shipping_tax_incl"];
+$total_shipping_tax_excl = $_infos["total_shipping_tax_excl"];
+
+ 
+//Adres yok ise bu değişkenler gelmeli. */
+
+$id_country = $_infos["id_country"];
+
+$firstname = $_infos["firstname"];
+
+$lastname = $_infos["lastname"];
+
+$city = $_infos["city"];
+
+$address1 = $_infos["address1"];
+
+$phone_mobile = $_infos["phone_mobile"];
+
+$ZIP = $_infos["ZIP"];
+//Adres yok ise bu değişkenler gelmeli.*/
+
+
+
+
  
 try {
 $webService = new PrestaShopWebservice(PS_SHOP_PATH, PS_WS_AUTH_KEY, DEBUG);
  
-        /*
-         *  1. Create new customer
-         */
-        if(!$id_customer){
-            // Getting the empty XML document to send back completed
-            $xml = $webService->get( array( 'url' => PS_SHOP_PATH .'api/customers?schema=blank' ) );
-            
-            // Adding dinamic values
-            // Required
-            $xml->customer->passwd              = $passwd;
-            $xml->customer->lastname            = $lastname;
-            $xml->customer->firstname           = $firstname;
-            $xml->customer->email               = $email;
-            // Others
-            $xml->customer->id_lang             = $id_lang;
-            $xml->customer->id_shop             = 1;
-            $xml->customer->id_shop_group       = 1;
-            $xml->customer->id_default_group    = $id_group; // Customers    
-            $xml->customer->active              = 1; 
-            $xml->customer->newsletter          = 1;
-            $xml->customer->newsletter_date_add = $date_now;
-            $xml->customer->last_passwd_gen     = $date_now;
-            $xml->customer->date_add            = $date_now;
-            $xml->customer->date_upd            = $date_now;
-            $xml->customer->id_gender           = $id_gender;
-            $xml->customer->associations->groups->group[0]->id = $id_group; // customers
- 
-             // Adding the new customer
-            $opt = array( 'resource' => 'customers' );
-            $opt['postXml'] = $xml->asXML();
-            $xml = $webService->add( $opt );
-            $id_customer = $xml->customer->id;
-        }
         
-        
+           
         /*
         * 2. Create an address
         */
@@ -65,16 +83,16 @@ $webService = new PrestaShopWebservice(PS_SHOP_PATH, PS_WS_AUTH_KEY, DEBUG);
  
             // Adding dinamic and mandatory fields
             // Required
-            $xml->address->id_customer  = 6;  //$id_customer;
-            $xml->address->id_country   =  211;  //$id_country;
-            $xml->address->alias        =  'eren ağar\alias';     //$firstname.' '.$lastname.'\'alias';
-            $xml->address->lastname     = 'ağar';  //$lastname;
-            $xml->address->firstname    = 'eren';  //$firstname;
-            $xml->address->city         = 'İzmir'; //$city;
-            $xml->address->address1     = '7029.SK NO:107 GÜMÜŞPAL/BAYRAKLI/İZMİR';   //$address1;
+            $xml->address->id_customer  = $id_customer;
+            $xml->address->id_country   = $id_country;
+            $xml->address->alias        =  $firstname.' '.$lastname.'\'alias';
+            $xml->address->lastname     = $lastname;
+            $xml->address->firstname    = $firstname;
+            $xml->address->city         = $city;
+            $xml->address->address1     = $address1;
             // Others
-            $xml->address->phone_mobile = '05456672984';  //$phone_mobile;
-            $xml->address->postcode     = '35510';//$ZIP;
+            $xml->address->phone_mobile = $phone_mobile;
+            $xml->address->postcode     = $ZIP;
             $xml->address->date_add     = '2017-11-10 23:59:49'; //$date_now;
             $xml->address->date_upd     = '2017-11-10 23:59:49'; //$date_now;
  
@@ -91,14 +109,22 @@ $webService = new PrestaShopWebservice(PS_SHOP_PATH, PS_WS_AUTH_KEY, DEBUG);
          * 3. Create new cart
          * 
          */
+
         if(!$id_cart){
             // Getting the empty XML document to send back completed
             $xml = $webService->get( array( 'url' => PS_SHOP_PATH .'api/carts?schema=blank' ) );
  
             // Adding dinamic and mandatory fields
             // Required
-            $xml->cart->id_currency         = 1;  //$id_currency;
-            $xml->cart->id_lang             = 1; //$id_lang;
+            $xml->cart->id_currency         = $id_currency;
+            $xml->cart->id_lang             = $id_lang;
+
+
+
+
+
+            
+
             $xml->cart->associations->cart_rows->cart_row[0]->id_product            = 5; //$products[0]['id_product'];
             $xml->cart->associations->cart_rows->cart_row[0]->id_product_attribute  = 19; //$products[0]['id_product_attribute'];
             $xml->cart->associations->cart_rows->cart_row[0]->id_address_delivery   = $id_address;
@@ -120,8 +146,8 @@ $webService = new PrestaShopWebservice(PS_SHOP_PATH, PS_WS_AUTH_KEY, DEBUG);
             // Others
             $xml->cart->id_address_delivery = $id_address;
             $xml->cart->id_address_invoice  = $id_address;
-            $xml->cart->id_customer         = 6; // $id_customer;
-            $xml->cart->carrier             = 2; //$id_carrier;
+            $xml->cart->id_customer         =  $id_customer;
+            $xml->cart->carrier             = $id_carrier;
             $xml->cart->date_add            = '2017-11-10 23:59:49'; //$date_now;
             $xml->cart->date_upd            = '2017-11-10 23:59:49'; //$date_now;
  
@@ -145,28 +171,28 @@ $xml = $webService->get(array('url' => PS_SHOP_PATH .'api/orders/?schema=blank')
 $xml->order->id_address_delivery    = $id_address; // Customer address
 $xml->order->id_address_invoice     = $id_address;        
 $xml->order->id_cart                = $id_cart; 
-$xml->order->id_currency            = 1; //$id_currency;
-$xml->order->id_lang                = 1; //$id_lang;
-        $xml->order->id_customer            = 6;   //$id_customer; 
-$xml->order->id_carrier             = 2; //$id_carrier;
-        $xml->order->module           = 'ps_wirepayment'; //$order_module;
-$xml->order->payment                = 'Havale ile ödeme'; //$order_payment;        
-        $xml->order->total_paid             = 42.45; //$total_paid;
-        $xml->order->total_paid_real        = 0;  //$total_paid_real;
-        $xml->order->total_products         = 28.98; //$total_products;
-        $xml->order->total_products_wt      = 34.19;  //$total_products_wt;
+$xml->order->id_currency            = $id_currency;
+$xml->order->id_lang                = $id_lang;
+        $xml->order->id_customer            = $id_customer; 
+$xml->order->id_carrier             = $id_carrier;
+        $xml->order->module           = $order_module;
+$xml->order->payment                = $order_payment;        
+        $xml->order->total_paid             = $total_paid;
+        $xml->order->total_paid_real        = $total_paid_real;
+        $xml->order->total_products         = $total_products;
+        $xml->order->total_products_wt      = $total_products_wt;
         $xml->order->conversion_rate        = 1;
         // Others
 $xml->order->valid                      = 1; 
-        $xml->order->current_state              = 10; // $id_status;        
-        $xml->order->total_discounts            = 0;  //$total_discounts;
-        $xml->order->total_discounts_tax_incl   = 0;  //$total_discounts_tax_incl;
-        $xml->order->total_discounts_tax_excl   = 0;  //$total_discounts_tax_excl;
-        $xml->order->total_paid_tax_incl        = 42.45; //$total_paid_tax_incl;
-        $xml->order->total_paid_tax_excl        = 35.98;  //$total_paid_tax_excl;
-        $xml->order->total_shipping             = 8.26;  //$total_shipping;
-        $xml->order->total_shipping_tax_incl    = 8.26;  //$total_shipping_tax_incl;
-        $xml->order->total_shipping_tax_excl    = 7; //$total_shipping_tax_excl;
+        $xml->order->current_state              = $id_status;        
+        $xml->order->total_discounts            = $total_discounts;
+        $xml->order->total_discounts_tax_incl   = $total_discounts_tax_incl;
+        $xml->order->total_discounts_tax_excl   = $total_discounts_tax_excl;
+        $xml->order->total_paid_tax_incl        = $total_paid_tax_incl;
+        $xml->order->total_paid_tax_excl        = $total_paid_tax_excl;
+        $xml->order->total_shipping             = $total_shipping;
+        $xml->order->total_shipping_tax_incl    = $total_shipping_tax_incl;
+        $xml->order->total_shipping_tax_excl    = $total_shipping_tax_excl;
         // Order Row. Required
         $xml->order->associations->order_rows->order_row[0]->product_id             = 5; //$products[0]['id_product'];
         $xml->order->associations->order_rows->order_row[0]->product_attribute_id   = 19; //$products[0]['id_product_attribute'];
@@ -199,7 +225,7 @@ $xml->order->valid                      = 1;
         $xml = $webService->add( $opt );
         $id_order = $xml->order->id;   
         
-        echo "Customer: ".$id_customer." address: ".$id_address." cart: ".$id_cart." Order: .".$id_order;
+       // echo "Customer: ".$id_customer." address: ".$id_address." cart: ".$id_cart." Order: .".$id_order;
         
         
 }  catch (PrestaShopWebserviceException $e) {
@@ -209,4 +235,6 @@ $xml->order->valid                      = 1;
   if ($trace[0]['args'][0] == 404) echo 'Bad ID';
   else if ($trace[0]['args'][0] == 401) echo 'Bad auth key';
   else echo 'Other error<br />'.$e->getMessage();
+}
+
 }
