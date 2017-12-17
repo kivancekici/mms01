@@ -19,7 +19,7 @@ function getProductBaseInfo(id_product,id_lang) {
 function getProductBasePrices(id_product) {
 
     var sdata = {
-        'opr': 'hpitemproductslist',
+        'opr': 'hpitemproductsprice',
         'id_product': id_product,
         'id_product_attribute':""
     }
@@ -36,7 +36,7 @@ function getProductBasePrices(id_product) {
 function getProductBaseUnitName(id_product,id_lang) {
 
     var sdata = {
-        'opr': 'hpitemproductslist',
+        'opr': 'hpitemproductunitname',
         'id_product': id_product,
         'id_lang':id_lang
     }
