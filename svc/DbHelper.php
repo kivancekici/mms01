@@ -897,7 +897,7 @@ class DbHelper {
 					}
 	
 	
-					$imgdirectory="/"."prestashop"."/"."img"."/"."p";
+					$imgdirectory="/"."img"."/"."p";
 	
 					$sql ="SELECT id_image FROM ps_image WHERE id_product = $row[id_product] AND cover = 1";
 	
@@ -946,21 +946,14 @@ class DbHelper {
 		$id_lang=$_infosItemMain["id_lang"];
 
 
-		 $sql ="SELECT ma.name as 'manufacname', prla.name as 'productname' FROM ps_product pr, ps_manufacturer ma, ps_product_lang prla where pr.id_product = $id_product and pr.id_manufacturer = ma.id_manufacturer and prla.id_product = pr.id_product and prla.id_lang = $id_lang";
+		 $sql ="SELECT ma.name as 'manufacname', prla.name as 'productname', prla.description_short, prla.description  FROM ps_product pr, ps_manufacturer ma, ps_product_lang prla where pr.id_product = $id_product and pr.id_manufacturer = ma.id_manufacturer and prla.id_product = pr.id_product and prla.id_lang = $id_lang";
 
 		$result = $this->conn->query($sql);
 		$items = array();
 		if ($result->num_rows > 0) {
             while ($_infos = $result->fetch_assoc()) {
 				
-				
-				
-
-
-
-
-
-				$imgdirectory="/"."prestashop"."/"."img"."/"."p";
+				$imgdirectory="/"."img"."/"."p";
 				
 								$sql ="SELECT id_image FROM ps_image WHERE id_product = $id_product AND cover = 1";
 				
