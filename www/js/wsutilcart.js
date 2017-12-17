@@ -10,7 +10,7 @@ function getProductBaseInfo(id_product,id_lang) {
     var result = restfulPostCall(sdata);
 
     if (result != "Error") {
-        return result;
+        return result[0];
     } else {
         return "NOK";
     }
