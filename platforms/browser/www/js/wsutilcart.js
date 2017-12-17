@@ -15,3 +15,20 @@ function getProductBaseInfo(id_product,id_lang) {
         return "NOK";
     }
 }
+
+function getProductBasePrices(id_product) {
+
+    var sdata = {
+        'opr': 'hpitemproductslist',
+        'id_product': id_product,
+        'id_product_attribute':""
+    }
+
+    var result = restfulPostCall(sdata);
+
+    if (result != "Error") {
+        return result;
+    } else {
+        return "NOK";
+    }
+}

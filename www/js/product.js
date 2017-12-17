@@ -1,7 +1,7 @@
 function getProductDetailsToShow(idProduct) {
 
     var product=getProductBaseInfo(idProduct,"1");
-
+    product.prices=getProductBasePrices(idProduct);
     return product;    
 }
 
@@ -20,7 +20,10 @@ function showProductDetailsModal(idProduct){
             '<p>'+product.productname+'</p>'+
             '<p>'+product.imgdirectory+'</p>'+
             '</div>' +
-            '<div class="tab" id="tab2">Posuere cubilia Curae</div>' +
+            '<div class="tab" id="tab2">'+
+            '<p> Gross:'+product.price.grossprice+'</p>'+
+            '<p> Reduced:'+product.price.reducedprice+'</p>'+
+            '</div>' +
             '</div>',
         buttons: [
             {
