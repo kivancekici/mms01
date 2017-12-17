@@ -49,17 +49,15 @@ var mainView = myApp.addView('.view-main', {
     // domCache: true
 });
 
-document.addEventListener("offline", onOffline, false);
-
 getLangJson();
-
-
 
 setTimeout(function() {
     
     checkLangStatus();
 
 }, 3000);
+
+//document.addEventListener("offline", onOffline, false);
 
 function onOffline() {
 
@@ -135,22 +133,10 @@ function loadPageWithLang(pageName) {
     var cntxName = 'languages.' + selectedLang + '.' + pageName;
     var pgUrl = pageName + '.html';
 
-    if (pageName == 'main') {
-
-        mainView.router.load({
-            url: pgUrl,
-            contextName: cntxName,
-            ignoreCache: true
-        });
-
-    } else {
-
-        mainView.router.load({
+    mainView.router.load({
             url: pgUrl,
             contextName: cntxName
-        });
-
-    }
+    });
 
 }
 
@@ -191,6 +177,11 @@ function alertMessage(msgKey, msgTypeKey) {
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
+    console.log("Device is ready!");
+});
+
+// Handle Cordova Device Ready Event
+$$(document).on('offline', function() {
     console.log("Device is ready!");
 });
 
@@ -553,7 +544,7 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'update_address'){
-       checkConnection();
+     
     }
 
     if (page.name === 'messages') {
