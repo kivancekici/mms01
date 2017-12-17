@@ -86,6 +86,11 @@ switch ($opr) {
 	case "hpitemproductslist":
 		fGetIpProductsList($decoded);
 		break;
+
+	case "hpproductscomments":
+		fGetProductsComments($decoded);
+		break;
+		
 	case "hpitemproductsprice":
 		fGetIpProductsPrice($decoded);
 		break; 
@@ -335,6 +340,18 @@ function fGetIpProductsList($_jsondata) {
 	}
 }
 
+
+
+
+function fGetProductsComments($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	$_items = DbHelper::getInstance()->getProductsComments($_jsondata);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
 
 
 

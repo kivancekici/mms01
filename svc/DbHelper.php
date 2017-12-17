@@ -995,6 +995,34 @@ class DbHelper {
 	}
 
  
+	function getProductsComments($_infosItemMain){
+		
+		$id_product=$_infosItemMain["id_product"];
+
+		$sql ="SELECT COUNT(grade) as 'numberofcomments',SUM(grade)/COUNT(grade)  as 'averagegrade',grade,customer_name,content,SUBSTRING(date_add,1,10) as 'date_add' FROM ps_product_comment WHERE id_product = $id_product AND validate = 1 AND deleted = 0";
+		
+		$result = $this->conn->query($sql);
+
+		$comment=array();
+		
+		if ($result->num_rows > 0) {
+            while ($_infos = $result->fetch_assoc()) {
+				
+				
+
+				//$addr=array_merge($addr,$_infos);           
+				
+                array_push($comment,$_infos);
+				
+            }
+			 
+        }
+
+
+		return $comment;
+        $this->conn->close();
+
+	}
 
 
 	function getIpProductsPrice($_infosItemMain){
