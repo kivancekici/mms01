@@ -10,11 +10,11 @@ var myApp = new Framework7({
     swipePanelOnlyClose: true,
     template7Pages: true,
     pushState: true,
-   
-    onAjaxStart: function (xhr) {
+
+    onAjaxStart: function(xhr) {
         myApp.showIndicator();
     },
-    onAjaxComplete: function (xhr) {
+    onAjaxComplete: function(xhr) {
         myApp.hideIndicator();
     }
 });
@@ -46,20 +46,24 @@ if (langIsSeleted) {
 
 // Add view
 var mainView = myApp.addView('.view-main', {
-   // domCache: true
+    // domCache: true
 });
-
-
 
 getLangJson();
 
-
-
 setTimeout(function() {
-
+    
     checkLangStatus();
 
 }, 3000);
+
+
+function onOffline() {
+
+    myApp.alert('İnternet bağlantısı yok.', function () {
+        navigator.app.exitApp();
+    });
+}
 
 function checkNewMessage(userId) {
     var msgCount = window.localStorage.getItem("msgCount");
@@ -128,23 +132,11 @@ function loadPageWithLang(pageName) {
     var cntxName = 'languages.' + selectedLang + '.' + pageName;
     var pgUrl = pageName + '.html';
 
-    if(pageName == 'main'){
-      
     mainView.router.load({
-        url: pgUrl,
-        contextName: cntxName,
-        ignoreCache:true
+            url: pgUrl,
+            contextName: cntxName
     });
 
-    }else {
-
-     mainView.router.load({
-        url: pgUrl,
-        contextName: cntxName
-    });
-
-    }
-    
 }
 
 function checkLoginStatus() {
@@ -185,6 +177,10 @@ function alertMessage(msgKey, msgTypeKey) {
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     console.log("Device is ready!");
+});
+
+$$(document).on('offline', function() {
+    onOffline();
 });
 
 $$('#orderItemBtn').on('click', function() {
@@ -251,18 +247,18 @@ $$(document).on('pageInit', function(e) {
         var userId = window.localStorage.getItem("customerId");
         checkNewMessage(userId);
 
-        
+
         /*Product listesini doldur*/
         if (productResultList == null) {
-            productResultList = getSearchResultList(searchKeyWord, selectedLang);      
+            productResultList = getSearchResultList(searchKeyWord, selectedLang);
         }
-        
-        initlistProduct(); 
+
+        initlistProduct();
         listProductResult.items = productResultList;
         listProductResult.update();
-        
+
         /*Üreticiler Listesini Doldur*/
-         if (manufacturersList == null) {
+        if (manufacturersList == null) {
             manufacturersList = getAllManufacturersList("");
         }
 
@@ -270,7 +266,7 @@ $$(document).on('pageInit', function(e) {
         listVirtualManufacturers.items = manufacturersList;
         listVirtualManufacturers.update();
 
-        
+
 
     }
 
@@ -457,7 +453,7 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'manufacturers') {
-       
+
     }
 
 
@@ -474,17 +470,79 @@ $$(document).on('pageInit', function(e) {
         var userId = window.localStorage.getItem("customerId");
         var response = getUserAddressesList(userId);
 
-        if(response != "NOK"){
-           initListVirtualUserAddresses();
-           listVirtualUserAddresses.items = response;
-           listVirtualUserAddresses.update();
-           $$('.deleteSwipeAction').text(myApp.template7Data.languages[selectedLang]['my_addresses']['deleteBtn']);        
+        if (response != "NOK") {
+            initListVirtualUserAddresses();
+            listVirtualUserAddresses.items = response;
+            listVirtualUserAddresses.update();
+            $$('.deleteSwipeAction').text(myApp.template7Data.languages[selectedLang]['my_addresses']['deleteBtn']);
         }
-        
+
         $$('.btnAddAddress').on('click', function() {
             loadPageWithLang('add_address');
         });
-               
+
+        $$('.btnUpdateAddress').on('click', function() {
+             loadPageWithLang('update_address');
+        });
+
+    }
+
+    if (page.name === 'add_address') {
+
+        var userId = window.localStorage.getItem("customerId");
+        var response = getUserInfo(userId);
+
+        var formData = {
+            'firstname': response.firstname,
+            'surname': response.lastname
+        }
+
+        myApp.formFromData('#adrform', formData);
+
+        $$('.saveAddressBtn').on('click', function() {
+
+            var addressData = myApp.formToData('#adrform');
+
+            var alias = addressData.alias;
+            var name = addressData.firstname;
+            var surname = addressData.surname;
+            var address = addressData.address;
+            var address2 = addressData.address2;
+            var zipcode = addressData.zipcode;
+            var city = addressData.city;
+            var countryId = addressData.country;
+            var homephone = addressData.homephone;
+            var mobilephone = addressData.mobilephone;
+            var company = addressData.company;
+            var vatno = addressData.vatno;
+
+            if (name == '' || surname == '' || mobilephone == '' || address == '' || zipcode == '' || city == '' || countryId == '') {
+                alertMessage('requiredField', 'info');
+            } else {
+
+                if (zipcode.length < 5) {
+                    
+                    alertMessage('zipcodeError', 'error');
+
+                } else {
+
+                    var response = saveAddress(countryId, userId, alias, company, surname, name, address, address2, zipcode, city, homephone, mobilephone, vatno);
+
+                    if (response == "OK") {
+                        loadPageWithLang('my_addresses');
+                    } else {
+                        alertMessage('addressError', 'info');
+                    }
+                }
+
+
+            }
+        });
+
+    }
+
+    if (page.name === 'update_address'){
+     
     }
 
     if (page.name === 'messages') {

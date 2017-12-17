@@ -4,12 +4,30 @@ function initListVirtualManufacturers() {
     listVirtualManufacturers = myApp.virtualList('.lstmanufacturers', {
         items: [
         ],
-        height: 61,
+        searchAll: function (query, items) {
+            var foundItems = [];
+            for (var i = 0; i < items.length; i++) {
+                // Check if title contains query string
+                var found=false;
+
+                if (items[i].name.toLowerCase().indexOf(query.trim()) >= 0) found=true;
+               //Locationda gelebilir.
+               // if (items[i].description_short.toLowerCase().indexOf(query.trim()) >= 0) found=true;
+               // if (items[i].description.toLowerCase().indexOf(query.trim()) >= 0) found=true;
+                
+                if(found) foundItems.push(i);;
+            }
+            // Return array with indexes of matched items
+            return foundItems; 
+        },
+        rowsBefore:100,
+        rowsAfter:100,
+        height: 80,
         template: '<li>' +
         '<a href="#" onclick="showManufacturerMenu('+"'{{name}}'"+',{{id_manufacturer}});" class="item-link item-content">' +
         '<div class="item-media">' +
         //'<img src="http://baklava7.de/img/tmp/manufacturer_mini_{{id_manufacturer}}_1.jpg" class="lazy" width="80">' +
-        '<img src="http://baklava7.de/img/m/{{id_manufacturer}}-field_manufacture.jpg" class="lazy" width="80">' +
+        '<img src="http://baklava7.de/img/m/{{id_manufacturer}}-field_manufacture.jpg" class="lazy" height="70">' +
         '</div>' +
         '<div class="item-inner">' +
         '<div class="item-title-row">' +
@@ -31,14 +49,16 @@ function showManufacturerMenu(manufacturer_name,id_manufacturer){
 
 
 
-var listVirtualSearchResult;
+var listProductResult;
 
 
-function initListVirtualSearchResult() {
-    listVirtualSearchResult = myApp.virtualList('.lstsearchresult', {
+function initlistProduct() {
+       listProductResult = myApp.virtualList('.lstproduct', {
         items: [
 
         ],
+        rowsBefore:200,
+        rowsAfter:200,
         searchAll: function (query, items) {
             var foundItems = [];
             for (var i = 0; i < items.length; i++) {
@@ -54,9 +74,9 @@ function initListVirtualSearchResult() {
             // Return array with indexes of matched items
             return foundItems; 
         },
-        height: 124,
+        height: 80,
         template: '<li>' +
-        '<a href="#" class="item-link item-content">' +
+        '<a href="#" onClick="showProductDetailsModal({{id_product}});return false;" class="item-link item-content">' +
         '<div class="item-media">' +
         '<img src="http://baklava7.de{{imgdirectory}}" class="lazy" width="80">' +
         '</div>' +
@@ -108,8 +128,8 @@ function initListVirtualUserAddresses() {
 
         ],
         height: 105,
-        template: '<li class="swipeout">' +
-                  '<div class="swipeout-content"><a href="#" class="item-link item-content">'+
+        template: '<li class="swipeout cls{{id_address}}">' +
+                  '<div class="swipeout-content"><a href="#" class="btnUpdateAddress item-link item-content">'+
                   '<div class="item-inner">'+
                   '<div class="item-title-row">' +
                   '<div class="item-title">{{alias}}</div>' +
@@ -118,16 +138,46 @@ function initListVirtualUserAddresses() {
                   '<div class="item-subtitle">{{postcode}}, {{city}}/{{name}}</div>' +
                   '<div class="item-text">{{address1}} {{address2}}</div>'+
                   '</div></a></div>' +
-                  '<div class="swipeout-actions-right"><a onclick="deleteAddress('+"'{{alias}}'"+',{{id_address}});" href="#" class="swipeout-delete deleteSwipeAction bg-red"></a></div>' +
+                  '<div class="swipeout-actions-right"><a onclick="deleteUserAddress({{id_address}});" href="#" class="deleteSwipeAction bg-red"></a></div>' +
                   '</li>'
         
     });
 }
 
 
-function deleteAddress(addressAlias,addressId){
+function deleteUserAddress(idAddress){
     var userId = window.localStorage.getItem("customerId");
-    deleteaddress(userId, addressAlias, addressId);
+    var mdlTitle = myApp.template7Data.languages[selectedLang]['alertMessages']['delAdrTitle'];
+    var mdlText = myApp.template7Data.languages[selectedLang]['alertMessages']['delAdrText'];
+    var okBtn = myApp.template7Data.languages[selectedLang]['alertMessages']['delAdrOkBtn'];
+    var cancelBtn = myApp.template7Data.languages[selectedLang]['alertMessages']['delAdrCancelBtn'];
+
+    
+    myApp.modal({
+    title:  mdlTitle,
+    text: mdlText,
+    buttons: [
+      {
+        text: okBtn,
+        onClick: function() {
+          var delId = '.cls' + idAddress;
+          var response = deleteAddress(userId, idAddress);
+          if(response == "OK"){
+            myApp.swipeoutDelete(delId);
+          }else {
+           alertMessage('delAdrError', 'error');
+          }
+        }
+      },
+      {
+        text: cancelBtn,
+        onClick: function() {
+          
+        }
+      }
+    ]
+  })
+  //  
 }
 
 var listVirtualCategories;
@@ -137,6 +187,7 @@ function initListVirtualCategories() {
         items: [
 
         ],
+        cols:2,
         height: 60,
         template: '<div class="row">' +
         '<div class="col-auto">' +

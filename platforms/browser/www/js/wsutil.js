@@ -1,4 +1,4 @@
-var servicePath = "http://baklava7.de/mapi/Msvc.php";
+var servicePath = "https://baklava7.de/mapi/Msvc.php";
 
 function restfulGetCall(restSuccess) {
     $.get(servicePath, function(data) {
@@ -200,12 +200,11 @@ function getUserInfo(userId) {
 }
 
 
-function saveAddress(id_country, id_state, id_customer, alias, company, lastname, firstname, address1, address2, postcode, city, phone, vat_number, date_add, date_upd, active, deleted) {
+function saveAddress(id_country, id_customer, alias, company, lastname, firstname, address1, address2, postcode, city, phone, mobile_phone, vat_number) {
 
     var data = {
         'opr': 'saveaddress',
         'id_country': id_country,
-        'id_state': id_state,
         'id_customer': id_customer,
         'alias': alias,
         'company': company,
@@ -216,11 +215,8 @@ function saveAddress(id_country, id_state, id_customer, alias, company, lastname
         'postcode': postcode,
         'city': city,
         'phone': phone,
-        'vat_number': vat_number,
-        'date_add': date_add,
-        'date_upd': date_upd,
-        'active': active,
-        'deleted': deleted
+        'phone_mobile':mobile_phone,
+        'vat_number': vat_number
     }
 
     var result = restfulPostCall(data);
@@ -228,10 +224,10 @@ function saveAddress(id_country, id_state, id_customer, alias, company, lastname
 
     if (result != "Error") {
 
-        if (result.status == "NOK") {
-            return "OK";
-        } else {
+        if (result == "NOK") {
             return "NOK";
+        } else {
+            return "OK";
         }
 
 
@@ -241,12 +237,11 @@ function saveAddress(id_country, id_state, id_customer, alias, company, lastname
 
 }
 
-function deleteaddress(id_customer, alias, id_address) {
+function deleteAddress(id_customer, id_address) {
 
     var data = {
         'opr': 'deleteaddress',
         'id_customer': id_customer,
-        'alias': alias,
         'id_address': id_address
     }
 
@@ -255,12 +250,11 @@ function deleteaddress(id_customer, alias, id_address) {
 
     if (result != "Error") {
 
-        if (result.status == "OK") {
+        if (result == "OK") {
             return "OK";
         } else {
             return "NOK";
         }
-
 
     } else {
         return "NOK";
@@ -558,5 +552,25 @@ function postMessages(id_customer, message) {
     } else {
         return "NOK";
     }
+}
+
+function getProductDetails(idProduct){
+    alert("not implemented");
+    return null;
+}
+
+function getProductUnit(idProduct){
+    alert("not implemented");
+    return null;
+}
+
+function getProductAtrributes(idProduct){
+    alert("not implemented");
+    return null;
+}
+
+function getProductAtrributePrice(idProduct,idAttribute){
+    alert("not implemented");
+    return null;
 }
 

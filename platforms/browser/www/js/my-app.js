@@ -9,7 +9,14 @@ var myApp = new Framework7({
     swipeBackPage: false,
     swipePanelOnlyClose: true,
     template7Pages: true,
-    pushState: true
+    pushState: true,
+
+    onAjaxStart: function(xhr) {
+        myApp.showIndicator();
+    },
+    onAjaxComplete: function(xhr) {
+        myApp.hideIndicator();
+    }
 });
 
 var $$ = Dom7;
@@ -24,7 +31,7 @@ var selectedLang;
 var manufacturersList = null;
 var manufacturersMenuList = null;
 var selectedManufacturerId = 0;
-var searchResultList = null;
+var productResultList = null;
 var searchKeyWord = "";
 var categoriesList = null;
 
@@ -39,7 +46,7 @@ if (langIsSeleted) {
 
 // Add view
 var mainView = myApp.addView('.view-main', {
-    domCache: true
+    // domCache: true
 });
 
 
@@ -120,10 +127,24 @@ function setContextParameter(pageName, key, value) {
 function loadPageWithLang(pageName) {
     var cntxName = 'languages.' + selectedLang + '.' + pageName;
     var pgUrl = pageName + '.html';
-    mainView.router.load({
-        url: pgUrl,
-        contextName: cntxName
-    });
+
+    if (pageName == 'main') {
+
+        mainView.router.load({
+            url: pgUrl,
+            contextName: cntxName,
+            ignoreCache: true
+        });
+
+    } else {
+
+        mainView.router.load({
+            url: pgUrl,
+            contextName: cntxName
+        });
+
+    }
+
 }
 
 function checkLoginStatus() {
@@ -230,24 +251,27 @@ $$(document).on('pageInit', function(e) {
         var userId = window.localStorage.getItem("customerId");
         checkNewMessage(userId);
 
-        if (searchResultList == null) {
-            searchResultList = getSearchResultList(searchKeyWord, selectedLang);
-        }
-        
-        initListVirtualSearchResult();
-        listVirtualSearchResult.items = searchResultList;
-        listVirtualSearchResult.update();
 
-        
-        /*
-        if (categoriesList == null) {
-            categoriesList = getAllManufacturersList("");
+        /*Product listesini doldur*/
+        if (productResultList == null) {
+            productResultList = getSearchResultList(searchKeyWord, selectedLang);
         }
 
-        initListVirtualCategories();
-        listVirtualCategories.items = categoriesList;
-        listVirtualCategories.update();
-        */
+        initlistProduct();
+        listProductResult.items = productResultList;
+        listProductResult.update();
+
+        /*Üreticiler Listesini Doldur*/
+        if (manufacturersList == null) {
+            manufacturersList = getAllManufacturersList("");
+        }
+
+        initListVirtualManufacturers();
+        listVirtualManufacturers.items = manufacturersList;
+        listVirtualManufacturers.update();
+
+
+
     }
 
     if (page.name === 'account') {
@@ -433,21 +457,9 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'manufacturers') {
-        if (manufacturersList == null) {
-            manufacturersList = getAllManufacturersList("");
-        }
 
-        initListVirtualManufacturers();
-        listVirtualManufacturers.items = manufacturersList;
-        listVirtualManufacturers.update();
     }
 
-    if (page.name === 'search_results') {
-        searchResultList = getSearchResultList(searchKeyWord, selectedLang);
-        initListVirtualSearchResult();
-        listVirtualSearchResult.items = searchResultList;
-        listVirtualSearchResult.update();
-    }
 
     if (page.name === 'manufacturers_menu') {
 
@@ -462,17 +474,79 @@ $$(document).on('pageInit', function(e) {
         var userId = window.localStorage.getItem("customerId");
         var response = getUserAddressesList(userId);
 
-        if(response != "NOK"){
-           initListVirtualUserAddresses();
-           listVirtualUserAddresses.items = response;
-           listVirtualUserAddresses.update();
-           $$('.deleteSwipeAction').text(myApp.template7Data.languages[selectedLang]['my_addresses']['deleteBtn']);        
+        if (response != "NOK") {
+            initListVirtualUserAddresses();
+            listVirtualUserAddresses.items = response;
+            listVirtualUserAddresses.update();
+            $$('.deleteSwipeAction').text(myApp.template7Data.languages[selectedLang]['my_addresses']['deleteBtn']);
         }
-        
+
         $$('.btnAddAddress').on('click', function() {
             loadPageWithLang('add_address');
         });
-               
+
+        $$('.btnUpdateAddress').on('click', function() {
+             loadPageWithLang('update_address');
+        });
+
+    }
+
+    if (page.name === 'add_address') {
+
+        var userId = window.localStorage.getItem("customerId");
+        var response = getUserInfo(userId);
+
+        var formData = {
+            'firstname': response.firstname,
+            'surname': response.lastname
+        }
+
+        myApp.formFromData('#adrform', formData);
+
+        $$('.saveAddressBtn').on('click', function() {
+
+            var addressData = myApp.formToData('#adrform');
+
+            var alias = addressData.alias;
+            var name = addressData.firstname;
+            var surname = addressData.surname;
+            var address = addressData.address;
+            var address2 = addressData.address2;
+            var zipcode = addressData.zipcode;
+            var city = addressData.city;
+            var countryId = addressData.country;
+            var homephone = addressData.homephone;
+            var mobilephone = addressData.mobilephone;
+            var company = addressData.company;
+            var vatno = addressData.vatno;
+
+            if (name == '' || surname == '' || mobilephone == '' || address == '' || zipcode == '' || city == '' || countryId == '') {
+                alertMessage('requiredField', 'info');
+            } else {
+
+                if (zipcode.length < 5) {
+                    
+                    alertMessage('zipcodeError', 'error');
+
+                } else {
+
+                    var response = saveAddress(countryId, userId, alias, company, surname, name, address, address2, zipcode, city, homephone, mobilephone, vatno);
+
+                    if (response == "OK") {
+                        loadPageWithLang('my_addresses');
+                    } else {
+                        alertMessage('addressError', 'info');
+                    }
+                }
+
+
+            }
+        });
+
+    }
+
+    if (page.name === 'update_address'){
+
     }
 
     if (page.name === 'messages') {
