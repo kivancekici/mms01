@@ -29,6 +29,7 @@ function showProductDetailsModal(idProduct){
             
             '<div class="tab" id="tab3">'+
             '<p> Gross:'+product.unit.name+'</p>'+
+            '<p> Gross:'+product.unit.name+'</p>'+
             '</div>' +
             '</div>'+
             '</div>',
