@@ -49,3 +49,20 @@ function getProductBaseUnitName(id_product,id_lang) {
         return "NOK";
     }
 }
+
+function getProductBaseAttributes(id_product,id_lang) {
+
+    var sdata = {
+        'opr': 'hpitemproductunitvalue',
+        'id_product': id_product,
+        'id_lang':id_lang
+    }
+
+    var result = restfulPostCall(sdata);
+
+    if (result != "Error") {
+        return result;
+    } else {
+        return "NOK";
+    }
+}
