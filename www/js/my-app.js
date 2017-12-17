@@ -56,7 +56,7 @@ getLangJson();
 
 
 setTimeout(function() {
-    checkConnection();
+    
     checkLangStatus();
 
 }, 3000);
@@ -562,7 +562,7 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'update_address'){
-
+       checkConnection();
     }
 
     if (page.name === 'messages') {
