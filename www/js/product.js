@@ -23,13 +23,14 @@ function showProductDetailsModal(idProduct){
             '<p>'+product.imgdirectory+'</p>'+
             '</div>' +
             '<div class="tab" id="tab2">'+
-            '<p> Gross:'+product.price.grossprice+'</p>'+
-            '<p> Reduced:'+product.price.reducedprice+'</p>'+
+            '<p> Gross:'+product.prices.grossprice+'</p>'+
+            '<p> Reduced:'+product.prices.reducedprice+'</p>'+
             '</div>' +
-            '</div>'+
+            
             '<div class="tab" id="tab3">'+
             '<p> Gross:'+product.unit.name+'</p>'+
             '</div>' +
+            '</div>'+
             '</div>',
         buttons: [
             {
