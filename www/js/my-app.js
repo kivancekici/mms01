@@ -180,9 +180,8 @@ $$(document).on('deviceready', function() {
     console.log("Device is ready!");
 });
 
-// Handle Cordova Device Ready Event
 $$(document).on('offline', function() {
-    console.log("Device is ready!");
+    onOffline();
 });
 
 $$('#orderItemBtn').on('click', function() {
