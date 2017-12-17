@@ -76,7 +76,7 @@ function initlistProduct() {
         },
         height: 80,
         template: '<li>' +
-        '<a href="#" class="item-link item-content">' +
+        '<a href="#" onClick="showProductDetailsModal({{id_product}});return false;" class="item-link item-content">' +
         '<div class="item-media">' +
         '<img src="http://baklava7.de{{imgdirectory}}" class="lazy" width="80">' +
         '</div>' +
