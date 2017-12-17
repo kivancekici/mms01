@@ -63,7 +63,9 @@ setTimeout(function() {
 
 function onOffline() {
 
-    myApp.alert('İnternet bağlantısı yok');
+    myApp.alert('İnternet bağlantısı yok.', function () {
+        navigator.app.exitApp();
+    });
 }
 
 function checkNewMessage(userId) {
