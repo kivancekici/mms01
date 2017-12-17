@@ -297,12 +297,12 @@ class DbHelper {
 		$city=$_infos["city"];
 		//$other=$_infos["other"];
 		$phone=$_infos["phone"];
-		//$phone_mobile=$_infos["phone_mobile"];
+		$phone_mobile=$_infos["phone_mobile"];
 		$vat_number=$_infos["vat_number"];
 		//$dni=$_infos["dni"];		
 		
-		$sql = "INSERT INTO ps_address (id_country, id_state, id_customer,  alias, company, lastname, firstname,address1,address2,postcode,city,phone,vat_number,date_add,date_upd,active,deleted) "
-				."VALUES($id_country, $id_state, $id_customer,  '$alias', '$company', '$lastname', '$firstname', '$address1', '$address2','$postcode','$city','$phone','$vat_number',now(),now(),1,0);";
+		$sql = "INSERT INTO ps_address (id_country, id_state, id_customer,  alias, company, lastname, firstname,address1,address2,postcode,city,phone,phone_mobile,vat_number,date_add,date_upd,active,deleted) "
+				."VALUES($id_country, $id_state, $id_customer,  '$alias', '$company', '$lastname', '$firstname', '$address1', '$address2','$postcode','$city','$phone','$phone_mobile','$vat_number',now(),now(),1,0);";
         $result = $this->conn->query($sql);
 
         if ($result === TRUE) {
@@ -328,7 +328,7 @@ class DbHelper {
 		$_res=false;
 
 		$id_customer=$_infos["id_customer"];
-		$sql = "SELECT pl.id_country, pa.id_address, pa.alias,CONCAT(pa.firstname,' ', pa.lastname) AS 'name',pa.vat_number,pa.address1,pa.address2,pa.postcode, pa.city, pl.name, pa.phone
+		$sql = "SELECT pl.id_country, pa.id_address, pa.alias,ps.company,CONCAT(pa.firstname,' ', pa.lastname) AS 'name',pa.vat_number,pa.address1,pa.address2,pa.postcode, pa.city, pl.name, pa.phone, pa.phone_mobile
 		 FROM ps_address pa, ps_customer pc, ps_country_lang pl WHERE pa.deleted=0 AND pa.id_customer=$id_customer AND pc.id_customer = pa.id_customer
 		 AND pl.id_country = pa.id_country AND pl.id_lang = pc.id_lang 
 		 ";
