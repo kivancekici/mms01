@@ -57,7 +57,6 @@ setTimeout(function() {
 
 }, 3000);
 
-//document.addEventListener("offline", onOffline, false);
 
 function onOffline() {
 
