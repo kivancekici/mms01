@@ -74,7 +74,7 @@ function checkConnection() {
     states[Connection.CELL]     = 'Cell generic connection';
     states[Connection.NONE]     = 'No network connection';
 
-    MyApp.alert('Connection type: ' + states[networkState]);
+    myApp.alert('Connection type: ' + states[networkState]);
 }
 
 function checkNewMessage(userId) {
