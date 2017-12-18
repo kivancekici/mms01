@@ -297,12 +297,12 @@ class DbHelper {
 		$city=$_infos["city"];
 		//$other=$_infos["other"];
 		$phone=$_infos["phone"];
-		//$phone_mobile=$_infos["phone_mobile"];
+		$phone_mobile=$_infos["phone_mobile"];
 		$vat_number=$_infos["vat_number"];
 		//$dni=$_infos["dni"];		
 		
-		$sql = "INSERT INTO ps_address (id_country, id_state, id_customer,  alias, company, lastname, firstname,address1,address2,postcode,city,phone,vat_number,date_add,date_upd,active,deleted) "
-				."VALUES($id_country, $id_state, $id_customer,  '$alias', '$company', '$lastname', '$firstname', '$address1', '$address2','$postcode','$city','$phone','$vat_number',now(),now(),1,0);";
+		$sql = "INSERT INTO ps_address (id_country, id_state, id_customer,  alias, company, lastname, firstname,address1,address2,postcode,city,phone,phone_mobile,vat_number,date_add,date_upd,active,deleted) "
+				."VALUES($id_country, $id_state, $id_customer,  '$alias', '$company', '$lastname', '$firstname', '$address1', '$address2','$postcode','$city','$phone','$phone_mobile','$vat_number',now(),now(),1,0);";
         $result = $this->conn->query($sql);
 
         if ($result === TRUE) {
@@ -328,7 +328,7 @@ class DbHelper {
 		$_res=false;
 
 		$id_customer=$_infos["id_customer"];
-		$sql = "SELECT pl.id_country, pa.id_address, pa.alias,CONCAT(pa.firstname,' ', pa.lastname) AS 'name',pa.vat_number,pa.address1,pa.address2,pa.postcode, pa.city, pl.name, pa.phone
+		$sql = "SELECT pl.id_country, pa.id_address, pa.alias,ps.company,CONCAT(pa.firstname,' ', pa.lastname) AS 'name',pa.vat_number,pa.address1,pa.address2,pa.postcode, pa.city, pl.name, pa.phone, pa.phone_mobile
 		 FROM ps_address pa, ps_customer pc, ps_country_lang pl WHERE pa.deleted=0 AND pa.id_customer=$id_customer AND pc.id_customer = pa.id_customer
 		 AND pl.id_country = pa.id_country AND pl.id_lang = pc.id_lang 
 		 ";
@@ -897,7 +897,7 @@ class DbHelper {
 					}
 	
 	
-					$imgdirectory="/"."prestashop"."/"."img"."/"."p";
+					$imgdirectory="/"."img"."/"."p";
 	
 					$sql ="SELECT id_image FROM ps_image WHERE id_product = $row[id_product] AND cover = 1";
 	
@@ -946,21 +946,14 @@ class DbHelper {
 		$id_lang=$_infosItemMain["id_lang"];
 
 
-		 $sql ="SELECT ma.name as 'manufacname', prla.name as 'productname' FROM ps_product pr, ps_manufacturer ma, ps_product_lang prla where pr.id_product = $id_product and pr.id_manufacturer = ma.id_manufacturer and prla.id_product = pr.id_product and prla.id_lang = $id_lang";
+		 $sql ="SELECT ma.name as 'manufacname', prla.name as 'productname', prla.description_short, prla.description  FROM ps_product pr, ps_manufacturer ma, ps_product_lang prla where pr.id_product = $id_product and pr.id_manufacturer = ma.id_manufacturer and prla.id_product = pr.id_product and prla.id_lang = $id_lang";
 
 		$result = $this->conn->query($sql);
 		$items = array();
 		if ($result->num_rows > 0) {
             while ($_infos = $result->fetch_assoc()) {
 				
-				
-				
-
-
-
-
-
-				$imgdirectory="/"."prestashop"."/"."img"."/"."p";
+				$imgdirectory="/"."img"."/"."p";
 				
 								$sql ="SELECT id_image FROM ps_image WHERE id_product = $id_product AND cover = 1";
 				
@@ -1002,6 +995,34 @@ class DbHelper {
 	}
 
  
+	function getProductsComments($_infosItemMain){
+		
+		$id_product=$_infosItemMain["id_product"];
+
+		$sql ="SELECT COUNT(grade) as 'numberofcomments',SUM(grade)/COUNT(grade)  as 'averagegrade',grade,customer_name,content,SUBSTRING(date_add,1,10) as 'date_add' FROM ps_product_comment WHERE id_product = $id_product AND validate = 1 AND deleted = 0";
+		
+		$result = $this->conn->query($sql);
+
+		$comment=array();
+		
+		if ($result->num_rows > 0) {
+            while ($_infos = $result->fetch_assoc()) {
+				
+				
+
+				//$addr=array_merge($addr,$_infos);           
+				
+                array_push($comment,$_infos);
+				
+            }
+			 
+        }
+
+
+		return $comment;
+        $this->conn->close();
+
+	}
 
 
 	function getIpProductsPrice($_infosItemMain){
