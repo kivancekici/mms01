@@ -15,5 +15,12 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <icon platform="android" qualifier="ldpi" src="images/icons/mipmap-mdpi/ic_launcher.png" />
+    <icon platform="android" qualifier="mdpi" src="images/icons/mipmap-mdpi/ic_launcher.png" />
+    <icon platform="android" qualifier="hdpi" src="images/icons/mipmap-hdpi/ic_launcher.png" />
+    <icon platform="android" qualifier="xhdpi" src="images/icons/mipmap-xhdpi/ic_launcher.png" />
+    <icon platform="android" qualifier="xxhdpi" src="images/icons/mipmap-xxhdpi/ic_launcher.png" />
+    <icon platform="android" qualifier="xxxhdpi" src="images/icons/mipmap-xxxhdpi/ic_launcher.png" />
+    <icon platform="android" qualifier="fr-xxhdpi" src="images/icons/mipmap-xxxhdpi/ic_launcher.png" />
     <preference name="DisallowOverscroll" value="true" />
 </widget>

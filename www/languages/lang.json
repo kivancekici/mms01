@@ -59,6 +59,35 @@
             "manufacturers_menu": {
                 "pageTitle": "Baklava7"
             },
+            "messages":{
+                "pageTitle":"Mesajlar",
+                "btnSend":"Gönder",
+                "msgPlaceholder":"Mesaj"
+            },
+            "add_address":{
+                "btnName": "Kaydet",
+                "pageTitle": "Adres Ekle",
+                "firstname": "Ad*",
+                "surname": "Soyad*",
+                "homephone":"Telefon",
+                "mobilephone":"Cep Telefonu*",
+                "address":"Adres*",
+                "address2":"Adres(2. Satır)",
+                "alias":"Adres Başlığı",
+                "zipcode":"Posta Kodu*",
+                "city":"Şehir*",
+                "countryPlc":"Ülke*",
+                "country":"Almanya",
+                "vatNo":"Kdv Numarası",
+                "company":"Şirket"
+            },
+            "update_address":{
+                "btnName": "Güncelle",
+                "pageTitle": "Adres Güncelle"
+            },
+            "my_addresses":{
+                "deleteBtn": "Sil"
+            },
             "alertMessages": {
                 "info": "Bilgi",
                 "warning": "Uyarı",
@@ -68,7 +97,15 @@
                 "passwordMatch": "Parolalar eşleşmedi, lütfen kontrol ediniz",
                 "updateOk": "Kullanıcı hesabınız başarı ile güncellenmiştir",
                 "mailNotAvailable": "Mail adresi daha önceden kayıtlıdır",
-                "mailNotOk": "Lütfen geçerli bir E-mail adresi girin"
+                "mailNotOk": "Lütfen geçerli bir E-mail adresi girin",
+                "msgSendError" : "Mesaj gönderilirken bir hata oluştu, daha sonra tekrar deneyin",
+                "delAdrTitle" : "Adres Silme",
+                "delAdrText" : "Adres silme işlemini onaylıyormusunuz?",
+                "delAdrOkBtn" : "Evet",
+                "delAdrCancelBtn" : "Hayır",
+                "delAdrError": "Adres silinemedi",
+                "addressError" : "Adres eklenemedi",
+                "zipcodeError" : "Geçersiz Posta Kodu"
             }
         },
         "de": {

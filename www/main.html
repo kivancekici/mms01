@@ -1,5 +1,4 @@
-
-<div data-page="main" class="page navbar-fixed">
+<div data-page="main" class="page navbar-fixed no-toolbar tabbar-labels-fixed">
     <div class="navbar bg-orange color-white border-orange">
         <div class="navbar-inner">
             <div class="center sliding">
@@ -10,8 +9,83 @@
             </div>
         </div>
     </div>
+
+    <!-- Floating Action Button -->
+    <a href="#" style="width: 70px !important; height: 70px !important" class="floating-button bgYesil">
+        <i class="fa fa-shopping-cart fa-2x"></i>
+    </a>
     <!-- Scrollable page content -->
-    <div class="page-content theme-orange page-bg-main lazy lazy-fadein" data-background="images/baklava7bg.jpg">
+    <div class="page-bg-main lazy lazy-fadein page-content theme-orange" data-background="images/baklava7bg.jpg">
+
+        <div id="mainContentBlock" class="content-block">
+            <div class="card bg-orange color-white">
+                <div class="card-header">What would you like to eat?</div>
+                <div class="card-content">
+                    <div class="card-content-inner">
+                        <form class="searchbar searchbar-init bgYesil color-white" data-search-list=".lstproduct" data-search-in=".item-title" data-found=".searchbar-found" data-not-found=".searchbar-not-found">
+                            <div class="searchbar-input">
+                                <input type="search" placeholder="Suchen">
+                                <a href="#" class="searchbar-clear"></a>
+                            </div>
+                            <a href="#" class="searchbar-cancel color-white">Abbrechen</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="toolbar tabbar tabbar-labels bg-orange color-white border-orange">
+            <div class="toolbar-inner">
+                <a href="#tab-1" class="tab-link active">
+                   <i class="color-white f7-icons">list</i>
+                    <span class="tabbar-label">Ürünler</span>
+                </a>
+                <a href="#tab-2" class="tab-link">
+                    <i class="color-white f7-icons">sort</i>
+                    <span class="tabbar-label">Üreticiler</span>              
+                </a>
+                <a href="#tab-3" class="tab-link">
+                    <i class="color-white f7-icons">book</i>
+                    <span class="tabbar-label">Kategori</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="tabs-swipeable-wrap">
+            <div class="tabs">
+                <div id="tab-1" class="tab bg-white active">
+                    <div class="content-block searchbar-not-found">
+                    <div style="padding-top:60px;">Nothing found</div>
+                     
+                     </div>
+                    <div style="padding-top:20px !important;" class="lstproduct list-block media-list virtual-list list-block-search searchbar-found theme-orange">
+                        <!-- keep it empty -->
+                    </div>
+                
+                </div>
+                <div id="tab-2" class="tab bg-white">
+                    <div class="content-block searchbar-not-found">
+                    <div style="padding-top:60px;">Nothing found</div>
+                     
+                     </div>
+                    <div style="padding-top:20px !important;" class="lstmanufacturers list-block media-list virtual-list list-block-search searchbar-found theme-orange">
+                        <!-- keep it empty -->
+                    </div>
+                </div>
+                <div id="tab-3" class="tab bg-white">
+                    <div class="content-block lstCategories virtual-list">
+                   
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!--
         <div class="content-block cntmiddle">
             <div class="content-block">
 
@@ -39,5 +113,6 @@
                 <a href="add_address.html" class="button button-big button-fill">{{btnname}}</a>
             </div>
         </div>
+        -->
     </div>
 </div>

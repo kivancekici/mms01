@@ -1,4 +1,4 @@
-Template7.registerHelper('placeholder', function (plchldrContent) {
+Template7.registerHelper('placeholder', function(plchldrContent) {
     var ret = 'placeholder="' + plchldrContent + '"';
     return ret;
 });
@@ -9,7 +9,14 @@ var myApp = new Framework7({
     swipeBackPage: false,
     swipePanelOnlyClose: true,
     template7Pages: true,
-    pushState: true
+    pushState: true,
+
+    onAjaxStart: function(xhr) {
+        myApp.showIndicator();
+    },
+    onAjaxComplete: function(xhr) {
+        myApp.hideIndicator();
+    }
 });
 
 var $$ = Dom7;
@@ -24,8 +31,9 @@ var selectedLang;
 var manufacturersList = null;
 var manufacturersMenuList = null;
 var selectedManufacturerId = 0;
-var searchResultList = null;
+var productResultList = null;
 var searchKeyWord = "";
+var categoriesList = null;
 
 
 if (langIsSeleted) {
@@ -38,7 +46,7 @@ if (langIsSeleted) {
 
 // Add view
 var mainView = myApp.addView('.view-main', {
-    domCache: true
+    // domCache: true
 });
 
 
@@ -47,13 +55,44 @@ getLangJson();
 
 
 
-setTimeout(function () {
+setTimeout(function() {
 
     checkLangStatus();
 
 }, 3000);
 
+function checkNewMessage(userId) {
+    var msgCount = window.localStorage.getItem("msgCount");
+    var receiveMsgCnt = getReceiveMsgCount(userId);
+    var diff = receiveMsgCnt - msgCount;
 
+    if (diff > 0) {
+        $$('#msgCountBadge').show();
+        $$('#msgCountBadge').text(diff);
+    } else {
+        $$('#msgCountBadge').hide();
+        $$('#msgCountBadge').text('');
+    }
+}
+
+function getReceiveMsgCount(userId) {
+
+    var msgDatas = getMessagesList(userId);
+
+    var receiveMsgCnt = 0;
+
+    for (var i = 0; i < msgDatas.length; i++) {
+
+        var idEmployee = msgDatas[i].id_employee;
+
+        if (idEmployee != "0") {
+            receiveMsgCnt++;
+        }
+    }
+
+    return receiveMsgCnt;
+
+}
 
 function checkLangStatus() {
     if (langIsSeleted) {
@@ -88,10 +127,24 @@ function setContextParameter(pageName, key, value) {
 function loadPageWithLang(pageName) {
     var cntxName = 'languages.' + selectedLang + '.' + pageName;
     var pgUrl = pageName + '.html';
-    mainView.router.load({
-        url: pgUrl,
-        contextName: cntxName
-    });
+
+    if (pageName == 'main') {
+
+        mainView.router.load({
+            url: pgUrl,
+            contextName: cntxName,
+            ignoreCache: true
+        });
+
+    } else {
+
+        mainView.router.load({
+            url: pgUrl,
+            contextName: cntxName
+        });
+
+    }
+
 }
 
 function checkLoginStatus() {
@@ -115,28 +168,35 @@ function validateEmail(email) {
 }
 
 function getLangJson() {
-    $$.getJSON('./languages/lang.json', function (data) {
+    $$.getJSON('./languages/lang.json', function(data) {
         myApp.template7Data.languages = data.languages;
         changePanelLanguage();
     });
 }
 
+function alertMessage(msgKey, msgTypeKey) {
+    var msg = myApp.template7Data.languages[selectedLang]['alertMessages'][msgKey];
+    var msgType = myApp.template7Data.languages[selectedLang]['alertMessages'][msgTypeKey];
+
+    myApp.alert(msg, msgType);
+}
+
 
 // Handle Cordova Device Ready Event
-$$(document).on('deviceready', function () {
+$$(document).on('deviceready', function() {
     console.log("Device is ready!");
 });
 
-$$('#orderItemBtn').on('click', function () {
+$$('#orderItemBtn').on('click', function() {
     loadPageWithLang('main');
 });
 
-$$('#accountItemBtn').on('click', function () {
+$$('#accountItemBtn').on('click', function() {
     loadPageWithLang('account');
 });
 
 
-$$('#btnLogout').on('click', function () {
+$$('#btnLogout').on('click', function() {
     userLoggedIn = false;
     window.localStorage.setItem("isLogin", false);
     window.localStorage.setItem("customerId", "0");
@@ -146,20 +206,25 @@ $$('#btnLogout').on('click', function () {
 
 });
 
+$$('#msgBoxBtn').on('click', function() {
+    loadPageWithLang('messages');
+});
+
+$$('#myAddressesItemBtn').on('click', function() {
+    loadPageWithLang('my_addresses');
+});
 
 
 
 // Option 2. Using one 'pageInit' event handler for all pages:
-$$(document).on('pageInit', function (e) {
+$$(document).on('pageInit', function(e) {
     // Get page data from event data
     var page = e.detail.page;
 
 
 
     if (page.name === 'login') {
-        // Following code will be executed for page with data-page attribute equal to "about"
-        //myApp.alert('Here comes login page');
-        $$('.btnLogin').on('click', function () {
+        $$('.btnLogin').on('click', function() {
             var email = $$('#txtEmail').val();
             var pass = $$('#txtPassword').val();
             var response = mobileLogin(email, pass);
@@ -176,47 +241,44 @@ $$(document).on('pageInit', function (e) {
 
         });
 
-        $$('.btnRegister').on('click', function () {
 
+        $$('.btnRegister').on('click', function() {
             loadPageWithLang('register');
-            /*
-            myApp.prompt('Lütfen E-mail Adresini Giriniz', 'Kayıt Ekranı', function(value) {
-
-                var email = value;
-
-                if (validateEmail(email)) {
-                    var avaibleuser = checkAvaibleUser(email);
-
-                    if (avaibleuser == "OK") {
-                        var response = mobileRegister(email);
-
-                        if (response != "NOK") {
-                            loadPageWithLang('main');
-                        }
-                    } else {
-                        myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
-                    }
-
-                } else {
-                    myApp.alert('Geçerli Email Adresi Giriniz.', 'Uyarı');
-                }
-
-
-
-
-            });
-            */
         });
     }
 
     if (page.name === 'main') {
+        var userId = window.localStorage.getItem("customerId");
+        checkNewMessage(userId);
+
+
+        /*Product listesini doldur*/
+        if (productResultList == null) {
+            productResultList = getSearchResultList(searchKeyWord, selectedLang);
+        }
+
+        initlistProduct();
+        listProductResult.items = productResultList;
+        listProductResult.update();
+
+        /*Üreticiler Listesini Doldur*/
+        if (manufacturersList == null) {
+            manufacturersList = getAllManufacturersList("");
+        }
+
+        initListVirtualManufacturers();
+        listVirtualManufacturers.items = manufacturersList;
+        listVirtualManufacturers.update();
+
+
+
     }
 
     if (page.name === 'account') {
 
         var userId = window.localStorage.getItem("customerId");
         var response = getUserInfo(userId);
-        myApp.formFromJSON('#account-form', JSON.stringify(response));
+
         var pass = window.localStorage.getItem('password');
 
         var formData = {
@@ -238,7 +300,7 @@ $$(document).on('pageInit', function (e) {
             cssClass: 'theme-orange'
         });
 
-        $$('.updateBtn').on('click', function () {
+        $$('.updateBtn').on('click', function() {
 
 
             var accountData = myApp.formToData('#accountform');
@@ -261,19 +323,18 @@ $$(document).on('pageInit', function (e) {
                 optin = "0";
             }
 
-            myApp.alert(newsletter);
 
 
 
             if (name == '' || surname == '' || pass == '' || repeatpassword == '' || email == '') {
-                myApp.alert('Lütfen zorunlu alanları doldurunuz.', 'Bilgi');
+                alertMessage('requiredField', 'info');
             } else {
                 if (pass.length < 5) {
-                    myApp.alert('Parola en az 5 karakterden oluşmalıdır.', 'Bilgi');
+                    alertMessage('passwordValidation', 'info');
                 } else {
 
                     if (pass !== repeatpassword) {
-                        myApp.alert('Parolalar Eşleşmedi, Lütfen Kontrol Ediniz', 'Bilgi');
+                        alertMessage('passwordMatch', 'info');
                     } else {
 
                         if (validateEmail(email)) {
@@ -284,15 +345,15 @@ $$(document).on('pageInit', function (e) {
                                 var response = updateAccount(email, name, surname, pass, genderId, birthday, newsletter, optin, userId);
 
                                 if (response == "OK") {
-                                    myApp.alert('Kullanıcı hesabınız güncellenmiştir.', 'Bilgi');
+                                    alertMessage('updateOk', 'info');
                                 }
 
                             } else {
-                                myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
+                                alertMessage('mailNotAvailable', 'info');
                             }
 
                         } else {
-                            myApp.alert('Geçerli Email Adresi Giriniz.', 'Bilgi');
+                            alertMessage('mailNotOk', 'info');
                         }
 
                     }
@@ -313,7 +374,7 @@ $$(document).on('pageInit', function (e) {
         });
 
 
-        $$('.registerBtn').on('click', function () {
+        $$('.registerBtn').on('click', function() {
 
 
             var formData = myApp.formToData('#register-form');
@@ -328,14 +389,14 @@ $$(document).on('pageInit', function (e) {
             var genderId = formData.gender;
 
             if (name == '' || surname == '' || pass == '' || repeatpassword == '' || email == '') {
-                myApp.alert('Lütfen zorunlu alanları doldurunuz.', 'Bilgi');
+                alertMessage('requiredField', 'info');
             } else {
                 if (pass.length < 5) {
-                    myApp.alert('Parola en az 5 karakterden oluşmalıdır.', 'Bilgi');
+                    alertMessage('passwordValidation', 'info');
                 } else {
 
                     if (pass !== repeatpassword) {
-                        myApp.alert('Parolalar Eşleşmedi, Lütfen Kontrol Ediniz', 'Bilgi');
+                        alertMessage('passwordMatch', 'info');
                     } else {
 
                         if (validateEmail(email)) {
@@ -351,11 +412,11 @@ $$(document).on('pageInit', function (e) {
                                     loadPageWithLang('main');
                                 }
                             } else {
-                                myApp.alert('Mail adresi daha önceden kayıtlıdır.', 'Bilgi');
+                                alertMessage('mailNotAvailable', 'info');
                             }
 
                         } else {
-                            myApp.alert('Geçerli Email Adresi Giriniz.', 'Bilgi');
+                            alertMessage('mailNotOk', 'info');
                         }
 
                     }
@@ -376,7 +437,7 @@ $$(document).on('pageInit', function (e) {
 
     if (page.name === 'language') {
 
-        $$('.btnLangTr').on('click', function () {
+        $$('.btnLangTr').on('click', function() {
 
             window.localStorage.setItem("langIsSelected", true);
             window.localStorage.setItem("lang", "tr");
@@ -385,7 +446,7 @@ $$(document).on('pageInit', function (e) {
             changePanelLanguage();
         });
 
-        $$('.btnLangGer').on('click', function () {
+        $$('.btnLangGer').on('click', function() {
             window.localStorage.setItem("langIsSelected", true);
             window.localStorage.setItem("lang", "de");
             selectedLang = "de";
@@ -396,20 +457,7 @@ $$(document).on('pageInit', function (e) {
     }
 
     if (page.name === 'manufacturers') {
-        if (manufacturersList == null) {
-            manufacturersList = getAllManufacturersList("");
-        }
 
-        initListVirtualManufacturers();
-        listVirtualManufacturers.items = manufacturersList;
-        listVirtualManufacturers.update();
-    }
-
-    if (page.name === 'search_results') {
-        searchResultList = getSearchResultList(searchKeyWord, selectedLang);
-        initListVirtualSearchResult();
-        listVirtualSearchResult.items = searchResultList;
-        listVirtualSearchResult.update();
     }
 
 
@@ -421,46 +469,166 @@ $$(document).on('pageInit', function (e) {
         listManufacturersMenu.update();
     }
 
+    if (page.name === 'my_addresses') {
 
-});
+        var userId = window.localStorage.getItem("customerId");
+        var response = getUserAddressesList(userId);
 
-
-var postCodeSearch = myApp.autocomplete({
-    input: '#autocomplete-dropdown-ajax',
-    openIn: 'dropdown',
-    preloader: true, //enable preloader
-    valueProperty: 'id', //object's "value" property name
-    textProperty: 'name', //object's "text" property name
-    limit: 8, //limit to 8 results
-    dropdownPlaceholderText: 'Produkte',
-    expandInput: true, // expand input
-    source: function (autocomplete, query, render) {
-        var results = [];
-        if (query.length === 0) {
-            render(results);
-            return;
+        if (response != "NOK") {
+            initListVirtualUserAddresses();
+            listVirtualUserAddresses.items = response;
+            listVirtualUserAddresses.update();
+            $$('.deleteSwipeAction').text(myApp.template7Data.languages[selectedLang]['my_addresses']['deleteBtn']);
         }
-        // Show Preloader
-        autocomplete.showPreloader();
-        // Do Ajax request to Autocomplete data
-        $$.ajax({
-            url: 'autocomplete-languages.json',
-            method: 'GET',
-            dataType: 'json',
-            //send "query" to server. Useful in case you generate response dynamically
-            data: {
-                query: query
-            },
-            success: function (data) {
-                // Find matched items
-                for (var i = 0; i < data.length; i++) {
-                    if (data[i].name.toLowerCase().indexOf(query.toLowerCase()) >= 0) results.push(data[i]);
+
+        $$('.btnAddAddress').on('click', function() {
+            loadPageWithLang('add_address');
+        });
+
+        $$('.btnUpdateAddress').on('click', function() {
+             loadPageWithLang('update_address');
+        });
+
+    }
+
+    if (page.name === 'add_address') {
+
+        var userId = window.localStorage.getItem("customerId");
+        var response = getUserInfo(userId);
+
+        var formData = {
+            'firstname': response.firstname,
+            'surname': response.lastname
+        }
+
+        myApp.formFromData('#adrform', formData);
+
+        $$('.saveAddressBtn').on('click', function() {
+
+            var addressData = myApp.formToData('#adrform');
+
+            var alias = addressData.alias;
+            var name = addressData.firstname;
+            var surname = addressData.surname;
+            var address = addressData.address;
+            var address2 = addressData.address2;
+            var zipcode = addressData.zipcode;
+            var city = addressData.city;
+            var countryId = addressData.country;
+            var homephone = addressData.homephone;
+            var mobilephone = addressData.mobilephone;
+            var company = addressData.company;
+            var vatno = addressData.vatno;
+
+            if (name == '' || surname == '' || mobilephone == '' || address == '' || zipcode == '' || city == '' || countryId == '') {
+                alertMessage('requiredField', 'info');
+            } else {
+
+                if (zipcode.length < 5) {
+                    
+                    alertMessage('zipcodeError', 'error');
+
+                } else {
+
+                    var response = saveAddress(countryId, userId, alias, company, surname, name, address, address2, zipcode, city, homephone, mobilephone, vatno);
+
+                    if (response == "OK") {
+                        loadPageWithLang('my_addresses');
+                    } else {
+                        alertMessage('addressError', 'info');
+                    }
                 }
-                // Hide Preoloader
-                autocomplete.hidePreloader();
-                // Render items by passing array with result items
-                render(results);
+
+
             }
         });
+
     }
+
+    if (page.name === 'update_address'){
+
+    }
+
+    if (page.name === 'messages') {
+
+        $$('#msgCountBadge').hide();
+        $$('#msgCountBadge').text('');
+
+        var myMessages = myApp.messages('.messages');
+
+        var myMessagebar = myApp.messagebar('.messagebar');
+
+        var userId = window.localStorage.getItem("customerId");
+
+        var msgDatas = getMessagesList(userId);
+
+        var receiveMsgCnt = 0;
+
+        for (var i = 0; i < msgDatas.length; i++) {
+
+            var msgType = "";
+            var msg = msgDatas[i].message;
+            var idEmployee = msgDatas[i].id_employee;
+            var msgdate = msgDatas[i].date_add;
+
+            var fulldate = new Date(msgdate);
+
+            var msgfulldate = fulldate.toLocaleString();
+
+
+            if (idEmployee == "0") {
+                msgType = 'sent';
+            } else {
+                msgType = 'received';
+                receiveMsgCnt++;
+            }
+
+            myMessages.addMessage({
+
+                text: msg,
+
+                type: msgType,
+
+                date: msgfulldate
+            });
+
+            window.localStorage.setItem("msgCount", receiveMsgCnt);
+        }
+
+        $$('.messagebar .link').on('click', function() {
+            // Message text
+            var messageText = myMessagebar.value().trim();
+            // Exit if empy message
+            if (messageText.length === 0) return;
+
+            // Empty messagebar
+            myMessagebar.clear()
+
+            // Message type
+            var messageType = 'sent';
+
+            var response = postMessages(userId, messageText);
+
+            if (response == "OK") {
+                // Add message
+                myMessages.addMessage({
+                    // Message text
+                    text: messageText,
+                    // Random message type
+                    type: messageType,
+
+                    date: new Date().toLocaleString()
+
+                });
+
+            } else {
+                alertMessage('msgSendError', 'info');
+            }
+
+
+        });
+
+
+    }
+
 });
