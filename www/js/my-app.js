@@ -230,6 +230,7 @@ $$(document).on('pageInit', function(e) {
                 window.localStorage.setItem("customerId", response);
                 window.localStorage.setItem("isLogin", true);
                 window.localStorage.setItem('password', pass);
+                window.localStorage.setItem('useremail', email);
             } else {
                 window.localStorage.setItem("isLogin", false);
 
