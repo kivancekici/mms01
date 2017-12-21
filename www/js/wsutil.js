@@ -17,6 +17,9 @@ function restfulPostCall(sendData) {
 
     //  myApp.showPreloader();
 
+    sendData['email'] = useremail;
+    sendData['pswd'] = password;
+
     var response;
 
     $$.ajax({
@@ -203,13 +206,12 @@ function getUserInfo(userId) {
 }
 
 
-function saveAddress(id_country, alias, company, lastname, firstname, address1, address2, postcode, city, phone, mobile_phone, vat_number) {
+function saveAddress(id_country, id_customer, alias, company, lastname, firstname, address1, address2, postcode, city, phone, mobile_phone, vat_number) {
 
     var data = {
         'opr': 'saveaddress',
         'id_country': id_country,
-        'email': useremail,
-        'pswd': password,
+        'id_customer': id_customer,
         'alias': alias,
         'company': company,
         'lastname': lastname,
