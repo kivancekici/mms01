@@ -48,6 +48,10 @@ class DbHelper {
 	}
 	
 	function checkLogin($_email,$_passwd){
+
+
+
+		
 		
 		$pwd=$this->encrypt($_passwd);
 		
@@ -71,9 +75,11 @@ class DbHelper {
 				$rwitem["pswd"]="$pwd";
                 array_push($items, $rwitem);
         }
-        $this->conn->close();
+        
 
-        return $items;
+		return $items;
+		
+		$this->conn->close();
 	}
 
 
@@ -98,6 +104,8 @@ class DbHelper {
 				}
 
 	}
+
+
 
 	function registerUser($_infos) {
 		$_res=false;
@@ -160,8 +168,25 @@ class DbHelper {
 
 	function getuserinfo($_infos) {
 	
-		
-		//$id_gender=$_infos["id_gender"];
+
+	$_email=$_infos["email"];
+	$_passwd=$_infos["pswd"];
+
+	$loginresult=$this->checkLogin($_email,$_passwd);
+
+
+	$this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+	$this->conn->set_charset("utf8");
+
+
+	if ($this->conn->connect_error) {
+		die("Datenbank Verbindung Fehlt! : ".$this->dbname."-" . $this->conn->connect_error);
+
+	}
+
+	if ($loginresult[0]['status'] == 'OK'){
+
+//$id_gender=$_infos["id_gender"];
 		//$company=$_infos["company"];
 		//$firstname=$_infos["firstname"];
 		//$lastname=$_infos["lastname"];
@@ -172,18 +197,26 @@ class DbHelper {
 		//$optin=$_infos["optin"];
 		//$website=$_infos["website"];
 		//$date_upd=$_infos["date_upd"];
-		$id_customer=$_infos["id_customer"];
-
-		$sql ="SELECT id_gender,company,firstname,lastname,email,passwd,birthday,newsletter,optin,website FROM ps_customer WHERE id_customer=$id_customer";
+		$id_customer=$loginresult[0]['id_customer'];
 		
-		$result = $this->conn->query($sql);
+		
 
-		$tmpuserinfo = mysqli_fetch_array($result , MYSQLI_ASSOC);
+				$sql ="SELECT id_gender,company,firstname,lastname,email,passwd,birthday,newsletter,optin,website FROM ps_customer WHERE id_customer='$id_customer'";
+				
+				$result = $this->conn->query($sql);
+		
+				$tmpuserinfo = mysqli_fetch_array($result , MYSQLI_ASSOC);
+		
+		
+		
+				return $tmpuserinfo;
+				$this->conn->close();
+				
 
+	}	
+	
 
-
-		return $tmpuserinfo;
-		$this->conn->close();
+		
     }
 
 
@@ -191,6 +224,29 @@ class DbHelper {
 
 
 	function updateuserdata($_infos) {
+		
+		
+
+
+		$_email=$_infos["email"];
+		$_passwd=$_infos["pswd"];
+	
+		$loginresult=$this->checkLogin($_email,$_passwd);
+	
+	
+		$this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+		$this->conn->set_charset("utf8");
+	
+	
+		if ($this->conn->connect_error) {
+			die("Datenbank Verbindung Fehlt! : ".$this->dbname."-" . $this->conn->connect_error);
+	
+		}
+	
+		if ($loginresult[0]['status'] == 'OK'){
+
+			
+		
 		$_res=false;
 		
 		$id_gender=$_infos["id_gender"];
@@ -204,7 +260,7 @@ class DbHelper {
 		$optin=$_infos["optin"];
 		$website=$_infos["website"]; 
 		//$date_upd=$_infos["date_upd"];
-		$id_customer=$_infos["id_customer"];
+		$id_customer=$loginresult[0]['id_customer'];
 		
 		
 		$sql = "UPDATE ps_customer SET id_gender=$id_gender,company='$company',firstname='$firstname',lastname='$lastname',email='$email',passwd='$passwd',birthday=$birthday,newsletter=$newsletter,optin=$optin,website='$website',date_upd=now() WHERE id_customer=$id_customer";
@@ -228,7 +284,8 @@ class DbHelper {
 			return $rwitem;
 		}
 		
-        return $item;
+		return $item;
+	}
     }
 
 
@@ -280,11 +337,31 @@ class DbHelper {
 
 	function saveAddress($_infos) {
 		
+
+
+		$_email=$_infos["email"];
+		$_passwd=$_infos["pswd"];
+	
+		$loginresult=$this->checkLogin($_email,$_passwd);
+	
+	
+		$this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+		$this->conn->set_charset("utf8");
+	
+	
+		if ($this->conn->connect_error) {
+			die("Datenbank Verbindung Fehlt! : ".$this->dbname."-" . $this->conn->connect_error);
+	
+		}
+	
+		if ($loginresult[0]['status'] == 'OK'){
+
+
 		$_res=false;
 
 		$id_country=$_infos["id_country"];
 		$id_state= 0 ; //$_infos["id_state"];
-		$id_customer=$_infos["id_customer"];
+		$id_customer=$loginresult[0]['id_customer'];
 		//$id_manufacturer=$_infos["id_manufacturer"];
 		//$id_warehouse=$_infos["id_warehouse"];
 		$alias=$_infos["alias"];
@@ -321,13 +398,34 @@ class DbHelper {
 		
 		return $item;
 		$this->conn->close();
+	}
     }
 	
 	function getMyAddress($_infos) {
 		
+
+		$_email=$_infos["email"];
+		$_passwd=$_infos["pswd"];
+	
+		$loginresult=$this->checkLogin($_email,$_passwd);
+	
+	
+		$this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+		$this->conn->set_charset("utf8");
+	
+	
+		if ($this->conn->connect_error) {
+			die("Datenbank Verbindung Fehlt! : ".$this->dbname."-" . $this->conn->connect_error);
+	
+		}
+	
+		if ($loginresult[0]['status'] == 'OK'){
+
+			$id_customer=$loginresult[0]['id_customer'];
+
 		$_res=false;
 
-		$id_customer=$_infos["id_customer"];
+		//$id_customer=$_infos["id_customer"];
 		$sql = "SELECT pl.id_country, pa.id_address, pa.alias,pa.company,CONCAT(pa.firstname,' ', pa.lastname) AS 'name',pa.vat_number,pa.address1,pa.address2,pa.postcode, pa.city, pl.name, pa.phone, pa.phone_mobile
 		 FROM ps_address pa, ps_customer pc, ps_country_lang pl WHERE pa.deleted=0 AND pa.id_customer=$id_customer AND pc.id_customer = pa.id_customer
 		 AND pl.id_country = pa.id_country AND pl.id_lang = pc.id_lang 
@@ -366,14 +464,38 @@ class DbHelper {
 		return $items;
 		
 		$this->conn->close();
+	}
     }
 	
+
+
+
 	function deleteAddress($_infos) {
 		
+
+		$_email=$_infos["email"];
+		$_passwd=$_infos["pswd"];
+	
+		$loginresult=$this->checkLogin($_email,$_passwd);
+	
+	
+		$this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+		$this->conn->set_charset("utf8");
+	
+	
+		if ($this->conn->connect_error) {
+			die("Datenbank Verbindung Fehlt! : ".$this->dbname."-" . $this->conn->connect_error);
+	
+		}
+	
+		if ($loginresult[0]['status'] == 'OK'){
+
+			$id_customer=$loginresult[0]['id_customer'];
+
 		$_res=false;
 
 		$id_address =$_infos["id_address"];
-		$id_customer=$_infos["id_customer"];
+		//$id_customer=$_infos["id_customer"];
 
 		$sql = "DELETE FROM ps_address WHERE id_address=$id_address AND id_customer=$id_customer";
         $result = $this->conn->query($sql);
@@ -388,16 +510,47 @@ class DbHelper {
 			$item="NOK";
 		}
 		
-        return $item;
+		return $item;
+	}
     }
 	
+
+
+
+
+
+
+
+
 	function updateAddress($_infos) {
-		
+
+
+		$_email=$_infos["email"];
+		$_passwd=$_infos["pswd"];
+	
+		$loginresult=$this->checkLogin($_email,$_passwd);
+	
+	
+		$this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+		$this->conn->set_charset("utf8");
+	
+	
+		if ($this->conn->connect_error) {
+			die("Datenbank Verbindung Fehlt! : ".$this->dbname."-" . $this->conn->connect_error);
+	
+		}
+	
+		if ($loginresult[0]['status'] == 'OK'){
+
+			$id_customer=$loginresult[0]['id_customer'];
+
+
 		$_res=false;
 
 		$id_country=$_infos["id_country"];
-		$id_state=0;   //$_infos["id_state"];
-		$id_customer=$_infos["id_customer"];
+		$id_state=0;  
+		 //$_infos["id_state"];
+		//$id_customer=$_infos["id_customer"];
 		$id_address=$_infos["id_address"];
 		$alias=$_infos["alias"];
 		$company=$_infos["company"];
@@ -429,6 +582,7 @@ class DbHelper {
 		return $item;
 		
 		$this->conn->close();
+	}
     }
 	
 	function openOrders($_infos2) {
@@ -542,9 +696,31 @@ class DbHelper {
 	
 	function getMessages($_infos2) {
 		
+
+		$_email=$_infos2["email"];
+		$_passwd=$_infos2["pswd"];
+	
+		$loginresult=$this->checkLogin($_email,$_passwd);
+	
+	
+		$this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+		$this->conn->set_charset("utf8");
+	
+	
+		if ($this->conn->connect_error) {
+			die("Datenbank Verbindung Fehlt! : ".$this->dbname."-" . $this->conn->connect_error);
+	
+		}
+	
+		if ($loginresult[0]['status'] == 'OK'){
+
+			$id_customer=$loginresult[0]['id_customer'];
+
+
+
 		$_res=false;
 
-		$id_customer=$_infos2["id_customer"];
+		//$id_customer=$_infos2["id_customer"];
 		$sql = "SELECT cm.id_employee, cm.message,cm.date_add FROM ps_customer_message cm, ps_customer_thread ct 
 		where ct.id_customer=$id_customer AND cm.id_customer_thread= ct.id_customer_thread ORDER BY cm.date_add";
 
@@ -575,13 +751,36 @@ class DbHelper {
 			return $item;
 		}
 		
-        return $items;
+		return $items;
+	}
 	}
 	
 
 	function postMessages($_infos2) {
+
+
+		$_email=$_infos2["email"];
+		$_passwd=$_infos2["pswd"];
+	
+		$loginresult=$this->checkLogin($_email,$_passwd);
+	
+	
+		$this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+		$this->conn->set_charset("utf8");
+	
+	
+		if ($this->conn->connect_error) {
+			die("Datenbank Verbindung Fehlt! : ".$this->dbname."-" . $this->conn->connect_error);
+	
+		}
+	
+		if ($loginresult[0]['status'] == 'OK'){
+
+			$id_customer=$loginresult[0]['id_customer'];
+
+
 		
-		$id_customer=$_infos2["id_customer"];
+		//$id_customer=$_infos2["id_customer"];
 
 		$message=$_infos2["message"];
 
@@ -684,6 +883,7 @@ class DbHelper {
 		
 		return $result;
 		$this->conn->close();
+	}
     }
 
 
@@ -1191,32 +1391,6 @@ class DbHelper {
 				$this->conn->close();
 		
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
