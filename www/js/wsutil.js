@@ -1,5 +1,8 @@
 var servicePath = "https://baklava7.de/mapi/Msvc.php";
 
+var useremail = window.localStorage.getItem("useremail");
+var password= window.localStorage.getItem("password");
+
 function restfulGetCall(restSuccess) {
     $.get(servicePath, function(data) {
         restSuccess(data);
@@ -200,12 +203,13 @@ function getUserInfo(userId) {
 }
 
 
-function saveAddress(id_country, id_customer, alias, company, lastname, firstname, address1, address2, postcode, city, phone, mobile_phone, vat_number) {
+function saveAddress(id_country, alias, company, lastname, firstname, address1, address2, postcode, city, phone, mobile_phone, vat_number) {
 
     var data = {
         'opr': 'saveaddress',
         'id_country': id_country,
-        'id_customer': id_customer,
+        'email': useremail,
+        'pswd': password,
         'alias': alias,
         'company': company,
         'lastname': lastname,
