@@ -482,10 +482,11 @@ $$(document).on('pageInit', function(e) {
             loadPageWithLang('add_address');
         });
 
+       /*
         $$('.btnUpdateAddress').on('click', function() {
              loadPageWithLang('update_address');
         });
-
+         */
     }
 
     if (page.name === 'add_address') {
