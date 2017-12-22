@@ -543,7 +543,7 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'update_address'){
-       myApp.alert('Deneme1:' + page.query.alias + '  Deneme2:' + page.query['alias'] ); 
+       myApp.alert('Deneme1:' + page.fromPage.query.alias + page.fromPage.query['alias'] + page.query.count + '  Deneme2:' + page.query['alias'] ); 
     }
 
     if (page.name === 'messages') {
