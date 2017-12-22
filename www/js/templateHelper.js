@@ -129,7 +129,7 @@ function initListVirtualUserAddresses() {
         ],
         height: 105,
         template: '<li class="swipeout cls{{id_address}}">' +
-                  '<div class="swipeout-content"><a href="#" class="btnUpdateAddress item-link item-content">'+
+                  '<div class="swipeout-content"><a href="update_address.html?alias={{alias}}" class="btnUpdateAddress item-link item-content">'+
                   '<div class="item-inner">'+
                   '<div class="item-title-row">' +
                   '<div class="item-title">{{alias}}</div>' +
