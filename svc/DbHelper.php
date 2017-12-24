@@ -1017,32 +1017,44 @@ class DbHelper {
 		$categorylist = '';
 
 
-	if($iscategorysearch){
+	switch ($iscategorysearch) {
 
+		case "":
+			$sql = "SELECT id_product, name,description_short, description FROM  ps_product_lang WHERE id_lang = $langu AND (description LIKE '%$keyword%' OR description_short LIKE '%$keyword%'  OR name LIKE '%$keyword%') ";
+			break;
 
-
-		foreach ($_infos2 as $key => $jsons) { // This will search in the 2 jsons
-			//foreach($jsons as $key => $value) {
+		case "1":
+			foreach ($_infos2 as $key => $jsons) { // This will search in the 2 jsons
+				//foreach($jsons as $key => $value) {
 		
-				if($key != 'keyword' &&  $key != 'currency' &&  $key != 'langu' &&  $key != 'opr' &&  $key != 'iscategorysearch'){
-
-
-				$categorylist .= '\''. $jsons. '\''.',';
+					if($key != 'keyword' &&  $key != 'currency' &&  $key != 'langu' &&  $key != 'opr' &&  $key != 'iscategorysearch'){
+					$categorylist .= '\''. $jsons. '\''.',';
 
 				//}
 
-	  		 }
+	  			 }
 
-   		}
+   			}
 
-   		$categorylist = '('. substr("$categorylist",0,-1). ')';
+   			$categorylist = '('. substr("$categorylist",0,-1). ')';
 
-   		$sql = "SELECT pl.id_product, pl.name, pl.description_short, description FROM  ps_product_lang pl, ps_product p WHERE pl.id_lang = $langu AND p.id_product = pl.id_product AND p.id_category_default IN "."$categorylist";
+   			$sql = "SELECT pl.id_product, pl.name, pl.description_short, description FROM  ps_product_lang pl, ps_product p WHERE pl.id_lang = $langu AND p.id_product = pl.id_product AND p.id_category_default IN "."$categorylist";
+			break;
+		case "2":
+			foreach ($_infos2 as $key => $jsons) { // This will search in the 2 jsons
+				//foreach($jsons as $key => $value) {
+					if($key != 'keyword' &&  $key != 'currency' &&  $key != 'langu' &&  $key != 'opr' &&  $key != 'iscategorysearch'){
+					$categorylist .= '\''. $jsons. '\''.',';
+					//}
+	  		 	}
+
+   			}
+
+   			$categorylist = '('. substr("$categorylist",0,-1). ')';
+
+   			$sql = "SELECT pl.id_product, pl.name, pl.description_short, description FROM  ps_product_lang pl, ps_product p WHERE pl.id_lang = $langu AND p.id_product = pl.id_product AND p.id_manufacturer IN "."$categorylist";
    
-
-	}else{
-
-		$sql = "SELECT id_product, name,description_short, description FROM  ps_product_lang WHERE id_lang = $langu AND (description LIKE '%$keyword%' OR description_short LIKE '%$keyword%'  OR name LIKE '%$keyword%') ";
+			break;	   
 
 	}
 
@@ -1391,6 +1403,42 @@ class DbHelper {
 				$this->conn->close();
 		
 	}
+
+
+
+
+	function getmanufacturerlist($_ProductUnitValue){
+		
+			
+				$sql = "SELECT id_manufacturer, name FROM  ps_manufacturer WHERE active=1";
+				
+				$resultidproducUnitValue = $this->conn->query($sql);
+				
+				if ($resultidproducUnitValue->num_rows > 0) {
+					$tmpsqltable = array();
+					while ($row = $resultidproducUnitValue->fetch_assoc()) {
+
+						array_push($tmpsqltable , $row);
+
+					}
+
+
+
+					//$tmpsqltable = mysqli_fetch_array($resultidproducUnitValue , MYSQLI_ASSOC);
+		
+				}
+				
+				return $tmpsqltable;
+				$this->conn->close();
+		
+	}
+
+
+
+
+
+
+
 
 
 
