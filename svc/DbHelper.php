@@ -426,7 +426,7 @@ class DbHelper {
 		$_res=false;
 
 		//$id_customer=$_infos["id_customer"];
-		$sql = "SELECT pl.id_country, pa.id_address, pa.alias,pa.company,CONCAT(pa.firstname,' ', pa.lastname) AS 'name',pa.vat_number,pa.address1,pa.address2,pa.postcode, pa.city, pl.name, pa.phone, pa.phone_mobile
+		$sql = "SELECT pl.id_country, pa.id_address, pa.alias,pa.company,pa.firstname,pa.lastname,pa.vat_number,pa.address1,pa.address2,pa.postcode, pa.city, pl.name, pa.phone, pa.phone_mobile
 		 FROM ps_address pa, ps_customer pc, ps_country_lang pl WHERE pa.deleted=0 AND pa.id_customer=$id_customer AND pc.id_customer = pa.id_customer
 		 AND pl.id_country = pa.id_country AND pl.id_lang = pc.id_lang 
 		 ";
