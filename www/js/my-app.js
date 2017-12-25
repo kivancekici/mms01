@@ -588,6 +588,47 @@ $$(document).on('pageInit', function(e) {
 
         myApp.formFromData('#updateadrform', formData);
 
+        $$('.updateAddressBtn').on('click', function() {
+
+            var addressData = myApp.formToData('#updateadrform');
+
+            var alias = addressData.alias;
+            var name = addressData.firstname;
+            var surname = addressData.lastname;
+            var address = addressData.address1;
+            var address2 = addressData.address2;
+            var zipcode = addressData.postcode;
+            var city = addressData.city;
+            var countryId = addressData.country;
+            var homephone = addressData.phone;
+            var mobilephone = addressData.mobilephone;
+            var company = addressData.company;
+            var vatno = addressData.vatno;
+
+            if (name == '' || surname == '' || mobilephone == '' || address == '' || zipcode == '' || city == '' || countryId == '') {
+                alertMessage('requiredField', 'info');
+            } else {
+
+                if (zipcode.length < 5) {
+
+                    alertMessage('zipcodeError', 'error');
+
+                } else {
+
+                  //  var response = saveAddress(countryId, userId, alias, company, surname, name, address, address2, zipcode, city, homephone, mobilephone, vatno);
+                  /*Update Adres fonksiyonu gelcek */
+                  
+                    if (response == "OK") {
+                        loadPageWithLang('my_addresses');
+                    } else {
+                        alertMessage('addressError', 'info');
+                    }
+                }
+
+
+            }
+        });
+
     }
 
     if (page.name === 'messages') {
