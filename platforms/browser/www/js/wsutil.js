@@ -1,5 +1,8 @@
 var servicePath = "https://baklava7.de/mapi/Msvc.php";
 
+var useremail = window.localStorage.getItem("useremail");
+var password= window.localStorage.getItem("password");
+
 function restfulGetCall(restSuccess) {
     $.get(servicePath, function(data) {
         restSuccess(data);
@@ -13,7 +16,11 @@ function restfulGetCall(restSuccess) {
 function restfulPostCall(sendData) {
 
     //  myApp.showPreloader();
-
+    if(sendData['opr'] != 'login'){
+    sendData['email'] = useremail;
+    sendData['pswd'] = password;
+    }
+    
     var response;
 
     $$.ajax({

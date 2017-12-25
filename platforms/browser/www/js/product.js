@@ -25,6 +25,7 @@ function showProductDetailsModal(idProduct) {
             '<div class="tab active" id="tab1">' +
             '<p>' + currentProduct.manufacname + '</p>' +
             '<p>' + currentProduct.productname + '</p>' +
+            '<p>' + currentProduct.description + '</p>' +
             '<p>' + currentProduct.imgdirectory + '</p>' +
             '</div>' +
             '<div class="tab" id="tab2">' +

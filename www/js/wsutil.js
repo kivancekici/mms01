@@ -16,10 +16,11 @@ function restfulGetCall(restSuccess) {
 function restfulPostCall(sendData) {
 
     //  myApp.showPreloader();
-
+    if(sendData['opr'] != 'login'){
     sendData['email'] = useremail;
     sendData['pswd'] = password;
-
+    }
+    
     var response;
 
     $$.ajax({

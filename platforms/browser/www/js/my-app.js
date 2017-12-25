@@ -230,6 +230,7 @@ $$(document).on('pageInit', function(e) {
                 window.localStorage.setItem("customerId", response);
                 window.localStorage.setItem("isLogin", true);
                 window.localStorage.setItem('password', pass);
+                window.localStorage.setItem('useremail', email);
             } else {
                 window.localStorage.setItem("isLogin", false);
 
@@ -481,10 +482,6 @@ $$(document).on('pageInit', function(e) {
             loadPageWithLang('add_address');
         });
 
-        $$('.btnUpdateAddress').on('click', function() {
-             loadPageWithLang('update_address');
-        });
-
     }
 
     if (page.name === 'add_address') {
@@ -542,7 +539,37 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'update_address'){
-     
+
+      var alias = page.query['alias'];
+      var company = page.query['company'];
+      var lastname = page.query['lastname']
+      var firstname = page.query['firstname']; 
+      var address1 = page.query['address1']; 
+      var address2 = page.query['address2'];
+      var postcode = page.query['postcode'];
+      var city = page.query['city']; 
+      var phone = page.query['phone']; 
+      var phone_mobile = page.query['phone_mobile']; 
+      var vat_number = page.query['vat_number'];
+      var id_country = page.query['id_country'];
+      
+      var formData = {
+        'alias': alias,
+        'company': company,
+        'lastname': lastname,
+        'firstname': firstname,
+        'address1': address1,
+        'address2': address2,
+        'postcode': postcode,
+        'city': city,
+        'country': id_country,
+        'phone': phone,
+        'mobilephone':mobile_phone,
+        'vatno': vat_number
+     }
+
+     myApp.formFromData('#updateadrform', formData);
+    
     }
 
     if (page.name === 'messages') {
