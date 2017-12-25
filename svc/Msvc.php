@@ -110,6 +110,10 @@ switch ($opr) {
 		fGetcategorytree($decoded);
 		break; 	
 
+	case "manufacturerlist":
+		fGetManufacturerList($decoded);
+		break; 
+
 	case "placeorder":
 		fPlaceOrder($decoded);
 		break;
@@ -368,13 +372,6 @@ function fGetIpProductsPrice($_jsondata) {
 
 
 
-
-
-
-
-
-
-
 function fGetIpProductAttribute($_jsondata) {
 	//alanları ekle ve dbhelper methodunu yaz
 	$_items = DbHelper::getInstance()->getProductIdatrribute($_jsondata);
@@ -423,6 +420,16 @@ function fGetcategorytree($_jsondata) {
 }
 
 
+
+function fGetManufacturerList($_jsondata) {
+	//alanları ekle ve dbhelper methodunu yaz
+	$_items = DbHelper::getInstance()->getmanufacturerlist($_jsondata);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
 
 
 
