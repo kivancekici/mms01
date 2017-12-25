@@ -1,5 +1,9 @@
 var servicePath = "https://baklava7.de/mapi/Msvc.php";
 
+
+
+
+
 function restfulGetCall(restSuccess) {
     $.get(servicePath, function(data) {
         restSuccess(data);
@@ -13,6 +17,12 @@ function restfulGetCall(restSuccess) {
 function restfulPostCall(sendData) {
 
     //  myApp.showPreloader();
+    if(sendData['opr'] != 'login'){
+    var useremail = window.localStorage.getItem("useremail");
+    var password= window.localStorage.getItem("password");
+    sendData['email'] = useremail;
+    sendData['pswd'] = password;
+    }
 
     var response;
 
@@ -262,7 +272,7 @@ function deleteAddress(id_customer, id_address) {
 
 }
 
-function updateAddress(id_country, id_state, id_customer, alias, company, lastname, firstname, address1, address2, postcode, city, phone, vat_number, date_add, date_upd, active, deleted) {
+function updateAddress(id_country, id_customer, alias, company, lastname, firstname, address1, address2, postcode, city, phone, vat_number, date_add, date_upd, active, deleted) {
 
     var data = {
         'opr': 'updateaddress',

@@ -129,7 +129,7 @@ function initListVirtualUserAddresses() {
         ],
         height: 105,
         template: '<li class="swipeout cls{{id_address}}">' +
-                  '<div class="swipeout-content"><a href="#" class="btnUpdateAddress item-link item-content">'+
+                  '<div class="swipeout-content"><a href="#" onclick="updateAdrPage('+"'{{alias}}',"+"'{{company}}',"+"'{{lastname}}',"+"'{{firstname}}',"+"'{{address1}}',"+"'{{address2}}',"+"'{{postcode}}',"+"'{{city}}',"+"'{{phone}}',"+"'{{phone_mobile}}',"+"'{{vat_number}}',"+'{{id_country}});" class="item-link item-content">'+
                   '<div class="item-inner">'+
                   '<div class="item-title-row">' +
                   '<div class="item-title">{{alias}}</div>' +
@@ -144,6 +144,25 @@ function initListVirtualUserAddresses() {
     });
 }
 
+function updateAdrPage(alias, company, lastname, firstname, address1, address2, postcode, city, phone, phone_mobile, vat_number, id_country){
+   
+   var dat = {
+            'alias': alias,
+            'company': company,
+            'lastname': lastname,
+            'firstname': firstname,
+            'address1': address1,
+            'address2': address2,
+            'postcode': postcode,
+            'city': city,
+            'id_country': id_country,
+            'phone': phone,
+            'phone_mobile': phone_mobile,
+            'vat_number': vat_number
+   }
+
+   loadPageWithLangAndData('update_address', dat);
+}
 
 function deleteUserAddress(idAddress){
     var userId = window.localStorage.getItem("customerId");

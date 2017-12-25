@@ -52,7 +52,7 @@ var mainView = myApp.addView('.view-main', {
 getLangJson();
 
 setTimeout(function() {
-    
+
     checkLangStatus();
 
 }, 3000);
@@ -60,7 +60,7 @@ setTimeout(function() {
 
 function onOffline() {
 
-    myApp.alert('İnternet bağlantısı yok.', function () {
+    myApp.alert('İnternet bağlantısı yok.', function() {
         navigator.app.exitApp();
     });
 }
@@ -128,13 +128,26 @@ function setContextParameter(pageName, key, value) {
     myApp.template7Data.languages[selectedLang][pageName][key] = value;
 }
 
+function loadPageWithLangAndData(pageName, contentData) {
+    var cntxName = 'languages.' + selectedLang + '.' + pageName;
+    var pgUrl = pageName + '.html';
+   
+    mainView.router.load({
+        url: pgUrl,
+        contextName: cntxName,
+        query : contentData
+    });
+
+}
+
 function loadPageWithLang(pageName) {
     var cntxName = 'languages.' + selectedLang + '.' + pageName;
     var pgUrl = pageName + '.html';
+   
 
     mainView.router.load({
-            url: pgUrl,
-            contextName: cntxName
+        url: pgUrl,
+        contextName: cntxName
     });
 
 }
@@ -230,6 +243,7 @@ $$(document).on('pageInit', function(e) {
                 window.localStorage.setItem("customerId", response);
                 window.localStorage.setItem("isLogin", true);
                 window.localStorage.setItem('password', pass);
+                window.localStorage.setItem('useremail', email);
             } else {
                 window.localStorage.setItem("isLogin", false);
 
@@ -481,9 +495,6 @@ $$(document).on('pageInit', function(e) {
             loadPageWithLang('add_address');
         });
 
-        $$('.btnUpdateAddress').on('click', function() {
-             loadPageWithLang('update_address');
-        });
 
     }
 
@@ -521,7 +532,7 @@ $$(document).on('pageInit', function(e) {
             } else {
 
                 if (zipcode.length < 5) {
-                    
+
                     alertMessage('zipcodeError', 'error');
 
                 } else {
@@ -539,10 +550,85 @@ $$(document).on('pageInit', function(e) {
             }
         });
 
+       
+
     }
 
-    if (page.name === 'update_address'){
-     
+    if (page.name === 'update_address') {
+        
+       
+
+        var alias = page.query['alias'];
+        var company = page.query['company'];
+        var lastname = page.query['lastname']
+        var firstname = page.query['firstname'];
+        var address1 = page.query['address1'];
+        var address2 = page.query['address2'];
+        var postcode = page.query['postcode'];
+        var city = page.query['city'];
+        var phone = page.query['phone'];
+        var phone_mobile = page.query['phone_mobile'];
+        var vat_number = page.query['vat_number'];
+        var id_country = page.query['id_country'];
+
+        var formData = {
+            'alias': alias,
+            'company': company,
+            'lastname': lastname,
+            'firstname': firstname,
+            'address1': address1,
+            'address2': address2,
+            'postcode': postcode,
+            'city': city,
+            'country': id_country,
+            'phone': phone,
+            'mobilephone': phone_mobile,
+            'vatno': vat_number
+        }
+
+        myApp.formFromData('#updateadrform', formData);
+
+        $$('.updateAddressBtn').on('click', function() {
+
+            var addressData = myApp.formToData('#updateadrform');
+
+            var alias = addressData.alias;
+            var name = addressData.firstname;
+            var surname = addressData.lastname;
+            var address = addressData.address1;
+            var address2 = addressData.address2;
+            var zipcode = addressData.postcode;
+            var city = addressData.city;
+            var countryId = addressData.country;
+            var homephone = addressData.phone;
+            var mobilephone = addressData.mobilephone;
+            var company = addressData.company;
+            var vatno = addressData.vatno;
+
+            if (name == '' || surname == '' || mobilephone == '' || address == '' || zipcode == '' || city == '' || countryId == '') {
+                alertMessage('requiredField', 'info');
+            } else {
+
+                if (zipcode.length < 5) {
+
+                    alertMessage('zipcodeError', 'error');
+
+                } else {
+
+                  //  var response = saveAddress(countryId, userId, alias, company, surname, name, address, address2, zipcode, city, homephone, mobilephone, vatno);
+                  /*Update Adres fonksiyonu gelcek */
+                  
+                    if (response == "OK") {
+                        loadPageWithLang('my_addresses');
+                    } else {
+                        alertMessage('addressError', 'info');
+                    }
+                }
+
+
+            }
+        });
+
     }
 
     if (page.name === 'messages') {
