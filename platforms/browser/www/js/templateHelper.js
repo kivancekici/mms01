@@ -129,7 +129,7 @@ function initListVirtualUserAddresses() {
         ],
         height: 105,
         template: '<li class="swipeout cls{{id_address}}">' +
-                  '<div href="#" class="swipeout-content"><a onclick=updateAdrPage('+"'{{alias}}'"+"',{{company}}'"+"',{{lastname}}'"+"',{{firstname}}'"+"',{{address1}}'"+"',{{address2}}'"+"',{{postcode}}'"+"',{{city}}'"+"',{{phone}}'"+"',{{phone_mobile}}'"+"',{{vat_number}}'"+',{{id_country}}) class="btnUpdateAddress item-link item-content">'+
+                  '<div class="swipeout-content"><a href="#" class="btnUpdateAddress item-link item-content">'+
                   '<div class="item-inner">'+
                   '<div class="item-title-row">' +
                   '<div class="item-title">{{alias}}</div>' +
@@ -142,11 +142,6 @@ function initListVirtualUserAddresses() {
                   '</li>'
         
     });
-}
-
-function updateAdrPage(alias, company, lastname, firstname, address1, address2, postcode, city, phone, phone_mobile, vat_number, id_country){
-
-    loadPageWithLang("update_address");
 }
 
 

@@ -543,6 +543,11 @@ $$(document).on('pageInit', function(e) {
             }
         });
 
+        $$('.btnUpdateAddress').on('click', function() {
+           
+           loadPageWithLang('update_address');
+        });
+
     }
 
     if (page.name === 'update_address') {
