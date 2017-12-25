@@ -495,9 +495,6 @@ $$(document).on('pageInit', function(e) {
             loadPageWithLang('add_address');
         });
 
-         $$('.btnUpdateAddress').on('click', function() { 
-           loadPageWithLang('update_address');
-        });
 
     }
 
@@ -563,11 +560,9 @@ $$(document).on('pageInit', function(e) {
 
         var alias = page.query['alias'];
         var company = page.query['company'];
-        myApp.alert('alias:' + alias);
         var lastname = page.query['lastname']
         var firstname = page.query['firstname'];
         var address1 = page.query['address1'];
-        myApp.alert('adr:' + address1);
         var address2 = page.query['address2'];
         var postcode = page.query['postcode'];
         var city = page.query['city'];
@@ -587,7 +582,7 @@ $$(document).on('pageInit', function(e) {
             'city': city,
             'country': id_country,
             'phone': phone,
-            'mobilephone': mobile_phone,
+            'mobilephone': phone_mobile,
             'vatno': vat_number
         }
 
