@@ -1,1 +1,1 @@
-{"plugins":["cordova-plugin-whitelist","cordova-plugin-console","cordova-plugin-statusbar"]}
+{"plugins":["cordova-plugin-whitelist","cordova-plugin-console","cordova-plugin-statusbar","cordova-plugin-network-information"]}

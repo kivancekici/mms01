@@ -49,17 +49,21 @@ var mainView = myApp.addView('.view-main', {
     // domCache: true
 });
 
-
-
 getLangJson();
 
-
-
 setTimeout(function() {
-
+    
     checkLangStatus();
 
 }, 3000);
+
+
+function onOffline() {
+
+    myApp.alert('İnternet bağlantısı yok.', function () {
+        navigator.app.exitApp();
+    });
+}
 
 function checkNewMessage(userId) {
     var msgCount = window.localStorage.getItem("msgCount");
@@ -128,22 +132,10 @@ function loadPageWithLang(pageName) {
     var cntxName = 'languages.' + selectedLang + '.' + pageName;
     var pgUrl = pageName + '.html';
 
-    if (pageName == 'main') {
-
-        mainView.router.load({
-            url: pgUrl,
-            contextName: cntxName,
-            ignoreCache: true
-        });
-
-    } else {
-
-        mainView.router.load({
+    mainView.router.load({
             url: pgUrl,
             contextName: cntxName
-        });
-
-    }
+    });
 
 }
 
@@ -185,6 +177,10 @@ function alertMessage(msgKey, msgTypeKey) {
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     console.log("Device is ready!");
+});
+
+$$(document).on('offline', function() {
+    onOffline();
 });
 
 $$('#orderItemBtn').on('click', function() {
@@ -546,7 +542,7 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'update_address'){
-
+     
     }
 
     if (page.name === 'messages') {

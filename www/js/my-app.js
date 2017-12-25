@@ -230,6 +230,7 @@ $$(document).on('pageInit', function(e) {
                 window.localStorage.setItem("customerId", response);
                 window.localStorage.setItem("isLogin", true);
                 window.localStorage.setItem('password', pass);
+                window.localStorage.setItem('useremail', email);
             } else {
                 window.localStorage.setItem("isLogin", false);
 
@@ -481,10 +482,6 @@ $$(document).on('pageInit', function(e) {
             loadPageWithLang('add_address');
         });
 
-        $$('.btnUpdateAddress').on('click', function() {
-             loadPageWithLang('update_address');
-        });
-
     }
 
     if (page.name === 'add_address') {
@@ -542,7 +539,7 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'update_address'){
-     
+       myApp.alert( page.query['alias'] ); 
     }
 
     if (page.name === 'messages') {
