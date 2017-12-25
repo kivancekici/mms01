@@ -552,7 +552,7 @@ $$(document).on('pageInit', function(e) {
       var phone_mobile = page.query['phone_mobile']; 
       var vat_number = page.query['vat_number'];
       var id_country = page.query['id_country'];
-
+      
       var formData = {
         'alias': alias,
         'company': company,
