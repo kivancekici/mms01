@@ -129,7 +129,7 @@ function initListVirtualUserAddresses() {
         ],
         height: 105,
         template: '<li class="swipeout cls{{id_address}}">' +
-                  '<div class="swipeout-content"><a href="#" class="btnUpdateAddress item-link item-content">'+
+                  '<div class="swipeout-content"><a href="#" onclick="updateAdrPage('+"'{{alias}}',"+"'{{address1}}'"+');" class="item-link item-content">'+
                   '<div class="item-inner">'+
                   '<div class="item-title-row">' +
                   '<div class="item-title">{{alias}}</div>' +
@@ -144,6 +144,15 @@ function initListVirtualUserAddresses() {
     });
 }
 
+function updateAdrPage(alias, address1){
+   
+   var dat = {
+       'alias': alias,
+       'address1' : address1
+   }
+
+   loadPageWithLangAndData('update_address', dat);
+}
 
 function deleteUserAddress(idAddress){
     var userId = window.localStorage.getItem("customerId");

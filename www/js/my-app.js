@@ -128,20 +128,26 @@ function setContextParameter(pageName, key, value) {
     myApp.template7Data.languages[selectedLang][pageName][key] = value;
 }
 
-function loadPageWithLang(pageName) {
+function loadPageWithLangAndData(pageName, contentData) {
     var cntxName = 'languages.' + selectedLang + '.' + pageName;
     var pgUrl = pageName + '.html';
-    var color = "blue";
-    var dat = {
-        'id': 10,
-        'count': 20,
-        'color': color
-    }
-
+   
     mainView.router.load({
         url: pgUrl,
         contextName: cntxName,
-        query : dat
+        query : contentData
+    });
+
+}
+
+function loadPageWithLang(pageName) {
+    var cntxName = 'languages.' + selectedLang + '.' + pageName;
+    var pgUrl = pageName + '.html';
+   
+
+    mainView.router.load({
+        url: pgUrl,
+        contextName: cntxName
     });
 
 }
@@ -553,13 +559,15 @@ $$(document).on('pageInit', function(e) {
 
     if (page.name === 'update_address') {
         
-        myApp.alert('Color:' + page.query['color']);
+       
 
         var alias = page.query['alias'];
         var company = page.query['company'];
+        myApp.alert('alias:' + alias);
         var lastname = page.query['lastname']
         var firstname = page.query['firstname'];
         var address1 = page.query['address1'];
+        myApp.alert('adr:' + address1);
         var address2 = page.query['address2'];
         var postcode = page.query['postcode'];
         var city = page.query['city'];
