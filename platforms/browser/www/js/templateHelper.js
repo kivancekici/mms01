@@ -146,8 +146,7 @@ function initListVirtualUserAddresses() {
 
 function updateAdrPage(alias, company, lastname, firstname, address1, address2, postcode, city, phone, phone_mobile, vat_number, id_country){
 
-    setContextParameter("manufacturers_menu","selectedManufacturerName",selectedManufacturerName);
-    loadPageWithLang("manufacturers_menu");
+    loadPageWithLang("update_address");
 }
 
 
