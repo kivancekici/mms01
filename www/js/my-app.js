@@ -482,11 +482,6 @@ $$(document).on('pageInit', function(e) {
             loadPageWithLang('add_address');
         });
 
-       /*
-        $$('.btnUpdateAddress').on('click', function() {
-             loadPageWithLang('update_address');
-        });
-         */
     }
 
     if (page.name === 'add_address') {
@@ -544,7 +539,7 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'update_address'){
-       myApp.alert('Deneme1:' + page.fromPage.query.alias + page.fromPage.query['alias'] + page.query.count + '  Deneme2:' + page.query['alias'] ); 
+       myApp.alert( page.query['alias'] ); 
     }
 
     if (page.name === 'messages') {
