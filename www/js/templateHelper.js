@@ -129,7 +129,7 @@ function initListVirtualUserAddresses() {
         ],
         height: 105,
         template: '<li class="swipeout cls{{id_address}}">' +
-                  '<div class="swipeout-content"><a href="#" onclick="updateAdrPage('+"'{{alias}}',"+"'{{company}}',"+"'{{lastname}}',"+"'{{firstname}}',"+"'{{address1}}',"+"'{{address2}}',"+"'{{postcode}}',"+"'{{city}}',"+"'{{phone}}',"+"'{{phone_mobile}}',"+"'{{vat_number}}',"+'{{id_country}});" class="item-link item-content">'+
+                  '<div class="swipeout-content"><a href="#" onclick="updateAdrPage({{id_address}},'+"'{{alias}}',"+"'{{company}}',"+"'{{lastname}}',"+"'{{firstname}}',"+"'{{address1}}',"+"'{{address2}}',"+"'{{postcode}}',"+"'{{city}}',"+"'{{phone}}',"+"'{{phone_mobile}}',"+"'{{vat_number}}',"+'{{id_country}});" class="item-link item-content">'+
                   '<div class="item-inner">'+
                   '<div class="item-title-row">' +
                   '<div class="item-title">{{alias}}</div>' +
@@ -144,9 +144,10 @@ function initListVirtualUserAddresses() {
     });
 }
 
-function updateAdrPage(alias, company, lastname, firstname, address1, address2, postcode, city, phone, phone_mobile, vat_number, id_country){
+function updateAdrPage(addressId, alias, company, lastname, firstname, address1, address2, postcode, city, phone, phone_mobile, vat_number, id_country){
    
    var dat = {
+            'id_address': addressId,
             'alias': alias,
             'company': company,
             'lastname': lastname,
