@@ -466,12 +466,8 @@ function getSearchResultList(searchKeyword) {
 
 }
 
-
-
-function getManufacturersMenuList(id_manufacturer) {
-    if (id_manufacturer == 0) {
-        //return;
-    }
+function getLangCode()
+{
     var lang = 1;
     if (selectedLang == "de") {
         lang = 1;
@@ -480,6 +476,16 @@ function getManufacturersMenuList(id_manufacturer) {
     } else {
         lang = 1;
     }
+
+    return lang;
+}
+
+
+function getManufacturersMenuList(id_manufacturer) {
+    if (id_manufacturer == 0) {
+        //return;
+    }
+    var lang = getLangCode();
     var searchData = {
         "opr": "manufacturersmenu",
         "id_manufacturer": id_manufacturer,
@@ -581,3 +587,24 @@ function getProductAtrributePrice(idProduct,idAttribute){
     return null;
 }
 
+function getProductCategoriesTree(idProduct){
+    var lang = getLangCode();
+    var data = {
+        "opr": "categorytree",
+        "id_lang": lang,
+    }
+
+    var result = restfulPostCall(data);
+
+
+    if (result != "Error") {
+
+        if (result != "NOK") {
+            return "OK";
+        } else {
+            return "NOK";
+        }
+    } else {
+        return "NOK";
+    }
+}
