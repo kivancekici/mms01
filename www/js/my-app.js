@@ -284,6 +284,8 @@ $$(document).on('pageInit', function(e) {
         listVirtualManufacturers.items = manufacturersList;
         listVirtualManufacturers.update();
 
+        //getProductCategoriesTree();
+
 
     }
 

@@ -5,9 +5,9 @@ var servicePath = "https://baklava7.de/mapi/Msvc.php";
 
 
 function restfulGetCall(restSuccess) {
-    $.get(servicePath, function(data) {
+    $.get(servicePath, function (data) {
         restSuccess(data);
-    }).fail(function() {
+    }).fail(function () {
 
     });
 
@@ -17,11 +17,11 @@ function restfulGetCall(restSuccess) {
 function restfulPostCall(sendData) {
 
     //  myApp.showPreloader();
-    if(sendData['opr'] != 'login'){
-    var useremail = window.localStorage.getItem("useremail");
-    var password= window.localStorage.getItem("password");
-    sendData['email'] = useremail;
-    sendData['pswd'] = password;
+    if (sendData['opr'] != 'login') {
+        var useremail = window.localStorage.getItem("useremail");
+        var password = window.localStorage.getItem("password");
+        sendData['email'] = useremail;
+        sendData['pswd'] = password;
     }
 
     var response;
@@ -33,11 +33,11 @@ function restfulPostCall(sendData) {
         data: JSON.stringify(sendData),
         contentType: 'application/json',
         dataType: 'json',
-        success: function(data, status, xmlRequest) {
+        success: function (data, status, xmlRequest) {
             //  myApp.hidePreloader();
             response = data;
         },
-        error: function(request, status, error) {
+        error: function (request, status, error) {
             //  myApp.hidePreloader();
             response = "Error";
         }
@@ -225,7 +225,7 @@ function saveAddress(id_country, id_customer, alias, company, lastname, firstnam
         'postcode': postcode,
         'city': city,
         'phone': phone,
-        'phone_mobile':mobile_phone,
+        'phone_mobile': mobile_phone,
         'vat_number': vat_number
     }
 
@@ -466,8 +466,7 @@ function getSearchResultList(searchKeyword) {
 
 }
 
-function getLangCode()
-{
+function getLangCode() {
     var lang = 1;
     if (selectedLang == "de") {
         lang = 1;
@@ -567,27 +566,27 @@ function postMessages(id_customer, message) {
     }
 }
 
-function getProductDetails(idProduct){
+function getProductDetails(idProduct) {
     alert("not implemented");
     return null;
 }
 
-function getProductUnit(idProduct){
+function getProductUnit(idProduct) {
     alert("not implemented");
     return null;
 }
 
-function getProductAtrributes(idProduct){
+function getProductAtrributes(idProduct) {
     alert("not implemented");
     return null;
 }
 
-function getProductAtrributePrice(idProduct,idAttribute){
+function getProductAtrributePrice(idProduct, idAttribute) {
     alert("not implemented");
     return null;
 }
 
-function getProductCategoriesTree(idProduct){
+function getProductCategoriesTree() {
     var lang = getLangCode();
     var data = {
         "opr": "categorytree",
@@ -596,15 +595,36 @@ function getProductCategoriesTree(idProduct){
 
     var result = restfulPostCall(data);
 
+    var categoriesTree={};
+    categoriesTree.rootCategories = getSubCategoriesFromList(result, "1");
+
+    categoriesTree.rootCategories.forEach(element => {
+        element.subcategories=getSubCategoriesFromList(result,element.id_category);
+        element.subcategories.forEach(subsub => {
+            subsub.subcategories=getSubCategoriesFromList(result,subsub.id_category);
+        });        
+    });
 
     if (result != "Error") {
 
         if (result != "NOK") {
-            return "OK";
+            return categoriesTree;
         } else {
-            return "NOK";
+            return null;
         }
     } else {
-        return "NOK";
+        return null;
     }
+}
+
+function getSubCategoriesFromList(lst, id_parent) {
+
+    var result = [];
+    lst.forEach(element => {
+        if (element.id_parent == id_parent) {
+            result.push(element);
+        }
+    });
+
+    return result;
 }
