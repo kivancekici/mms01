@@ -167,6 +167,7 @@ function checkLoginStatus() {
 
 }
 
+
 function validateEmail(email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -279,7 +280,6 @@ $$(document).on('pageInit', function(e) {
         initListVirtualManufacturers();
         listVirtualManufacturers.items = manufacturersList;
         listVirtualManufacturers.update();
-
 
 
     }
@@ -557,7 +557,7 @@ $$(document).on('pageInit', function(e) {
     if (page.name === 'update_address') {
         
        
-
+        var adressId = page.query['id_address'];
         var alias = page.query['alias'];
         var company = page.query['company'];
         var lastname = page.query['lastname']
@@ -615,9 +615,9 @@ $$(document).on('pageInit', function(e) {
 
                 } else {
 
-                  //  var response = saveAddress(countryId, userId, alias, company, surname, name, address, address2, zipcode, city, homephone, mobilephone, vatno);
-                  /*Update Adres fonksiyonu gelcek */
-                  
+
+                  var response = updateAddress(countryId, adressId, alias, company, surname, name, address, address2, zipcode, city, homephone, mobilephone, vatno);
+
                     if (response == "OK") {
                         loadPageWithLang('my_addresses');
                     } else {

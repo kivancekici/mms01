@@ -272,13 +272,12 @@ function deleteAddress(id_customer, id_address) {
 
 }
 
-function updateAddress(id_country, id_customer, alias, company, lastname, firstname, address1, address2, postcode, city, phone, vat_number, date_add, date_upd, active, deleted) {
+function updateAddress(id_country, id_address, alias, company, lastname, firstname, address1, address2, postcode, city, phone, phone_mobile, vat_number) {
 
     var data = {
         'opr': 'updateaddress',
         'id_country': id_country,
-        'id_state': id_state,
-        'id_customer': id_customer,
+        'id_address': id_address,
         'alias': alias,
         'company': company,
         'lastname': lastname,
@@ -288,11 +287,9 @@ function updateAddress(id_country, id_customer, alias, company, lastname, firstn
         'postcode': postcode,
         'city': city,
         'phone': phone,
+        'phone_mobile': phone_mobile,
         'vat_number': vat_number,
-        'date_add': date_add,
-        'date_upd': date_upd,
-        'active': active,
-        'deleted': deleted
+        'other': ""
     }
 
     var result = restfulPostCall(data);
@@ -300,7 +297,7 @@ function updateAddress(id_country, id_customer, alias, company, lastname, firstn
 
     if (result != "Error") {
 
-        if (result.status == "NOK") {
+        if (result == "OK") {
             return "OK";
         } else {
             return "NOK";
