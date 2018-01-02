@@ -10,6 +10,9 @@ var myApp = new Framework7({
     swipePanelOnlyClose: true,
     template7Pages: true,
     pushState: true,
+    smartSelectFormTheme: 'orange',
+    smartSelectNavbarTheme : 'orange',
+    smartSelectBackText:'OK',
 
     onAjaxStart: function(xhr) {
         myApp.showIndicator();
@@ -262,7 +265,7 @@ $$(document).on('pageInit', function(e) {
         var userId = window.localStorage.getItem("customerId");
         checkNewMessage(userId);
 
-
+    
         /*Product listesini doldur*/
         if (productResultList == null) {
             productResultList = getSearchResultList(searchKeyWord, selectedLang);
