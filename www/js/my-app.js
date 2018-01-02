@@ -10,6 +10,9 @@ var myApp = new Framework7({
     swipePanelOnlyClose: true,
     template7Pages: true,
     pushState: true,
+    smartSelectFormTheme: 'orange',
+    smartSelectNavbarTheme : 'orange',
+    smartSelectBackText:'OK',
 
     onAjaxStart: function(xhr) {
         myApp.showIndicator();
@@ -167,6 +170,7 @@ function checkLoginStatus() {
 
 }
 
+
 function validateEmail(email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -261,7 +265,7 @@ $$(document).on('pageInit', function(e) {
         var userId = window.localStorage.getItem("customerId");
         checkNewMessage(userId);
 
-
+    
         /*Product listesini doldur*/
         if (productResultList == null) {
             productResultList = getSearchResultList(searchKeyWord, selectedLang);
@@ -279,7 +283,6 @@ $$(document).on('pageInit', function(e) {
         initListVirtualManufacturers();
         listVirtualManufacturers.items = manufacturersList;
         listVirtualManufacturers.update();
-
 
 
     }

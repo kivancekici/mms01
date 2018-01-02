@@ -22,18 +22,19 @@ function initListVirtualManufacturers() {
         },
         rowsBefore:100,
         rowsAfter:100,
-        height: 80,
+        height: 105,
         template: '<li>' +
         '<a href="#" onclick="showManufacturerMenu('+"'{{name}}'"+',{{id_manufacturer}});" class="item-link item-content">' +
         '<div class="item-media">' +
-        //'<img src="http://baklava7.de/img/tmp/manufacturer_mini_{{id_manufacturer}}_1.jpg" class="lazy" width="80">' +
-        '<img src="http://baklava7.de/img/m/{{id_manufacturer}}-field_manufacture.jpg" class="lazy" height="70">' +
+        '<img src="http://baklava7.de/img/m/{{id_manufacturer}}-field_manufacture.jpg" class="lazy" height="25">' +
         '</div>' +
         '<div class="item-inner">' +
         '<div class="item-title-row">' +
         '<div class="item-title">{{name}}</div>' +
-        '<div class="item-after">lorem ipsum dolor sit amet...</div>' +
+        '<div class="item-after"></div>' +
         '</div>' +
+        '<div class="item-subtitle">lorem ipsum dolor sit amet...</div>' +
+        '<div class="item-text"></div>'+
         '</div>' +
         '</a>' +
         '</li>'
@@ -74,11 +75,11 @@ function initlistProduct() {
             // Return array with indexes of matched items
             return foundItems; 
         },
-        height: 80,
+        height: 105,
         template: '<li>' +
         '<a href="#" onClick="showProductDetailsModal({{id_product}});return false;" class="item-link item-content">' +
         '<div class="item-media">' +
-        '<img src="http://baklava7.de{{imgdirectory}}" class="lazy" width="80">' +
+        '<img src="http://baklava7.de{{imgdirectory}}" class="lazy" height="80">' +
         '</div>' +
         '<div class="item-inner">' +
         '<div class="item-title-row">' +
