@@ -284,7 +284,23 @@ $$(document).on('pageInit', function(e) {
         listVirtualManufacturers.items = manufacturersList;
         listVirtualManufacturers.update();
 
-        //getProductCategoriesTree();
+        //fill the categories
+
+       var categories = getProductCategoriesTree();
+        
+       var subcategories = categories['rootCategories'][0]['subcategories'];
+       console.log(JSON.stringify(subcategories));
+
+       
+       for (i = 0; i < subcategories.length; i++) { 
+        var catName = subcategories[i]['categoryname'];
+        var txt = '<optgroup label="'+catName+'"></optgroup>';
+        $$('#Categori').html(txt);
+       // myApp.smartSelectAddOption('.smart-select select', txt);
+       }
+       
+       // myApp.alert(JSON.stringify(x));
+       
 
 
     }
