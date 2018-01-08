@@ -200,31 +200,3 @@ function deleteUserAddress(idAddress){
   })
   //  
 }
-
-var listVirtualCategories;
-
-function initListVirtualCategories() {
-    listVirtualCategories = myApp.virtualList('.lstCategories', {
-        items: [
-
-        ],
-        cols:2,
-        height: 60,
-        template: '<div class="row">' +
-        '<div class="col-auto">' +
-        '<div class="card">' +
-        '<div class="card-content">' +
-        '<div class="card-content-inner"><img src="http://baklava7.de/img/m/{{id_manufacturer}}-field_manufacture.jpg" class="lazy" width="80" height="80"></div>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '<div class="col-auto">' +
-        '<div class="card">' +
-        '<div class="card-content">' +
-        '<div class="card-content-inner"><img src="http://baklava7.de/img/m/{{id_manufacturer}}-field_manufacture.jpg" class="lazy" width="80" height="80"></div>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '</div>'
-    });
-}

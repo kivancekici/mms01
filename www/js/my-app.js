@@ -265,10 +265,48 @@ $$(document).on('pageInit', function(e) {
         var userId = window.localStorage.getItem("customerId");
         checkNewMessage(userId);
 
-    
+        
+        /*Kategori Listesini Doldur*/
+        var categories = getProductCategoriesTree();
+
+        var subcategories = categories['rootCategories'][0]['subcategories'];
+
+
+        for (i = 0; i < subcategories.length; i++) {
+            var catName = subcategories[i]['categoryname'];
+            var txt = '<optgroup label="' + catName + '"></optgroup>';
+            $$('#Categori').append(txt);
+            var subcatName = subcategories[i]['subcategories'];
+            for (k = 0; k < subcatName.length; k++) {
+                var catName = subcatName[k]['categoryname'];
+                var idVal = subcatName[k]['id_category'];
+                var subCatTxt = '<option value="' + idVal + '">' + catName + '</option>';
+                $$('.smart-select select optgroup').eq(i).append(subCatTxt);
+            }
+        }
+
+        $$('select').on('change', function (e) {
+            var catIdArray = $$('select[name=CategoriSelector]').val();
+            if (catIdArray.length == 1) {
+                var result = categorySearchResultList("", catIdArray[0], "");
+                listProductResult.items = result;
+                listProductResult.update();
+            } else if (catIdArray.length == 2) {
+                var result = categorySearchResultList("", catIdArray[0], catIdArray[1]);
+                listProductResult.items = result;
+                listProductResult.update();
+            } else {
+                var result = getSearchResultList("");
+                listProductResult.items = result;
+                listProductResult.update();
+            }
+
+        });
+
+
         /*Product listesini doldur*/
         if (productResultList == null) {
-            productResultList = getSearchResultList(searchKeyWord, selectedLang);
+            productResultList = getSearchResultList(searchKeyWord);
         }
 
         initlistProduct();
@@ -284,7 +322,7 @@ $$(document).on('pageInit', function(e) {
         listVirtualManufacturers.items = manufacturersList;
         listVirtualManufacturers.update();
 
-        //getProductCategoriesTree();
+       
 
 
     }
