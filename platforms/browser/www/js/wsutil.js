@@ -5,9 +5,9 @@ var servicePath = "https://baklava7.de/mapi/Msvc.php";
 
 
 function restfulGetCall(restSuccess) {
-    $.get(servicePath, function (data) {
+    $.get(servicePath, function(data) {
         restSuccess(data);
-    }).fail(function () {
+    }).fail(function() {
 
     });
 
@@ -33,11 +33,11 @@ function restfulPostCall(sendData) {
         data: JSON.stringify(sendData),
         contentType: 'application/json',
         dataType: 'json',
-        success: function (data, status, xmlRequest) {
+        success: function(data, status, xmlRequest) {
             //  myApp.hidePreloader();
             response = data;
         },
-        error: function (request, status, error) {
+        error: function(request, status, error) {
             //  myApp.hidePreloader();
             response = "Error";
         }
@@ -461,33 +461,33 @@ function getSearchResultList(searchKeyword) {
 }
 
 function categorySearchResultList(searchKeyword, catid1, catid2) {
-    
-        var lang = getLangCode();
-    
-        var searchData = {
-            "opr": "hpproductslist",
-            "keyword": searchKeyword,
-            "currency": "EUR",
-            "langu": lang,
-            "iscategorysearch":"1",
-            "c1": catid1,
-            "c2": catid2            
-        }
-    
-        var result = restfulPostCall(searchData);
-    
-        if (result != "Error") {
-    
-            if (result.status != "NOK") {
-                return result;
-            } else {
-                return "NOK";
-            }
-    
+
+    var lang = getLangCode();
+
+    var searchData = {
+        "opr": "hpproductslist",
+        "keyword": searchKeyword,
+        "currency": "EUR",
+        "langu": lang,
+        "iscategorysearch": "1",
+        "c1": catid1,
+        "c2": catid2
+    }
+
+    var result = restfulPostCall(searchData);
+
+    if (result != "Error") {
+
+        if (result.status != "NOK") {
+            return result;
         } else {
             return "NOK";
         }
-    
+
+    } else {
+        return "NOK";
+    }
+
 }
 
 function getLangCode() {
@@ -509,11 +509,16 @@ function getManufacturersMenuList(id_manufacturer) {
         //return;
     }
     var lang = getLangCode();
-    var searchData = {
-        "opr": "manufacturersmenu",
-        "id_manufacturer": id_manufacturer,
-        "langu": lang
+ 
+   var searchData = {
+        "opr": "hpproductslist",
+        "keyword": "",
+        "currency": "EUR",
+        "langu": lang,
+        "iscategorysearch": "2",
+        "c1": id_manufacturer
     }
+
 
     var result = restfulPostCall(searchData);
 
@@ -619,14 +624,14 @@ function getProductCategoriesTree() {
 
     var result = restfulPostCall(data);
 
-    var categoriesTree={};
+    var categoriesTree = {};
     categoriesTree.rootCategories = getSubCategoriesFromList(result, "1");
 
     categoriesTree.rootCategories.forEach(element => {
-        element.subcategories=getSubCategoriesFromList(result,element.id_category);
+        element.subcategories = getSubCategoriesFromList(result, element.id_category);
         element.subcategories.forEach(subsub => {
-            subsub.subcategories=getSubCategoriesFromList(result,subsub.id_category);
-        });        
+            subsub.subcategories = getSubCategoriesFromList(result, subsub.id_category);
+        });
     });
 
     if (result != "Error") {
