@@ -15,6 +15,10 @@ function showProductDetailsModal(idProduct) {
 
     currentProduct = product;
 
+    loadPageWithLang('product_details');
+
+    return false;
+
     myApp.modal({
         title: '<div class="buttons-row">' +
             '<a href="#tab1" class="button active tab-link">Tab 1</a>' +
