@@ -11,6 +11,14 @@ function initPageProductDetails() {
     currentProduct.unit = getProductBaseUnitName(currentProduct.idProduct, "1");
     currentProduct.attributes = getProductBaseAttributes(currentProduct.idProduct, "1");
 
+    $$(".ulattribs").empty();
+    $$('.ulattribs li').remove();
+
+    var checked=true;
+    currentProduct.attributes.forEach(element => {
+        addProductAttributeRadioItem(element,checked);
+        checked=false;
+    });
 }
 
 function addProductAttributeRadioItem(attribute, checked) {
@@ -27,6 +35,6 @@ function addProductAttributeRadioItem(attribute, checked) {
         '</label>' +
         '</li>';
 
-    
+    $$(".ulattribs").append(li);
 
 }

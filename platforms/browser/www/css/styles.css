@@ -153,3 +153,7 @@ margin-bottom: 10px !important;
     background-size: cover;
     background-position: center;
 }
+
+.product-description{
+    font-stretch: expanded;
+}
