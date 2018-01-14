@@ -234,6 +234,7 @@ $$(document).on('pageInit', function(e) {
     // Get page data from event data
     var page = e.detail.page;
 
+    
 
 
     if (page.name === 'login') {
@@ -672,6 +673,10 @@ $$(document).on('pageInit', function(e) {
             }
         });
 
+    }
+
+    if(page.name==='product_details'){
+        initPageProductDetails();
     }
 
     if (page.name === 'messages') {
