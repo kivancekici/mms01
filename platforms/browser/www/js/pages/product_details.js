@@ -11,30 +11,18 @@ function initPageProductDetails() {
     currentProduct.unit = getProductBaseUnitName(currentProduct.idProduct, "1");
     currentProduct.attributes = getProductBaseAttributes(currentProduct.idProduct, "1");
 
-    $$(".ulattribs").empty();
-    $$('.ulattribs li').remove();
 
-    var checked=true;
     currentProduct.attributes.forEach(element => {
-        addProductAttributeRadioItem(element,checked);
-        checked=false;
+        addProductAttributeSelectOption(element);
+
     });
 }
+//var subCatTxt = ;
+//$$('.smart-select select optgroup').eq(i).append(subCatTxt);
 
-function addProductAttributeRadioItem(attribute, checked) {
-    var strchk = "";
-    if (checked) {
-        strchk = 'checked="checked"';
-    }
-    var li = '<li>' +
-        '<label class="label-radio item-content">' +
-        '<input type="radio" name="my-radio" value="' + attribute.id_attribute + '" ' + strchk + '>' +
-        '<div class="item-inner">' +
-        '<div class="item-title">' + attribute.name + '</div>' +
-        '</div>' +
-        '</label>' +
-        '</li>';
+function addProductAttributeSelectOption(attribute) {
+    var opt ='<option value="' + attribute.id_attribute + '">' + attribute.name + '</option>';
 
-    $$(".ulattribs").append(li);
+    $$("#selectProductAttribute").append(opt);
 
 }
