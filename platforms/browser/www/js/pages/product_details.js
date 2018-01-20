@@ -11,6 +11,7 @@ function initPageProductDetails() {
     currentProduct.unit = getProductBaseUnitName(currentProduct.idProduct, "1");
     currentProduct.attributes = getProductBaseAttributes(currentProduct.idProduct, "1");
 
+    $$(".product-base-price").text(currentProduct.prices.reducedprice+" €");
 
     currentProduct.attributes.forEach(element => {
         addProductAttributeSelectOption(element);
