@@ -199,7 +199,7 @@
                 "countryPlc": "Deutschland*",
                 "country": "Deutschland",
                 "vatNo": "Wenn vorhanden USt-IdNr.",
-                "company": "Wenn vorhanden Firma",
+                "company": "Wenn vorhanden Firma"
             },
             "update_address": {
                 "btnName": "Speichern",
@@ -216,7 +216,7 @@
                 "countryPlc": " Deutschland*",
                 "country": "Deutschland",
                 "vatNo": "Wenn vorhanden USt-IdNr.",
-                "company": "Wenn vorhanden Firma",
+                "company": "Wenn vorhanden Firma"
             },
             "my_addresses": {
                 "deleteBtn": "Löschen"
