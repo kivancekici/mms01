@@ -14,11 +14,11 @@
                 "logoutItem": "Çıkış"
             },
             "main": {
-                "pageTitle": "Baklava7",
-                "btnname": "Adres Ekle",
-                "alert": "denemeAlertTurkish",
                 "allmanufacturers": "Üreticiler",
-                "catalogue": "Katalog"
+                "catalogue": "Ürünler",
+                "searchBtn": "Ara",
+                "searchPlc": "Arama",
+                "nothingFound": "Bulunamadı"
             },
             "login": {
                 "cardHeader": "Kullanıcı Girişi",
@@ -135,10 +135,11 @@
                 "logoutItem": "Logout"
             },
             "main": {
-                "pageTitle": "Baklava7",
-                "btnname": "Adresse hinzufügen",
                 "allmanufacturers": "Partnerhäuser",
-                "catalogue": "Produktliste"
+                "catalogue": "Produktliste",
+                "searchBtn": "Abbrechen",
+                "searchPlc": "Suchen",
+                "nothingFound": "Bulunamadı"
             },
             "login": {
                 "cardHeader": "Login",
@@ -191,9 +192,9 @@
                 "surname": "Name*",
                 "homephone": "Festnetz",
                 "mobilephone": "Mobilnummer*",
-                "address": " Adresszeile 1*",
-                "address2": " Adresszeile 2",
-                "alias": " Adressüberschrift",
+                "address": "Adresszeile 1*",
+                "address2": "Adresszeile 2",
+                "alias": "Adressüberschrift",
                 "zipcode": "PLZ*",
                 "city": "Ort*",
                 "countryPlc": "Deutschland*",
