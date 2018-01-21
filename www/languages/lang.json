@@ -18,7 +18,8 @@
                 "catalogue": "Ürünler",
                 "searchBtn": "Ara",
                 "searchPlc": "Arama",
-                "nothingFound": "Bulunamadı"
+                "nothingFound": "Bulunamadı",
+                "mainSlogan": "Ne sipariş vermek istersiniz?"
             },
             "login": {
                 "cardHeader": "Kullanıcı Girişi",
@@ -139,7 +140,8 @@
                 "catalogue": "Produktliste",
                 "searchBtn": "Abbrechen",
                 "searchPlc": "Suchen",
-                "nothingFound": "Bulunamadı"
+                "nothingFound": "",
+                "mainSlogan": ""
             },
             "login": {
                 "cardHeader": "Login",
@@ -209,12 +211,12 @@
                 "surname": "Name*",
                 "homephone": "Festnetz",
                 "mobilephone": "Mobilnummer*",
-                "address": " Adresszeile 1*",
-                "address2": " Adresszeile 2",
-                "alias": " Adressüberschrift",
+                "address": "Adresszeile 1*",
+                "address2": "Adresszeile 2",
+                "alias": "Adressüberschrift",
                 "zipcode": "PLZ*",
                 "city": "Ort*",
-                "countryPlc": " Deutschland*",
+                "countryPlc": "Deutschland*",
                 "country": "Deutschland",
                 "vatNo": "Wenn vorhanden USt-IdNr.",
                 "company": "Wenn vorhanden Firma"
