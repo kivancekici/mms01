@@ -21,20 +21,39 @@
             </div>
             <div class="card-content">
                 <div class="card-content-inner">
-
                     <div class="row">
-                        <!-- Each "cell" has col-[widht in percents] class -->
-                        <div class="col-60">
-                            <p class="color-gray product-manufacturer-name">Beispiel Hersteller</p>
-                            <p class="product-description"></p>
+
+                        <div class="col-35">
+                            <p>
+                                <span class="product-base-price" NaN></span> inkl. MwSt.</p>
                         </div>
-                        <div class="col-40">
+                        <div class="col-65">
+
+
                             <div class="list-block">
                                 <ul class="ulattribs">
-                                   
+                                    <li class="item-content">
+                                        <div class="item-media itemLogo">
+                                            <i class="icon f7-icons">right</i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <select id="selectProductAttribute" required>
+                                                    <option value="0" disabled selected>Gewicht</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
+
                         </div>
+                    </div>
+                    <div class="row">
+                        <p><span class="product-description"></span></p>
+                    </div>
+                    <div class="row">
+                            <p class="color-gray">Hersteller: <span class="product-manufacturer-name"></span></p>
                     </div>
 
 

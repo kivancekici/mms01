@@ -1,28 +1,25 @@
 <?php
-/*
- *
- * 1) create Customer (opt.)
- * 2) create Address (opt.)
- * 3) create Cart with order_rows and with product id's and quantities
- * 4) create the Order
- * 
-*/
-// Vars & includes required to use the lib
+include_once './PSWebServiceLibrary.php';
 define('DEBUG', true);
 define('PS_SHOP_PATH', 'http://localhost/prestashop/');
 define('PS_WS_AUTH_KEY', 'UBVD43GE7E14WIT35UFH2XJTVL5SJ7TU');
 require_once('./PSWebServiceLibrary.php');
- 
+
+class PSSvcHelper {
+    
+    public static function getInstance() {
+        return new PSSvcHelper();
+    }
+
+    function __construct() {
+
+    }
 
 
-
-
-function CreateOrder($_infos){
-
-
-
-
-
+	function createOrder($_infos)
+	{
+        
+        
 
 
 // If != 0, we don't create the corresponding structure
@@ -46,6 +43,8 @@ $total_paid_tax_excl = $_infos["total_paid_tax_excl"];
 $total_shipping = $_infos["total_shipping"];
 $total_shipping_tax_incl = $_infos["total_shipping_tax_incl"];
 $total_shipping_tax_excl = $_infos["total_shipping_tax_excl"];
+
+$mobile_orders_list=$_infos["mobile_orders_list"];
 
  
 //Adres yok ise bu değişkenler gelmeli. */
@@ -233,4 +232,10 @@ $xml->order->valid                      = 1;
   else echo 'Other error<br />'.$e->getMessage();
 }
 
+
+
+
+
+        
+    }
 }

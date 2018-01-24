@@ -598,26 +598,6 @@ function postMessages(id_customer, message) {
     }
 }
 
-function getProductDetails(idProduct) {
-    alert("not implemented");
-    return null;
-}
-
-function getProductUnit(idProduct) {
-    alert("not implemented");
-    return null;
-}
-
-function getProductAtrributes(idProduct) {
-    alert("not implemented");
-    return null;
-}
-
-function getProductAtrributePrice(idProduct, idAttribute) {
-    alert("not implemented");
-    return null;
-}
-
 function getProductCategoriesTree() {
     var lang = getLangCode();
     var data = {
