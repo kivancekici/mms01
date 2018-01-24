@@ -117,10 +117,27 @@ switch ($opr) {
 	case "placeorder":
 		fPlaceOrder($decoded);
 		break;
+
+		case "orderhistoryhead":
+		fOrderHistoryHead($decoded);
+		break;
+
     default:
 		send_response(Null);
 		break;
 }
+
+
+
+function fOrderHistoryHead($_jsondata) {
+	$_items = DbHelper::getInstance()->getOrderHistoryHead($_jsondata);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
 
 function send_response($response_data) {
 	header("Content-Type:application/json");
@@ -422,7 +439,6 @@ function fGetcategorytree($_jsondata) {
 
 
 function fGetManufacturerList($_jsondata) {
-	//alanları ekle ve dbhelper methodunu yaz
 	$_items = DbHelper::getInstance()->getmanufacturerlist($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
@@ -437,8 +453,7 @@ function fGetManufacturerList($_jsondata) {
 
 
 function fPlaceOrder($_jsondata) {
-	//alanları ekle ve dbhelper methodunu yaz
-	$email=$_jsondata["email"];
+
 	$_items = DbHelper::getInstance()->placeOrder($email);
 	if (!empty($_items)) {
 		send_response($_items);
