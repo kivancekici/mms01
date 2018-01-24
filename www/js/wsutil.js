@@ -17,11 +17,11 @@ function restfulGetCall(restSuccess) {
 function restfulPostCall(sendData) {
 
     //  myApp.showPreloader();
-    if(sendData['opr'] != 'login'){
-    var useremail = window.localStorage.getItem("useremail");
-    var password= window.localStorage.getItem("password");
-    sendData['email'] = useremail;
-    sendData['pswd'] = password;
+    if (sendData['opr'] != 'login') {
+        var useremail = window.localStorage.getItem("useremail");
+        var password = window.localStorage.getItem("password");
+        sendData['email'] = useremail;
+        sendData['pswd'] = password;
     }
 
     var response;
@@ -225,7 +225,7 @@ function saveAddress(id_country, id_customer, alias, company, lastname, firstnam
         'postcode': postcode,
         'city': city,
         'phone': phone,
-        'phone_mobile':mobile_phone,
+        'phone_mobile': mobile_phone,
         'vat_number': vat_number
     }
 
@@ -435,14 +435,8 @@ function getAllManufacturersList(manufacturer) {
 
 function getSearchResultList(searchKeyword) {
 
-    var lang = 1;
-    if (selectedLang == "de") {
-        lang = 1;
-    } else if (selectedLang == "tr") {
-        lang = 2;
-    } else {
-        lang = 1;
-    }
+    var lang = getLangCode();
+
     var searchData = {
         "opr": "hpproductslist",
         "keyword": searchKeyword,
@@ -466,12 +460,37 @@ function getSearchResultList(searchKeyword) {
 
 }
 
+function categorySearchResultList(searchKeyword, catid1, catid2) {
 
+    var lang = getLangCode();
 
-function getManufacturersMenuList(id_manufacturer) {
-    if (id_manufacturer == 0) {
-        //return;
+    var searchData = {
+        "opr": "hpproductslist",
+        "keyword": searchKeyword,
+        "currency": "EUR",
+        "langu": lang,
+        "iscategorysearch": "1",
+        "c1": catid1,
+        "c2": catid2
     }
+
+    var result = restfulPostCall(searchData);
+
+    if (result != "Error") {
+
+        if (result.status != "NOK") {
+            return result;
+        } else {
+            return "NOK";
+        }
+
+    } else {
+        return "NOK";
+    }
+
+}
+
+function getLangCode() {
     var lang = 1;
     if (selectedLang == "de") {
         lang = 1;
@@ -480,11 +499,26 @@ function getManufacturersMenuList(id_manufacturer) {
     } else {
         lang = 1;
     }
-    var searchData = {
-        "opr": "manufacturersmenu",
-        "id_manufacturer": id_manufacturer,
-        "langu": lang
+
+    return lang;
+}
+
+
+function getManufacturersMenuList(id_manufacturer) {
+    if (id_manufacturer == 0) {
+        //return;
     }
+    var lang = getLangCode();
+ 
+   var searchData = {
+        "opr": "hpproductslist",
+        "keyword": "",
+        "currency": "EUR",
+        "langu": lang,
+        "iscategorysearch": "2",
+        "c1": id_manufacturer
+    }
+
 
     var result = restfulPostCall(searchData);
 
@@ -561,23 +595,45 @@ function postMessages(id_customer, message) {
     }
 }
 
-function getProductDetails(idProduct){
-    alert("not implemented");
-    return null;
+function getProductCategoriesTree() {
+    var lang = getLangCode();
+    var data = {
+        "opr": "categorytree",
+        "id_lang": lang,
+    }
+
+    var result = restfulPostCall(data);
+
+    var categoriesTree = {};
+    categoriesTree.rootCategories = getSubCategoriesFromList(result, "1");
+
+    categoriesTree.rootCategories.forEach(element => {
+        element.subcategories = getSubCategoriesFromList(result, element.id_category);
+        element.subcategories.forEach(subsub => {
+            subsub.subcategories = getSubCategoriesFromList(result, subsub.id_category);
+        });
+    });
+
+    if (result != "Error") {
+
+        if (result != "NOK") {
+            return categoriesTree;
+        } else {
+            return null;
+        }
+    } else {
+        return null;
+    }
 }
 
-function getProductUnit(idProduct){
-    alert("not implemented");
-    return null;
-}
+function getSubCategoriesFromList(lst, id_parent) {
 
-function getProductAtrributes(idProduct){
-    alert("not implemented");
-    return null;
-}
+    var result = [];
+    lst.forEach(element => {
+        if (element.id_parent == id_parent) {
+            result.push(element);
+        }
+    });
 
-function getProductAtrributePrice(idProduct,idAttribute){
-    alert("not implemented");
-    return null;
+    return result;
 }
-
