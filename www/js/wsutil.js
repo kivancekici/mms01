@@ -412,9 +412,12 @@ function getOldOrdersList(id_customer) {
 
 function getAllManufacturersList(manufacturer) {
 
+    var lang = getLangCode();
+
     var searchData = {
         'opr': 'manufacturers',
-        'manufacturer': manufacturer
+        'manufacturer': manufacturer,
+        'idlang' : lang
     }
 
     var result = restfulPostCall(searchData);
