@@ -895,7 +895,7 @@ class DbHelper {
 		$manufacturer=$_infos2["manufacturer"];
 		$idlang=$_infos2["idlang"];
 
-		$sql = "select m.*, ml.* from ps_manufacturer m, ps_manufacturer_lang ml where ml.id_manufacturer = m.id_manufacturer and  ml.id_lang = $idlang and  m.name like '%$manufacturer%' and m.active=1";
+		$sql = "select m.name, m.id_manufacturer, ml.short_description from ps_manufacturer m, ps_manufacturer_lang ml where ml.id_manufacturer = m.id_manufacturer and  ml.id_lang = '$idlang' and  m.name like '%$manufacturer%' and m.active=1";
         $result = $this->conn->query($sql);
 
         $items = array();
@@ -923,7 +923,7 @@ class DbHelper {
 			$item="OK";
 		}else{
 			$item="NOK";
-			return $item;
+			return $idlang;
 		}
 		
         return $items;
