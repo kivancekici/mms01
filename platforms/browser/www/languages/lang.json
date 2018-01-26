@@ -14,11 +14,12 @@
                 "logoutItem": "Çıkış"
             },
             "main": {
-                "pageTitle": "Baklava7",
-                "btnname": "Adres Ekle",
-                "alert": "denemeAlertTurkish",
                 "allmanufacturers": "Üreticiler",
-                "catalogue": "Katalog"
+                "catalogue": "Ürünler",
+                "searchBtn": "Ara",
+                "searchPlc": "Arama",
+                "nothingFound": "Bulunamadı",
+                "mainSlogan": "Ne sipariş vermek istersiniz?"
             },
             "login": {
                 "cardHeader": "Kullanıcı Girişi",
@@ -59,33 +60,46 @@
             "manufacturers_menu": {
                 "pageTitle": "Baklava7"
             },
-            "messages":{
-                "pageTitle":"Mesajlar",
-                "btnSend":"Gönder",
-                "msgPlaceholder":"Mesaj"
+            "messages": {
+                "pageTitle": "Mesajlar",
+                "btnSend": "Gönder",
+                "msgPlaceholder": "Mesaj"
             },
-            "add_address":{
+            "add_address": {
                 "btnName": "Kaydet",
                 "pageTitle": "Adres Ekle",
                 "firstname": "Ad*",
                 "surname": "Soyad*",
-                "homephone":"Telefon",
-                "mobilephone":"Cep Telefonu*",
-                "address":"Adres*",
-                "address2":"Adres(2. Satır)",
-                "alias":"Adres Başlığı",
-                "zipcode":"Posta Kodu*",
-                "city":"Şehir*",
-                "countryPlc":"Ülke*",
-                "country":"Almanya",
-                "vatNo":"Kdv Numarası",
-                "company":"Şirket"
+                "homephone": "Telefon",
+                "mobilephone": "Cep Telefonu*",
+                "address": "Adres*",
+                "address2": "Adres(2. Satır)",
+                "alias": "Adres Başlığı",
+                "zipcode": "Posta Kodu*",
+                "city": "Şehir*",
+                "countryPlc": "Ülke*",
+                "country": "Almanya",
+                "vatNo": "Kdv Numarası",
+                "company": "Şirket"
             },
-            "update_address":{
-                "btnName": "Güncelle",
-                "pageTitle": "Adres Güncelle"
+            "update_address": {
+                "btnName": "Kaydet",
+                "pageTitle": "Adres Güncelleme",
+                "firstname": "Ad*",
+                "surname": "Soyad*",
+                "homephone": "Telefon",
+                "mobilephone": "Cep Telefonu*",
+                "address": "Adres*",
+                "address2": "Adres(2. Satır)",
+                "alias": "Adres Başlığı",
+                "zipcode": "Posta Kodu*",
+                "city": "Şehir*",
+                "countryPlc": "Ülke*",
+                "country": "Almanya",
+                "vatNo": "Kdv Numarası",
+                "company": "Şirket"
             },
-            "my_addresses":{
+            "my_addresses": {
                 "deleteBtn": "Sil"
             },
             "alertMessages": {
@@ -98,75 +112,137 @@
                 "updateOk": "Kullanıcı hesabınız başarı ile güncellenmiştir",
                 "mailNotAvailable": "Mail adresi daha önceden kayıtlıdır",
                 "mailNotOk": "Lütfen geçerli bir E-mail adresi girin",
-                "msgSendError" : "Mesaj gönderilirken bir hata oluştu, daha sonra tekrar deneyin",
-                "delAdrTitle" : "Adres Silme",
-                "delAdrText" : "Adres silme işlemini onaylıyormusunuz?",
-                "delAdrOkBtn" : "Evet",
-                "delAdrCancelBtn" : "Hayır",
+                "msgSendError": "Mesaj gönderilirken bir hata oluştu, daha sonra tekrar deneyin",
+                "delAdrTitle": "Adres Silme",
+                "delAdrText": "Adres silme işlemini onaylıyormusunuz?",
+                "delAdrOkBtn": "Evet",
+                "delAdrCancelBtn": "Hayır",
                 "delAdrError": "Adres silinemedi",
-                "addressError" : "Adres eklenemedi",
-                "zipcodeError" : "Geçersiz Posta Kodu"
+                "addressError": "Adres eklenemedi",
+                "zipcodeError": "Geçersiz Posta Kodu"
             }
         },
         "de": {
             "panel": {
-                "panelTitle": "Menu",
                 "orderItem": "Bestellen",
-                "orderBoxItem": "Warenkorb",
-                "accountItem": "Mein Konto",
-                "addressItem": "Mein Addresse",
-                "myOrdersItem": "Bestellungen",
-                "workItem": "Wie es Funktioniert",
+                "orderBoxItem": "Einkaufskorb",
+                "accountItem": "Mein Account",
+                "addressItem": "Meine Adressen",
+                "myOrdersItem": "Meine Bestellungen",
+                "workItem": "Wie geht das?",
                 "helpItem": "Hilfe",
-                "infoItem": "Impressum",
-                "messageItem": "Message Box",
-                "logoutItem": "Ausloggen"
-
+                "infoItem": "Über Baklava7",
+                "messageItem": "Postfach",
+                "logoutItem": "Logout"
             },
             "main": {
-                "panelTitle": "Baklava7",
-                "btnname": "Addresse Hinzufügen",
-                "alert": "denemeAlertGerman",
-                "allmanufacturers": "Hersteller",
-                "catalogue": "Katalog"
+                "allmanufacturers": "Partnerhäuser",
+                "catalogue": "Produktliste",
+                "searchBtn": "Abbrechen",
+                "searchPlc": "Suchen",
+                "nothingFound": "",
+                "mainSlogan": ""
             },
             "login": {
                 "cardHeader": "Login",
-                "pass": " Passwort",
-                "btnlogin": "Einloggen",
-                "btnforgetpass": "Passwort Vergessen",
-                "btnregister": "Registrierung"
+                "pass": "Passwort",
+                "btnlogin": "Login",
+                "btnforgetpass": "Passwort vergessen",
+                "btnregister": "Registrieren"
             },
             "account": {
-                "panelTitle": "Mein Konto",
-                "name": "Name",
-                "surname": "Nachname",
+                "panelTitle": "Mein Account",
+                "firstname": "Vorname(n)",
+                "surname": "Name",
                 "email": "E-mail",
                 "password": "Passwort",
-                "repeatpassword": "Passwort (Wieder)",
+                "repeatpassword": "Passwort wiederholen",
                 "birthday": "Geburtstag",
                 "gender": "Geschlecht",
-                "male": "Herr",
-                "female": "Frau"
+                "male": "Mann",
+                "female": "Frau",
+                "optin": "Aktionen und Rabatte abonnieren",
+                "newsletter": "Newsletter abonnieren",
+                "btnName": "Spreichern"
             },
             "register": {
-                "firstname": "Name",
-                "surname": "Nachname",
+                "firstname": "Vorname(n)",
+                "surname": "Name",
                 "email": "E-mail",
                 "password": "Passwort",
-                "repeatpassword": "Passwort (Wieder)",
+                "repeatpassword": "Passwort wiederholen",
                 "birthday": "Geburtstag",
                 "gender": "Geschlecht",
-                "male": "Herr",
+                "male": "Mann",
                 "female": "Frau",
-                "pageTitle": "Neu Benutzer",
+                "pageTitle": "Registrierung",
                 "btnName": "Speichern",
-                "toolbarText": "OK"
+                "toolbarText": "Erledigt"
             },
             "manufacturers_menu": {
                 "pageTitle": "Baklava7"
+            },
+            "messages": {
+                "pageTitle": "Postfach",
+                "btnSend": "Senden",
+                "msgPlaceholder": "Nachricht"
+            },
+            "add_address": {
+                "btnName": "Speichern",
+                "pageTitle": "Adresse hinzufügen",
+                "firstname": "Vorname*",
+                "surname": "Name*",
+                "homephone": "Festnetz",
+                "mobilephone": "Mobilnummer*",
+                "address": "Adresszeile 1*",
+                "address2": "Adresszeile 2",
+                "alias": "Adressüberschrift",
+                "zipcode": "PLZ*",
+                "city": "Ort*",
+                "countryPlc": "Deutschland*",
+                "country": "Deutschland",
+                "vatNo": "Wenn vorhanden USt-IdNr.",
+                "company": "Wenn vorhanden Firma"
+            },
+            "update_address": {
+                "btnName": "Speichern",
+                "pageTitle": "Adresse aktualisieren",
+                "firstname": "Vorname*",
+                "surname": "Name*",
+                "homephone": "Festnetz",
+                "mobilephone": "Mobilnummer*",
+                "address": "Adresszeile 1*",
+                "address2": "Adresszeile 2",
+                "alias": "Adressüberschrift",
+                "zipcode": "PLZ*",
+                "city": "Ort*",
+                "countryPlc": "Deutschland*",
+                "country": "Deutschland",
+                "vatNo": "Wenn vorhanden USt-IdNr.",
+                "company": "Wenn vorhanden Firma"
+            },
+            "my_addresses": {
+                "deleteBtn": "Löschen"
+            },
+            "alertMessages": {
+                "info": "Info",
+                "warning": "Hinweis",
+                "error": "Fehler",
+                "requiredField": "Die mit markierten Felder sind Pflichtfelder!",
+                "passwordValidation": "Das Passwort muss mindestens 5 Zeichen umfassen.",
+                "passwordMatch": "Passwort stimmt nicht überein",
+                "updateOk": "Ihr Profil wurde erfolgreich aktualisiert.",
+                "mailNotAvailable": "Diese E-Mail-Adresse wird bereits verwendet. Probieren Sie eine andere aus.",
+                "mailNotOk": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+                "msgSendError": "Beim Senden der Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.",
+                "delAdrTitle": "Adresse löschen",
+                "delAdrText": "Möchten Sie diese Adresse wirklich löschen?",
+                "delAdrOkBtn": "Ja",
+                "delAdrCancelBtn": "Nein",
+                "delAdrError": "Adresse konnte nicht gelöscht werden",
+                "addressError": "Adresse konnte nicht hinzugefügt werden",
+                "zipcodeError": "PLZ ist ungültig"
             }
-
         }
     }
 }

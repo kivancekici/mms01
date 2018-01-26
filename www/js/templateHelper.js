@@ -22,18 +22,18 @@ function initListVirtualManufacturers() {
         },
         rowsBefore:100,
         rowsAfter:100,
-        height: 80,
+        height: 105,
         template: '<li>' +
         '<a href="#" onclick="showManufacturerMenu('+"'{{name}}'"+',{{id_manufacturer}});" class="item-link item-content">' +
         '<div class="item-media">' +
-        //'<img src="http://baklava7.de/img/tmp/manufacturer_mini_{{id_manufacturer}}_1.jpg" class="lazy" width="80">' +
-        '<img src="http://baklava7.de/img/m/{{id_manufacturer}}-field_manufacture.jpg" class="lazy" height="70">' +
+        '<img src="http://baklava7.de/img/m/{{id_manufacturer}}-field_manufacture.jpg" class="lazy" height="30">' +
         '</div>' +
         '<div class="item-inner">' +
         '<div class="item-title-row">' +
         '<div class="item-title">{{name}}</div>' +
-        '<div class="item-after">lorem ipsum dolor sit amet...</div>' +
+        '<div class="item-after"></div>' +
         '</div>' +
+        '<div class="item-text">{{short_description}}</div>'+
         '</div>' +
         '</a>' +
         '</li>'
@@ -74,11 +74,11 @@ function initlistProduct() {
             // Return array with indexes of matched items
             return foundItems; 
         },
-        height: 80,
+        height: 105,
         template: '<li>' +
         '<a href="#" onClick="showProductDetailsModal({{id_product}});return false;" class="item-link item-content">' +
         '<div class="item-media">' +
-        '<img src="http://baklava7.de{{imgdirectory}}" class="lazy" width="80">' +
+        '<img src="http://baklava7.de{{imgdirectory}}" class="lazy" height="80">' +
         '</div>' +
         '<div class="item-inner">' +
         '<div class="item-title-row">' +
@@ -129,7 +129,7 @@ function initListVirtualUserAddresses() {
         ],
         height: 105,
         template: '<li class="swipeout cls{{id_address}}">' +
-                  '<div class="swipeout-content"><a href="#" class="btnUpdateAddress item-link item-content">'+
+                  '<div class="swipeout-content"><a href="#" onclick="updateAdrPage({{id_address}},'+"'{{alias}}',"+"'{{company}}',"+"'{{lastname}}',"+"'{{firstname}}',"+"'{{address1}}',"+"'{{address2}}',"+"'{{postcode}}',"+"'{{city}}',"+"'{{phone}}',"+"'{{phone_mobile}}',"+"'{{vat_number}}',"+'{{id_country}});" class="item-link item-content">'+
                   '<div class="item-inner">'+
                   '<div class="item-title-row">' +
                   '<div class="item-title">{{alias}}</div>' +
@@ -144,6 +144,26 @@ function initListVirtualUserAddresses() {
     });
 }
 
+function updateAdrPage(addressId, alias, company, lastname, firstname, address1, address2, postcode, city, phone, phone_mobile, vat_number, id_country){
+   
+   var dat = {
+            'id_address': addressId,
+            'alias': alias,
+            'company': company,
+            'lastname': lastname,
+            'firstname': firstname,
+            'address1': address1,
+            'address2': address2,
+            'postcode': postcode,
+            'city': city,
+            'id_country': id_country,
+            'phone': phone,
+            'phone_mobile': phone_mobile,
+            'vat_number': vat_number
+   }
+
+   loadPageWithLangAndData('update_address', dat);
+}
 
 function deleteUserAddress(idAddress){
     var userId = window.localStorage.getItem("customerId");
@@ -178,32 +198,4 @@ function deleteUserAddress(idAddress){
     ]
   })
   //  
-}
-
-var listVirtualCategories;
-
-function initListVirtualCategories() {
-    listVirtualCategories = myApp.virtualList('.lstCategories', {
-        items: [
-
-        ],
-        cols:2,
-        height: 60,
-        template: '<div class="row">' +
-        '<div class="col-auto">' +
-        '<div class="card">' +
-        '<div class="card-content">' +
-        '<div class="card-content-inner"><img src="http://baklava7.de/img/m/{{id_manufacturer}}-field_manufacture.jpg" class="lazy" width="80" height="80"></div>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '<div class="col-auto">' +
-        '<div class="card">' +
-        '<div class="card-content">' +
-        '<div class="card-content-inner"><img src="http://baklava7.de/img/m/{{id_manufacturer}}-field_manufacture.jpg" class="lazy" width="80" height="80"></div>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '</div>'
-    });
 }

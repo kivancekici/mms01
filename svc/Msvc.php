@@ -110,13 +110,34 @@ switch ($opr) {
 		fGetcategorytree($decoded);
 		break; 	
 
+	case "manufacturerlist":
+		fGetManufacturerList($decoded);
+		break; 
+
 	case "placeorder":
 		fPlaceOrder($decoded);
 		break;
+
+		case "orderhistoryhead":
+		fOrderHistoryHead($decoded);
+		break;
+
     default:
 		send_response(Null);
 		break;
 }
+
+
+
+function fOrderHistoryHead($_jsondata) {
+	$_items = DbHelper::getInstance()->getOrderHistoryHead($_jsondata);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
 
 function send_response($response_data) {
 	header("Content-Type:application/json");
@@ -215,7 +236,7 @@ function fGetMyAddress($_jsondata) {
 
 function fDeleteAddress($_jsondata) {
 	//alanları ekle ve dbhelper methodunu yaz
-	$email=$_jsondata["email"];
+	//$email=$_jsondata["email"];
 	$_items = DbHelper::getInstance()->deleteAddress($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
@@ -226,7 +247,7 @@ function fDeleteAddress($_jsondata) {
 
 function fUpdateAddress($_jsondata) {
 	//alanları ekle ve dbhelper methodunu yaz
-	$email=$_jsondata["email"];
+	//$email=$_jsondata["email"];
 	$_items = DbHelper::getInstance()->updateAddress($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
@@ -272,8 +293,8 @@ function fOldOrders($_jsondata) {
 
 function fGetMessages($_jsondata) {
 	//alanları ekle ve dbhelper methodunu yaz
-	$id_customer=$_jsondata["id_customer"];
-	$_items = DbHelper::getInstance()->getMessages($id_customer);
+	//$id_customer=$_jsondata["id_customer"];
+	$_items = DbHelper::getInstance()->getMessages($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
@@ -298,8 +319,8 @@ function fPostMessages($_jsondata) {
 
 function fGetManufacturers($_jsondata) {
 	//alanları ekle ve dbhelper methodunu yaz
-	$email=$_jsondata["email"];
-	$_items = DbHelper::getInstance()->getManufacturers($email);
+	//$email=$_jsondata["email"];
+	$_items = DbHelper::getInstance()->getManufacturers($_jsondata);
 	if (!empty($_items)) {
 		send_response($_items);
 	} else {
@@ -368,13 +389,6 @@ function fGetIpProductsPrice($_jsondata) {
 
 
 
-
-
-
-
-
-
-
 function fGetIpProductAttribute($_jsondata) {
 	//alanları ekle ve dbhelper methodunu yaz
 	$_items = DbHelper::getInstance()->getProductIdatrribute($_jsondata);
@@ -424,14 +438,22 @@ function fGetcategorytree($_jsondata) {
 
 
 
+function fGetManufacturerList($_jsondata) {
+	$_items = DbHelper::getInstance()->getmanufacturerlist($_jsondata);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
+
 
 
 
 
 
 function fPlaceOrder($_jsondata) {
-	//alanları ekle ve dbhelper methodunu yaz
-	$email=$_jsondata["email"];
+
 	$_items = DbHelper::getInstance()->placeOrder($email);
 	if (!empty($_items)) {
 		send_response($_items);

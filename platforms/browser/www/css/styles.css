@@ -147,3 +147,13 @@ margin-bottom: 10px !important;
 }    
 
 /*Askin Bitir*/
+
+.product-card-header-pic .card-header {
+    height: 50vw;
+    background-size: cover;
+    background-position: center;
+}
+
+.product-description{
+    font-stretch: expanded;
+}
