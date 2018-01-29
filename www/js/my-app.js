@@ -10,8 +10,8 @@ var myApp = new Framework7({
     swipePanelOnlyClose: true,
     template7Pages: true,
     pushState: true,
-    smartSelectFormTheme: 'orange',
-    smartSelectNavbarTheme : 'orange',
+    smartSelectFormTheme: 'baklava7',
+    smartSelectNavbarTheme : 'baklava7',
     smartSelectBackText:'OK',
 
     onAjaxStart: function(xhr) {
@@ -351,7 +351,7 @@ $$(document).on('pageInit', function(e) {
 
         var calendarDefault = myApp.calendar({
             input: '#calendar-default',
-            cssClass: 'theme-orange'
+            cssClass: 'theme-baklava7'
         });
 
         $$('.updateBtn').on('click', function() {
@@ -424,7 +424,7 @@ $$(document).on('pageInit', function(e) {
 
         var calendarDefault = myApp.calendar({
             input: '#calendar-default',
-            cssClass: 'theme-orange'
+            cssClass: 'theme-baklava7'
         });
 
 
