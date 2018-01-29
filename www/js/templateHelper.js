@@ -15,7 +15,7 @@ function initListVirtualManufacturers() {
                // if (items[i].description_short.toLowerCase().indexOf(query.trim()) >= 0) found=true;
                // if (items[i].description.toLowerCase().indexOf(query.trim()) >= 0) found=true;
                 
-                if(found) foundItems.push(i);;
+                if(found) foundItems.push(i);
             }
             // Return array with indexes of matched items
             return foundItems; 
@@ -69,7 +69,7 @@ function initlistProduct() {
                 if (items[i].description_short.toLowerCase().indexOf(query.trim()) >= 0) found=true;
                 if (items[i].description.toLowerCase().indexOf(query.trim()) >= 0) found=true;
                 
-                if(found) foundItems.push(i);;
+                if(found) foundItems.push(i);
             }
             // Return array with indexes of matched items
             return foundItems; 
