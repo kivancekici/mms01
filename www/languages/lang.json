@@ -120,6 +120,17 @@
                 "delAdrError": "Adres silinemedi",
                 "addressError": "Adres eklenemedi",
                 "zipcodeError": "Geçersiz Posta Kodu"
+            },
+            "product_details":{
+                "priceLbl":"Fiyat:",
+                "numberLbl":"Adet:",
+                "priceDesc":" (Vergi Dahil)",
+                "weightLbl":"Ağırlık:",
+                "weightSelect":"Seçiniz",
+                "addToBasket":"Sepete Ekle",
+                "infoTab":"Bilgi",
+                "nutriValTab":"Besin Değerleri",
+                "manufactLbl":"Üretici:"
             }
         },
         "de": {
@@ -242,6 +253,17 @@
                 "delAdrError": "Adresse konnte nicht gelöscht werden",
                 "addressError": "Adresse konnte nicht hinzugefügt werden",
                 "zipcodeError": "PLZ ist ungültig"
+            },
+            "product_details":{
+                "priceLbl":"Preis:",
+                "numberLbl":"Menge:",
+                "priceDesc":" (inkl. MwSt.)",
+                "weightLbl":"Gewicht:",
+                "weightSelect":"wählen",
+                "addToBasket":"In Den Warenkorb",
+                "infoTab":"Mehr Infos",
+                "nutriValTab":"Nährwerte und Zutaten",
+                "manufactLbl":"Hersteller:"
             }
         }
     }
