@@ -121,16 +121,16 @@ option {
 }
 
 .bgYesil{
- background-color: #788F00;
+ background-color: #E6EE9C;
 }
 
 .tabbar a.active {
-  color:#ff9500 !important;
+  color:#788F00 !important;
   background-color: #ffffff !important;
 }
 
 .tabbar a.active i {
-  color:#ff9500 !important;
+  color:#788F00 !important;
 }
 
 .toolbar-inner {    
