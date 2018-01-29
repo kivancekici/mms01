@@ -49,7 +49,7 @@ if (langIsSeleted) {
 
 // Add view
 var mainView = myApp.addView('.view-main', {
-     domCache: true
+    // domCache: true
 });
 
 getLangJson();
