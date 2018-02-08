@@ -26,7 +26,6 @@ var $$ = Dom7;
 
 
 var langIsSelected = window.localStorage.getItem("langIsSelected");
-var userLoggedIn = window.localStorage.getItem("isLogin");
 var selectedLang;
 
 
@@ -177,6 +176,8 @@ function loadPageWithLang(pageName) {
 
 
 function checkLoginStatus() {
+    
+    userLoggedIn = window.localStorage.getItem("isLogin");
 
     try {
         if (userLoggedIn) {
@@ -258,7 +259,7 @@ $$('#btnInfo').on('click', function() {
 });
 
 $$('#btnLogout').on('click', function() {
-    userLoggedIn = false;
+
     window.localStorage.setItem("isLogin", false);
     window.localStorage.setItem("customerId", "0");
     window.localStorage.setItem("langIsSelected", false);
@@ -512,7 +513,7 @@ $$(document).on('pageInit', function(e) {
                                 if (response != "NOK") {
                                     window.localStorage.setItem('password', pass);
                                     window.localStorage.setItem("isLogin", true);
-                                    loadPageWithLang('main');
+                                    checkLoginStatus();
                                 }
                             } else {
                                 alertMessage('mailNotAvailable', 'info');
