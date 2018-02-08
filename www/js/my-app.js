@@ -180,7 +180,7 @@ function checkLoginStatus() {
     var userLoggedIn = window.localStorage.getItem("isLogin");
 
     try {
-        if (userLoggedIn) {
+        if (userLoggedIn == "true") {
             loadPageWithLang('main');
             // show all panel items
             showPanelItems();
@@ -322,7 +322,7 @@ $$(document).on('pageInit', function(e) {
     if (page.name === 'main') {
         var userLoggedIn = window.localStorage.getItem("isLogin");
 
-        if(userLoggedIn){
+        if(userLoggedIn == "true"){
             var userId = window.localStorage.getItem("customerId");
             checkNewMessage(userId);
         }
