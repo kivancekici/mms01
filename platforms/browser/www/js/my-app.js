@@ -180,7 +180,7 @@ function checkLoginStatus() {
     userLoggedIn = window.localStorage.getItem("isLogin");
 
     try {
-        if (userLoggedIn) {
+        if (userLoggedIn === true) {
             loadPageWithLang('main');
             // show all panel items
             showPanelItems();
