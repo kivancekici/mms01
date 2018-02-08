@@ -261,10 +261,8 @@ $$('#btnInfo').on('click', function() {
 $$('#btnLogout').on('click', function() {
 
     window.localStorage.setItem("isLogin", false);
-    window.localStorage.setItem("customerId", "0");
-    window.localStorage.setItem("langIsSelected", false);
-    langIsSelected = false;
-    checkLangStatus();
+    checkLoginStatus();
+    
 
 });
 
