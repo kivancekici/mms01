@@ -177,10 +177,10 @@ function loadPageWithLang(pageName) {
 
 function checkLoginStatus() {
     
-    userLoggedIn = window.localStorage.getItem("isLogin");
+    var userLoggedIn = window.localStorage.getItem("isLogin");
 
     try {
-        if (userLoggedIn == "true") {
+        if (userLoggedIn) {
             loadPageWithLang('main');
             // show all panel items
             showPanelItems();
@@ -228,47 +228,56 @@ $$(document).on('offline', function() {
 
 $$('#btnOrder').on('click', function() {
     loadPageWithLang('main');
+    myApp.closePanel();
 });
 
 $$('#btnOrderBox').on('click', function() {
     loadPageWithLang('shopping_cart');
+    myApp.closePanel();
 });
 
 $$('#btnAccount').on('click', function() {
     loadPageWithLang('account');
+    myApp.closePanel();
 });
 
 $$('#btnAddress').on('click', function() {
     loadPageWithLang('my_addresses');
+    myApp.closePanel();
 });
 
 $$('#btnMessage').on('click', function() {
     loadPageWithLang('messages');
+    myApp.closePanel();
 });
 
 $$('#btnMyOrders').on('click', function() {
     loadPageWithLang('my_orders');
+    myApp.closePanel();
 });
 
 $$('#btnHelp').on('click', function() {
     loadPageWithLang('help');
+    myApp.closePanel();
 });
 
 $$('#btnInfo').on('click', function() {
     loadPageWithLang('info');
+    myApp.closePanel();
 });
 
 $$('#btnLogout').on('click', function() {
 
     window.localStorage.setItem("isLogin", false);
     checkLoginStatus();
-    
+    myApp.closePanel();
 
 });
 
 
 $$('#btnLogin').on('click', function() {
     loadPageWithLang('login');
+    myApp.closePanel();
 });
 
 
@@ -311,8 +320,13 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'main') {
-        var userId = window.localStorage.getItem("customerId");
-        checkNewMessage(userId);
+        var userLoggedIn = window.localStorage.getItem("isLogin");
+
+        if(userLoggedIn){
+            var userId = window.localStorage.getItem("customerId");
+            checkNewMessage(userId);
+        }
+        
 
         
         /*Kategori Listesini Doldur*/
