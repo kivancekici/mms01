@@ -26,7 +26,7 @@ var $$ = Dom7;
 
 
 var langIsSelected = window.localStorage.getItem("langIsSelected");
-// var userLoggedIn = window.localStorage.getItem("isLogin");
+var userLoggedIn = window.localStorage.getItem("isLogin");
 var selectedLang;
 
 
