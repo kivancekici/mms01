@@ -25,8 +25,8 @@ var myApp = new Framework7({
 var $$ = Dom7;
 
 
-var langIsSeleted = window.localStorage.getItem("langIsSelected");
-var userLoggedIn = window.localStorage.getItem("isLogin");
+var langIsSelected = window.localStorage.getItem("langIsSelected");
+// var userLoggedIn = window.localStorage.getItem("isLogin");
 var selectedLang;
 
 
@@ -39,7 +39,7 @@ var searchKeyWord = "";
 var categoriesList = null;
 
 
-if (langIsSeleted) {
+if (langIsSelected) {
     selectedLang = window.localStorage.getItem("lang");
 } else {
     //selectedLang = "tr"; // Set turkish to default language
@@ -102,8 +102,11 @@ function getReceiveMsgCount(userId) {
 }
 
 function checkLangStatus() {
-    if (langIsSeleted) {
-        checkLoginStatus();
+    if (langIsSelected) {
+        /* AS yeni kurgu 
+        checkLoginStatus(); 
+        */
+        loadPageWithLang('main');
     } else {
         mainView.router.loadPage({ url: 'language.html', ignoreCache: true });
     }
@@ -155,6 +158,7 @@ function loadPageWithLang(pageName) {
 
 }
 
+/* AS yeni kurgu için 
 function checkLoginStatus() {
 
     try {
@@ -169,7 +173,7 @@ function checkLoginStatus() {
     }
 
 }
-
+*/
 
 function validateEmail(email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -214,7 +218,7 @@ $$('#btnLogout').on('click', function() {
     window.localStorage.setItem("isLogin", false);
     window.localStorage.setItem("customerId", "0");
     window.localStorage.setItem("langIsSelected", false);
-    langIsSeleted = false;
+    langIsSelected = false;
     checkLangStatus();
 
 });
