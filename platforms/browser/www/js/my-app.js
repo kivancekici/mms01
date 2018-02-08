@@ -103,10 +103,7 @@ function getReceiveMsgCount(userId) {
 
 function checkLangStatus() {
     if (langIsSelected) {
-        /* AS yeni kurgu 
         checkLoginStatus(); 
-        */
-        loadPageWithLang('main');
     } else {
         mainView.router.loadPage({ url: 'language.html', ignoreCache: true });
     }
@@ -122,13 +119,33 @@ function changePanelLanguage() {
     $$('#accountItem').text(panelData.accountItem);
     $$('#addressItem').text(panelData.addressItem);
     $$('#myOrdersItem').text(panelData.myOrdersItem);
-    $$('#workItem').text(panelData.workItem);
     $$('#helpItem').text(panelData.helpItem);
     $$('#infoItem').text(panelData.infoItem);
     $$('#messageItem').text(panelData.messageItem);
     $$('#logoutItem').text(panelData.logoutItem);
+    $$('#loginItem').text(panelData.loginItem);
 }
 
+
+function hidePanelItems() {
+
+    $$('#btnAccount').hide();
+    $$('#btnAddress').hide();
+    $$('#btnMyOrders').hide();
+    $$('#btnMessage').hide();
+    $$('#btnLogout').hide();
+    $$('#btnLogin').show();
+}
+
+function showPanelItems() {
+
+    $$('#btnAccount').show();
+    $$('#btnAddress').show();
+    $$('#btnMyOrders').show();
+    $$('#btnMessage').show();
+    $$('#btnLogout').show();
+    $$('#btnLogin').hide();
+}
 
 function setContextParameter(pageName, key, value) {
     myApp.template7Data.languages[selectedLang][pageName][key] = value;
@@ -158,22 +175,26 @@ function loadPageWithLang(pageName) {
 
 }
 
-/* AS yeni kurgu için 
+
 function checkLoginStatus() {
 
     try {
         if (userLoggedIn) {
             loadPageWithLang('main');
+            // show all panel items
+            showPanelItems();
 
         } else {
-            loadPageWithLang('login');
+            loadPageWithLang('main');
+            // hide some items
+            hidePanelItems();
         }
     } catch (e) {
         myApp.alert(e);
     }
 
 }
-*/
+
 
 function validateEmail(email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -204,14 +225,37 @@ $$(document).on('offline', function() {
     onOffline();
 });
 
-$$('#orderItemBtn').on('click', function() {
+$$('#btnOrder').on('click', function() {
     loadPageWithLang('main');
 });
 
-$$('#accountItemBtn').on('click', function() {
+$$('#btnOrderBox').on('click', function() {
+    loadPageWithLang('shopping_cart');
+});
+
+$$('#btnAccount').on('click', function() {
     loadPageWithLang('account');
 });
 
+$$('#btnAddress').on('click', function() {
+    loadPageWithLang('my_addresses');
+});
+
+$$('#btnMessage').on('click', function() {
+    loadPageWithLang('messages');
+});
+
+$$('#btnMyOrders').on('click', function() {
+    loadPageWithLang('my_orders');
+});
+
+$$('#btnHelp').on('click', function() {
+    loadPageWithLang('help');
+});
+
+$$('#btnInfo').on('click', function() {
+    loadPageWithLang('info');
+});
 
 $$('#btnLogout').on('click', function() {
     userLoggedIn = false;
@@ -223,13 +267,14 @@ $$('#btnLogout').on('click', function() {
 
 });
 
-$$('#msgBoxBtn').on('click', function() {
-    loadPageWithLang('messages');
+
+$$('#btnLogin').on('click', function() {
+    loadPageWithLang('login');
 });
 
-$$('#myAddressesItemBtn').on('click', function() {
-    loadPageWithLang('my_addresses');
-});
+
+
+
 
 
 
