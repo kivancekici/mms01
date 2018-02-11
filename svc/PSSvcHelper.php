@@ -44,6 +44,7 @@ $total_shipping = $_infos["total_shipping"];
 $total_shipping_tax_incl = $_infos["total_shipping_tax_incl"];
 $total_shipping_tax_excl = $_infos["total_shipping_tax_excl"];
 
+//siparişler listesi eren
 $mobile_orders_list=$_infos["mobile_orders_list"];
 
  

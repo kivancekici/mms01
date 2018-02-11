@@ -118,14 +118,32 @@ switch ($opr) {
 		fPlaceOrder($decoded);
 		break;
 
-		case "orderhistoryhead":
+	case "orderhistoryhead":
 		fOrderHistoryHead($decoded);
 		break;
+
+	case "checkbeforeupdateuserdata":
+			fCheckBeforeUpdateUserData($decoded);
+			break;
 
     default:
 		send_response(Null);
 		break;
 }
+
+
+
+
+function fCheckBeforeUpdateUserData($_jsondata) {
+	$_items = DbHelper::getInstance()->checkBeforeUpdateUserdata($_jsondata);
+	if (!empty($_items)) {
+	send_response($_items);
+	} else {
+	send_response(Null);
+	}
+	}
+
+
 
 
 
