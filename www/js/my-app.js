@@ -466,7 +466,10 @@ $$(document).on('pageInit', function(e) {
                                 var response = updateAccount(email, name, surname, pass, genderId, birthday, newsletter, optin, userId, oldemail, pswd);
 
                                 if (response == "OK") {
-                                    alertMessage('updateOk', 'info');
+                                        alertMessage('updateOk', 'info');
+                                        window.localStorage.setItem('password', pass);
+                                        window.localStorage.setItem('useremail', email);
+                                        loadPageWithLang('main');
                                 }
 
                             } else {
@@ -601,6 +604,14 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'my_addresses') {
+        
+        $$('.btnAddAddress').on('click', function() {
+            loadPageWithLang('add_address');
+        });
+
+        $$('.backToMainBtn').on('click', function() {
+            loadPageWithLang('main');
+        });
 
         var userId = window.localStorage.getItem("customerId");
         var pswd = window.localStorage.getItem("password");
@@ -615,9 +626,7 @@ $$(document).on('pageInit', function(e) {
             $$('.deleteSwipeAction').text(myApp.template7Data.languages[selectedLang]['my_addresses']['deleteBtn']);
         }
 
-        $$('.btnAddAddress').on('click', function() {
-            loadPageWithLang('add_address');
-        });
+       
 
 
     }
@@ -625,9 +634,10 @@ $$(document).on('pageInit', function(e) {
     if (page.name === 'add_address') {
 
         var userId = window.localStorage.getItem("customerId");
-        var response = getUserInfo(userId);
         var pswd = window.localStorage.getItem("password");
         var email = window.localStorage.getItem("useremail");
+
+        var response = getUserInfo(userId, email, pswd);
 
         var formData = {
             'firstname': response.firstname,
@@ -676,7 +686,6 @@ $$(document).on('pageInit', function(e) {
             }
         });
 
-       
 
     }
 
