@@ -38,7 +38,7 @@ var searchKeyWord = "";
 var categoriesList = null;
 
 
-if (langIsSelected) {
+if (langIsSelected == "1") {
     selectedLang = window.localStorage.getItem("lang");
 } else {
     //selectedLang = "tr"; // Set turkish to default language
@@ -67,9 +67,9 @@ function onOffline() {
     });
 }
 
-function checkNewMessage(userId) {
+function checkNewMessage(userId, email, password) {
     var msgCount = window.localStorage.getItem("msgCount");
-    var receiveMsgCnt = getReceiveMsgCount(userId);
+    var receiveMsgCnt = getReceiveMsgCount(userId, email, password);
     var diff = receiveMsgCnt - msgCount;
 
     if (diff > 0) {
@@ -81,9 +81,9 @@ function checkNewMessage(userId) {
     }
 }
 
-function getReceiveMsgCount(userId) {
+function getReceiveMsgCount(userId, email, password) {
 
-    var msgDatas = getMessagesList(userId);
+    var msgDatas = getMessagesList(userId, email, password);
 
     var receiveMsgCnt = 0;
 
@@ -101,7 +101,7 @@ function getReceiveMsgCount(userId) {
 }
 
 function checkLangStatus() {
-    if (langIsSelected) {
+    if (langIsSelected == "1") {
         checkLoginStatus(); 
     } else {
         mainView.router.loadPage({ url: 'language.html', ignoreCache: true });
@@ -180,7 +180,7 @@ function checkLoginStatus() {
     var userLoggedIn = window.localStorage.getItem("isLogin");
 
     try {
-        if (userLoggedIn == "true") {
+        if (userLoggedIn == "1") {
             loadPageWithLang('main');
             // show all panel items
             showPanelItems();
@@ -268,7 +268,7 @@ $$('#btnInfo').on('click', function() {
 
 $$('#btnLogout').on('click', function() {
 
-    window.localStorage.setItem("isLogin", false);
+    window.localStorage.setItem("isLogin", "0");
     checkLoginStatus();
     myApp.closePanel();
 
@@ -302,12 +302,12 @@ $$(document).on('pageInit', function(e) {
 
             if (response != 'NOK') {
                 window.localStorage.setItem("customerId", response);
-                window.localStorage.setItem("isLogin", true);
+                window.localStorage.setItem("isLogin", "1");
                 window.localStorage.setItem('password', pass);
                 window.localStorage.setItem('useremail', email);
                 checkLoginStatus();
             } else {
-                window.localStorage.setItem("isLogin", false);
+                window.localStorage.setItem("isLogin", "0");
 
             }
 
@@ -322,9 +322,11 @@ $$(document).on('pageInit', function(e) {
     if (page.name === 'main') {
         var userLoggedIn = window.localStorage.getItem("isLogin");
 
-        if(userLoggedIn == "true"){
+        if(userLoggedIn == "1"){
             var userId = window.localStorage.getItem("customerId");
-            checkNewMessage(userId);
+            var pswd = window.localStorage.getItem("password");
+            var email = window.localStorage.getItem("useremail");
+            checkNewMessage(userId, email, pswd);
         }
         
 
@@ -531,12 +533,12 @@ $$(document).on('pageInit', function(e) {
 
                                     if (response != 'NOK') {
                                         window.localStorage.setItem("customerId", response);
-                                        window.localStorage.setItem("isLogin", true);
+                                        window.localStorage.setItem("isLogin", "1");
                                         window.localStorage.setItem('password', pass);
                                         window.localStorage.setItem('useremail', email);
                                         checkLoginStatus();
                                     } else {
-                                        window.localStorage.setItem("isLogin", false);
+                                        window.localStorage.setItem("isLogin", "0");
                         
                                     }
                                 }
@@ -568,7 +570,7 @@ $$(document).on('pageInit', function(e) {
 
         $$('.btnLangTr').on('click', function() {
 
-            window.localStorage.setItem("langIsSelected", true);
+            window.localStorage.setItem("langIsSelected", "1");
             window.localStorage.setItem("lang", "tr");
             selectedLang = "tr";
             checkLoginStatus();
@@ -576,7 +578,7 @@ $$(document).on('pageInit', function(e) {
         });
 
         $$('.btnLangGer').on('click', function() {
-            window.localStorage.setItem("langIsSelected", true);
+            window.localStorage.setItem("langIsSelected", "1");
             window.localStorage.setItem("lang", "de");
             selectedLang = "de";
             checkLoginStatus();
