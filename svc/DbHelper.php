@@ -253,7 +253,7 @@ class DbHelper {
 		$company=$_infos["company"];
 		$firstname=$_infos["firstname"];
 		$lastname=$_infos["lastname"];
-		$email=$_infos["email"];	
+		$emailnew=$_infos["emailnew"];	
 		$passwd= md5($_infos["passwd"]);
 		$birthday=$_infos["birthday"];
 		$newsletter=$_infos["newsletter"];		
@@ -263,7 +263,7 @@ class DbHelper {
 		$id_customer=$loginresult[0]['id_customer'];
 		
 		
-		$sql = "UPDATE ps_customer SET id_gender=$id_gender,company='$company',firstname='$firstname',lastname='$lastname',email='$email',passwd='$passwd',birthday=$birthday,newsletter=$newsletter,optin=$optin,website='$website',date_upd=now() WHERE id_customer=$id_customer";
+		$sql = "UPDATE ps_customer SET id_gender=$id_gender,company='$company',firstname='$firstname',lastname='$lastname',email='$emailnew',passwd='$passwd',birthday=$birthday,newsletter=$newsletter,optin=$optin,website='$website',date_upd=now() WHERE id_customer=$id_customer";
         $result = $this->conn->query($sql);
 
         if ($result === TRUE) {
