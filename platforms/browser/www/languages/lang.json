@@ -7,11 +7,11 @@
                 "accountItem": "Hesabım",
                 "addressItem": "Adreslerim",
                 "myOrdersItem": "Siparişlerim",
-                "workItem": "Nasıl Çalışır?",
                 "helpItem": "Yardım",
                 "infoItem": "Hakkında",
                 "messageItem": "Mesaj Kutusu",
-                "logoutItem": "Çıkış"
+                "logoutItem": "Çıkış",
+                "loginItem": "Giriş"
             },
             "main": {
                 "allmanufacturers": "Üreticiler",
@@ -140,16 +140,16 @@
                 "accountItem": "Mein Account",
                 "addressItem": "Meine Adressen",
                 "myOrdersItem": "Meine Bestellungen",
-                "workItem": "Wie geht das?",
                 "helpItem": "Hilfe",
                 "infoItem": "Über Baklava7",
                 "messageItem": "Postfach",
-                "logoutItem": "Logout"
+                "logoutItem": "Logout",
+                "loginItem": "Login"
             },
             "main": {
                 "allmanufacturers": "Partnerhäuser",
                 "catalogue": "Produktliste",
-                "searchBtn": "Abbrechen",
+                "searchBtn": "Suchen",
                 "searchPlc": "Suchen",
                 "nothingFound": "",
                 "mainSlogan": ""

@@ -16,14 +16,6 @@ function restfulGetCall(restSuccess) {
 
 function restfulPostCall(sendData) {
 
-    //  myApp.showPreloader();
-    if (sendData['opr'] != 'login') {
-        var useremail = window.localStorage.getItem("useremail");
-        var password = window.localStorage.getItem("password");
-        sendData['email'] = useremail;
-        sendData['pswd'] = password;
-    }
-
     var response;
 
     $$.ajax({
@@ -102,7 +94,7 @@ function mobileRegister(email, name, surname, pass, genderId, birthday) {
 
 }
 
-function updateAccount(email, name, surname, pass, genderId, birthday, newsletter, optin, userId) {
+function updateAccount(email, name, surname, newpass, genderId, birthday, newsletter, optin, userId, oldemail, pswd) {
 
     var accountdata = {
         'opr': 'updateuserdata',
@@ -111,12 +103,14 @@ function updateAccount(email, name, surname, pass, genderId, birthday, newslette
         'firstname': name,
         'lastname': surname,
         'email': email,
-        'passwd': pass,
+        'passwd': newpass,
         'birthday': birthday,
         'newsletter': newsletter,
         'optin': optin,
         'id_customer': userId,
-        'website': ''
+        'website': '',
+        'oldemail': oldemail,
+        'pswd': pswd
     }
 
     var result = restfulPostCall(accountdata);
@@ -148,10 +142,10 @@ function checkAvaibleUser(email) {
 
     if (result != "Error") {
 
-        if (result.status == "NOK") {
-            return "OK";
-        } else {
+        if (result.status == "OK") {
             return "NOK";
+        } else {
+            return "OK";
         }
 
 
@@ -187,11 +181,13 @@ function checkAvaibleUserForAccountUpdate(email, userId) {
 
 }
 
-function getUserInfo(userId) {
+function getUserInfo(userId, email, pswd) {
 
     var userdata = {
         'opr': 'getuserinfo',
-        'id_customer': userId
+        'id_customer': userId,
+        'email':email,
+        'pswd': pswd
     }
 
     var result = restfulPostCall(userdata);
@@ -210,7 +206,7 @@ function getUserInfo(userId) {
 }
 
 
-function saveAddress(id_country, id_customer, alias, company, lastname, firstname, address1, address2, postcode, city, phone, mobile_phone, vat_number) {
+function saveAddress(id_country, id_customer, alias, company, lastname, firstname, address1, address2, postcode, city, phone, mobile_phone, vat_number, email, password) {
 
     var data = {
         'opr': 'saveaddress',
@@ -226,7 +222,9 @@ function saveAddress(id_country, id_customer, alias, company, lastname, firstnam
         'city': city,
         'phone': phone,
         'phone_mobile': mobile_phone,
-        'vat_number': vat_number
+        'vat_number': vat_number,
+        'email': email,
+        'pswd':password
     }
 
     var result = restfulPostCall(data);
@@ -247,12 +245,14 @@ function saveAddress(id_country, id_customer, alias, company, lastname, firstnam
 
 }
 
-function deleteAddress(id_customer, id_address) {
+function deleteAddress(id_customer, id_address, email, password) {
 
     var data = {
         'opr': 'deleteaddress',
         'id_customer': id_customer,
-        'id_address': id_address
+        'id_address': id_address,
+        'email': email,
+        'pswd':password
     }
 
     var result = restfulPostCall(data);
@@ -272,7 +272,7 @@ function deleteAddress(id_customer, id_address) {
 
 }
 
-function updateAddress(id_country, id_address, alias, company, lastname, firstname, address1, address2, postcode, city, phone, phone_mobile, vat_number) {
+function updateAddress(id_country, id_address, alias, company, lastname, firstname, address1, address2, postcode, city, phone, phone_mobile, vat_number, email, password) {
 
     var data = {
         'opr': 'updateaddress',
@@ -289,7 +289,9 @@ function updateAddress(id_country, id_address, alias, company, lastname, firstna
         'phone': phone,
         'phone_mobile': phone_mobile,
         'vat_number': vat_number,
-        'other': ""
+        'other': "",
+        'email': email,
+        'pswd':password
     }
 
     var result = restfulPostCall(data);
@@ -536,11 +538,13 @@ function getManufacturersMenuList(id_manufacturer) {
 }
 
 
-function getUserAddressesList(id_customer) {
+function getUserAddressesList(id_customer, email, password) {
 
     var searchData = {
         "opr": "getmyaddresses",
-        "id_customer": id_customer
+        "id_customer": id_customer,
+        'email': email,
+        'pswd':password
     }
 
     var result = restfulPostCall(searchData);
@@ -555,11 +559,13 @@ function getUserAddressesList(id_customer) {
 
 }
 
-function getMessagesList(id_customer) {
+function getMessagesList(id_customer, email, password) {
 
     var searchData = {
         "opr": "getmessages",
-        "id_customer": id_customer
+        "id_customer": id_customer,
+        'email': email,
+        'pswd':password
     }
 
     var result = restfulPostCall(searchData);
@@ -575,12 +581,14 @@ function getMessagesList(id_customer) {
 }
 
 
-function postMessages(id_customer, message) {
+function postMessages(id_customer, message, email, password) {
 
     var data = {
         "opr": "postmessages",
         "id_customer": id_customer,
-        "message": message
+        "message": message,
+        'email': email,
+        'pswd':password
     }
 
     var result = restfulPostCall(data);
