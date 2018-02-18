@@ -25,8 +25,7 @@ var myApp = new Framework7({
 var $$ = Dom7;
 
 
-var langIsSeleted = window.localStorage.getItem("langIsSelected");
-var userLoggedIn = window.localStorage.getItem("isLogin");
+var langIsSelected = window.localStorage.getItem("langIsSelected");
 var selectedLang;
 
 
@@ -39,7 +38,7 @@ var searchKeyWord = "";
 var categoriesList = null;
 
 
-if (langIsSeleted) {
+if (langIsSelected == "1") {
     selectedLang = window.localStorage.getItem("lang");
 } else {
     //selectedLang = "tr"; // Set turkish to default language
@@ -68,9 +67,9 @@ function onOffline() {
     });
 }
 
-function checkNewMessage(userId) {
+function checkNewMessage(userId, email, password) {
     var msgCount = window.localStorage.getItem("msgCount");
-    var receiveMsgCnt = getReceiveMsgCount(userId);
+    var receiveMsgCnt = getReceiveMsgCount(userId, email, password);
     var diff = receiveMsgCnt - msgCount;
 
     if (diff > 0) {
@@ -82,9 +81,9 @@ function checkNewMessage(userId) {
     }
 }
 
-function getReceiveMsgCount(userId) {
+function getReceiveMsgCount(userId, email, password) {
 
-    var msgDatas = getMessagesList(userId);
+    var msgDatas = getMessagesList(userId, email, password);
 
     var receiveMsgCnt = 0;
 
@@ -102,8 +101,8 @@ function getReceiveMsgCount(userId) {
 }
 
 function checkLangStatus() {
-    if (langIsSeleted) {
-        checkLoginStatus();
+    if (langIsSelected == "1") {
+        checkLoginStatus(); 
     } else {
         mainView.router.loadPage({ url: 'language.html', ignoreCache: true });
     }
@@ -119,13 +118,33 @@ function changePanelLanguage() {
     $$('#accountItem').text(panelData.accountItem);
     $$('#addressItem').text(panelData.addressItem);
     $$('#myOrdersItem').text(panelData.myOrdersItem);
-    $$('#workItem').text(panelData.workItem);
     $$('#helpItem').text(panelData.helpItem);
     $$('#infoItem').text(panelData.infoItem);
     $$('#messageItem').text(panelData.messageItem);
     $$('#logoutItem').text(panelData.logoutItem);
+    $$('#loginItem').text(panelData.loginItem);
 }
 
+
+function hidePanelItems() {
+
+    $$('#btnAccount').hide();
+    $$('#btnAddress').hide();
+    $$('#btnMyOrders').hide();
+    $$('#btnMessage').hide();
+    $$('#btnLogout').hide();
+    $$('#btnLogin').show();
+}
+
+function showPanelItems() {
+
+    $$('#btnAccount').show();
+    $$('#btnAddress').show();
+    $$('#btnMyOrders').show();
+    $$('#btnMessage').show();
+    $$('#btnLogout').show();
+    $$('#btnLogin').hide();
+}
 
 function setContextParameter(pageName, key, value) {
     myApp.template7Data.languages[selectedLang][pageName][key] = value;
@@ -155,14 +174,21 @@ function loadPageWithLang(pageName) {
 
 }
 
+
 function checkLoginStatus() {
+    
+    var userLoggedIn = window.localStorage.getItem("isLogin");
 
     try {
-        if (userLoggedIn) {
+        if (userLoggedIn == "1") {
             loadPageWithLang('main');
+            // show all panel items
+            showPanelItems();
 
         } else {
-            loadPageWithLang('login');
+            loadPageWithLang('main');
+            // hide some items
+            hidePanelItems();
         }
     } catch (e) {
         myApp.alert(e);
@@ -200,32 +226,63 @@ $$(document).on('offline', function() {
     onOffline();
 });
 
-$$('#orderItemBtn').on('click', function() {
+$$('#btnOrder').on('click', function() {
     loadPageWithLang('main');
+    myApp.closePanel();
 });
 
-$$('#accountItemBtn').on('click', function() {
+$$('#btnOrderBox').on('click', function() {
+    loadPageWithLang('shopping_cart');
+    myApp.closePanel();
+});
+
+$$('#btnAccount').on('click', function() {
     loadPageWithLang('account');
+    myApp.closePanel();
 });
 
+$$('#btnAddress').on('click', function() {
+    loadPageWithLang('my_addresses');
+    myApp.closePanel();
+});
+
+$$('#btnMessage').on('click', function() {
+    loadPageWithLang('messages');
+    myApp.closePanel();
+});
+
+$$('#btnMyOrders').on('click', function() {
+    loadPageWithLang('my_orders');
+    myApp.closePanel();
+});
+
+$$('#btnHelp').on('click', function() {
+    loadPageWithLang('help');
+    myApp.closePanel();
+});
+
+$$('#btnInfo').on('click', function() {
+    loadPageWithLang('info');
+    myApp.closePanel();
+});
 
 $$('#btnLogout').on('click', function() {
-    userLoggedIn = false;
-    window.localStorage.setItem("isLogin", false);
-    window.localStorage.setItem("customerId", "0");
-    window.localStorage.setItem("langIsSelected", false);
-    langIsSeleted = false;
-    checkLangStatus();
+
+    window.localStorage.setItem("isLogin", "0");
+    checkLoginStatus();
+    myApp.closePanel();
 
 });
 
-$$('#msgBoxBtn').on('click', function() {
-    loadPageWithLang('messages');
+
+$$('#btnLogin').on('click', function() {
+    loadPageWithLang('login');
+    myApp.closePanel();
 });
 
-$$('#myAddressesItemBtn').on('click', function() {
-    loadPageWithLang('my_addresses');
-});
+
+
+
 
 
 
@@ -244,13 +301,13 @@ $$(document).on('pageInit', function(e) {
             var response = mobileLogin(email, pass);
 
             if (response != 'NOK') {
-                loadPageWithLang('main');
                 window.localStorage.setItem("customerId", response);
-                window.localStorage.setItem("isLogin", true);
+                window.localStorage.setItem("isLogin", "1");
                 window.localStorage.setItem('password', pass);
                 window.localStorage.setItem('useremail', email);
+                checkLoginStatus();
             } else {
-                window.localStorage.setItem("isLogin", false);
+                window.localStorage.setItem("isLogin", "0");
 
             }
 
@@ -263,8 +320,15 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'main') {
-        var userId = window.localStorage.getItem("customerId");
-        checkNewMessage(userId);
+        var userLoggedIn = window.localStorage.getItem("isLogin");
+
+        if(userLoggedIn == "1"){
+            var userId = window.localStorage.getItem("customerId");
+            var pswd = window.localStorage.getItem("password");
+            var email = window.localStorage.getItem("useremail");
+            checkNewMessage(userId, email, pswd);
+        }
+        
 
         
         /*Kategori Listesini Doldur*/
@@ -331,7 +395,10 @@ $$(document).on('pageInit', function(e) {
     if (page.name === 'account') {
 
         var userId = window.localStorage.getItem("customerId");
-        var response = getUserInfo(userId);
+        var pswd = window.localStorage.getItem("password");
+        var oldemail = window.localStorage.getItem("useremail");
+        
+        var response = getUserInfo(userId, oldemail, pswd);
 
         var pass = window.localStorage.getItem('password');
 
@@ -396,7 +463,7 @@ $$(document).on('pageInit', function(e) {
 
                             if (avaibleuser == "OK") {
 
-                                var response = updateAccount(email, name, surname, pass, genderId, birthday, newsletter, optin, userId);
+                                var response = updateAccount(email, name, surname, pass, genderId, birthday, newsletter, optin, userId, oldemail, pswd);
 
                                 if (response == "OK") {
                                     alertMessage('updateOk', 'info');
@@ -461,9 +528,19 @@ $$(document).on('pageInit', function(e) {
 
 
                                 if (response != "NOK") {
-                                    window.localStorage.setItem('password', pass);
-                                    window.localStorage.setItem("isLogin", true);
-                                    loadPageWithLang('main');
+                                   
+                                    var response = mobileLogin(email, pass);
+
+                                    if (response != 'NOK') {
+                                        window.localStorage.setItem("customerId", response);
+                                        window.localStorage.setItem("isLogin", "1");
+                                        window.localStorage.setItem('password', pass);
+                                        window.localStorage.setItem('useremail', email);
+                                        checkLoginStatus();
+                                    } else {
+                                        window.localStorage.setItem("isLogin", "0");
+                        
+                                    }
                                 }
                             } else {
                                 alertMessage('mailNotAvailable', 'info');
@@ -493,7 +570,7 @@ $$(document).on('pageInit', function(e) {
 
         $$('.btnLangTr').on('click', function() {
 
-            window.localStorage.setItem("langIsSelected", true);
+            window.localStorage.setItem("langIsSelected", "1");
             window.localStorage.setItem("lang", "tr");
             selectedLang = "tr";
             checkLoginStatus();
@@ -501,7 +578,7 @@ $$(document).on('pageInit', function(e) {
         });
 
         $$('.btnLangGer').on('click', function() {
-            window.localStorage.setItem("langIsSelected", true);
+            window.localStorage.setItem("langIsSelected", "1");
             window.localStorage.setItem("lang", "de");
             selectedLang = "de";
             checkLoginStatus();
@@ -526,7 +603,10 @@ $$(document).on('pageInit', function(e) {
     if (page.name === 'my_addresses') {
 
         var userId = window.localStorage.getItem("customerId");
-        var response = getUserAddressesList(userId);
+        var pswd = window.localStorage.getItem("password");
+        var email = window.localStorage.getItem("useremail");
+
+        var response = getUserAddressesList(userId, email, pswd);
 
         if (response != "NOK") {
             initListVirtualUserAddresses();
@@ -546,6 +626,8 @@ $$(document).on('pageInit', function(e) {
 
         var userId = window.localStorage.getItem("customerId");
         var response = getUserInfo(userId);
+        var pswd = window.localStorage.getItem("password");
+        var email = window.localStorage.getItem("useremail");
 
         var formData = {
             'firstname': response.firstname,
@@ -581,7 +663,7 @@ $$(document).on('pageInit', function(e) {
 
                 } else {
 
-                    var response = saveAddress(countryId, userId, alias, company, surname, name, address, address2, zipcode, city, homephone, mobilephone, vatno);
+                    var response = saveAddress(countryId, userId, alias, company, surname, name, address, address2, zipcode, city, homephone, mobilephone, vatno, email, pswd);
 
                     if (response == "OK") {
                         loadPageWithLang('my_addresses');
@@ -600,6 +682,8 @@ $$(document).on('pageInit', function(e) {
 
     if (page.name === 'update_address') {
         
+        var pswd = window.localStorage.getItem("password");
+        var email = window.localStorage.getItem("useremail");
        
         var adressId = page.query['id_address'];
         var alias = page.query['alias'];
@@ -660,7 +744,7 @@ $$(document).on('pageInit', function(e) {
                 } else {
 
 
-                  var response = updateAddress(countryId, adressId, alias, company, surname, name, address, address2, zipcode, city, homephone, mobilephone, vatno);
+                  var response = updateAddress(countryId, adressId, alias, company, surname, name, address, address2, zipcode, city, homephone, mobilephone, vatno, email, pswd);
 
                     if (response == "OK") {
                         loadPageWithLang('my_addresses');
@@ -689,8 +773,10 @@ $$(document).on('pageInit', function(e) {
         var myMessagebar = myApp.messagebar('.messagebar');
 
         var userId = window.localStorage.getItem("customerId");
+        var password = window.localStorage.getItem("password");
+        var email = window.localStorage.getItem("useremail");
 
-        var msgDatas = getMessagesList(userId);
+        var msgDatas = getMessagesList(userId, email, password);
 
         var receiveMsgCnt = 0;
 
@@ -737,7 +823,7 @@ $$(document).on('pageInit', function(e) {
             // Message type
             var messageType = 'sent';
 
-            var response = postMessages(userId, messageText);
+            var response = postMessages(userId, messageText, email, password);
 
             if (response == "OK") {
                 // Add message

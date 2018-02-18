@@ -97,6 +97,7 @@ class DbHelper {
 		
 					$rwitem["status"]="OK";
 					return $rwitem;
+					
 				}else {
 				$rwitem["status"]="NOK";
 				return $rwitem;

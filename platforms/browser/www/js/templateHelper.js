@@ -171,6 +171,8 @@ function deleteUserAddress(idAddress){
     var mdlText = myApp.template7Data.languages[selectedLang]['alertMessages']['delAdrText'];
     var okBtn = myApp.template7Data.languages[selectedLang]['alertMessages']['delAdrOkBtn'];
     var cancelBtn = myApp.template7Data.languages[selectedLang]['alertMessages']['delAdrCancelBtn'];
+    var pswd = window.localStorage.getItem("password");
+    var email = window.localStorage.getItem("useremail");
 
     
     myApp.modal({
@@ -181,7 +183,7 @@ function deleteUserAddress(idAddress){
         text: okBtn,
         onClick: function() {
           var delId = '.cls' + idAddress;
-          var response = deleteAddress(userId, idAddress);
+          var response = deleteAddress(userId, idAddress, email, pswd);
           if(response == "OK"){
             myApp.swipeoutDelete(delId);
           }else {
