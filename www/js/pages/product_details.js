@@ -4,7 +4,7 @@ function initPageProductDetails() {
     currentOrder={
         product:{},
         amount:1,
-        selectedAttribute=0,
+        selectedAttribute:0,
         price:0
     };
     
@@ -26,7 +26,7 @@ function initPageProductDetails() {
     currentOrder.selectedAttributePrice=currentProduct.attributes[0].price;
     currentOrder.price = currentOrder.selectedAttributePrice;
 
-    $$(".product-base-price").text(currentProduct.prices.reducedprice+" €");
+    $$(".product-base-price").text(currentOrder.price+" €");
 
     currentProduct.attributes.forEach(element => {
         addProductAttributeSelectOption(element);
@@ -47,14 +47,14 @@ function addProductAttributeSelectOption(attribute) {
 
 function incrementOrderItemAmount(){
     currentOrder.amount++;
-    $("#txt-cart-order-amount").text(currentOrder.amount);
+    $$("#txt-cart-order-amount").text(currentOrder.amount);
     calculateOrderItemPrice();
 }
 
 function decrementOrderItemAmount(){
     if(currentOrder.amount>1){
         currentOrder.amount--;
-        $("#txt-cart-order-amount").text(currentOrder.amount);
+        $$("#txt-cart-order-amount").text(currentOrder.amount);
     }
 
     calculateOrderItemPrice();
@@ -62,4 +62,5 @@ function decrementOrderItemAmount(){
 
 function calculateOrderItemPrice(){
     currentOrder.price=currentOrder.amount*currentOrder.selectedAttributePrice;
+    $$(".product-base-price").text(currentOrder.price+" €");
 }
