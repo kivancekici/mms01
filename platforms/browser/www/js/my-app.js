@@ -11,8 +11,8 @@ var myApp = new Framework7({
     template7Pages: true,
     pushState: true,
     smartSelectFormTheme: 'baklava7',
-    smartSelectNavbarTheme : 'baklava7',
-    smartSelectBackText:'OK',
+    smartSelectNavbarTheme: 'baklava7',
+    smartSelectBackText: 'OK',
 
     onAjaxStart: function(xhr) {
         myApp.showIndicator();
@@ -102,7 +102,7 @@ function getReceiveMsgCount(userId, email, password) {
 
 function checkLangStatus() {
     if (langIsSelected == "1") {
-        checkLoginStatus(); 
+        checkLoginStatus();
     } else {
         mainView.router.loadPage({ url: 'language.html', ignoreCache: true });
     }
@@ -153,11 +153,11 @@ function setContextParameter(pageName, key, value) {
 function loadPageWithLangAndData(pageName, contentData) {
     var cntxName = 'languages.' + selectedLang + '.' + pageName;
     var pgUrl = pageName + '.html';
-   
+
     mainView.router.load({
         url: pgUrl,
         contextName: cntxName,
-        query : contentData
+        query: contentData
     });
 
 }
@@ -165,7 +165,7 @@ function loadPageWithLangAndData(pageName, contentData) {
 function loadPageWithLang(pageName) {
     var cntxName = 'languages.' + selectedLang + '.' + pageName;
     var pgUrl = pageName + '.html';
-   
+
 
     mainView.router.load({
         url: pgUrl,
@@ -176,7 +176,7 @@ function loadPageWithLang(pageName) {
 
 
 function checkLoginStatus() {
-    
+
     var userLoggedIn = window.localStorage.getItem("isLogin");
 
     try {
@@ -291,7 +291,7 @@ $$(document).on('pageInit', function(e) {
     // Get page data from event data
     var page = e.detail.page;
 
-    
+
 
 
     if (page.name === 'login') {
@@ -322,15 +322,15 @@ $$(document).on('pageInit', function(e) {
     if (page.name === 'main') {
         var userLoggedIn = window.localStorage.getItem("isLogin");
 
-        if(userLoggedIn == "1"){
+        if (userLoggedIn == "1") {
             var userId = window.localStorage.getItem("customerId");
             var pswd = window.localStorage.getItem("password");
             var email = window.localStorage.getItem("useremail");
             checkNewMessage(userId, email, pswd);
         }
-        
 
-        
+
+
         /*Kategori Listesini Doldur*/
         var categories = getProductCategoriesTree();
 
@@ -350,7 +350,7 @@ $$(document).on('pageInit', function(e) {
             }
         }
 
-        $$('select').on('change', function (e) {
+        $$('select').on('change', function(e) {
             var catIdArray = $$('select[name=CategoriSelector]').val();
             if (catIdArray.length == 1) {
                 var result = categorySearchResultList("", catIdArray[0], "");
@@ -387,7 +387,7 @@ $$(document).on('pageInit', function(e) {
         listVirtualManufacturers.items = manufacturersList;
         listVirtualManufacturers.update();
 
-       
+
 
 
     }
@@ -397,7 +397,7 @@ $$(document).on('pageInit', function(e) {
         var userId = window.localStorage.getItem("customerId");
         var pswd = window.localStorage.getItem("password");
         var oldemail = window.localStorage.getItem("useremail");
-        
+
         var response = getUserInfo(userId, oldemail, pswd);
 
         var pass = window.localStorage.getItem('password');
@@ -466,10 +466,10 @@ $$(document).on('pageInit', function(e) {
                                 var response = updateAccount(email, name, surname, pass, genderId, birthday, newsletter, optin, userId, oldemail, pswd);
 
                                 if (response == "OK") {
-                                        alertMessage('updateOk', 'info');
-                                        window.localStorage.setItem('password', pass);
-                                        window.localStorage.setItem('useremail', email);
-                                        loadPageWithLang('main');
+                                    alertMessage('updateOk', 'info');
+                                    window.localStorage.setItem('password', pass);
+                                    window.localStorage.setItem('useremail', email);
+                                    loadPageWithLang('main');
                                 }
 
                             } else {
@@ -531,7 +531,7 @@ $$(document).on('pageInit', function(e) {
 
 
                                 if (response != "NOK") {
-                                   
+
                                     var response = mobileLogin(email, pass);
 
                                     if (response != 'NOK') {
@@ -542,7 +542,7 @@ $$(document).on('pageInit', function(e) {
                                         checkLoginStatus();
                                     } else {
                                         window.localStorage.setItem("isLogin", "0");
-                        
+
                                     }
                                 }
                             } else {
@@ -604,7 +604,7 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'my_addresses') {
-        
+
         $$('.btnAddAddress').on('click', function() {
             loadPageWithLang('add_address');
         });
@@ -626,7 +626,7 @@ $$(document).on('pageInit', function(e) {
             $$('.deleteSwipeAction').text(myApp.template7Data.languages[selectedLang]['my_addresses']['deleteBtn']);
         }
 
-       
+
 
 
     }
@@ -690,10 +690,10 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'update_address') {
-        
+
         var pswd = window.localStorage.getItem("password");
         var email = window.localStorage.getItem("useremail");
-       
+
         var adressId = page.query['id_address'];
         var alias = page.query['alias'];
         var company = page.query['company'];
@@ -753,7 +753,7 @@ $$(document).on('pageInit', function(e) {
                 } else {
 
 
-                  var response = updateAddress(countryId, adressId, alias, company, surname, name, address, address2, zipcode, city, homephone, mobilephone, vatno, email, pswd);
+                    var response = updateAddress(countryId, adressId, alias, company, surname, name, address, address2, zipcode, city, homephone, mobilephone, vatno, email, pswd);
 
                     if (response == "OK") {
                         loadPageWithLang('my_addresses');
@@ -768,7 +768,7 @@ $$(document).on('pageInit', function(e) {
 
     }
 
-    if(page.name==='product_details'){
+    if (page.name === 'product_details') {
         initPageProductDetails();
     }
 
@@ -856,4 +856,30 @@ $$(document).on('pageInit', function(e) {
 
     }
 
+    if (page.name === 'shopping_cart') {
+
+        $$('#btnCheckOut').on('click', function() {
+            loadPageWithLang('check_out');
+        });
+    }
+
+    if (page.name === 'check_out') {
+       
+        $$('.show-selectAddress').on('click', function () {
+            $$(".toolbar-inner .address").addClass("active");
+            $$(".toolbar-inner .login").removeClass("active");
+            myApp.showTab('#tabSelectAddress');
+        });
+
+        $$('.show-cargo').on('click', function () {
+            $$(".toolbar-inner .cargo").addClass("active");
+            $$(".toolbar-inner .address").removeClass("active");
+            myApp.showTab('#tabCargo');
+        });
+        $$('.show-payment').on('click', function () {
+            $$(".toolbar-inner .payment").addClass("active");
+            $$(".toolbar-inner .cargo").removeClass("active");
+            myApp.showTab('#tabPayment');
+        });  
+    }
 });
