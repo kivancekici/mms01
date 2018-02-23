@@ -17,6 +17,9 @@ function initPageProductDetails() {
         addProductAttributeSelectOption(element);
 
     });
+
+
+    
 }
 //var subCatTxt = ;
 //$$('.smart-select select optgroup').eq(i).append(subCatTxt);

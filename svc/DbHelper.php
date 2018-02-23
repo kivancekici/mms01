@@ -254,7 +254,7 @@ class DbHelper {
 		$company=$_infos["company"];
 		$firstname=$_infos["firstname"];
 		$lastname=$_infos["lastname"];
-		$email=$_infos["email"];	
+		$emailnew=$_infos["emailnew"];	
 		$passwd= md5($_infos["passwd"]);
 		$birthday=$_infos["birthday"];
 		$newsletter=$_infos["newsletter"];		
@@ -264,7 +264,7 @@ class DbHelper {
 		$id_customer=$loginresult[0]['id_customer'];
 		
 		
-		$sql = "UPDATE ps_customer SET id_gender=$id_gender,company='$company',firstname='$firstname',lastname='$lastname',email='$email',passwd='$passwd',birthday=$birthday,newsletter=$newsletter,optin=$optin,website='$website',date_upd=now() WHERE id_customer=$id_customer";
+		$sql = "UPDATE ps_customer SET id_gender=$id_gender,company='$company',firstname='$firstname',lastname='$lastname',email='$emailnew',passwd='$passwd',birthday=$birthday,newsletter=$newsletter,optin=$optin,website='$website',date_upd=now() WHERE id_customer=$id_customer";
         $result = $this->conn->query($sql);
 
         if ($result === TRUE) {
@@ -757,6 +757,43 @@ class DbHelper {
 	}
 	
 
+
+
+	function checkBeforeUpdateUserdata($_infos){
+		
+		
+					$email=$_infos["email"];
+					$id_customer=$_infos["id_customer"];
+		
+					$sql = "SELECT id_customer FROM ps_customer WHERE email='$email' AND id_customer !='$id_customer' ;";
+		
+							$result = $this->conn->query($sql);
+		
+							if ($result->num_rows > 0) {
+		
+								$rwitem["status"]="OK";
+								return $rwitem;
+							}else {
+							$rwitem["status"]="NOK";
+							return $rwitem;
+		
+							}
+		
+				}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	function postMessages($_infos2) {
 
 
@@ -906,7 +943,12 @@ class DbHelper {
 				
 				$msg=array();
 				$msg["status"]="OK";
-				$msg=array_merge($msg,$_infos);				
+				$msg=array_merge($msg,$_infos);	
+				
+				$msg['short_description'] = str_replace("</p>","",str_replace("<span>","",str_replace("<p>","",str_replace("</span>","",$msg['short_description']))));
+				
+			 
+								
 				
                 array_push($items,$msg);
 				
