@@ -33,7 +33,9 @@
                 "btnlogin": "Giriş",
                 "btnregister": "Yeni Üye Kayıt",
                 "loginTab":"Oturum Aç",
-                "adresTab":"Adres"
+                "adresTab":"Adres",
+                "cargoTab":"Kargolama",
+                "paymentTab":"Ödeme"
             },
             "account": {
                 "panelTitle": "Hesabım",
