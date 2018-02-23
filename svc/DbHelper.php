@@ -254,8 +254,11 @@ class DbHelper {
 		$company=$_infos["company"];
 		$firstname=$_infos["firstname"];
 		$lastname=$_infos["lastname"];
-		$emailnew=$_infos["emailnew"];	
-		$passwd= md5($_infos["passwd"]);
+		$emailnew=$_infos["emailnew"];
+		
+		//$passwdnew= md5(_COOKIE_KEY_.$_infos["passwdnew"]);
+		//$secure_key = md5(uniqid(rand(), true));
+		//passwd='$passwd',secure_key = '$secure_key',
 		$birthday=$_infos["birthday"];
 		$newsletter=$_infos["newsletter"];		
 		$optin=$_infos["optin"];
@@ -264,7 +267,7 @@ class DbHelper {
 		$id_customer=$loginresult[0]['id_customer'];
 		
 		
-		$sql = "UPDATE ps_customer SET id_gender=$id_gender,company='$company',firstname='$firstname',lastname='$lastname',email='$emailnew',passwd='$passwd',birthday=$birthday,newsletter=$newsletter,optin=$optin,website='$website',date_upd=now() WHERE id_customer=$id_customer";
+		$sql = "UPDATE ps_customer SET id_gender=$id_gender,company='$company',firstname='$firstname',lastname='$lastname',email='$emailnew',birthday=$birthday,newsletter=$newsletter,optin=$optin,website='$website',date_upd=now() WHERE id_customer=$id_customer";
         $result = $this->conn->query($sql);
 
         if ($result === TRUE) {
