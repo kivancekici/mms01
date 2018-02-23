@@ -1,4 +1,4 @@
-<div data-page="check_out" class="page navbar-fixed">
+<div data-page="check_out" class="page navbar-fixed toolbar-fixed">
     <div class="navbar bg-baklava7  border-baklava7 color-white">
         <div class="navbar-inner">
             <div class="center sliding color-white">Ödemeyi Tamamla</div>
@@ -9,7 +9,65 @@
     </div>
 
     <div class="page-content bg-white theme-baklava7">
-        <div class="content-block cntbottom">
+        <div class="toolbar tabbar bg-baklava7 color-white border-baklava7">
+            <div class="toolbar-inner">
+
+                <a href="#" class="tab-link login active">{{loginTab}}</a>
+                <a href="#" class="tab-link address">{{adresTab}}</a>
+                <a href="#" class="tab-link cargo">{{cargoTab}}</a>
+                <a href="#" class="tab-link payment">{{paymentTab}}</a>
+            </div>
+        </div>
+        <div class="tabs">
+            <div id="tabLogin" class="tab bg-white active">
+                <form>
+                    <div class="list-block">
+                        <ul>
+                            <li class="item-content">
+                                <div class="item-media itemLogo"><i class="icon f7-icons">at_fill</i></div>
+                                <div class="item-inner">
+
+                                    <div class="item-input">
+                                        <input type="email" id="txtEmail" name="email" placeholder="E-mail">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-media itemLogo"><i class="icon f7-icons">lock_fill</i></div>
+                                <div class="item-inner">
+
+                                    <div class="item-input">
+                                        <input type="password" id="txtPassword" name="password" {{placeholder pass}}>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+                <div class="content-block">
+                    <a href="#" class="show-selectAddress button button-round active">{{btnlogin}}</a>
+                    <br>
+                    <a href="#" class="button button-round btnRegister active">{{btnregister}}</a>
+                </div>
+
+            </div>
+            <div id="tabSelectAddress" class="tab bg-white">
+                <div class="list-block virtual-list media-list theme-baklava7 lstUserAddresses">
+                    <!-- keep it empty -->
+                </div>
+                <div class="content-block">
+                    <a href="#" class="show-cargo button button-round active">Next</a>
+                </div>
+            </div>
+            <div id="tabCargo" class="tab bg-white">
+                tab3 content
+                <div class="content-block">
+                    <p><a href="#" class="show-payment button button-round active">Next</a></p>
+                </div>
+            </div>
+            <div id="tabPayment" class="tab bg-white">
+                tab4 content
+            </div>
 
         </div>
     </div>
