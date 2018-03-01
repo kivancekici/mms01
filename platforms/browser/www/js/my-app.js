@@ -222,28 +222,28 @@ function openBrowser(redirectUrl) {
     var target = '_blank';
     var options = "location=no"
     var ref = cordova.InAppBrowser.open(url, target, options);
-    
+
     ref.addEventListener('loadstart', loadstartCallback);
     ref.addEventListener('loadstop', loadstopCallback);
     ref.addEventListener('loadloaderror', loaderrorCallback);
     ref.addEventListener('exit', exitCallback);
- 
+
     function loadstartCallback(event) {
-       console.log('Loading started: '  + event.url)
+        console.log('Loading started: ' + event.url)
     }
- 
+
     function loadstopCallback(event) {
-       console.log('Loading finished: ' + event.url)
+        console.log('Loading finished: ' + event.url)
     }
- 
+
     function loaderrorCallback(error) {
-       console.log('Loading error: ' + error.message)
+        console.log('Loading error: ' + error.message)
     }
- 
+
     function exitCallback() {
-       console.log('Browser is closed...')
+        console.log('Browser is closed...')
     }
- }
+}
 
 
 // Handle Cordova Device Ready Event
@@ -893,38 +893,48 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'check_out') {
-       
-        $$('.show-selectAddress').on('click', function () {
+
+        $$('.show-selectAddress').on('click', function() {
             $$(".toolbar-inner .address").addClass("active");
             $$(".toolbar-inner .login").removeClass("active");
             myApp.showTab('#tabSelectAddress');
         });
 
-        $$('.show-cargo').on('click', function () {
+        $$('.show-cargo').on('click', function() {
             $$(".toolbar-inner .cargo").addClass("active");
             $$(".toolbar-inner .address").removeClass("active");
             myApp.showTab('#tabCargo');
         });
-        $$('.show-payment').on('click', function () {
+        $$('.show-payment').on('click', function() {
             /*
             $$(".toolbar-inner .payment").addClass("active");
             $$(".toolbar-inner .cargo").removeClass("active");
             myApp.showTab('#tabPayment');
             */
             var x = getAccessToken();
-          //  myApp.alert(x.access_token + " " + x['access_token']);
-          var urlData = createPayment(x.access_token);
-          
-          for(var i=0; i<urlData.links.length; i++){
-              if(urlData.links[i].rel === 'approval_url'){
-                openBrowser(urlData.links[i].href);
-              }
+            //  myApp.alert(x.access_token + " " + x['access_token']);
+            var urlData = createPayment(x.access_token);
 
-          }
-          
-            
-         
-        });  
+            for (var i = 0; i < urlData.links.length; i++) {
+                if (urlData.links[i].rel === 'approval_url') {
+                    
+                    var approval_url = urlData.links[i].href;
+
+
+                    var ppp = PAYPAL.apps.PPP({
+                        "approvalUrl": approval_url,
+                        "placeholder": "ppplus",
+                        "mode": "sandbox"
+                    });
+                    //openBrowser(urlData.links[i].href);
+
+                    var z=0;
+                }
+
+            }
+
+           
+
+        });
     }
 });
-

@@ -34,26 +34,29 @@ function getAccessToken() {
 
 
 
-function createPayment(accessToken){
-    
+function createPayment(accessToken) {
+
     var response;
 
     var paymentData = {
         "intent": "sale",
         "redirect_urls": {
-          "return_url": "https://example.com/your_redirect_url.html",
-          "cancel_url": "https://example.com/your_cancel_url.html"
+            "return_url": "https://example.com/your_redirect_url.html",
+            "cancel_url": "https://example.com/your_cancel_url.html"
         },
         "payer": {
-          "payment_method": "paypal"
+            "payment_method": "paypal"
         },
         "transactions": [{
-          "amount": {
-            "total": "7.47",
-            "currency": "USD"
-          }
+            "amount": {
+                "total": "7.47",
+                "currency": "USD"
+            },
+            "payment_options": {
+                "allowed_payment_method": "IMMEDIATE_PAY"
+            }
         }]
-      }
+    }
 
     $$.ajax({
         headers: {
@@ -79,5 +82,3 @@ function createPayment(accessToken){
     return response;
 
 }
-
-
