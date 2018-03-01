@@ -50,7 +50,7 @@ function createPayment(accessToken) {
         "transactions": [{
             "amount": {
                 "total": "7.47",
-                "currency": "USD"
+                "currency": "EUR"
             },
             "payment_options": {
                 "allowed_payment_method": "IMMEDIATE_PAY"

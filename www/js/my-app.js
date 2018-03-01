@@ -217,34 +217,6 @@ function alertMessage(msgKey, msgTypeKey) {
 }
 
 
-function openBrowser(redirectUrl) {
-    var url = redirectUrl;
-    var target = '_blank';
-    var options = "location=no"
-    var ref = cordova.InAppBrowser.open(url, target, options);
-
-    ref.addEventListener('loadstart', loadstartCallback);
-    ref.addEventListener('loadstop', loadstopCallback);
-    ref.addEventListener('loadloaderror', loaderrorCallback);
-    ref.addEventListener('exit', exitCallback);
-
-    function loadstartCallback(event) {
-        console.log('Loading started: ' + event.url)
-    }
-
-    function loadstopCallback(event) {
-        console.log('Loading finished: ' + event.url)
-    }
-
-    function loaderrorCallback(error) {
-        console.log('Loading error: ' + error.message)
-    }
-
-    function exitCallback() {
-        console.log('Browser is closed...')
-    }
-}
-
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
@@ -906,13 +878,13 @@ $$(document).on('pageInit', function(e) {
             myApp.showTab('#tabCargo');
         });
         $$('.show-payment').on('click', function() {
-            /*
+            
             $$(".toolbar-inner .payment").addClass("active");
             $$(".toolbar-inner .cargo").removeClass("active");
             myApp.showTab('#tabPayment');
-            */
+
             var x = getAccessToken();
-            //  myApp.alert(x.access_token + " " + x['access_token']);
+           
             var urlData = createPayment(x.access_token);
 
             for (var i = 0; i < urlData.links.length; i++) {
@@ -920,19 +892,18 @@ $$(document).on('pageInit', function(e) {
                     
                     var approval_url = urlData.links[i].href;
 
-
                     var ppp = PAYPAL.apps.PPP({
                         "approvalUrl": approval_url,
                         "placeholder": "ppplus",
-                        "mode": "sandbox"
+                        "mode": "sandbox",
+                        "country": "DE",
+                        "language": "de_DE",
+                        "showLoadingIndicator": "true" 
                     });
-                    //openBrowser(urlData.links[i].href);
-
-                    var z=0;
+        
                 }
 
             }
-
            
 
         });
