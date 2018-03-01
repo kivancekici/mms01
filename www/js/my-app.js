@@ -220,7 +220,7 @@ function alertMessage(msgKey, msgTypeKey) {
 function openBrowser() {
     var url = 'https://cordova.apache.org';
     var target = '_blank';
-    var options = "location = no"
+    var options = "location=no"
     var ref = cordova.InAppBrowser.open(url, target, options);
     
     ref.addEventListener('loadstart', loadstartCallback);
