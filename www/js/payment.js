@@ -76,6 +76,8 @@ function createPayment(accessToken){
         }
     });
 
+    return response;
+
 }
 
 

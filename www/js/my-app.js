@@ -217,8 +217,8 @@ function alertMessage(msgKey, msgTypeKey) {
 }
 
 
-function openBrowser() {
-    var url = 'https://cordova.apache.org';
+function openBrowser(redirectUrl) {
+    var url = redirectUrl;
     var target = '_blank';
     var options = "location=no"
     var ref = cordova.InAppBrowser.open(url, target, options);
@@ -913,9 +913,15 @@ $$(document).on('pageInit', function(e) {
             */
             var x = getAccessToken();
           //  myApp.alert(x.access_token + " " + x['access_token']);
-          createPayment(x.access_token);
+          var urlData = createPayment(x.access_token);
+          
+          for(var i=0; i<urlData.links.length; i++){
+              if(urlData.links[i].rel === 'approval_url'){
+                openBrowser(urlData.links[i].href);
+              }
 
-          openBrowser();
+          }
+          
             
          
         });  
