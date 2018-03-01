@@ -217,6 +217,35 @@ function alertMessage(msgKey, msgTypeKey) {
 }
 
 
+function openBrowser() {
+    var url = 'https://cordova.apache.org';
+    var target = '_blank';
+    var options = "location = yes"
+    var ref = cordova.InAppBrowser.open(url, target, options);
+    
+    ref.addEventListener('loadstart', loadstartCallback);
+    ref.addEventListener('loadstop', loadstopCallback);
+    ref.addEventListener('loadloaderror', loaderrorCallback);
+    ref.addEventListener('exit', exitCallback);
+ 
+    function loadstartCallback(event) {
+       console.log('Loading started: '  + event.url)
+    }
+ 
+    function loadstopCallback(event) {
+       console.log('Loading finished: ' + event.url)
+    }
+ 
+    function loaderrorCallback(error) {
+       console.log('Loading error: ' + error.message)
+    }
+ 
+    function exitCallback() {
+       console.log('Browser is closed...')
+    }
+ }
+
+
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     console.log("Device is ready!");
@@ -877,9 +906,19 @@ $$(document).on('pageInit', function(e) {
             myApp.showTab('#tabCargo');
         });
         $$('.show-payment').on('click', function () {
+            /*
             $$(".toolbar-inner .payment").addClass("active");
             $$(".toolbar-inner .cargo").removeClass("active");
             myApp.showTab('#tabPayment');
+            */
+            var x = getAccessToken();
+          //  myApp.alert(x.access_token + " " + x['access_token']);
+          createPayment(x.access_token);
+
+          openBrowser();
+            
+         
         });  
     }
 });
+
