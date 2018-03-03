@@ -25,8 +25,17 @@
                 "cardHeader": "Kullanıcı Girişi",
                 "pass": "Parola",
                 "btnlogin": "Giriş",
-                "btnforgetpass": "Parolamı Unuttum",
                 "btnregister": "Yeni Üye Kayıt"
+            },
+            "check_out":{
+                "pageTitle":"Ödemeyi Tamamla",
+                "pass": "Parola",
+                "btnlogin": "Giriş",
+                "btnregister": "Yeni Üye Kayıt",
+                "loginTab":"Oturum Aç",
+                "adresTab":"Adres",
+                "cargoTab":"Kargolama",
+                "paymentTab":"Ödeme"
             },
             "account": {
                 "panelTitle": "Hesabım",
@@ -160,6 +169,8 @@
                 "btnlogin": "Login",
                 "btnforgetpass": "Passwort vergessen",
                 "btnregister": "Registrieren"
+            },
+            "check_out":{"pageTitle":"De"
             },
             "account": {
                 "panelTitle": "Mein Account",
