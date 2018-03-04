@@ -217,6 +217,7 @@ function alertMessage(msgKey, msgTypeKey) {
 }
 
 
+
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     console.log("Device is ready!");
@@ -864,22 +865,47 @@ $$(document).on('pageInit', function(e) {
     }
 
     if (page.name === 'check_out') {
-       
-        $$('.show-selectAddress').on('click', function () {
+
+        $$('.show-selectAddress').on('click', function() {
             $$(".toolbar-inner .address").addClass("active");
             $$(".toolbar-inner .login").removeClass("active");
             myApp.showTab('#tabSelectAddress');
         });
 
-        $$('.show-cargo').on('click', function () {
+        $$('.show-cargo').on('click', function() {
             $$(".toolbar-inner .cargo").addClass("active");
             $$(".toolbar-inner .address").removeClass("active");
             myApp.showTab('#tabCargo');
         });
-        $$('.show-payment').on('click', function () {
+        $$('.show-payment').on('click', function() {
+            
             $$(".toolbar-inner .payment").addClass("active");
             $$(".toolbar-inner .cargo").removeClass("active");
             myApp.showTab('#tabPayment');
-        });  
+
+            var x = getAccessToken();
+           
+            var urlData = createPayment(x.access_token);
+
+            for (var i = 0; i < urlData.links.length; i++) {
+                if (urlData.links[i].rel === 'approval_url') {
+                    
+                    var approval_url = urlData.links[i].href;
+
+                    var ppp = PAYPAL.apps.PPP({
+                        "approvalUrl": approval_url,
+                        "placeholder": "ppplus",
+                        "mode": "sandbox",
+                        "country": "DE",
+                        "language": "de_DE",
+                        "showLoadingIndicator": "true" 
+                    });
+        
+                }
+
+            }
+           
+
+        });
     }
 });
