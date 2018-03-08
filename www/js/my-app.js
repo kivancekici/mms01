@@ -884,7 +884,7 @@ $$(document).on('pageInit', function(e) {
             myApp.showTab('#tabPayment');
 
             var x = getAccessToken();
-           
+    
             var urlData = createPayment(x.access_token);
 
             for (var i = 0; i < urlData.links.length; i++) {
@@ -904,7 +904,7 @@ $$(document).on('pageInit', function(e) {
                 }
 
             }
-           
+            
 
         });
     }
