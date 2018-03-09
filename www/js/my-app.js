@@ -330,6 +330,23 @@ $$(document).on('pageInit', function(e) {
             checkNewMessage(userId, email, pswd);
         }
 
+        /*Product listesini doldur*/
+        if (productResultList == null) {
+            productResultList = getSearchResultList(searchKeyWord);
+        }
+
+        initlistProduct();
+        listProductResult.items = productResultList;
+        listProductResult.update();
+
+        /*Üreticiler Listesini Doldur*/
+        if (manufacturersList == null) {
+            manufacturersList = getAllManufacturersList("");
+        }
+
+        initListVirtualManufacturers();
+        listVirtualManufacturers.items = manufacturersList;
+        listVirtualManufacturers.update();
 
 
         /*Kategori Listesini Doldur*/
@@ -370,26 +387,6 @@ $$(document).on('pageInit', function(e) {
         });
 
 
-        /*Product listesini doldur*/
-        if (productResultList == null) {
-            productResultList = getSearchResultList(searchKeyWord);
-        }
-
-        initlistProduct();
-        listProductResult.items = productResultList;
-        listProductResult.update();
-
-        /*Üreticiler Listesini Doldur*/
-        if (manufacturersList == null) {
-            manufacturersList = getAllManufacturersList("");
-        }
-
-        initListVirtualManufacturers();
-        listVirtualManufacturers.items = manufacturersList;
-        listVirtualManufacturers.update();
-
-
-
 
     }
 
@@ -401,14 +398,13 @@ $$(document).on('pageInit', function(e) {
 
         var response = getUserInfo(userId, oldemail, pswd);
 
-        var pass = window.localStorage.getItem('password');
 
         var formData = {
             'firstname': response.firstname,
             'surname': response.lastname,
             'email': response.email,
-            'password': pass,
-            'repeatpassword': pass,
+            'password': pswd,
+            'repeatpassword': pswd,
             'birthday': response.birthday,
             'newsletter': [response.newsletter],
             'optin': [response.optin],
@@ -419,7 +415,20 @@ $$(document).on('pageInit', function(e) {
 
         var calendarDefault = myApp.calendar({
             input: '#calendar-default',
-            cssClass: 'theme-baklava7'
+            cssClass: 'theme-baklava7',
+            closeOnSelect: true,
+            monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+            monthNamesShort: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+            dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+            dayNamesShort: ['Son', 'Mon', 'Die', 'Mit', 'Don', 'Fre', 'Sam'],
+            /*Disable under 18*/
+            disabled: function(date) {
+                if (date.getFullYear() > (today.getFullYear() - 18)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         });
 
         $$('.updateBtn').on('click', function() {
@@ -464,7 +473,7 @@ $$(document).on('pageInit', function(e) {
 
                             if (avaibleuser == "OK") {
 
-                                var response = updateAccount(email, name, surname, pass, genderId, birthday, newsletter, optin, userId, oldemail, pswd);
+                                var response = updateAccount(email, name, surname, genderId, birthday, newsletter, optin, userId, oldemail, pass);
 
                                 if (response == "OK") {
                                     alertMessage('updateOk', 'info');
@@ -493,9 +502,24 @@ $$(document).on('pageInit', function(e) {
 
     if (page.name === 'register') {
 
+        var today = new Date();
+
         var calendarDefault = myApp.calendar({
             input: '#calendar-default',
-            cssClass: 'theme-baklava7'
+            cssClass: 'theme-baklava7',
+            closeOnSelect: true,
+            monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+            monthNamesShort: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+            dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+            dayNamesShort: ['Son', 'Mon', 'Die', 'Mit', 'Don', 'Fre', 'Sam'],
+            /*Disable under 18*/
+            disabled: function(date) {
+                if (date.getFullYear() > (today.getFullYear() - 18)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         });
 
 
@@ -878,18 +902,18 @@ $$(document).on('pageInit', function(e) {
             myApp.showTab('#tabCargo');
         });
         $$('.show-payment').on('click', function() {
-            
+
             $$(".toolbar-inner .payment").addClass("active");
             $$(".toolbar-inner .cargo").removeClass("active");
             myApp.showTab('#tabPayment');
 
             var x = getAccessToken();
-    
+
             var urlData = createPayment(x.access_token);
 
             for (var i = 0; i < urlData.links.length; i++) {
                 if (urlData.links[i].rel === 'approval_url') {
-                    
+
                     var approval_url = urlData.links[i].href;
 
                     var ppp = PAYPAL.apps.PPP({
@@ -898,13 +922,13 @@ $$(document).on('pageInit', function(e) {
                         "mode": "sandbox",
                         "country": "DE",
                         "language": "de_DE",
-                        "showLoadingIndicator": "true" 
+                        "showLoadingIndicator": "true"
                     });
-        
+
                 }
 
             }
-            
+
 
         });
     }
