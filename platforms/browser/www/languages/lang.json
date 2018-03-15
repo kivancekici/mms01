@@ -16,7 +16,7 @@
             "main": {
                 "allmanufacturers": "Üreticiler",
                 "catalogue": "Ürünler",
-                "searchBtn": "Ara",
+                "cancelBtn": "Vazgeç",
                 "searchPlc": "Arama",
                 "nothingFound": "Bulunamadı",
                 "mainSlogan": "Ne sipariş vermek istersiniz?"
@@ -158,7 +158,7 @@
             "main": {
                 "allmanufacturers": "Partnerhäuser",
                 "catalogue": "Produktliste",
-                "searchBtn": "Suchen",
+                "cancelBtn": "Abbrechen",
                 "searchPlc": "Suchen",
                 "nothingFound": "",
                 "mainSlogan": ""
