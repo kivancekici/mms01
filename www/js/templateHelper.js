@@ -5,20 +5,16 @@ function initListVirtualManufacturers() {
         items: [
         ],
         searchAll: function (query, items) {
-            var foundItems = [];
+            var found = [];
             for (var i = 0; i < items.length; i++) {
-                // Check if title contains query string
-                var found=false;
-
-                if (items[i].name.toLowerCase().indexOf(query.trim()) >= 0) found=true;
-               //Locationda gelebilir.
-               // if (items[i].description_short.toLowerCase().indexOf(query.trim()) >= 0) found=true;
-               // if (items[i].description.toLowerCase().indexOf(query.trim()) >= 0) found=true;
                 
-                if(found) foundItems.push(i);
+                var foundFlag = false;
+				
+                if (items[i].name.toUpperCase().indexOf(query.toUpperCase()) >= 0 || query.trim() === '') foundFlag = true;
+                
+                if(foundFlag) found.push(i);
             }
-            // Return array with indexes of matched items
-            return foundItems; 
+            return found; //return array with mathced indexes
         },
         rowsBefore:100,
         rowsAfter:100,
@@ -60,6 +56,21 @@ function initlistProduct() {
         rowsBefore:200,
         rowsAfter:200,
         searchAll: function (query, items) {
+            var found = [];
+            for (var i = 0; i < items.length; i++) {
+                
+                var foundFlag = false;
+				
+                if (items[i].name.toUpperCase().indexOf(query.toUpperCase()) >= 0 || query.trim() === '') foundFlag = true;
+                if (items[i].description_short.toUpperCase().indexOf(query.toUpperCase()) >= 0 || query.trim() === '') foundFlag = true;
+                if (items[i].description.toUpperCase().indexOf(query.toUpperCase()) >= 0 || query.trim() === '') foundFlag = true;
+                
+                if(foundFlag) found.push(i);
+            }
+            return found; //return array with mathced indexes
+        },
+        /*
+        searchAll: function (query, items) {
             var foundItems = [];
             for (var i = 0; i < items.length; i++) {
                 // Check if title contains query string
@@ -74,6 +85,7 @@ function initlistProduct() {
             // Return array with indexes of matched items
             return foundItems; 
         },
+        */
         height: 105,
         template: '<li>' +
         '<a href="#" onClick="showProductDetailsModal({{id_product}});return false;" class="item-link item-content">' +
