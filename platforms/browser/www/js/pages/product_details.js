@@ -44,7 +44,11 @@ function addProductAttributeSelectOption(attribute) {
 
 }
 
-
+function onSelectedAttributeChanged(){
+    var attrIndex=$$("#selectProductAttribute")[0].selectedIndex;
+    currentOrder.selectedAttribute=currentProduct.attributes[attrIndex];
+    currentOrder.selectedAttributePrice=currentProduct.attributes[attrIndex].reducedprice;
+}
 
 function incrementOrderItemAmount(){
     currentOrder.amount++;
@@ -60,6 +64,8 @@ function decrementOrderItemAmount(){
 
     calculateOrderItemPrice();
 }
+
+
 
 function calculateOrderItemPrice(){
     currentOrder.price=currentOrder.amount*currentOrder.selectedAttributePrice;
