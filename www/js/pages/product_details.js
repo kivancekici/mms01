@@ -2,6 +2,7 @@ var currentOrder={};
 
 function initPageProductDetails() {
     currentOrder={
+        orderid:"",
         product:{},
         amount:1,
         selectedAttribute:0,
@@ -26,6 +27,7 @@ function initPageProductDetails() {
     $$(".txt-cart-order-amount").text(currentOrder.amount);
     currentOrder.selectedAttribute=currentProduct.attributes[0];
     currentOrder.selectedAttributePrice=currentProduct.attributes[0].reducedprice;
+    currentOrder.idOrder=""+currentOrder.product.idProduct+":"+currentOrder.selectedAttribute;
     currentOrder.price = currentOrder.selectedAttributePrice;
 
     $$(".product-base-price").text(currentOrder.price+" €");

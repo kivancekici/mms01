@@ -31,31 +31,47 @@ function initResetCart(){
             idCart:"",
             country:1,
             cartSum:0,
-            products:[],
-            shipmentCount:0,           
+            orders:[],
+            shipmentCost:0,
+            suppliersList:[],
             
         };
 }
 
-function calculateAttributePrice(product){
-    
-    alert("not implemented");
-    return null;
-}
 
 function calculateCartTotal(product){
-    
-    alert("not implemented");
-    return null;
+
+    var shipmentPrice=4.90;
+    shipmentPrice=getDefaultShipmentPrice();
+    shipmentCount=0;
+    //products total
+    var carttotal=0;
+    currentCart.orders.forEach(order => {
+        carttotal+=order.price;
+        if(!currentCart.suppliersList.includes(order.product.id_supplier)){
+            shipmentCount++;
+            currentCart.suppliersList.push(order.product.id_supplier);
+        }
+    });    
+
+    var shipmentCost=shipmentPrice*shipmentCount;
+    shipmentCost=shipmentCost.toFixed(2);
+    currentCart.shipmentCost=shipmentCost;
+    carttotal+=shipmentCost;
+
+    currentCart.cartSum=carttotal.toFixed(2);
+    return true;
 }
 
-function checkManufacturersUpdateShippingCost(){
-    
-    alert("not implemented");
-    return null;
-}
+function addProductToCart(order){
+    var foundIndex = checkProductExist(order);
 
-function addProductToCart(product){
-    alert("not implemented");
-    return null;
+    if(foundIndex>-1){
+        currentCart.orders[foundIndex].amount+=order.amount;
+        currentCart.orders[foundIndex].price+=order.price;
+    }else{
+        currentCart.orders.push(order);
+    }
+    calculateCartTotal();
+    return true;
 }
