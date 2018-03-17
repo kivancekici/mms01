@@ -63,7 +63,7 @@ function calculateCartTotal(product){
     return true;
 }
 
-function addProductToCart(order){
+function addNewOrderToCart(order){
     var foundIndex = checkProductExist(order);
 
     if(foundIndex>-1){

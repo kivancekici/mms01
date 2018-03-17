@@ -36,6 +36,11 @@ function initPageProductDetails() {
         addProductAttributeSelectOption(element);
 
     });
+
+    $$("#btnAddToCart").on('click', function() {
+
+        loadPageWithLang('shopping_cart');
+    });
 }
 //var subCatTxt = ;
 //$$('.smart-select select optgroup').eq(i).append(subCatTxt);
@@ -75,4 +80,8 @@ function calculateOrderItemPrice(){
     currentOrder.price=currentOrder.amount*currentOrder.selectedAttributePrice;
     currentOrder.price=currentOrder.price.toFixed(2);
     $$(".product-base-price").text(currentOrder.price+" €");
+}
+
+function onClickAddToCart(){
+    addNewOrderToCart(currentOrder);
 }
