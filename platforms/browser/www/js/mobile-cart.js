@@ -55,7 +55,9 @@ function checkManufacturersUpdateShippingCost(){
     return null;
 }
 
-function addProductToCart(product){
-    alert("not implemented");
-    return null;
+function addProductToCart(order){
+    //aynı attributeden
+    currentCart.products.push(order);
+    calculateCartTotal();
+    return true;
 }
