@@ -13,6 +13,7 @@ function initPageProductDetails() {
     $$(".product_name_over_image").text(currentProduct.productname);
     $$(".product-manufacturer-name").text(currentProduct.manufacname);
     $$(".product-description").html(currentProduct.description_short);
+    $$(".product-nutrival").html(currentProduct.description);
 
     $$('.card-header-product').css('background-image', 'url("http://baklava7.de' + currentProduct.imgdirectory + '")');
 
@@ -48,18 +49,19 @@ function onSelectedAttributeChanged(){
     var attrIndex=$$("#selectProductAttribute")[0].selectedIndex;
     currentOrder.selectedAttribute=currentProduct.attributes[attrIndex];
     currentOrder.selectedAttributePrice=currentProduct.attributes[attrIndex].reducedprice;
+    calculateOrderItemPrice();
 }
 
 function incrementOrderItemAmount(){
     currentOrder.amount++;
-    $$(".txt-cart-order-amount").text(currentOrder.amount);
+    $$(".txt-cart-order-amount").val(currentOrder.amount);
     calculateOrderItemPrice();
 }
 
 function decrementOrderItemAmount(){
     if(currentOrder.amount>1){
         currentOrder.amount--;
-        $$(".txt-cart-order-amount").text(currentOrder.amount);
+        $$(".txt-cart-order-amount").val(currentOrder.amount);
     }
 
     calculateOrderItemPrice();
