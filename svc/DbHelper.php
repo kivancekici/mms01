@@ -267,7 +267,7 @@ class DbHelper {
 		$id_customer=$loginresult[0]['id_customer'];
 		
 		
-		$sql = "UPDATE ps_customer SET id_gender=$id_gender,company='$company',firstname='$firstname',lastname='$lastname',email='$emailnew',birthday=$birthday,newsletter=$newsletter,optin=$optin,website='$website',date_upd=now() WHERE id_customer=$id_customer";
+		$sql = "UPDATE ps_customer SET id_gender=$id_gender,company='$company',firstname='$firstname',lastname='$lastname',email='$emailnew',birthday='$birthday',newsletter=$newsletter,optin=$optin,website='$website',date_upd=now() WHERE id_customer=$id_customer";
         $result = $this->conn->query($sql);
 
         if ($result === TRUE) {
@@ -1343,7 +1343,7 @@ class DbHelper {
 		
 		$id_attribute=$_ProductIdatrribute["id_attribute"];
 
-		$sql = "SELECT pa.id_product_attribute  as 'id_product_attribute ' FROM ps_product_attribute pa , ps_product_attribute_combination pac  WHERE pa.id_product = $id_product  and pa.id_product_attribute = pac.id_product_attribute and pac.id_attribute =$id_attribute";
+		$sql = "SELECT pa.id_product_attribute  as 'id_product_attribute' FROM ps_product_attribute pa , ps_product_attribute_combination pac  WHERE pa.id_product = $id_product  and pa.id_product_attribute = pac.id_product_attribute and pac.id_attribute =$id_attribute";
 
 		$resultidproductattribute = $this->conn->query($sql);
 
@@ -1391,18 +1391,26 @@ class DbHelper {
 				$id_lang=$_ProductUnitValue["id_lang"];
 		
 			
-				$sql = "SELECT al.id_attribute, al.name FROM ps_product_attribute pa, ps_product_attribute_combination pac, ps_attribute_lang  al WHERE pa.id_product = $id_product AND pac.id_product_attribute = pa.id_product_attribute AND pac.id_attribute = al.id_attribute AND al.id_lang = $id_lang ORDER BY al.id_attribute ";
+				$sql = "SELECT pa.id_product, al.id_attribute, al.name, pac.id_product_attribute FROM ps_product_attribute pa, ps_product_attribute_combination pac, ps_attribute_lang  al WHERE pa.id_product = $id_product AND pac.id_product_attribute = pa.id_product_attribute AND pac.id_attribute = al.id_attribute AND al.id_lang = $id_lang ORDER BY al.id_attribute ";
 				
 				$resultidproducUnitValue = $this->conn->query($sql);
 				
 				if ($resultidproducUnitValue->num_rows > 0) {
 					$tmpsqltable = array();
 					while ($row = $resultidproducUnitValue->fetch_assoc()) {
+						
+						
+						$_infosItemMain["id_product"] = $row["id_product"];
+						$_infosItemMain["id_product_attribute"] = $row["id_product_attribute"];
+						$tmpsqltableitem = $this->getIpProductsPrice($_infosItemMain);
+						$row["grossprice"]=$tmpsqltableitem["grossprice"];
+						$row["reducedprice"]=$tmpsqltableitem["reducedprice"];
 
 
 
+						//array_push($row,$tmpsqltableitem);
 						array_push($tmpsqltable , $row);
-
+						//array_push($tmpsqltable , $tmpsqltableitem);
 					}
 
 

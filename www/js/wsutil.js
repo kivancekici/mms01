@@ -94,7 +94,7 @@ function mobileRegister(email, name, surname, pass, genderId, birthday) {
 
 }
 
-function updateAccount(email, name, surname, newpass, genderId, birthday, newsletter, optin, userId, oldemail, pswd) {
+function updateAccount(email, name, surname, genderId, birthday, newsletter, optin, userId, oldemail, pswd) {
 
     var accountdata = {
         'opr': 'updateuserdata',
@@ -102,26 +102,26 @@ function updateAccount(email, name, surname, newpass, genderId, birthday, newsle
         'company': '',
         'firstname': name,
         'lastname': surname,
-        'email': email,
-        'passwd': newpass,
+        'email': oldemail,
         'birthday': birthday,
         'newsletter': newsletter,
         'optin': optin,
         'id_customer': userId,
         'website': '',
-        'oldemail': oldemail,
+        'emailnew': email,
         'pswd': pswd
     }
+
 
     var result = restfulPostCall(accountdata);
 
 
     if (result != "Error") {
 
-        if (result.status != "NOK") {
-            return "OK";
-        } else {
+        if (result.status != "OK") {
             return "NOK";
+        } else {
+            return "OK";
         }
 
     } else {
