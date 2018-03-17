@@ -22,6 +22,7 @@ function initPageProductDetails() {
 
     currentOrder.product=currentProduct;
     currentOrder.amount=1;
+    $$(".txt-cart-order-amount").text(currentOrder.amount);
     currentOrder.selectedAttribute=currentProduct.attributes[0];
     currentOrder.selectedAttributePrice=currentProduct.attributes[0].reducedprice;
     currentOrder.price = currentOrder.selectedAttributePrice;
@@ -47,14 +48,14 @@ function addProductAttributeSelectOption(attribute) {
 
 function incrementOrderItemAmount(){
     currentOrder.amount++;
-    $$("#txt-cart-order-amount").text(currentOrder.amount);
+    $$(".txt-cart-order-amount").text(currentOrder.amount);
     calculateOrderItemPrice();
 }
 
 function decrementOrderItemAmount(){
     if(currentOrder.amount>1){
         currentOrder.amount--;
-        $$("#txt-cart-order-amount").text(currentOrder.amount);
+        $$(".txt-cart-order-amount").text(currentOrder.amount);
     }
 
     calculateOrderItemPrice();
