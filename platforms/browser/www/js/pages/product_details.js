@@ -23,7 +23,7 @@ function initPageProductDetails() {
     currentOrder.product=currentProduct;
     currentOrder.amount=1;
     currentOrder.selectedAttribute=currentProduct.attributes[0];
-    currentOrder.selectedAttributePrice=currentProduct.attributes[0].price;
+    currentOrder.selectedAttributePrice=currentProduct.attributes[0].reducedprice;
     currentOrder.price = currentOrder.selectedAttributePrice;
 
     $$(".product-base-price").text(currentOrder.price+" €");
@@ -62,5 +62,6 @@ function decrementOrderItemAmount(){
 
 function calculateOrderItemPrice(){
     currentOrder.price=currentOrder.amount*currentOrder.selectedAttributePrice;
+    currentOrder.price=currentOrder.price.toFixed(2);
     $$(".product-base-price").text(currentOrder.price+" €");
 }
