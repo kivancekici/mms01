@@ -44,7 +44,7 @@ function calculateCartTotal(product){
     var shipmentPrice=4.90;
     shipmentPrice=getDefaultShipmentPrice();
     shipmentCount=0;
-    //products total
+    //orders total
     var carttotal=0;
     currentCart.orders.forEach(order => {
         carttotal+=order.price;
