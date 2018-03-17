@@ -63,12 +63,6 @@ function calculateCartTotal(product){
     return true;
 }
 
-function checkManufacturersUpdateShippingCost(){
-    
-    alert("not implemented");
-    return null;
-}
-
 function addProductToCart(order){
     var foundIndex = checkProductExist(order);
 
