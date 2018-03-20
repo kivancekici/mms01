@@ -1,24 +1,47 @@
 {
+  "background_color": "#FFF",
+  "display": "standalone",
   "name": "Deneme",
   "short_name": "Deneme",
-  "description": "Description of your app from template",
-  "start_url": "index.html",
-  "scope": "index.html",
+  "version": "com.mms.baklava7",
+  "description": "Deneme.De Mobil Uygulaması",
+  "author": "M.Sc. Computer Engineer Suleyman Kivanc Ekici",
   "icons": [
     {
-      "src": "img/logo.png",
-      "sizes": "192x192",
-      "type": "image/png"
+      "src": "images/icons/mipmap-mdpi/ic_launcher.png",
+      "type": "image/png",
+      "sizes": "undefinedxundefined"
     },
     {
-      "src": "img/splash.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "images/icons/mipmap-mdpi/ic_launcher.png",
+      "type": "image/png",
+      "sizes": "undefinedxundefined"
+    },
+    {
+      "src": "images/icons/mipmap-hdpi/ic_launcher.png",
+      "type": "image/png",
+      "sizes": "undefinedxundefined"
+    },
+    {
+      "src": "images/icons/mipmap-xhdpi/ic_launcher.png",
+      "type": "image/png",
+      "sizes": "undefinedxundefined"
+    },
+    {
+      "src": "images/icons/mipmap-xxhdpi/ic_launcher.png",
+      "type": "image/png",
+      "sizes": "undefinedxundefined"
+    },
+    {
+      "src": "images/icons/mipmap-xxxhdpi/ic_launcher.png",
+      "type": "image/png",
+      "sizes": "undefinedxundefined"
+    },
+    {
+      "src": "images/icons/mipmap-xxxhdpi/ic_launcher.png",
+      "type": "image/png",
+      "sizes": "undefinedxundefined"
     }
   ],
-  "default_locale": "en",
-  "display": "standalone",
-  "background_color": "#FFF",
-  "theme_color": "#000",
-  "orientation": "landscape"
+  "start_url": "index.html"
 }

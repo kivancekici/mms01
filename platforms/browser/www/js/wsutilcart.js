@@ -66,3 +66,18 @@ function getProductBaseAttributes(id_product,id_lang) {
         return "NOK";
     }
 }
+
+function getDefaultShipmentPrice() {
+
+    var sdata = {
+        'opr': 'defaultShipmentPrice',
+    }
+
+    var result = restfulPostCall(sdata);
+
+    if (result != "Error") {
+        return result;
+    } else {
+        return 4.90;
+    }
+}
