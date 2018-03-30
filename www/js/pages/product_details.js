@@ -39,6 +39,7 @@ function initPageProductDetails() {
 
     $$("#btnAddToCart").on('click', function() {
 
+        onClickAddToCart();
         loadPageWithLang('shopping_cart');
     });
 }
