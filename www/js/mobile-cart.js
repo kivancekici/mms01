@@ -55,11 +55,11 @@ function calculateCartTotal() {
     });
 
     var shipmentCost = shipmentPrice * shipmentCount;
-    shipmentCost = shipmentCost.toFixed(2);
+    shipmentCost = Math.round( shipmentCost * 1e2 ) / 1e2;
     currentCart.shipmentCost = shipmentCost;
     carttotal += shipmentCost;
 
-    currentCart.cartSum = carttotal.toFixed(2);
+    currentCart.cartSum = Math.round( carttotal * 1e2 ) / 1e2;
     return true;
 }
 
