@@ -75,7 +75,9 @@ function getDefaultShipmentPrice() {
 
     var result = restfulPostCall(sdata);
 
-    if (result != "Error") {
+    
+
+    if (result!==null) {
         return result;
     } else {
         return 4.90;

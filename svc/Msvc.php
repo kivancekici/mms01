@@ -1,6 +1,8 @@
 <?php
 include_once './DbHelper.php';
 
+include_once './CreateOrder.php';
+
 //Make sure that it is a POST request.
 if(strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') != 0){
     throw new Exception('Request method must be POST!');
@@ -120,6 +122,10 @@ switch ($opr) {
 
 	case "orderhistoryhead":
 		fOrderHistoryHead($decoded);
+		break;
+
+	case "createorders":
+		fCreateorder($decoded);
 		break;
 
 	case "checkbeforeupdateuserdata":
@@ -466,7 +472,14 @@ function fGetManufacturerList($_jsondata) {
 }
 
 
-
+function fCreateorder($_jsondata) {
+	$_items = CreateOrder::getInstance()->OrderCreator($_jsondata);
+	if (!empty($_items)) {
+		send_response($_items);
+	} else {
+		send_response(Null);
+	}
+}
 
 
 

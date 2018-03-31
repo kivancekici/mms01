@@ -883,6 +883,7 @@ $$(document).on('pageInit', function(e) {
 
     if (page.name === 'shopping_cart') {
 
+        initListCartItemsToShow();
         $$('#btnCheckOut').on('click', function() {
             loadPageWithLang('check_out');
         });

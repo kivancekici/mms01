@@ -29,7 +29,7 @@ function initPageProductDetails() {
     currentOrder.selectedAttributePrice=currentProduct.attributes[0].reducedprice;
     currentOrder.idOrder=""+currentOrder.product.idProduct+":"+currentOrder.selectedAttribute;
     currentOrder.price = currentOrder.selectedAttributePrice;
-
+    currentOrder.price=parseFloat(currentOrder.price);
     $$(".product-base-price").text(currentOrder.price+" €");
 
     currentProduct.attributes.forEach(element => {
@@ -39,6 +39,7 @@ function initPageProductDetails() {
 
     $$("#btnAddToCart").on('click', function() {
 
+        onClickAddToCart();
         loadPageWithLang('shopping_cart');
     });
 }
@@ -78,7 +79,8 @@ function decrementOrderItemAmount(){
 
 function calculateOrderItemPrice(){
     currentOrder.price=currentOrder.amount*currentOrder.selectedAttributePrice;
-    currentOrder.price=currentOrder.price.toFixed(2);
+    currentOrder.price=Math.round( currentOrder.price * 1e2 ) / 1e2;
+    currentOrder.price=parseFloat(currentOrder.price);
     $$(".product-base-price").text(currentOrder.price+" €");
 }
 

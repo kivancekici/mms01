@@ -17,7 +17,7 @@ require_once('./PSWebServiceLibrary.php');
 
 
 
-function CreateOrder($_infos){
+function OrderCreator($_infos){
 
 
 
@@ -26,9 +26,9 @@ function CreateOrder($_infos){
 
 
 // If != 0, we don't create the corresponding structure
-$id_customer    = $_infos["id_customer"];
-$id_address     = $_infos["id_address"];
-$id_cart        = $_infos["id_cart"];
+$id_customer  = $_infos["id_customer"];
+$id_address   = $_infos["id_address"];
+$id_cart      = $_infos["id_cart"];
 $id_currency = $_infos["id_currency"];
 $id_lang = $_infos["id_lang"];
 $id_carrier = $_infos["id_carrier"];
@@ -40,35 +40,55 @@ $productids = $_infos["id_products"];
 $id_product_attributes  = array();
 $id_product_attributes = $_infos["id_product_attribute"];
 
+$quantityofproduct  = array();
+$quantityofproduct = $_infos["quantity"];
+
+$product_names  = array();
+$product_names = $_infos["product_name"];
+
+$product_references  = array();
+$product_references = $_infos["product_reference"];
+
+$product_prices  = array();
+$product_prices = $_infos["product_price"];
 
 
-//?????????
+$unit_price_tax_incls  = array();
+$unit_price_tax_incls = $_infos["unit_price_tax_incl"];
+
+$unit_price_tax_excls  = array();
+$unit_price_tax_excls = $_infos["unit_price_tax_excl"];
+
+
+
 $order_module = $_infos["order_module"];
-//?????????
+
 $order_payment  = $_infos["order_payment"];
-//?????????
+
 $total_paid  = $_infos["total_paid"];
-//?????????
+
 $total_paid_real  = $_infos["total_paid_real"];
-//?????????
+
 $total_products  = $_infos["total_products"];
-//?????????
+
 $total_products_wt  = $_infos["total_products_wt"];
-//?????????
+
+$id_status = $_infos["id_status"];
+
 $total_discounts  = $_infos["total_discounts"];
-//?????????
+
 $total_discounts_tax_incl  = $_infos["total_discounts_tax_incl"];
-//?????????
+
 $total_discounts_tax_excl  = $_infos["total_discounts_tax_excl"];
-//?????????
+
 $total_paid_tax_incl = $_infos["total_paid_tax_incl"];
-//?????????
+
 $total_paid_tax_excl = $_infos["total_paid_tax_excl"];
-//?????????
+
 $total_shipping = $_infos["total_shipping"];
-//?????????
+
 $total_shipping_tax_incl = $_infos["total_shipping_tax_incl"];
-//?????????
+
 $total_shipping_tax_excl = $_infos["total_shipping_tax_excl"];
 
  
@@ -153,10 +173,10 @@ $webService = new PrestaShopWebservice(PS_SHOP_PATH, PS_WS_AUTH_KEY, DEBUG);
 $productquantity =  count($productids);
 
 for ($x = 0; $x <= $productquantity-1; $x++) {
-        $xml->cart->associations->cart_rows->cart_row[($x]->id_product            = $productids[($x];
-            $xml->cart->associations->cart_rows->cart_row[($x]->id_product_attribute  = $id_product_attributes[($x];
+        $xml->cart->associations->cart_rows->cart_row[$x]->id_product            = $productids[$x];
+            $xml->cart->associations->cart_rows->cart_row[$x]->id_product_attribute  = $id_product_attributes[$x];
             $xml->cart->associations->cart_rows->cart_row[$x]->id_address_delivery   = $id_address;
-            $xml->cart->associations->cart_rows->cart_row[$x]->quantity              = $products[$x];
+            $xml->cart->associations->cart_rows->cart_row[$x]->quantity              = $quantityofproduct[$x];
     } 
 
            
@@ -235,13 +255,13 @@ $xml->order->valid                      = 1;
                 // Order Row. Required
         $xml->order->associations->order_rows->order_row[$x]->product_id             =  $productids[$x];    //$products[0]['id_product'];
         $xml->order->associations->order_rows->order_row[$x]->product_attribute_id   = $id_product_attributes[$x]; //$products[0]['id_product_attribute'];
-        $xml->order->associations->order_rows->order_row[$x]->product_quantity       = 1;  // $products[0]['quantity'];
+        $xml->order->associations->order_rows->order_row[$x]->product_quantity       = $quantityofproduct[$x];  // $products[0]['quantity'];
         // Order Row. Others
-        $xml->order->associations->order_rows->order_row[$x]->product_name           = 'Printed Summer Dress'; // $products[0]['name'];
-        $xml->order->associations->order_rows->order_row[$x]->product_reference      = 'demo_5';  //$products[0]['reference'];
-        $xml->order->associations->order_rows->order_row[$x]->product_price          = 30.5; //$products[0]['product_price'];
-        $xml->order->associations->order_rows->order_row[$x]->unit_price_tax_incl    = 35.99; //$products[0]['product_price'];
-        $xml->order->associations->order_rows->order_row[$x]->unit_price_tax_excl    = 30.5;  //$products[0]['product_price'];
+        $xml->order->associations->order_rows->order_row[$x]->product_name           = $product_names[$x]; // $products[0]['name'];
+        $xml->order->associations->order_rows->order_row[$x]->product_reference      = $product_references[$x];  //$products[0]['reference'];
+        $xml->order->associations->order_rows->order_row[$x]->product_price          = $product_prices[$x]; //$products[0]['product_price'];
+        $xml->order->associations->order_rows->order_row[$x]->unit_price_tax_incl    = $unit_price_tax_incls[$x]; //$products[0]['product_price'];
+        $xml->order->associations->order_rows->order_row[$x]->unit_price_tax_excl    = $unit_price_tax_excls[$x];  //$products[0]['product_price'];
         } 
 
 
